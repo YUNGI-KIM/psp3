@@ -1,15 +1,15 @@
 package kr.clos21.springbootdevelop;
 
+import kr.clos21.springbootdevelop.domain.Notification;
 import kr.clos21.springbootdevelop.domain.User;
-import kr.clos21.springbootdevelop.dto.AddUserRequest;
+import kr.clos21.springbootdevelop.dto.*;
+import kr.clos21.springbootdevelop.repository.NotificationRepository;
 import kr.clos21.springbootdevelop.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.clos21.springbootdevelop.domain.Article;
-import kr.clos21.springbootdevelop.dto.AddArticleRequest;
-import kr.clos21.springbootdevelop.dto.UpdateArticleRequest;
 import kr.clos21.springbootdevelop.repository.ArticleRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -233,9 +233,6 @@ class UserApiControllerTest {
 		final String requestBody = objectMapper.writeValueAsString(userRequest);
 
 		// when
-//		ResultActions result = mockMvc.perform(post(url)
-//				.contentType(MediaType.MULTIPART_FORM_DATA)
-//				.content(requestBody));
 		ResultActions result = mockMvc.perform(post(url)
 				.param("email", email)
 				.param("password", password));
@@ -306,4 +303,174 @@ class UserApiControllerTest {
 		assertThat(mockHttpServletResponse.getContentLength()).isEqualTo(14);
 
 	}
+}
+
+@SpringBootTest
+@AutoConfigureMockMvc
+class NotificationApiControllerTest {
+
+	@Autowired
+	protected MockMvc mockMvc;
+
+	@Autowired
+	protected ObjectMapper objectMapper;
+
+	@Autowired
+	private WebApplicationContext context;
+
+	@Autowired
+	NotificationRepository notificationRepository;
+
+	@BeforeEach
+	public void mockMvcSetUp() {
+		this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
+				.build();
+		notificationRepository.deleteAll();
+	}
+
+	@DisplayName("addNotification: Notification add success.")
+	@Test
+	public void addNotification() throws Exception {
+		// given
+		final String url = "/api/notifications";
+		final String title = "title";
+		final String content = "content";
+		final Boolean emergency = Boolean.TRUE;
+		final AddNotificationRequest userRequest = new AddNotificationRequest(title, content, emergency);
+
+		final String requestBody = objectMapper.writeValueAsString(userRequest);
+
+		// when
+		ResultActions result = mockMvc.perform(post(url)
+				.contentType(MediaType.APPLICATION_JSON_VALUE)
+				.content(requestBody));
+
+		// then
+		result.andExpect(status().isCreated());
+
+		List<Notification> notifications = notificationRepository.findAll();
+
+		assertThat(notifications.size()).isEqualTo(1);
+		assertThat(notifications.get(0).getTitle()).isEqualTo(title);
+		assertThat(notifications.get(0).getContent()).isEqualTo(content);
+		assertThat(notifications.get(0).getEmergency()).isEqualTo(emergency);
+	}
+
+	@DisplayName("findAllNotifications: All Notification find success.")
+	@Test
+	public void findAllNotifications() throws Exception {
+		// given
+		final String url = "/api/notifications";
+		final String title = "title";
+		final String content = "content";
+		final Boolean emergency = Boolean.TRUE;
+
+		notificationRepository.save(Notification.builder()
+				.title(title)
+				.content(content)
+				.emergency(emergency)
+				.build());
+
+		// when
+		final ResultActions resultActions = mockMvc.perform(get(url)
+				.accept(MediaType.APPLICATION_JSON));
+
+		// then
+		resultActions
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$[0].content").value(content))
+				.andExpect(jsonPath("$[0].title").value(title))
+				.andExpect(jsonPath("$[0].emergency").value("Y"));
+
+	}
+
+	@DisplayName("findNotification: Notification find by id success.")
+	@Test
+	public void findNotification() throws Exception {
+		// given
+		final String url = "/api/notifications/{id}";
+		final String title = "title";
+		final String content = "content";
+		final Boolean emergency = Boolean.TRUE;
+
+		Notification savedNotification = notificationRepository.save(Notification.builder()
+				.title(title)
+				.content(content)
+				.emergency(emergency)
+				.build());
+
+		// when
+		final ResultActions resultActions = mockMvc.perform(get(url, savedNotification.getId()));
+
+		// then
+		resultActions
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.content").value(content))
+				.andExpect(jsonPath("$.emergency").value("Y"))
+				.andExpect(jsonPath("$.title").value(title));
+	}
+
+
+	@DisplayName("deleteNotification: Notification delete by id success.")
+	@Test
+	public void deleteNotification() throws Exception {
+		// given
+		final String url = "/api/notifications/{id}";
+		final String title = "title";
+		final String content = "content";
+		final Boolean emergency = Boolean.TRUE;
+
+		Notification savedNotification = notificationRepository.save(Notification.builder()
+				.title(title)
+				.content(content)
+				.emergency(emergency)
+				.build());
+
+		// when
+		mockMvc.perform(delete(url, savedNotification.getId()))
+				.andExpect(status().isOk());
+
+		// then
+		List<Notification> notifications = notificationRepository.findAll();
+
+		assertThat(notifications).isEmpty();
+	}
+
+
+	@DisplayName("updateNotification: Notification update by id success")
+	@Test
+	public void updateNotification() throws Exception {
+		// given
+		final String url = "/api/notifications/{id}";
+		final String title = "title";
+		final String content = "content";
+		final Boolean emergency = Boolean.TRUE;
+
+		Notification savedNotification = notificationRepository.save(Notification.builder()
+				.title(title)
+				.content(content)
+				.emergency(emergency)
+				.build());
+
+		final String newTitle = "new title";
+		final String newContent = "new content";
+		final Boolean newEmergency = Boolean.FALSE;
+
+		UpdateNotificationRequest request = new UpdateNotificationRequest(newTitle, newContent, newEmergency);
+
+		// when
+		ResultActions result = mockMvc.perform(put(url, savedNotification.getId())
+				.contentType(MediaType.APPLICATION_JSON_VALUE)
+				.content(objectMapper.writeValueAsString(request)));
+
+		// then
+		result.andExpect(status().isOk());
+
+		Notification notification = notificationRepository.findById(savedNotification.getId()).get();
+
+		assertThat(notification.getTitle()).isEqualTo(newTitle);
+		assertThat(notification.getContent()).isEqualTo(newContent);
+		assertThat(notification.getEmergencyToString()).isEqualTo("N");
+	}
+
 }
