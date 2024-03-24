@@ -16,8 +16,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.ResultHandler;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -298,6 +300,10 @@ class UserApiControllerTest {
 		//when
 		ResultActions logoutResult = mockMvc.perform(get(url));
 		logoutResult.andDo(print()).andExpect(status().isOk());
+		MvcResult mvcResult = logoutResult.andReturn();
+		MockHttpServletResponse mockHttpServletResponse = mvcResult.getResponse();
+		assertThat(mockHttpServletResponse.getContentAsString()).isEqualTo("logout success");
+		assertThat(mockHttpServletResponse.getContentLength()).isEqualTo(14);
 
 	}
 }

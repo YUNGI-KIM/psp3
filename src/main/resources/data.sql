@@ -1,3 +1,5 @@
 INSERT INTO article (title, content, created_at, updated_at) VALUES ('제목 1', '내용 1', NOW(), NOW())
 INSERT INTO article (title, content, created_at, updated_at) VALUES ('제목 2', '내용 2', NOW(), NOW())
 INSERT INTO article (title, content, created_at, updated_at) VALUES ('제목 3', '내용 3', NOW(), NOW())
+INSERT INTO notification (title, content, emergency, created_at, updated_at) VALUES ('공지 1', '내용 1', true, NOW(), NOW())
+INSERT INTO notification (title, content, emergency, created_at, updated_at) VALUES ('공지 2', '내용 2', false, NOW(), NOW())
