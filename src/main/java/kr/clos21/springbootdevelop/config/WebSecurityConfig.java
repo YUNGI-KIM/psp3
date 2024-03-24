@@ -43,19 +43,36 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/login", "/signup", "/user").permitAll()
+                        .requestMatchers("/login", "/signup", "/user", "/logout", "/success").permitAll()
                         .anyRequest().authenticated()
-                );
+                )
+                .formLogin((formLogin) -> formLogin
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/api/articles"));
 
         http
-                .logout((logout) ->
-                        logout.invalidateHttpSession(true)
+                .logout((logout) -> logout
+                        .invalidateHttpSession(true)
+                        .logoutSuccessHandler(((request, response, authentication) -> {
+                            response.sendRedirect("/success");
+                        }))
+
                 );
 
         http.csrf(AbstractHttpConfigurer::disable);
 
+        http.exceptionHandling(exceptionHandling -> exceptionHandling
+                .defaultAuthenticationEntryPointFor(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED),
+                        new AntPathRequestMatcher("/api/**")));
+
         return http.build();
     }
+
+
+
+
+
+
 //    @Bean
 //    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 //        http.csrf(AbstractHttpConfigurer::disable)
