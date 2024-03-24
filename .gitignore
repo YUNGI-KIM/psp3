@@ -3,6 +3,7 @@ HELP.md
 src/main/resources/application-db.yml
 src/main/resources/application-oauth2.yml
 src/main/resources/application-jwt.yml
+src/main/resources/application.properties
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
