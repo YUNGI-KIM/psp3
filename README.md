@@ -33,13 +33,17 @@ logging.level.org.hibernate.SQL=DEBUG
 email="example@gmail.com"
 password="password"
 ```
-- How to Login User (Used form-data, Method POST) Url: /login
+- How to Login User (Used form-data, Method POST)
 ```http request
 /login
 ```
 ```
 username="example@gmail.com"
 password="password"
+```
+- How to Logout User (Method Get)
+```http request
+/logout
 ```
 ### Article
 - How to Create Article (Used JSON. Method POST)
@@ -52,11 +56,11 @@ password="password"
   "content": "content"
 }
 ```
-- How to Get All Article (Used JSON. Method GET)
+- How to Get All Article (Method GET)
 ```http request
 /api/articles
 ```
-- How to Get Article (Used JSON. Method GET)
+- How to Get Article (Method GET)
 
 ```http request
 /api/articles/{id}
@@ -73,11 +77,11 @@ password="password"
   "emergency": false
 }
 ```
-- How to Get All Notification (Used JSON. Method GET)
+- How to Get All Notification (Method GET)
 ```http request
 /api/notifications
 ```
-- How to Get Notification (Used JSON. Method GET)
+- How to Get Notification (Method GET)
 
 ```http request
 /api/notifications/{id}
