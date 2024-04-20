@@ -25,7 +25,7 @@ logging.level.org.hibernate.SQL=DEBUG
 
 ## How to send a request
 ### User
-- How to Create User (Used form-data, Method POST)
+- How to Create User (Used form-data to send data, Method POST)
 ```http request
 /user
 ```
@@ -33,7 +33,7 @@ logging.level.org.hibernate.SQL=DEBUG
 email="example@gmail.com"
 password="password"
 ```
-- How to Login User (Used form-data, Method POST)
+- How to Login User (Used form-data to send data, Method POST)
 ```http request
 /login
 ```
@@ -46,7 +46,7 @@ password="password"
 /logout
 ```
 ### Article
-- How to Create Article (Used JSON. Method POST)
+- How to Create Article (Used JSON to send data, Method POST)
 ```http request
 /api/articles
 ```
@@ -56,17 +56,17 @@ password="password"
   "content": "content"
 }
 ```
-- How to Get All Article (Method GET)
+- How to Get All Article (Receive JSON data, Method GET)
 ```http request
 /api/articles
 ```
-- How to Get Article (Method GET)
+- How to Get Article (Receive JSON data, Method GET)
 
 ```http request
 /api/articles/{id}
 ```
 ### Notification
-- How to Create Notification (Used JSON. Method POST)
+- How to Create Notification (Used JSON to send data, Method POST)
 ```http request
 /api/notifications
 ```
@@ -77,11 +77,11 @@ password="password"
   "emergency": false
 }
 ```
-- How to Get All Notification (Method GET)
+- How to Get All Notification (Receive JSON data, Method GET)
 ```http request
 /api/notifications
 ```
-- How to Get Notification (Method GET)
+- How to Get Notification (Receive JSON data, Method GET)
 
 ```http request
 /api/notifications/{id}
