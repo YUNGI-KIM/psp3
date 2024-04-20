@@ -22,4 +22,24 @@ logging.level.org.hibernate.type.descriptor.sql=DEBUG
 logging.level.org.hibernate.SQL=DEBUG
 ```
 
+### How to send a request
+- How to Create User (Used form-data)
+```
+email="example@gmail.com"
+password="password"
+```
+- How to Login User (Used form-data)
+```
+username="example@gmail.com"
+password="password"
+```
+- How to Create Article (Used JSON. Method POST)
+```json
+{
+  "title": "title",
+  "content": "content"
+}
+```
+
+
 Write by YUNGI-KIM.
