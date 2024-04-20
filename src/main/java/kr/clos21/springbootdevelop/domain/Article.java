@@ -10,6 +10,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @EntityListeners(AuditingEntityListener.class)
 @Entity
@@ -27,6 +28,14 @@ public class Article {
 
     @Column(name = "content", nullable = false)
     private String content;
+
+    @Column(name = "writer", nullable = false)
+    private String writer;
+
+    @OneToMany(mappedBy = "article", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OrderBy("id asc") // 댓글 정렬
+    private List<Comment> comments;
+
 
     @CreatedDate
     @Column(name = "created_at")
