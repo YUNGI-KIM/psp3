@@ -1,4 +1,5 @@
 # Spring Boot Develop Practice
+## Settings
 
 - This project used Spring Boot.
 - Used port is 8080.
@@ -22,24 +23,66 @@ logging.level.org.hibernate.type.descriptor.sql=DEBUG
 logging.level.org.hibernate.SQL=DEBUG
 ```
 
-### How to send a request
-- How to Create User (Used form-data)
+## How to send a request
+### User
+- How to Create User (Used form-data, Method POST)
+```http request
+/user
+```
 ```
 email="example@gmail.com"
 password="password"
 ```
-- How to Login User (Used form-data)
+- How to Login User (Used form-data, Method POST) Url: /login
+```http request
+/login
+```
 ```
 username="example@gmail.com"
 password="password"
 ```
+### Article
 - How to Create Article (Used JSON. Method POST)
+```http request
+/api/articles
+```
 ```json
 {
   "title": "title",
   "content": "content"
 }
 ```
+- How to Get All Article (Used JSON. Method GET)
+```http request
+/api/articles
+```
+- How to Get Article (Used JSON. Method GET)
+
+```http request
+/api/articles/{id}
+```
+### Notification
+- How to Create Notification (Used JSON. Method POST)
+```http request
+/api/notifications
+```
+```json
+{
+  "title": "공지 3",
+  "content": "내용 3",
+  "emergency": false
+}
+```
+- How to Get All Notification (Used JSON. Method GET)
+```http request
+/api/notifications
+```
+- How to Get Notification (Used JSON. Method GET)
+
+```http request
+/api/notifications/{id}
+```
+
 
 
 Write by YUNGI-KIM.
