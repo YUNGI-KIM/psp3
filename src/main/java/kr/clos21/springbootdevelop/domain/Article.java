@@ -16,7 +16,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Article {
+public class Article extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,20 +36,12 @@ public class Article {
     @OrderBy("id asc") // 댓글 정렬
     private List<Comment> comments;
 
-
-    @CreatedDate
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
-
-    @LastModifiedDate
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
-
-
     @Builder
-    public Article(String title, String content) {
+    public Article(String title, String content, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.title = title;
         this.content = content;
+        super.createdAt = createdAt;
+        super.updatedAt = updatedAt;
     }
 
     public void update(String title, String content) {

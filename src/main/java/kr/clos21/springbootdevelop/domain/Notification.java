@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Notification {
+public class Notification extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,18 +33,8 @@ public class Notification {
     @Column(name = "emergency", nullable = false)
     private Boolean emergency = Boolean.FALSE;
 
-    @CreatedDate
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
-
-    @LastModifiedDate
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
-
-
-
     @Builder
-    public Notification(String title, String content, Boolean emergency) {
+    public Notification(String title, String content, Boolean emergency, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.title = title;
         this.content = content;
         this.emergency = emergency;

@@ -6,26 +6,20 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDateTime;
+
 @Table(name = "comments")
 @EntityListeners(AuditingEntityListener.class)
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Comment {
+public class Comment extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String comment; // 댓글 내용
-
-    @Column(name = "created_date")
-    @CreatedDate
-    private String createdDate;
-
-    @Column(name = "modified_date")
-    @LastModifiedDate
-    private String modifiedDate;
 
     @ManyToOne
     @JoinColumn(name = "article_id")
@@ -36,7 +30,7 @@ public class Comment {
     private User user;
 
     @Builder
-    public Comment(String comment, Article article, User user) {
+    public Comment(String comment, Article article, User user, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.comment = comment;
         this.article = article;
         this.user = user;
