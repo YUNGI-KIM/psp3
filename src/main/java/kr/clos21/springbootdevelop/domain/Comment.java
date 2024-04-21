@@ -42,9 +42,8 @@ public class Comment {
         this.user = user;
     }
 
-    public void update(String comment, User user) {
+    public void update(String comment) {
         this.comment = comment;
-        this.user = user;
     }
 }
 

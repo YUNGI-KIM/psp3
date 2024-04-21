@@ -11,12 +11,14 @@ import java.util.stream.Collector;
 
 @Getter
 public class CommentResponse {
+    private final Long id;
     private final Long articleId;
     private final Long userId;
     private final String comment;
 
 
     public CommentResponse(Comment comment) {
+        this.id = comment.getId();
         this.articleId = comment.getArticle().getId();
         this.userId = comment.getUser().getId();
         this.comment = comment.getComment();

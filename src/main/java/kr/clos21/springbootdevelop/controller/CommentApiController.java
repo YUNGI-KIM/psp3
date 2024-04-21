@@ -54,11 +54,11 @@ public class CommentApiController {
 
 
     //댓글 수정
-    @PatchMapping("/api/articles/comments/{id}")
+    @PutMapping("/api/articles/comments/{id}")
     public ResponseEntity<Comment> update(@PathVariable Long id,
                                              @RequestBody UpdateCommentRequest request){
-        Comment updatedComment = commentService.update(id, request);
-        return ResponseEntity.ok().body(updatedComment);
+        commentService.update(id, request);
+        return ResponseEntity.ok().build();
     }
 
 

@@ -65,6 +65,34 @@ password="password"
 ```http request
 /api/articles/{id}
 ```
+#### Comments on Article
+- How to Add Comment on Article (Used JSON to send data, Method POST)
+```http request
+/api/articles/{articleId}/comments
+```
+```json
+{
+  "comment": "comment's content"
+}
+```
+
+- How to Get Comments on Article (Receive JSON data, Method GET)
+```http request
+/api/articles/{articleId}/comments
+```
+- How to Delete Comments (Method DELETE)
+```http request
+/api/articles/comments/{commentId}
+```
+- How to Update Comments (Used JSON to send data, Method PUT)
+```http request
+/api/articles/comments/{commentId}
+```
+```json
+{
+  "comment": "Update comment's content"
+}
+```
 ### Notification
 - How to Create Notification (Used JSON to send data, Method POST)
 ```http request

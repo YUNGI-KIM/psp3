@@ -50,7 +50,7 @@ public class CommentService {
         Comment comment = commentRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
 
-        comment.update(request.getComment(), request.getUser());
+        comment.update(request.getComment());
 
         return comment;
     }
