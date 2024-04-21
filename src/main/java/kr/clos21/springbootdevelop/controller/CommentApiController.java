@@ -47,9 +47,9 @@ public class CommentApiController {
                 .orElseThrow(() -> new IllegalArgumentException("not found : " + articleId)));
         User writer = userDetailService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         request.setUser(writer);
-        Comment newComment = commentService.save(request);
+        commentService.save(request);
 
-        return ResponseEntity.status(HttpStatus.OK).body(newComment);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 
@@ -58,7 +58,7 @@ public class CommentApiController {
     public ResponseEntity<Comment> update(@PathVariable Long id,
                                              @RequestBody UpdateCommentRequest request){
         Comment updatedComment = commentService.update(id, request);
-        return ResponseEntity.status(HttpStatus.OK).body(updatedComment);
+        return ResponseEntity.ok().body(updatedComment);
     }
 
 

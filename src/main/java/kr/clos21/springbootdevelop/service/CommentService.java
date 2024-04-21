@@ -31,7 +31,7 @@ public class CommentService {
     }
 
     public List<CommentResponse> findCommentsByArticleId(Long articleId) {
-        Article article = articleRepository.findById(articleId)
+        articleRepository.findById(articleId)
                 .orElseThrow(() -> new IllegalArgumentException("not fount: " + articleId));
         List<Comment> comments = commentRepository.findCommentsByArticleId(articleId);
 

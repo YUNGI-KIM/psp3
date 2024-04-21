@@ -21,7 +21,4 @@ public class CommentResponse {
         this.userId = comment.getUser().getId();
         this.comment = comment.getComment();
     }
-
-
-
 }
