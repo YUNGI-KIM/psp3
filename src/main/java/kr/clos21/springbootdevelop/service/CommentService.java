@@ -1,33 +1,58 @@
 package kr.clos21.springbootdevelop.service;
 
-public interface CommentService {
+import jakarta.transaction.Transactional;
+import kr.clos21.springbootdevelop.domain.Article;
+import kr.clos21.springbootdevelop.domain.Comment;
+import kr.clos21.springbootdevelop.dto.AddCommentRequest;
+import kr.clos21.springbootdevelop.dto.CommentResponse;
+import kr.clos21.springbootdevelop.dto.UpdateCommentRequest;
+import kr.clos21.springbootdevelop.repository.ArticleRepository;
+import kr.clos21.springbootdevelop.repository.CommentRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-    /**
-     * 댓글 작성
-     * @param commentRequestDTO 댓글 정보
-     * @param boardId 게시물
-     * @param email 작성자
-     * @return 댓글 ID
-     */
-    Long writeComment(CommentRequestDTO commentRequestDTO, Long boardId, String email);
+import java.util.List;
+import java.util.stream.Collectors;
 
-    /**
-     * 댓글 조회
-     * @param id 게시물
-     * @return 게시물 별 댓글
-     */
-    List<CommentResponseDTO> commentList(Long id);
 
-    /**
-     * 댓글 수정
-     * @param commentRequestDTO 댓글 정보
-     * @param commentId 댓글 ID
-     */
-    void updateComment(CommentRequestDTO commentRequestDTO, Long commentId);
+@RequiredArgsConstructor
+@Service
+public class CommentService {
+    private final CommentRepository commentRepository;
+    private final ArticleRepository articleRepository;
 
-    /**
-     * 댓글 삭제
-     * @param commentId 댓글 ID
-     */
-    void deleteComment(Long commentId);
+    public Comment save(AddCommentRequest request) {
+        return commentRepository.save(request.toEntity());
+    }
+
+    public List<Comment> findAll() {
+        return commentRepository.findAll();
+    }
+
+    public List<CommentResponse> findCommentsByArticleId(Long articleId) {
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new IllegalArgumentException("not fount: " + articleId));
+        List<Comment> comments = commentRepository.findCommentsByArticleId(articleId);
+
+
+        return comments.stream()
+                .map(CommentResponse::new)
+                .collect(Collectors.toList());
+    }
+
+    public void delete(long id) {
+        commentRepository.deleteById(id);
+    }
+
+    @Transactional
+    public Comment update(long id, UpdateCommentRequest request) {
+        Comment comment = commentRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
+
+        comment.update(request.getComment(), request.getUser());
+
+        return comment;
+    }
+
 }
