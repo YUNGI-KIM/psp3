@@ -1,8 +1,6 @@
 package kr.clos21.springbootdevelop.dto;
 
-import kr.clos21.springbootdevelop.domain.Article;
 import kr.clos21.springbootdevelop.domain.Notification;
-import kr.clos21.springbootdevelop.domain.User;
 import lombok.Getter;
 
 @Getter
