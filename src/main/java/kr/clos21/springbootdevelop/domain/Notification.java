@@ -33,11 +33,17 @@ public class Notification extends BaseTimeEntity {
     @Column(name = "emergency", nullable = false)
     private Boolean emergency = Boolean.FALSE;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+
     @Builder
-    public Notification(String title, String content, Boolean emergency, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Notification(String title, String content, Boolean emergency, User user, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.title = title;
         this.content = content;
         this.emergency = emergency;
+        this.user = user;
     }
 
     public void update(String title, String content, Boolean emergency) {

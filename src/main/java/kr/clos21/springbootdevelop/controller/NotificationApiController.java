@@ -1,11 +1,15 @@
 package kr.clos21.springbootdevelop.controller;
 
 import kr.clos21.springbootdevelop.domain.Notification;
+import kr.clos21.springbootdevelop.domain.User;
 import kr.clos21.springbootdevelop.dto.*;
 import kr.clos21.springbootdevelop.service.NotificationService;
+import kr.clos21.springbootdevelop.service.UserDetailService;
+import kr.clos21.springbootdevelop.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,9 +19,12 @@ import java.util.List;
 public class NotificationApiController {
 
     private final NotificationService notificationService;
+    private final UserDetailService userDetailService;
 
     @PostMapping("/api/notifications")
     public ResponseEntity<Notification> addNotification(@RequestBody AddNotificationRequest request) {
+        User writer = userDetailService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        request.setUser(writer);
         Notification savedNotification = notificationService.save(request);
 
         return ResponseEntity.status(HttpStatus.CREATED)
