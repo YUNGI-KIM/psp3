@@ -29,14 +29,19 @@ public class Article extends BaseTimeEntity {
     @Column(name = "content", nullable = false)
     private String content;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @OneToMany(mappedBy = "article", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @OrderBy("id asc") // 댓글 정렬
     private List<Comment> comments;
 
     @Builder
-    public Article(String title, String content, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Article(String title, String content, User user, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.title = title;
         this.content = content;
+        this.user = user;
         super.createdAt = createdAt;
         super.updatedAt = updatedAt;
     }

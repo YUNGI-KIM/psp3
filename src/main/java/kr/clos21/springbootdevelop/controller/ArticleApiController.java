@@ -1,5 +1,7 @@
 package kr.clos21.springbootdevelop.controller;
 
+import kr.clos21.springbootdevelop.domain.User;
+import kr.clos21.springbootdevelop.service.UserDetailService;
 import lombok.RequiredArgsConstructor;
 import kr.clos21.springbootdevelop.domain.Article;
 import kr.clos21.springbootdevelop.dto.AddArticleRequest;
@@ -8,6 +10,7 @@ import kr.clos21.springbootdevelop.dto.UpdateArticleRequest;
 import kr.clos21.springbootdevelop.service.ArticleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,9 +20,12 @@ import java.util.List;
 public class ArticleApiController {
 
     private final ArticleService articleService;
+    private final UserDetailService userDetailService;
 
     @PostMapping("/api/articles")
     public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request) {
+        User writer = userDetailService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+        request.setUser(writer);
         Article savedArticle = articleService.save(request);
 
         return ResponseEntity.status(HttpStatus.CREATED)
