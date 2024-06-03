@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -42,12 +43,30 @@ public class ArticleApiController {
         return ResponseEntity.ok()
                 .body(articles);
     }
+
     @GetMapping("/api/articles/{id}")
     public ResponseEntity<ArticleResponse> findArticle(@PathVariable long id) {
-        Article article = articleService.findById(id);
+        try {
+            Article article = articleService.findById(id);
 
-        return ResponseEntity.ok()
-                .body(new ArticleResponse(article));
+            return ResponseEntity.ok()
+                    .body(new ArticleResponse(article));
+        } catch (IllegalArgumentException IAE) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/api/articles/user/{userId}")
+    public ResponseEntity<List<ArticleResponse>> findArticlesByUserId(@PathVariable Long userId) {
+        try{
+            List<ArticleResponse> articles = articleService.findArticlesByUserId(userId)
+                    .stream()
+                    .toList();
+            return ResponseEntity.ok()
+                    .body(articles);
+        } catch (IllegalArgumentException IAE) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/api/articles/{id}")
@@ -56,15 +75,20 @@ public class ArticleApiController {
 
         return ResponseEntity.ok()
                 .build();
+
     }
 
     @PutMapping("/api/articles/{id}")
     public ResponseEntity<Article> updateArticle(@PathVariable long id,
                                                  @RequestBody UpdateArticleRequest request) {
-        Article updatedArticle = articleService.update(id, request);
+        try {
+            Article updatedArticle = articleService.update(id, request);
 
-        return ResponseEntity.ok()
-                .body(updatedArticle);
+            return ResponseEntity.ok()
+                    .body(updatedArticle);
+        } catch (IllegalArgumentException IAE) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 
 }

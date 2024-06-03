@@ -1,6 +1,9 @@
 package kr.clos21.springbootdevelop.service;
 
 import jakarta.transaction.Transactional;
+import kr.clos21.springbootdevelop.domain.User;
+import kr.clos21.springbootdevelop.dto.ArticleResponse;
+import kr.clos21.springbootdevelop.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import kr.clos21.springbootdevelop.domain.Article;
 import kr.clos21.springbootdevelop.dto.AddArticleRequest;
@@ -9,12 +12,14 @@ import kr.clos21.springbootdevelop.repository.ArticleRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
+    private final UserRepository userRepository;
 
     public Article save(AddArticleRequest request) {
         return articleRepository.save(request.toEntity());
@@ -27,6 +32,16 @@ public class ArticleService {
     public Article findById(long id) {
         return articleRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
+    }
+
+    public List<ArticleResponse> findArticlesByUserId(long userId) {
+        userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("not found : " + userId));
+        List<Article> articles = articleRepository.findArticlesByUserId(userId);
+
+        return articles.stream()
+                .map(ArticleResponse::new)
+                .collect(Collectors.toList());
     }
 
     public void delete(long id) {
