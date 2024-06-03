@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -28,17 +29,18 @@ public class CommentApiController {
     //댓글 목록 조회
     @GetMapping("/api/articles/{articleId}/comments")
     public ResponseEntity<List<CommentResponse>> comments(@PathVariable Long articleId){
-        //서비스에게 위임
-        List<CommentResponse> comments = commentService.findCommentsByArticleId(articleId)
-                .stream()
-                .toList();
+        try {//서비스에게 위임
+            List<CommentResponse> comments = commentService.findCommentsByArticleId(articleId)
+                    .stream()
+                    .toList();
 
-        //결과 응답
-        return ResponseEntity.ok()
-                .body(comments);
+            //결과 응답
+            return ResponseEntity.ok()
+                    .body(comments);
+        } catch (IllegalArgumentException IAE) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
-
-
 
     //댓글 생성
     @PostMapping("/api/articles/{articleId}/comments")
@@ -57,8 +59,12 @@ public class CommentApiController {
     @PutMapping("/api/articles/comments/{id}")
     public ResponseEntity<Comment> update(@PathVariable Long id,
                                              @RequestBody UpdateCommentRequest request){
-        commentService.update(id, request);
-        return ResponseEntity.ok().build();
+        try {
+            commentService.update(id, request);
+            return ResponseEntity.ok().build();
+        } catch (IllegalArgumentException IAE) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 
 
