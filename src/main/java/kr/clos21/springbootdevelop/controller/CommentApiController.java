@@ -45,13 +45,17 @@ public class CommentApiController {
     //댓글 생성
     @PostMapping("/api/articles/{articleId}/comments")
     public ResponseEntity<Comment> create(@RequestBody AddCommentRequest request, @PathVariable Long articleId){
-        request.setArticle(articleRepository.findById(articleId)
-                .orElseThrow(() -> new IllegalArgumentException("not found : " + articleId)));
-        User writer = userDetailService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        request.setUser(writer);
-        commentService.save(request);
+        try {
+            request.setArticle(articleRepository.findById(articleId)
+                    .orElseThrow(() -> new IllegalArgumentException("not found : " + articleId)));
+            User writer = userDetailService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+            request.setUser(writer);
+            commentService.save(request);
 
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        } catch(IllegalArgumentException IAE) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 
 
