@@ -1,8 +1,8 @@
 package kr.clos21.springbootdevelop.service;
 
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
-import kr.clos21.springbootdevelop.domain.Article;
 import kr.clos21.springbootdevelop.domain.Comment;
 import kr.clos21.springbootdevelop.dto.AddCommentRequest;
 import kr.clos21.springbootdevelop.dto.CommentResponse;
@@ -10,7 +10,6 @@ import kr.clos21.springbootdevelop.dto.UpdateCommentRequest;
 import kr.clos21.springbootdevelop.repository.ArticleRepository;
 import kr.clos21.springbootdevelop.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,21 +23,22 @@ public class CommentService {
     private final ArticleRepository articleRepository;
 
     @Transactional
+    @CacheEvict(cacheNames = {"allComments", "articleComments"}, allEntries = true)
     public Comment save(AddCommentRequest request) {
         return commentRepository.save(request.toEntity());
     }
 
     @Transactional(readOnly = true)
-    @Cacheable(cacheNames = "Comments")
+    @Cacheable(cacheNames = "allComments")
     public List<Comment> findAll() {
         return commentRepository.findAll();
     }
 
     @Transactional(readOnly = true)
-    @Cacheable(cacheNames = "Comments")
+    @Cacheable(cacheNames = "articleComments")
     public List<CommentResponse> findCommentsByArticleId(Long articleId) {
         articleRepository.findById(articleId)
-                .orElseThrow(() -> new IllegalArgumentException("not fount: " + articleId));
+                .orElseThrow(() -> new IllegalArgumentException(String.format("Article with ID %d not found", articleId)));
         List<Comment> comments = commentRepository.findCommentsByArticleId(articleId);
 
 
@@ -48,14 +48,16 @@ public class CommentService {
     }
 
     @Transactional
+    @CacheEvict(cacheNames = {"allComments", "articleComments"}, allEntries = true)
     public void delete(long id) {
         commentRepository.deleteById(id);
     }
 
     @Transactional
+    @CacheEvict(cacheNames = {"allComments", "articleComments"}, allEntries = true)
     public Comment update(long id, UpdateCommentRequest request) {
         Comment comment = commentRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
+                .orElseThrow(() -> new IllegalArgumentException(String.format("Comment with ID %d not found", id)));
 
         comment.update(request.getComment());
 

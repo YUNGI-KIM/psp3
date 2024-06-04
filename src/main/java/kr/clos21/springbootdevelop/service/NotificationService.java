@@ -7,6 +7,8 @@ import kr.clos21.springbootdevelop.dto.NotificationResponse;
 import kr.clos21.springbootdevelop.dto.UpdateNotificationRequest;
 import kr.clos21.springbootdevelop.repository.NotificationRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,34 +17,33 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
+@Transactional
 public class NotificationService {
 
     private final NotificationRepository notificationRepository;
 
-    @Transactional
+    @CachePut(cacheNames = "notifications", key = "#result.id")
     public Notification save(AddNotificationRequest request) {
         return notificationRepository.save(request.toEntity());
     }
 
-    @Transactional(readOnly = true)
     @Cacheable(cacheNames = "notifications")
     public List<Notification> findAll() {
         return notificationRepository.findAll();
     }
 
-    @Transactional(readOnly = true)
-    @Cacheable(cacheNames = "notifications")
+    @Cacheable(cacheNames = "notifications", key = "#id")
     public Notification findById(long id) {
         return notificationRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
     }
 
-    @Transactional
+    @CacheEvict(cacheNames = "notifications", allEntries = true)
     public void delete(long id) {
         notificationRepository.deleteById(id);
     }
 
-    @Transactional
+    @CachePut(cacheNames = "notifications", key = "#id")
     public Notification update(long id, UpdateNotificationRequest request) {
         Notification notification = notificationRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("not found : " + id));

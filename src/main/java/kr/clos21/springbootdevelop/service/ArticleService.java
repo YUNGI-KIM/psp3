@@ -8,6 +8,8 @@ import kr.clos21.springbootdevelop.repository.ArticleRepository;
 import kr.clos21.springbootdevelop.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,31 +19,32 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
+@Transactional
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
     private final UserRepository userRepository;
 
-    @Transactional
+    @CachePut(cacheNames = "articles", key = "#result.id")
     public Article save(AddArticleRequest request) {
         return articleRepository.save(request.toEntity());
     }
 
-    @Transactional
+
     @Cacheable(cacheNames = "articles")
     public List<Article> findAll() {
         return articleRepository.findAll();
     }
 
-    @Transactional(readOnly = true)
-    @Cacheable(cacheNames = "articles")
+
+    @Cacheable(cacheNames = "articles", key = "#id")
     public Article findById(long id) {
         return articleRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
     }
 
-    @Transactional(readOnly = true)
-    @Cacheable(cacheNames = "articles")
+
+    @Cacheable(cacheNames = "articles", key="#userId")
     public List<ArticleResponse> findArticlesByUserId(long userId) {
         userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("not found : " + userId));
@@ -52,11 +55,12 @@ public class ArticleService {
                 .collect(Collectors.toList());
     }
 
+    @CacheEvict(cacheNames = "articles", allEntries = true)
     public void delete(long id) {
         articleRepository.deleteById(id);
     }
 
-    @Transactional
+    @CachePut(cacheNames = "articles", key = "#id")
     public Article update(long id, UpdateArticleRequest request) {
         Article article = articleRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
