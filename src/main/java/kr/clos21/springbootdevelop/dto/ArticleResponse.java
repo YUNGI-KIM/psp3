@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 @Getter
 public class ArticleResponse {
-    private final Long articleId;
+    private final Long id;
     private final String title;
     private final String content;
     private final Long userId;
@@ -18,7 +18,7 @@ public class ArticleResponse {
     private final LocalDateTime updatedAt;
 
     public ArticleResponse(Article article) {
-        this.articleId = article.getId();
+        this.id = article.getId();
         this.title = article.getTitle();
         this.content = article.getContent();
         this.userId = article.getUser().getId();
