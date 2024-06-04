@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -43,10 +44,14 @@ public class NotificationApiController {
     }
     @GetMapping("/api/notifications/{id}")
     public ResponseEntity<NotificationResponse> findNotification(@PathVariable long id) {
-        Notification notification = notificationService.findById(id);
+        try {
+            Notification notification = notificationService.findById(id);
 
-        return ResponseEntity.ok()
-                .body(new NotificationResponse(notification));
+            return ResponseEntity.ok()
+                    .body(new NotificationResponse(notification));
+        } catch (IllegalArgumentException IAE) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/api/notifications/{id}")
@@ -60,11 +65,14 @@ public class NotificationApiController {
     @PutMapping("/api/notifications/{id}")
     public ResponseEntity<Notification> updateNotification(@PathVariable long id,
                                                  @RequestBody UpdateNotificationRequest request) {
-        Notification updatedNotification = notificationService.update(id, request);
+        try {
+            Notification updatedNotification = notificationService.update(id, request);
 
-        return ResponseEntity.ok()
-                .body(updatedNotification);
+            return ResponseEntity.ok()
+                    .body(updatedNotification);
+        } catch (IllegalArgumentException IAE) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
-
 }
 
