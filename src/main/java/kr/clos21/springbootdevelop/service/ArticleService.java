@@ -7,7 +7,6 @@ import kr.clos21.springbootdevelop.dto.UpdateArticleRequest;
 import kr.clos21.springbootdevelop.repository.ArticleRepository;
 import kr.clos21.springbootdevelop.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;

@@ -1,9 +1,7 @@
 package kr.clos21.springbootdevelop.service;
 
-import kr.clos21.springbootdevelop.domain.Article;
 import kr.clos21.springbootdevelop.domain.Notification;
 import kr.clos21.springbootdevelop.dto.AddNotificationRequest;
-import kr.clos21.springbootdevelop.dto.NotificationResponse;
 import kr.clos21.springbootdevelop.dto.UpdateNotificationRequest;
 import kr.clos21.springbootdevelop.repository.NotificationRepository;
 import lombok.RequiredArgsConstructor;
