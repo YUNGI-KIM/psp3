@@ -25,12 +25,16 @@ public class ArticleApiController {
 
     @PostMapping("/api/articles")
     public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request) {
-        User writer = userDetailService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-        request.setUser(writer);
-        Article savedArticle = articleService.save(request);
+        try {
+            User writer = userDetailService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+            request.setUser(writer);
+            Article savedArticle = articleService.save(request);
 
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(savedArticle);
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(savedArticle);
+        } catch (IllegalArgumentException IAE) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/api/articles")
