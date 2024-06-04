@@ -1,5 +1,6 @@
 package kr.clos21.springbootdevelop.controller;
 
+import jakarta.persistence.EntityNotFoundException;
 import kr.clos21.springbootdevelop.domain.User;
 import kr.clos21.springbootdevelop.service.UserDetailService;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +33,7 @@ public class ArticleApiController {
 
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(savedArticle);
-        } catch (IllegalArgumentException IAE) {
+        } catch (EntityNotFoundException ENFE) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
@@ -55,7 +56,7 @@ public class ArticleApiController {
 
             return ResponseEntity.ok()
                     .body(new ArticleResponse(article));
-        } catch (IllegalArgumentException IAE) {
+        } catch (EntityNotFoundException ENFE) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
@@ -68,7 +69,7 @@ public class ArticleApiController {
                     .toList();
             return ResponseEntity.ok()
                     .body(articles);
-        } catch (IllegalArgumentException IAE) {
+        } catch (EntityNotFoundException ENFE) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
@@ -90,7 +91,7 @@ public class ArticleApiController {
 
             return ResponseEntity.ok()
                     .body(updatedArticle);
-        } catch (IllegalArgumentException IAE) {
+        } catch (EntityNotFoundException ENFE) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }

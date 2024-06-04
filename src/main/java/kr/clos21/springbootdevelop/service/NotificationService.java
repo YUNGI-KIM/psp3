@@ -1,5 +1,6 @@
 package kr.clos21.springbootdevelop.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import kr.clos21.springbootdevelop.domain.Notification;
 import kr.clos21.springbootdevelop.dto.AddNotificationRequest;
 import kr.clos21.springbootdevelop.dto.UpdateNotificationRequest;
@@ -33,7 +34,7 @@ public class NotificationService {
     @Cacheable(cacheNames = "notifications", key = "#id")
     public Notification findById(long id) {
         return notificationRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
+                .orElseThrow(() -> new EntityNotFoundException("not found : " + id));
     }
 
     @CacheEvict(cacheNames = "notifications", allEntries = true)
@@ -44,7 +45,7 @@ public class NotificationService {
     @CachePut(cacheNames = "notifications", key = "#id")
     public Notification update(long id, UpdateNotificationRequest request) {
         Notification notification = notificationRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
+                .orElseThrow(() -> new EntityNotFoundException("not found : " + id));
 
         notification.update(request.getTitle(), request.getContent(), request.getEmergency());
 

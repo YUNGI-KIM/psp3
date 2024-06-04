@@ -1,5 +1,6 @@
 package kr.clos21.springbootdevelop.controller;
 
+import jakarta.persistence.EntityNotFoundException;
 import kr.clos21.springbootdevelop.domain.Comment;
 import kr.clos21.springbootdevelop.domain.User;
 import kr.clos21.springbootdevelop.dto.AddCommentRequest;
@@ -37,7 +38,7 @@ public class CommentApiController {
             //결과 응답
             return ResponseEntity.ok()
                     .body(comments);
-        } catch (IllegalArgumentException IAE) {
+        } catch (EntityNotFoundException ENFE) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
@@ -53,7 +54,7 @@ public class CommentApiController {
             commentService.save(request);
 
             return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch(IllegalArgumentException IAE) {
+        } catch(EntityNotFoundException ENFE) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
@@ -66,7 +67,7 @@ public class CommentApiController {
         try {
             commentService.update(id, request);
             return ResponseEntity.ok().build();
-        } catch (IllegalArgumentException IAE) {
+        } catch (EntityNotFoundException ENFE) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }

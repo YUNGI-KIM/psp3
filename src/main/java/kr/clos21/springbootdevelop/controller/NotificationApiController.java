@@ -1,5 +1,6 @@
 package kr.clos21.springbootdevelop.controller;
 
+import jakarta.persistence.EntityNotFoundException;
 import kr.clos21.springbootdevelop.domain.Notification;
 import kr.clos21.springbootdevelop.domain.User;
 import kr.clos21.springbootdevelop.dto.*;
@@ -49,7 +50,7 @@ public class NotificationApiController {
 
             return ResponseEntity.ok()
                     .body(new NotificationResponse(notification));
-        } catch (IllegalArgumentException IAE) {
+        } catch (EntityNotFoundException ENFE) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
@@ -70,7 +71,7 @@ public class NotificationApiController {
 
             return ResponseEntity.ok()
                     .body(updatedNotification);
-        } catch (IllegalArgumentException IAE) {
+        } catch (EntityNotFoundException ENFE) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }

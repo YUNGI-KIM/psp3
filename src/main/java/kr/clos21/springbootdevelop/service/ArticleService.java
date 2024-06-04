@@ -1,5 +1,6 @@
 package kr.clos21.springbootdevelop.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import kr.clos21.springbootdevelop.domain.Article;
 import kr.clos21.springbootdevelop.dto.AddArticleRequest;
 import kr.clos21.springbootdevelop.dto.ArticleResponse;
@@ -39,14 +40,14 @@ public class ArticleService {
     @Cacheable(cacheNames = "articles", key = "#id")
     public Article findById(long id) {
         return articleRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
+                .orElseThrow(() -> new EntityNotFoundException("not found : " + id));
     }
 
 
     @Cacheable(cacheNames = "articles", key="#userId")
     public List<ArticleResponse> findArticlesByUserId(long userId) {
         userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("not found : " + userId));
+                .orElseThrow(() -> new EntityNotFoundException("not found : " + userId));
         List<Article> articles = articleRepository.findArticlesByUserId(userId);
 
         return articles.stream()
@@ -62,7 +63,7 @@ public class ArticleService {
     @CachePut(cacheNames = "articles", key = "#id")
     public Article update(long id, UpdateArticleRequest request) {
         Article article = articleRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
+                .orElseThrow(() -> new EntityNotFoundException("not found : " + id));
 
         article.update(request.getTitle(), request.getContent());
 

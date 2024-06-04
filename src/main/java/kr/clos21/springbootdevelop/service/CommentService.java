@@ -1,5 +1,6 @@
 package kr.clos21.springbootdevelop.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +39,7 @@ public class CommentService {
     @Cacheable(cacheNames = "articleComments")
     public List<CommentResponse> findCommentsByArticleId(Long articleId) {
         articleRepository.findById(articleId)
-                .orElseThrow(() -> new IllegalArgumentException(String.format("Article with ID %d not found", articleId)));
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Article with ID %d not found", articleId)));
         List<Comment> comments = commentRepository.findCommentsByArticleId(articleId);
 
 
@@ -57,7 +58,7 @@ public class CommentService {
     @CacheEvict(cacheNames = {"allComments", "articleComments"}, allEntries = true)
     public Comment update(long id, UpdateCommentRequest request) {
         Comment comment = commentRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException(String.format("Comment with ID %d not found", id)));
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Comment with ID %d not found", id)));
 
         comment.update(request.getComment());
 
