@@ -5,13 +5,14 @@ import lombok.Getter;
 
 @Getter
 public class NotificationResponse {
-
+    private final Long notificationId;
     private final String title;
     private final String content;
     private final String emergency;
     private final Long userId;
 
     public NotificationResponse(Notification notification) {
+        this.notificationId = notification.getId();
         this.title = notification.getTitle();
         this.content = notification.getContent();
         this.emergency = notification.getEmergencyToString();
