@@ -1,6 +1,7 @@
 package kr.clos21.springbootdevelop.service;
 
-import jakarta.transaction.Transactional;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.transaction.annotation.Transactional;
 import kr.clos21.springbootdevelop.domain.Article;
 import kr.clos21.springbootdevelop.domain.Comment;
 import kr.clos21.springbootdevelop.dto.AddCommentRequest;
@@ -22,14 +23,19 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final ArticleRepository articleRepository;
 
+    @Transactional
     public Comment save(AddCommentRequest request) {
         return commentRepository.save(request.toEntity());
     }
 
+    @Transactional(readOnly = true)
+    @Cacheable(cacheNames = "Comments")
     public List<Comment> findAll() {
         return commentRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
+    @Cacheable(cacheNames = "Comments")
     public List<CommentResponse> findCommentsByArticleId(Long articleId) {
         articleRepository.findById(articleId)
                 .orElseThrow(() -> new IllegalArgumentException("not fount: " + articleId));
@@ -41,6 +47,7 @@ public class CommentService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public void delete(long id) {
         commentRepository.deleteById(id);
     }
