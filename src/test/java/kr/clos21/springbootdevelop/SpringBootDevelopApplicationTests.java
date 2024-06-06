@@ -5,6 +5,7 @@ import kr.clos21.springbootdevelop.domain.User;
 import kr.clos21.springbootdevelop.dto.*;
 import kr.clos21.springbootdevelop.repository.NotificationRepository;
 import kr.clos21.springbootdevelop.repository.UserRepository;
+import kr.clos21.springbootdevelop.service.UserDetailService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -53,6 +55,9 @@ class ArticleApiControllerTest {
 	@Autowired
 	ArticleRepository articleRepository;
 
+	@Autowired
+	UserDetailService userDetailService;
+
 	@BeforeEach
 	public void mockMvcSetUp() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
@@ -67,7 +72,8 @@ class ArticleApiControllerTest {
 		final String url = "/api/articles";
 		final String title = "title";
 		final String content = "content";
-		final AddArticleRequest userRequest = new AddArticleRequest(title, content);
+		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
+		final AddArticleRequest userRequest = new AddArticleRequest(title, content, testUser);
 
 		final String requestBody = objectMapper.writeValueAsString(userRequest);
 
@@ -117,10 +123,12 @@ class ArticleApiControllerTest {
 		final String url = "/api/articles/{id}";
 		final String title = "title";
 		final String content = "content";
+		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
 
 		Article savedArticle = articleRepository.save(Article.builder()
 				.title(title)
 				.content(content)
+				.user(testUser)
 				.build());
 
 		// when
@@ -141,10 +149,12 @@ class ArticleApiControllerTest {
 		final String url = "/api/articles/{id}";
 		final String title = "title";
 		final String content = "content";
+		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
 
 		Article savedArticle = articleRepository.save(Article.builder()
 				.title(title)
 				.content(content)
+				.user(testUser)
 				.build());
 
 		// when
@@ -165,10 +175,12 @@ class ArticleApiControllerTest {
 		final String url = "/api/articles/{id}";
 		final String title = "title";
 		final String content = "content";
+		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
 
 		Article savedArticle = articleRepository.save(Article.builder()
 				.title(title)
 				.content(content)
+				.user(testUser)
 				.build());
 
 		final String newTitle = "new title";
@@ -321,6 +333,9 @@ class NotificationApiControllerTest {
 	@Autowired
 	NotificationRepository notificationRepository;
 
+	@Autowired
+	UserDetailService userDetailService;
+
 	@BeforeEach
 	public void mockMvcSetUp() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
@@ -335,8 +350,9 @@ class NotificationApiControllerTest {
 		final String url = "/api/notifications";
 		final String title = "title";
 		final String content = "content";
+		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
 		final Boolean emergency = Boolean.TRUE;
-		final AddNotificationRequest userRequest = new AddNotificationRequest(title, content, emergency);
+		final AddNotificationRequest userRequest = new AddNotificationRequest(title, content, emergency, testUser);
 
 		final String requestBody = objectMapper.writeValueAsString(userRequest);
 
@@ -364,11 +380,13 @@ class NotificationApiControllerTest {
 		final String title = "title";
 		final String content = "content";
 		final Boolean emergency = Boolean.TRUE;
+		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
 
 		notificationRepository.save(Notification.builder()
 				.title(title)
 				.content(content)
 				.emergency(emergency)
+				.user(testUser)
 				.build());
 
 		// when
@@ -392,11 +410,13 @@ class NotificationApiControllerTest {
 		final String title = "title";
 		final String content = "content";
 		final Boolean emergency = Boolean.TRUE;
+		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
 
 		Notification savedNotification = notificationRepository.save(Notification.builder()
 				.title(title)
 				.content(content)
 				.emergency(emergency)
+				.user(testUser)
 				.build());
 
 		// when
@@ -419,11 +439,13 @@ class NotificationApiControllerTest {
 		final String title = "title";
 		final String content = "content";
 		final Boolean emergency = Boolean.TRUE;
+		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
 
 		Notification savedNotification = notificationRepository.save(Notification.builder()
 				.title(title)
 				.content(content)
 				.emergency(emergency)
+				.user(testUser)
 				.build());
 
 		// when
@@ -445,11 +467,13 @@ class NotificationApiControllerTest {
 		final String title = "title";
 		final String content = "content";
 		final Boolean emergency = Boolean.TRUE;
+		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
 
 		Notification savedNotification = notificationRepository.save(Notification.builder()
 				.title(title)
 				.content(content)
 				.emergency(emergency)
+				.user(testUser)
 				.build());
 
 		final String newTitle = "new title";
