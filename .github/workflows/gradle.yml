@@ -46,12 +46,12 @@ jobs:
     - name: Build with Gradle Wrapper
       run: ./gradlew build
 
-    - name: Doecker build
+    - name: Docker build
       run: |
-        docker login -u ${{secrets.USERNAME}} -p ${{secrets.PASSWORD}}
+        docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
         docker build -t spring-boot .
-        docker tag spring-boot YUNGI-KIM/spring-boot:${GITHUB_SHA::7}
-        docker push YUNGI-KIM/spring-boot:${GITHUB_SHA::7}
+        docker tag spring-boot m1npr0/spring-boot:${GITHUB_SHA::7}
+        docker push m1npr0/spring-boot:${GITHUB_SHA::7}
         
 
     - name: Deploy
@@ -62,8 +62,8 @@ jobs:
         password: ${{secrets.PASSWORD}}
         port: 22
         script: |
-          docker pull YUNGI-KIM/spring-boot:${GITHUB_SHA::7}
-          docker tag YUNGI-KIM/spring-boot:${GITHUB_SHA::7} spring-boot
+          docker pull m1npr0/spring-boot:${GITHUB_SHA::7}
+          docker tag m1npr0/spring-boot:${GITHUB_SHA::7} spring-boot
           docker stop server
           docker run -d --rm --name server -p 80:8080 spring-boot
 
