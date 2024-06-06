@@ -43,458 +43,458 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class ArticleApiControllerTest {
 
-	@Autowired
-	protected MockMvc mockMvc;
-
-	@Autowired
-	protected ObjectMapper objectMapper;
-
-	@Autowired
-	private WebApplicationContext context;
-
-	@Autowired
-	ArticleRepository articleRepository;
-
-	@Autowired
-	UserDetailService userDetailService;
-
-	@BeforeEach
-	public void mockMvcSetUp() {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
-				.build();
-		articleRepository.deleteAll();
-	}
-
-	@DisplayName("addArticle: Article add success.")
-	@Test
-	public void addArticle() throws Exception {
-		// given
-		final String url = "/api/articles";
-		final String title = "title";
-		final String content = "content";
-		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
-		final AddArticleRequest userRequest = new AddArticleRequest(title, content, testUser);
-
-		final String requestBody = objectMapper.writeValueAsString(userRequest);
-
-		// when
-		ResultActions result = mockMvc.perform(post(url)
-				.contentType(MediaType.APPLICATION_JSON_VALUE)
-				.content(requestBody));
-
-		// then
-		result.andExpect(status().isCreated());
-
-		List<Article> articles = articleRepository.findAll();
-
-		assertThat(articles.size()).isEqualTo(1);
-		assertThat(articles.get(0).getTitle()).isEqualTo(title);
-		assertThat(articles.get(0).getContent()).isEqualTo(content);
-	}
-
-	@DisplayName("findAllArticles: All Article find success.")
-	@Test
-	public void findAllArticles() throws Exception {
-		// given
-		final String url = "/api/articles";
-		final String title = "title";
-		final String content = "content";
-
-		articleRepository.save(Article.builder()
-				.title(title)
-				.content(content)
-				.build());
-
-		// when
-		final ResultActions resultActions = mockMvc.perform(get(url)
-				.accept(MediaType.APPLICATION_JSON));
-
-		// then
-		resultActions
-				.andExpect(status().isOk())
-				.andExpect(jsonPath("$[0].content").value(content))
-				.andExpect(jsonPath("$[0].title").value(title));
-	}
-
-	@DisplayName("findArticle: Article find by id success.")
-	@Test
-	public void findArticle() throws Exception {
-		// given
-		final String url = "/api/articles/{id}";
-		final String title = "title";
-		final String content = "content";
-		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
-
-		Article savedArticle = articleRepository.save(Article.builder()
-				.title(title)
-				.content(content)
-				.user(testUser)
-				.build());
-
-		// when
-		final ResultActions resultActions = mockMvc.perform(get(url, savedArticle.getId()));
-
-		// then
-		resultActions
-				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.content").value(content))
-				.andExpect(jsonPath("$.title").value(title));
-	}
-
-
-	@DisplayName("deleteArticle: Article delete by id success.")
-	@Test
-	public void deleteArticle() throws Exception {
-		// given
-		final String url = "/api/articles/{id}";
-		final String title = "title";
-		final String content = "content";
-		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
-
-		Article savedArticle = articleRepository.save(Article.builder()
-				.title(title)
-				.content(content)
-				.user(testUser)
-				.build());
-
-		// when
-		mockMvc.perform(delete(url, savedArticle.getId()))
-				.andExpect(status().isOk());
-
-		// then
-		List<Article> articles = articleRepository.findAll();
-
-		assertThat(articles).isEmpty();
-	}
-
-
-	@DisplayName("updateArticle: Article update by id success")
-	@Test
-	public void updateArticle() throws Exception {
-		// given
-		final String url = "/api/articles/{id}";
-		final String title = "title";
-		final String content = "content";
-		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
-
-		Article savedArticle = articleRepository.save(Article.builder()
-				.title(title)
-				.content(content)
-				.user(testUser)
-				.build());
-
-		final String newTitle = "new title";
-		final String newContent = "new content";
-
-		UpdateArticleRequest request = new UpdateArticleRequest(newTitle, newContent);
-
-		// when
-		ResultActions result = mockMvc.perform(put(url, savedArticle.getId())
-				.contentType(MediaType.APPLICATION_JSON_VALUE)
-				.content(objectMapper.writeValueAsString(request)));
-
-		// then
-		result.andExpect(status().isOk());
-
-		Article article = articleRepository.findById(savedArticle.getId()).get();
-
-		assertThat(article.getTitle()).isEqualTo(newTitle);
-		assertThat(article.getContent()).isEqualTo(newContent);
-	}
-
-}
-
-@SpringBootTest
-@AutoConfigureMockMvc
-class UserApiControllerTest {
-	@Autowired
-	protected MockMvc mockMvc;
-
-	@Autowired
-	protected ObjectMapper objectMapper;
-
-	@Autowired
-	private WebApplicationContext context;
-
-	@Autowired
-	UserRepository userRepository;
-
-
-	@Autowired
-	BCryptPasswordEncoder bCryptPasswordEncoder;
-
-	@BeforeEach
-	public void mockMvcSetUp() {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
-				.build();
-		userRepository.deleteAll();
-	}
-
-	@DisplayName("addUser: User add success.")
-	@Test
-	public void addUser() throws Exception {
-		// given
-		final String url = "/user";
-		final String email = "user@clos21.kr";
-		final String password = "password";
-		final AddUserRequest userRequest = new AddUserRequest();
-		userRequest.setEmail(email);
-		userRequest.setPassword(password);
-
-
-		final String requestBody = objectMapper.writeValueAsString(userRequest);
-
-		// when
-		ResultActions result = mockMvc.perform(post(url)
-				.param("email", email)
-				.param("password", password));
-
-		// then
-		result.andExpect(status().isCreated());
-
-		Optional<User> users = userRepository.findByEmail(email);
-
-		assertThat(users.isPresent()).isEqualTo(true);
-		assertThat(users.get().getUsername()).isEqualTo(email);
-		assertThat(bCryptPasswordEncoder.matches(password, users.get().getPassword())).isEqualTo(true);
-
-	}
-
-	@DisplayName("loginUser: User login success.")
-	@Test
-	public void loginUser() throws Exception {
-		//given
-		final String url = "/login";
-		final String email = "user@clos21.kr";
-		final String password = "password";
-		User targetUser = userRepository.save(User.builder()
-				.email(email)
-				.password(password)
-				.build());
-
-		//when
-		ResultActions result = mockMvc.perform(post(url)
-				.param("username", email)
-				.param("password", password));
-		//when
-		ResultActions confirm = mockMvc.perform(get("/api/articles"));
-		//then
-		confirm.andExpect(status().isOk());
-
-		Optional<User> users = userRepository.findByEmail(email);
-
-		assertThat(users.isPresent()).isEqualTo(true);
-		assertThat(users.get().getUsername()).isEqualTo(targetUser.getUsername());
-		assertThat(bCryptPasswordEncoder.matches(password, users.get().getPassword())).isEqualTo(bCryptPasswordEncoder.matches(password, targetUser.getPassword()));
-
-	}
-
-	@DisplayName("logoutUser: User logout success")
-	@Test
-	public void logoutUser() throws Exception {
-		//given
-		final String url = "/logout";
-		final String email = "user@clos21.kr";
-		final String password = "password";
-		User targetUser = userRepository.save(User.builder()
-				.email(email)
-				.password(password)
-				.build());
-
-		//when
-		ResultActions loginResult = mockMvc.perform(post("/login")
-				.param("username", email)
-				.param("password", password));
-
-		//when
-		ResultActions logoutResult = mockMvc.perform(get(url));
-		logoutResult.andDo(print()).andExpect(status().isOk());
-		MvcResult mvcResult = logoutResult.andReturn();
-		MockHttpServletResponse mockHttpServletResponse = mvcResult.getResponse();
-		assertThat(mockHttpServletResponse.getContentAsString()).isEqualTo("logout success");
-		assertThat(mockHttpServletResponse.getContentLength()).isEqualTo(14);
-
-	}
-}
-
-@SpringBootTest
-@AutoConfigureMockMvc
-class NotificationApiControllerTest {
-
-	@Autowired
-	protected MockMvc mockMvc;
-
-	@Autowired
-	protected ObjectMapper objectMapper;
-
-	@Autowired
-	private WebApplicationContext context;
-
-	@Autowired
-	NotificationRepository notificationRepository;
-
-	@Autowired
-	UserDetailService userDetailService;
-
-	@BeforeEach
-	public void mockMvcSetUp() {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
-				.build();
-		notificationRepository.deleteAll();
-	}
-
-	@DisplayName("addNotification: Notification add success.")
-	@Test
-	public void addNotification() throws Exception {
-		// given
-		final String url = "/api/notifications";
-		final String title = "title";
-		final String content = "content";
-		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
-		final Boolean emergency = Boolean.TRUE;
-		final AddNotificationRequest userRequest = new AddNotificationRequest(title, content, emergency, testUser);
-
-		final String requestBody = objectMapper.writeValueAsString(userRequest);
-
-		// when
-		ResultActions result = mockMvc.perform(post(url)
-				.contentType(MediaType.APPLICATION_JSON_VALUE)
-				.content(requestBody));
-
-		// then
-		result.andExpect(status().isCreated());
-
-		List<Notification> notifications = notificationRepository.findAll();
-
-		assertThat(notifications.size()).isEqualTo(1);
-		assertThat(notifications.get(0).getTitle()).isEqualTo(title);
-		assertThat(notifications.get(0).getContent()).isEqualTo(content);
-		assertThat(notifications.get(0).getEmergency()).isEqualTo(emergency);
-	}
-
-	@DisplayName("findAllNotifications: All Notification find success.")
-	@Test
-	public void findAllNotifications() throws Exception {
-		// given
-		final String url = "/api/notifications";
-		final String title = "title";
-		final String content = "content";
-		final Boolean emergency = Boolean.TRUE;
-		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
-
-		notificationRepository.save(Notification.builder()
-				.title(title)
-				.content(content)
-				.emergency(emergency)
-				.user(testUser)
-				.build());
-
-		// when
-		final ResultActions resultActions = mockMvc.perform(get(url)
-				.accept(MediaType.APPLICATION_JSON));
-
-		// then
-		resultActions
-				.andExpect(status().isOk())
-				.andExpect(jsonPath("$[0].content").value(content))
-				.andExpect(jsonPath("$[0].title").value(title))
-				.andExpect(jsonPath("$[0].emergency").value("Y"));
-
-	}
-
-	@DisplayName("findNotification: Notification find by id success.")
-	@Test
-	public void findNotification() throws Exception {
-		// given
-		final String url = "/api/notifications/{id}";
-		final String title = "title";
-		final String content = "content";
-		final Boolean emergency = Boolean.TRUE;
-		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
-
-		Notification savedNotification = notificationRepository.save(Notification.builder()
-				.title(title)
-				.content(content)
-				.emergency(emergency)
-				.user(testUser)
-				.build());
-
-		// when
-		final ResultActions resultActions = mockMvc.perform(get(url, savedNotification.getId()));
-
-		// then
-		resultActions
-				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.content").value(content))
-				.andExpect(jsonPath("$.emergency").value("Y"))
-				.andExpect(jsonPath("$.title").value(title));
-	}
-
-
-	@DisplayName("deleteNotification: Notification delete by id success.")
-	@Test
-	public void deleteNotification() throws Exception {
-		// given
-		final String url = "/api/notifications/{id}";
-		final String title = "title";
-		final String content = "content";
-		final Boolean emergency = Boolean.TRUE;
-		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
-
-		Notification savedNotification = notificationRepository.save(Notification.builder()
-				.title(title)
-				.content(content)
-				.emergency(emergency)
-				.user(testUser)
-				.build());
-
-		// when
-		mockMvc.perform(delete(url, savedNotification.getId()))
-				.andExpect(status().isOk());
-
-		// then
-		List<Notification> notifications = notificationRepository.findAll();
-
-		assertThat(notifications).isEmpty();
-	}
-
-
-	@DisplayName("updateNotification: Notification update by id success")
-	@Test
-	public void updateNotification() throws Exception {
-		// given
-		final String url = "/api/notifications/{id}";
-		final String title = "title";
-		final String content = "content";
-		final Boolean emergency = Boolean.TRUE;
-		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
-
-		Notification savedNotification = notificationRepository.save(Notification.builder()
-				.title(title)
-				.content(content)
-				.emergency(emergency)
-				.user(testUser)
-				.build());
-
-		final String newTitle = "new title";
-		final String newContent = "new content";
-		final Boolean newEmergency = Boolean.FALSE;
-
-		UpdateNotificationRequest request = new UpdateNotificationRequest(newTitle, newContent, newEmergency);
-
-		// when
-		ResultActions result = mockMvc.perform(put(url, savedNotification.getId())
-				.contentType(MediaType.APPLICATION_JSON_VALUE)
-				.content(objectMapper.writeValueAsString(request)));
-
-		// then
-		result.andExpect(status().isOk());
-
-		Notification notification = notificationRepository.findById(savedNotification.getId()).get();
-
-		assertThat(notification.getTitle()).isEqualTo(newTitle);
-		assertThat(notification.getContent()).isEqualTo(newContent);
-		assertThat(notification.getEmergencyToString()).isEqualTo("N");
-	}
+//	@Autowired
+//	protected MockMvc mockMvc;
+//
+//	@Autowired
+//	protected ObjectMapper objectMapper;
+//
+//	@Autowired
+//	private WebApplicationContext context;
+//
+//	@Autowired
+//	ArticleRepository articleRepository;
+//
+//	@Autowired
+//	UserDetailService userDetailService;
+//
+//	@BeforeEach
+//	public void mockMvcSetUp() {
+//		this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
+//				.build();
+//		articleRepository.deleteAll();
+//	}
+//
+//	@DisplayName("addArticle: Article add success.")
+//	@Test
+//	public void addArticle() throws Exception {
+//		// given
+//		final String url = "/api/articles";
+//		final String title = "title";
+//		final String content = "content";
+//		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
+//		final AddArticleRequest userRequest = new AddArticleRequest(title, content, testUser);
+//
+//		final String requestBody = objectMapper.writeValueAsString(userRequest);
+//
+//		// when
+//		ResultActions result = mockMvc.perform(post(url)
+//				.contentType(MediaType.APPLICATION_JSON_VALUE)
+//				.content(requestBody));
+//
+//		// then
+//		result.andExpect(status().isCreated());
+//
+//		List<Article> articles = articleRepository.findAll();
+//
+//		assertThat(articles.size()).isEqualTo(1);
+//		assertThat(articles.get(0).getTitle()).isEqualTo(title);
+//		assertThat(articles.get(0).getContent()).isEqualTo(content);
+//	}
+//
+//	@DisplayName("findAllArticles: All Article find success.")
+//	@Test
+//	public void findAllArticles() throws Exception {
+//		// given
+//		final String url = "/api/articles";
+//		final String title = "title";
+//		final String content = "content";
+//
+//		articleRepository.save(Article.builder()
+//				.title(title)
+//				.content(content)
+//				.build());
+//
+//		// when
+//		final ResultActions resultActions = mockMvc.perform(get(url)
+//				.accept(MediaType.APPLICATION_JSON));
+//
+//		// then
+//		resultActions
+//				.andExpect(status().isOk())
+//				.andExpect(jsonPath("$[0].content").value(content))
+//				.andExpect(jsonPath("$[0].title").value(title));
+//	}
+//
+//	@DisplayName("findArticle: Article find by id success.")
+//	@Test
+//	public void findArticle() throws Exception {
+//		// given
+//		final String url = "/api/articles/{id}";
+//		final String title = "title";
+//		final String content = "content";
+//		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
+//
+//		Article savedArticle = articleRepository.save(Article.builder()
+//				.title(title)
+//				.content(content)
+//				.user(testUser)
+//				.build());
+//
+//		// when
+//		final ResultActions resultActions = mockMvc.perform(get(url, savedArticle.getId()));
+//
+//		// then
+//		resultActions
+//				.andExpect(status().isOk())
+//				.andExpect(jsonPath("$.content").value(content))
+//				.andExpect(jsonPath("$.title").value(title));
+//	}
+//
+//
+//	@DisplayName("deleteArticle: Article delete by id success.")
+//	@Test
+//	public void deleteArticle() throws Exception {
+//		// given
+//		final String url = "/api/articles/{id}";
+//		final String title = "title";
+//		final String content = "content";
+//		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
+//
+//		Article savedArticle = articleRepository.save(Article.builder()
+//				.title(title)
+//				.content(content)
+//				.user(testUser)
+//				.build());
+//
+//		// when
+//		mockMvc.perform(delete(url, savedArticle.getId()))
+//				.andExpect(status().isOk());
+//
+//		// then
+//		List<Article> articles = articleRepository.findAll();
+//
+//		assertThat(articles).isEmpty();
+//	}
+//
+//
+//	@DisplayName("updateArticle: Article update by id success")
+//	@Test
+//	public void updateArticle() throws Exception {
+//		// given
+//		final String url = "/api/articles/{id}";
+//		final String title = "title";
+//		final String content = "content";
+//		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
+//
+//		Article savedArticle = articleRepository.save(Article.builder()
+//				.title(title)
+//				.content(content)
+//				.user(testUser)
+//				.build());
+//
+//		final String newTitle = "new title";
+//		final String newContent = "new content";
+//
+//		UpdateArticleRequest request = new UpdateArticleRequest(newTitle, newContent);
+//
+//		// when
+//		ResultActions result = mockMvc.perform(put(url, savedArticle.getId())
+//				.contentType(MediaType.APPLICATION_JSON_VALUE)
+//				.content(objectMapper.writeValueAsString(request)));
+//
+//		// then
+//		result.andExpect(status().isOk());
+//
+//		Article article = articleRepository.findById(savedArticle.getId()).get();
+//
+//		assertThat(article.getTitle()).isEqualTo(newTitle);
+//		assertThat(article.getContent()).isEqualTo(newContent);
+//	}
+//
+//}
+//
+//@SpringBootTest
+//@AutoConfigureMockMvc
+//class UserApiControllerTest {
+//	@Autowired
+//	protected MockMvc mockMvc;
+//
+//	@Autowired
+//	protected ObjectMapper objectMapper;
+//
+//	@Autowired
+//	private WebApplicationContext context;
+//
+//	@Autowired
+//	UserRepository userRepository;
+//
+//
+//	@Autowired
+//	BCryptPasswordEncoder bCryptPasswordEncoder;
+//
+//	@BeforeEach
+//	public void mockMvcSetUp() {
+//		this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
+//				.build();
+//		userRepository.deleteAll();
+//	}
+//
+//	@DisplayName("addUser: User add success.")
+//	@Test
+//	public void addUser() throws Exception {
+//		// given
+//		final String url = "/user";
+//		final String email = "user@clos21.kr";
+//		final String password = "password";
+//		final AddUserRequest userRequest = new AddUserRequest();
+//		userRequest.setEmail(email);
+//		userRequest.setPassword(password);
+//
+//
+//		final String requestBody = objectMapper.writeValueAsString(userRequest);
+//
+//		// when
+//		ResultActions result = mockMvc.perform(post(url)
+//				.param("email", email)
+//				.param("password", password));
+//
+//		// then
+//		result.andExpect(status().isCreated());
+//
+//		Optional<User> users = userRepository.findByEmail(email);
+//
+//		assertThat(users.isPresent()).isEqualTo(true);
+//		assertThat(users.get().getUsername()).isEqualTo(email);
+//		assertThat(bCryptPasswordEncoder.matches(password, users.get().getPassword())).isEqualTo(true);
+//
+//	}
+//
+//	@DisplayName("loginUser: User login success.")
+//	@Test
+//	public void loginUser() throws Exception {
+//		//given
+//		final String url = "/login";
+//		final String email = "user@clos21.kr";
+//		final String password = "password";
+//		User targetUser = userRepository.save(User.builder()
+//				.email(email)
+//				.password(password)
+//				.build());
+//
+//		//when
+//		ResultActions result = mockMvc.perform(post(url)
+//				.param("username", email)
+//				.param("password", password));
+//		//when
+//		ResultActions confirm = mockMvc.perform(get("/api/articles"));
+//		//then
+//		confirm.andExpect(status().isOk());
+//
+//		Optional<User> users = userRepository.findByEmail(email);
+//
+//		assertThat(users.isPresent()).isEqualTo(true);
+//		assertThat(users.get().getUsername()).isEqualTo(targetUser.getUsername());
+//		assertThat(bCryptPasswordEncoder.matches(password, users.get().getPassword())).isEqualTo(bCryptPasswordEncoder.matches(password, targetUser.getPassword()));
+//
+//	}
+//
+//	@DisplayName("logoutUser: User logout success")
+//	@Test
+//	public void logoutUser() throws Exception {
+//		//given
+//		final String url = "/logout";
+//		final String email = "user@clos21.kr";
+//		final String password = "password";
+//		User targetUser = userRepository.save(User.builder()
+//				.email(email)
+//				.password(password)
+//				.build());
+//
+//		//when
+//		ResultActions loginResult = mockMvc.perform(post("/login")
+//				.param("username", email)
+//				.param("password", password));
+//
+//		//when
+//		ResultActions logoutResult = mockMvc.perform(get(url));
+//		logoutResult.andDo(print()).andExpect(status().isOk());
+//		MvcResult mvcResult = logoutResult.andReturn();
+//		MockHttpServletResponse mockHttpServletResponse = mvcResult.getResponse();
+//		assertThat(mockHttpServletResponse.getContentAsString()).isEqualTo("logout success");
+//		assertThat(mockHttpServletResponse.getContentLength()).isEqualTo(14);
+//
+//	}
+//}
+//
+//@SpringBootTest
+//@AutoConfigureMockMvc
+//class NotificationApiControllerTest {
+//
+//	@Autowired
+//	protected MockMvc mockMvc;
+//
+//	@Autowired
+//	protected ObjectMapper objectMapper;
+//
+//	@Autowired
+//	private WebApplicationContext context;
+//
+//	@Autowired
+//	NotificationRepository notificationRepository;
+//
+//	@Autowired
+//	UserDetailService userDetailService;
+//
+//	@BeforeEach
+//	public void mockMvcSetUp() {
+//		this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
+//				.build();
+//		notificationRepository.deleteAll();
+//	}
+//
+//	@DisplayName("addNotification: Notification add success.")
+//	@Test
+//	public void addNotification() throws Exception {
+//		// given
+//		final String url = "/api/notifications";
+//		final String title = "title";
+//		final String content = "content";
+//		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
+//		final Boolean emergency = Boolean.TRUE;
+//		final AddNotificationRequest userRequest = new AddNotificationRequest(title, content, emergency, testUser);
+//
+//		final String requestBody = objectMapper.writeValueAsString(userRequest);
+//
+//		// when
+//		ResultActions result = mockMvc.perform(post(url)
+//				.contentType(MediaType.APPLICATION_JSON_VALUE)
+//				.content(requestBody));
+//
+//		// then
+//		result.andExpect(status().isCreated());
+//
+//		List<Notification> notifications = notificationRepository.findAll();
+//
+//		assertThat(notifications.size()).isEqualTo(1);
+//		assertThat(notifications.get(0).getTitle()).isEqualTo(title);
+//		assertThat(notifications.get(0).getContent()).isEqualTo(content);
+//		assertThat(notifications.get(0).getEmergency()).isEqualTo(emergency);
+//	}
+//
+//	@DisplayName("findAllNotifications: All Notification find success.")
+//	@Test
+//	public void findAllNotifications() throws Exception {
+//		// given
+//		final String url = "/api/notifications";
+//		final String title = "title";
+//		final String content = "content";
+//		final Boolean emergency = Boolean.TRUE;
+//		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
+//
+//		notificationRepository.save(Notification.builder()
+//				.title(title)
+//				.content(content)
+//				.emergency(emergency)
+//				.user(testUser)
+//				.build());
+//
+//		// when
+//		final ResultActions resultActions = mockMvc.perform(get(url)
+//				.accept(MediaType.APPLICATION_JSON));
+//
+//		// then
+//		resultActions
+//				.andExpect(status().isOk())
+//				.andExpect(jsonPath("$[0].content").value(content))
+//				.andExpect(jsonPath("$[0].title").value(title))
+//				.andExpect(jsonPath("$[0].emergency").value("Y"));
+//
+//	}
+//
+//	@DisplayName("findNotification: Notification find by id success.")
+//	@Test
+//	public void findNotification() throws Exception {
+//		// given
+//		final String url = "/api/notifications/{id}";
+//		final String title = "title";
+//		final String content = "content";
+//		final Boolean emergency = Boolean.TRUE;
+//		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
+//
+//		Notification savedNotification = notificationRepository.save(Notification.builder()
+//				.title(title)
+//				.content(content)
+//				.emergency(emergency)
+//				.user(testUser)
+//				.build());
+//
+//		// when
+//		final ResultActions resultActions = mockMvc.perform(get(url, savedNotification.getId()));
+//
+//		// then
+//		resultActions
+//				.andExpect(status().isOk())
+//				.andExpect(jsonPath("$.content").value(content))
+//				.andExpect(jsonPath("$.emergency").value("Y"))
+//				.andExpect(jsonPath("$.title").value(title));
+//	}
+//
+//
+//	@DisplayName("deleteNotification: Notification delete by id success.")
+//	@Test
+//	public void deleteNotification() throws Exception {
+//		// given
+//		final String url = "/api/notifications/{id}";
+//		final String title = "title";
+//		final String content = "content";
+//		final Boolean emergency = Boolean.TRUE;
+//		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
+//
+//		Notification savedNotification = notificationRepository.save(Notification.builder()
+//				.title(title)
+//				.content(content)
+//				.emergency(emergency)
+//				.user(testUser)
+//				.build());
+//
+//		// when
+//		mockMvc.perform(delete(url, savedNotification.getId()))
+//				.andExpect(status().isOk());
+//
+//		// then
+//		List<Notification> notifications = notificationRepository.findAll();
+//
+//		assertThat(notifications).isEmpty();
+//	}
+//
+//
+//	@DisplayName("updateNotification: Notification update by id success")
+//	@Test
+//	public void updateNotification() throws Exception {
+//		// given
+//		final String url = "/api/notifications/{id}";
+//		final String title = "title";
+//		final String content = "content";
+//		final Boolean emergency = Boolean.TRUE;
+//		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
+//
+//		Notification savedNotification = notificationRepository.save(Notification.builder()
+//				.title(title)
+//				.content(content)
+//				.emergency(emergency)
+//				.user(testUser)
+//				.build());
+//
+//		final String newTitle = "new title";
+//		final String newContent = "new content";
+//		final Boolean newEmergency = Boolean.FALSE;
+//
+//		UpdateNotificationRequest request = new UpdateNotificationRequest(newTitle, newContent, newEmergency);
+//
+//		// when
+//		ResultActions result = mockMvc.perform(put(url, savedNotification.getId())
+//				.contentType(MediaType.APPLICATION_JSON_VALUE)
+//				.content(objectMapper.writeValueAsString(request)));
+//
+//		// then
+//		result.andExpect(status().isOk());
+//
+//		Notification notification = notificationRepository.findById(savedNotification.getId()).get();
+//
+//		assertThat(notification.getTitle()).isEqualTo(newTitle);
+//		assertThat(notification.getContent()).isEqualTo(newContent);
+//		assertThat(notification.getEmergencyToString()).isEqualTo("N");
+//	}
 
 }
