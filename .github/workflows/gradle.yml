@@ -62,7 +62,11 @@ jobs:
         password: ${{secrets.PASSWORD}}
         port: 22
         script: |
-          docker pull m1npr0/spring-boot:latest
-          docker tag m1npr0/spring-boot:latest spring-boot
+          cd /root/Spring-Boot
+          git pull
+          export GITHUB_SHA=$(git rev-parse HEAD)
+          echo "Using tag: ${GITHUB_SHA::7}"
+          docker pull m1npr0/spring-boot:${GITHUB_SHA::7}
+          docker tag m1npr0/spring-boot:${GITHUB_SHA::7} spring-boot
           docker stop server && docker rm server
           docker run -d --name server -p 80:8080 spring-boot
