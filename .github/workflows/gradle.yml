@@ -64,8 +64,8 @@ jobs:
         script: |
           docker pull m1npr0/spring-boot:${GITHUB_SHA::7}
           docker tag m1npr0/spring-boot:${GITHUB_SHA::7} spring-boot
-          docker stop server
-          docker run -d --rm --name server -p 80:8080 m1npr0/spring-boot:${GITHUB_SHA::7}
+          docker stop server && docker rm server
+          docker run -d --rm --name server -p 80:8080 spring-boot
 
     # NOTE: The Gradle Wrapper is the default and recommended way to run Gradle (https://docs.gradle.org/current/userguide/gradle_wrapper.html).
     # If your project does not have the Gradle Wrapper configured, you can use the following configuration to run Gradle with a specified version.
