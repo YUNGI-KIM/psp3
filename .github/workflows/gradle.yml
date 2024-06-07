@@ -48,8 +48,8 @@ jobs:
 
     - name: Docker build
       run: |
-        echo "${{secrets.DOCKER_PASSWORD}}" docker login -u ${{secrets.DOCKER_USERNAME}} --password-stdin
-        docker build -t spring-boot .
+        echo "${{secrets.DOCKER_PASSWORD}}" | docker login -u ${{secrets.DOCKER_USERNAME}} --password-stdin
+        docker build --build-arg JAR_FILE=build/libs/spring-boot.jar -t spring-boot .
         docker tag spring-boot m1npr0/spring-boot:${GITHUB_SHA::7}
         docker push m1npr0/spring-boot:${GITHUB_SHA::7}
         
