@@ -30,7 +30,7 @@ public class User implements UserDetails {
     @Column(name = "email", nullable = false, unique = true)
     @JsonProperty("email")
     private String email;
-    
+
     @Column(name = "password", nullable = false)
     @JsonIgnore
     private String password;
