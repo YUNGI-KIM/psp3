@@ -1,5 +1,8 @@
 package kr.clos21.springbootdevelop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -21,12 +24,15 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false)
+    @JsonProperty("id")
     private Long id;
 
     @Column(name = "email", nullable = false, unique = true)
+    @JsonProperty("email")
     private String email;
-
+    
     @Column(name = "password", nullable = false)
+    @JsonIgnore
     private String password;
 
     @Builder

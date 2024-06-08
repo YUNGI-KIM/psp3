@@ -1,5 +1,7 @@
 package kr.clos21.springbootdevelop;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import kr.clos21.springbootdevelop.domain.Notification;
 import kr.clos21.springbootdevelop.domain.User;
 import kr.clos21.springbootdevelop.dto.*;
@@ -62,7 +64,6 @@ class ArticleApiControllerTest {
 //	public void mockMvcSetUp() {
 //		this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
 //				.build();
-//		articleRepository.deleteAll();
 //	}
 //
 //	@DisplayName("addArticle: Article add success.")
@@ -74,6 +75,7 @@ class ArticleApiControllerTest {
 //		final String content = "content";
 //		User testUser = userDetailService.loadUserByUsername("example@gmail.com");
 //		final AddArticleRequest userRequest = new AddArticleRequest(title, content, testUser);
+//		userRequest.setUser(testUser);
 //
 //		final String requestBody = objectMapper.writeValueAsString(userRequest);
 //
@@ -87,9 +89,8 @@ class ArticleApiControllerTest {
 //
 //		List<Article> articles = articleRepository.findAll();
 //
-//		assertThat(articles.size()).isEqualTo(1);
-//		assertThat(articles.get(0).getTitle()).isEqualTo(title);
-//		assertThat(articles.get(0).getContent()).isEqualTo(content);
+//		assertThat(articles.get(articles.size()-1).getTitle()).isEqualTo(title);
+//		assertThat(articles.get(articles.size()-1).getContent()).isEqualTo(content);
 //	}
 //
 //	@DisplayName("findAllArticles: All Article find success.")
