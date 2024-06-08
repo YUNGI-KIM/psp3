@@ -20,6 +20,7 @@ public class HttpToHttpsRedirectConfig {
         connector.setPort(8080); // HTTP 포트
         connector.setSecure(false);
         connector.setRedirectPort(8443); // HTTPS 포트
+        connector.setParseBodyMethods(connector.getParseBodyMethods());
         return connector;
     }
 }
