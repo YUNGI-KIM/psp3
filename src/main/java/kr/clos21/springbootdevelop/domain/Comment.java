@@ -34,6 +34,8 @@ public class Comment extends BaseTimeEntity {
         this.comment = comment;
         this.article = article;
         this.user = user;
+        super.createdAt = createdAt;
+        super.updatedAt = updatedAt;
     }
 
     public void update(String comment) {

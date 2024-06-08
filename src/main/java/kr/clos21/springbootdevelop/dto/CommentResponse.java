@@ -6,6 +6,7 @@ import kr.clos21.springbootdevelop.domain.User;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collector;
 
@@ -15,6 +16,8 @@ public class CommentResponse {
     private final Long articleId;
     private final Long userId;
     private final String comment;
+    private final LocalDateTime createdAt;
+    private final LocalDateTime updatedAt;
 
 
     public CommentResponse(Comment comment) {
@@ -22,5 +25,7 @@ public class CommentResponse {
         this.articleId = comment.getArticle().getId();
         this.userId = comment.getUser().getId();
         this.comment = comment.getComment();
+        this.createdAt = comment.getCreatedAt();
+        this.updatedAt = comment.getUpdatedAt();
     }
 }

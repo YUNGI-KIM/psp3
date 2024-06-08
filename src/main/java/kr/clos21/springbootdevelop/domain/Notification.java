@@ -44,6 +44,8 @@ public class Notification extends BaseTimeEntity {
         this.content = content;
         this.emergency = emergency;
         this.user = user;
+        super.createdAt = createdAt;
+        super.updatedAt = updatedAt;
     }
 
     public void update(String title, String content, Boolean emergency) {
