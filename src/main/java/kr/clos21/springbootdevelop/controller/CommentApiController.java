@@ -48,7 +48,7 @@ public class CommentApiController {
     public ResponseEntity<Comment> create(@RequestBody AddCommentRequest request, @PathVariable Long articleId){
         try {
             request.setArticle(articleRepository.findById(articleId)
-                    .orElseThrow(() -> new IllegalArgumentException("not found : " + articleId)));
+                    .orElseThrow(() -> new EntityNotFoundException("not found : " + articleId)));
             User writer = userDetailService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
             request.setUser(writer);
             commentService.save(request);
