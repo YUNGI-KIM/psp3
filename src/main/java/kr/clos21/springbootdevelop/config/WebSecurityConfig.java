@@ -52,7 +52,7 @@ public class WebSecurityConfig{
                 )
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/login")
-                        .defaultSuccessUrl("/api/articles"));
+                        .defaultSuccessUrl("/"));
 
         http
                 .logout((logout) -> logout
