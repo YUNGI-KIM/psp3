@@ -69,4 +69,4 @@ jobs:
           docker pull m1npr0/spring-boot:${GITHUB_SHA::7}
           docker tag m1npr0/spring-boot:${GITHUB_SHA::7} spring-boot
           docker stop server && docker rm server
-          docker run -d --name server -p 80:8080 spring-boot
+          docker run -d --name server -p 443:8443 -p 80:8080 spring-boot

@@ -25,7 +25,7 @@ import static org.springframework.boot.autoconfigure.security.servlet.PathReques
 
 @RequiredArgsConstructor
 @Configuration
-public class WebSecurityConfig {
+public class WebSecurityConfig{
 
 //    private final OAuth2UserCustomService oAuth2UserCustomService;
 //    private final TokenProvider tokenProvider;
@@ -34,13 +34,17 @@ public class WebSecurityConfig {
 
     @Bean
     public WebSecurityCustomizer configure() {
-        return (web) -> web.ignoring()
-
+        return (web) -> web
+                .ignoring()
                 .requestMatchers("/img/**", "/css/**", "/js/**");
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+        http.
+                requiresChannel(channel -> channel
+                    .anyRequest().requiresSecure()
+                );
         http
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/login", "/signup", "/user", "/logout", "/success", "/").permitAll()
