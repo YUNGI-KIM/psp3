@@ -60,11 +60,15 @@ password="password"
 ```http request
 /api/articles
 ```
-- How to Get Article (Receive JSON data, Method GET)
-
+- How to Get Article on ArticleId (Receive JSON data, Method GET)
 ```http request
 /api/articles/{id}
 ```
+- How to Get Article on UserId (Receive JSON data, Method GET)
+```http request
+/api/articles/user/{userId}
+```
+
 #### Comments on Article
 - How to Add Comment on Article (Used JSON to send data, Method POST)
 ```http request
@@ -76,9 +80,13 @@ password="password"
 }
 ```
 
-- How to Get Comments on Article (Receive JSON data, Method GET)
+- How to Get Comments on ArticleId (Receive JSON data, Method GET)
 ```http request
 /api/articles/{articleId}/comments
+```
+- How to Get Comments on UserId (Receive JSON data, Method GET)
+```http request
+/api/articles/comments/user/{userId}
 ```
 - How to Delete Comments (Method DELETE)
 ```http request
