@@ -55,7 +55,7 @@ public class NotificationApiController {
         }
     }
 
-    @GetMapping("/api/notification/user/{userId}")
+    @GetMapping("/api/notifications/user/{userId}")
     public ResponseEntity<List<NotificationResponse>> findNotificationByUserId(@PathVariable Long userId) {
         try {
             List<NotificationResponse> notifications = notificationService.findNotificationByUserId(userId)
