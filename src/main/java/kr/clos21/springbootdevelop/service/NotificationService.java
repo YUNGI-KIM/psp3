@@ -3,8 +3,10 @@ package kr.clos21.springbootdevelop.service;
 import jakarta.persistence.EntityNotFoundException;
 import kr.clos21.springbootdevelop.domain.Notification;
 import kr.clos21.springbootdevelop.dto.AddNotificationRequest;
+import kr.clos21.springbootdevelop.dto.NotificationResponse;
 import kr.clos21.springbootdevelop.dto.UpdateNotificationRequest;
 import kr.clos21.springbootdevelop.repository.NotificationRepository;
+import kr.clos21.springbootdevelop.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -13,6 +15,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -20,6 +23,7 @@ import java.util.List;
 public class NotificationService {
 
     private final NotificationRepository notificationRepository;
+    private final UserRepository userRepository;
 
     @CachePut(cacheNames = "notifications", key = "#result.id")
     public Notification save(AddNotificationRequest request) {
@@ -37,6 +41,15 @@ public class NotificationService {
                 .orElseThrow(() -> new EntityNotFoundException("not found : " + id));
     }
 
+    @Cacheable(cacheNames = "notifications")
+    public List<NotificationResponse> findNotificationByUserId(Long userId) {
+        userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("not found : " + userId));
+        List<Notification> notifications = notificationRepository.findNotificationsByUserId(userId);
+        return notifications.stream()
+                .map(NotificationResponse::new)
+                .collect(Collectors.toList());
+    }
     @CacheEvict(cacheNames = "notifications", allEntries = true)
     public void delete(long id) {
         notificationRepository.deleteById(id);

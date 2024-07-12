@@ -44,12 +44,26 @@ public class NotificationApiController {
                 .body(notifications);
     }
     @GetMapping("/api/notifications/{id}")
-    public ResponseEntity<NotificationResponse> findNotification(@PathVariable long id) {
+    public ResponseEntity<NotificationResponse> findNotificationById(@PathVariable long id) {
         try {
             Notification notification = notificationService.findById(id);
 
             return ResponseEntity.ok()
                     .body(new NotificationResponse(notification));
+        } catch (EntityNotFoundException ENFE) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/api/notification/user/{userId}")
+    public ResponseEntity<List<NotificationResponse>> findNotificationByUserId(@PathVariable Long userId) {
+        try {
+            List<NotificationResponse> notifications = notificationService.findNotificationByUserId(userId)
+                    .stream()
+                    .toList();
+
+            return ResponseEntity.ok()
+                    .body(notifications);
         } catch (EntityNotFoundException ENFE) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }

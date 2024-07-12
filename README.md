@@ -117,10 +117,14 @@ password="password"
 ```http request
 /api/notifications
 ```
-- How to Get Notification (Receive JSON data, Method GET)
+- How to Get Notification on id (Receive JSON data, Method GET)
 
 ```http request
 /api/notifications/{id}
+```
+- How to Get Notification on UserId (Receive JSON data, Method GET)
+```http request
+/api/notification/user/{userId}
 ```
 
 
