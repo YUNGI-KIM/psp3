@@ -44,7 +44,7 @@ public class CommentApiController {
     }
 
     //댓글 목록 조회(UserId)
-    @GetMapping("/api/articles/comments/{userId}")
+    @GetMapping("/api/articles/comments/user/{userId}")
     public ResponseEntity<List<CommentResponse>> findCommentsByUserId(@PathVariable Long userId) {
         try {//서비스에게 위임
             List<CommentResponse> comments = commentService.findCommentsByUserId(userId)
