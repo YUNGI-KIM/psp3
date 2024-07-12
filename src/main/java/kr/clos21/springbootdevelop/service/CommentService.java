@@ -1,6 +1,8 @@
 package kr.clos21.springbootdevelop.service;
 
 import jakarta.persistence.EntityNotFoundException;
+import kr.clos21.springbootdevelop.dto.CommentRequest;
+import kr.clos21.springbootdevelop.repository.UserRepository;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +24,7 @@ import java.util.stream.Collectors;
 public class CommentService {
     private final CommentRepository commentRepository;
     private final ArticleRepository articleRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     @CacheEvict(cacheNames = {"allComments", "articleComments"}, allEntries = true)
@@ -42,6 +45,18 @@ public class CommentService {
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Article with ID %d not found", articleId)));
         List<Comment> comments = commentRepository.findCommentsByArticleId(articleId);
 
+
+        return comments.stream()
+                .map(CommentResponse::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    @Cacheable(cacheNames = "articleComments")
+    public List<CommentResponse> findCommentsByUserId(Long userId) {
+        userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("not found : " + userId));
+        List<Comment> comments = commentRepository.findCommentsByUserId(userId);
 
         return comments.stream()
                 .map(CommentResponse::new)

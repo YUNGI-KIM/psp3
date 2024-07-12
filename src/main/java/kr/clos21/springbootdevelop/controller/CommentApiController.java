@@ -27,9 +27,9 @@ public class CommentApiController {
     private final UserDetailService userDetailService;
     private final ArticleRepository articleRepository;
 
-    //댓글 목록 조회
+    //댓글 목록 조회(ArticleId)
     @GetMapping("/api/articles/{articleId}/comments")
-    public ResponseEntity<List<CommentResponse>> comments(@PathVariable Long articleId){
+    public ResponseEntity<List<CommentResponse>> findCommentsByArticleId(@PathVariable Long articleId){
         try {//서비스에게 위임
             List<CommentResponse> comments = commentService.findCommentsByArticleId(articleId)
                     .stream()
@@ -40,6 +40,21 @@ public class CommentApiController {
                     .body(comments);
         } catch (EntityNotFoundException ENFE) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    //댓글 목록 조회(UserId)
+    @GetMapping("/api/articles/comments/{userId}")
+    public ResponseEntity<List<CommentResponse>> findCommentsByUserId(@PathVariable Long userId) {
+        try {//서비스에게 위임
+            List<CommentResponse> comments = commentService.findCommentsByUserId(userId)
+                    .stream()
+                    .toList();
+            //결과 응답
+            return ResponseEntity.ok()
+                    .body(comments);
+        } catch (EntityNotFoundException ENFE) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND); //유저 Not Found 에러 구문
         }
     }
 
