@@ -1,5 +1,6 @@
 package kr.clos21.springbootdevelop.config;
 
+import kr.clos21.springbootdevelop.service.LoginHistoryService;
 import kr.clos21.springbootdevelop.service.UserDetailService;
 import kr.clos21.springbootdevelop.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +32,7 @@ public class WebSecurityConfig{
 //    private final TokenProvider tokenProvider;
 //    private final RefreshTokenRepository refreshTokenRepository;
     private final UserDetailService userDetailService;
-
+    private final LoginHistoryService loginHistoryService;
     @Bean
     public WebSecurityCustomizer configure() {
         return (web) -> web
@@ -52,6 +53,7 @@ public class WebSecurityConfig{
                 )
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/login")
+                        .successHandler(getSuccessHandler())
                         .defaultSuccessUrl("/api/articles"));
 
         http
@@ -70,6 +72,12 @@ public class WebSecurityConfig{
                         new AntPathRequestMatcher("/api/**")));
 
         return http.build();
+    }
+
+    // 로그인 성공시 동작하는 UserAuthenticationSuccessHandler 핸들러 추가
+    @Bean
+    UserAuthenticationSuccessHandler getSuccessHandler() {
+        return new UserAuthenticationSuccessHandler(loginHistoryService, userDetailService);
     }
 
 
