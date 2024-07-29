@@ -25,20 +25,24 @@ public class UserAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
-        Object principal = authentication.getPrincipal();
-        UserDetails userDetails = (UserDetails) principal;
+        try {
+            Object principal = authentication.getPrincipal();
+            UserDetails userDetails = (UserDetails) principal;
 
-        String username = userDetails.getUsername();
-        User user = userDetailService.loadUserByUsername(username);
-        String clientIp = request.getRemoteAddr();
-        String userAgent = request.getHeader("User-Agent");
+            String username = userDetails.getUsername();
+            User user = userDetailService.loadUserByUsername(username);
+            String clientIp = request.getRemoteAddr();
+            String userAgent = request.getHeader("User-Agent");
 
-        AddLoginHistoryRequest addRequest = new AddLoginHistoryRequest();
-        addRequest.setUser(user);
-        addRequest.setUserAgent(userAgent);
-        addRequest.setClientIp(clientIp);
-        loginHistoryService.saveLogonLogin(addRequest);
+            AddLoginHistoryRequest addRequest = new AddLoginHistoryRequest();
+            addRequest.setUser(user);
+            addRequest.setUserAgent(userAgent);
+            addRequest.setClientIp(clientIp);
+            loginHistoryService.saveLogonLogin(addRequest);
 
-        super.onAuthenticationSuccess(request, response, authentication);
+            super.onAuthenticationSuccess(request, response, authentication);
+        } catch (Exception e) {
+            throw new ServletException("Error during authentication success handling", e);
+        }
     }
 }
