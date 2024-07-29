@@ -18,9 +18,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.stereotype.Component;
 
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 
@@ -33,6 +35,12 @@ public class WebSecurityConfig{
 //    private final RefreshTokenRepository refreshTokenRepository;
     private final UserDetailService userDetailService;
     private final LoginHistoryService loginHistoryService;
+    private final AuthenticationSuccessHandler getSuccessHandler;
+
+    public WebSecurityConfig(AuthenticationSuccessHandler getSuccessHandler) {
+        this.getSuccessHandler = getSuccessHandler;
+    }
+
     @Bean
     public WebSecurityCustomizer configure() {
         return (web) -> web

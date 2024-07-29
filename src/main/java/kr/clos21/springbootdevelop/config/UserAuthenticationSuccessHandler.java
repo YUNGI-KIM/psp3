@@ -9,11 +9,14 @@ import kr.clos21.springbootdevelop.service.LoginHistoryService;
 import kr.clos21.springbootdevelop.service.UserDetailService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-public class UserAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+@Component
+public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     private final LoginHistoryService loginHistoryService;
     private final UserDetailService userDetailService;
 
@@ -40,7 +43,7 @@ public class UserAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
             addRequest.setClientIp(clientIp);
             loginHistoryService.saveLogonLogin(addRequest);
 
-            super.onAuthenticationSuccess(request, response, authentication);
+            response.sendRedirect("/api/articles");
         } catch (Exception e) {
             throw new ServletException("Error during authentication success handling", e);
         }
