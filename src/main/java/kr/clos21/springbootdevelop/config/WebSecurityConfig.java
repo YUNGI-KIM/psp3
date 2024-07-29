@@ -35,7 +35,6 @@ public class WebSecurityConfig{
 //    private final RefreshTokenRepository refreshTokenRepository;
     private final UserDetailService userDetailService;
     private final LoginHistoryService loginHistoryService;
-    private final AuthenticationSuccessHandler getSuccessHandler;
 
     @Bean
     public WebSecurityCustomizer configure() {
@@ -57,7 +56,6 @@ public class WebSecurityConfig{
                 )
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/login")
-                        .successHandler(getSuccessHandler)
                         .defaultSuccessUrl("/api/articles"));
 
         http
