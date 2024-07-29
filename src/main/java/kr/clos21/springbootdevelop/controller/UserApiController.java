@@ -42,11 +42,13 @@ public class UserApiController {
         new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
         return new ResponseEntity<>("logout success", HttpStatus.OK);
     }
-    @GetMapping("/success")
+    @GetMapping("/login-success")
     public ResponseEntity<String> success(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
         onAuthenticationSuccess(request, response, authentication);
         return new ResponseEntity<>("success", HttpStatus.OK);
     }
+    @GetMapping("/success")
+    public ResponseEntity<String> success() { return new ResponseEntity<>("success", HttpStatus.OK); }
 
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
