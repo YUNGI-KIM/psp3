@@ -37,12 +37,6 @@ public class WebSecurityConfig{
     private final LoginHistoryService loginHistoryService;
     private final AuthenticationSuccessHandler getSuccessHandler;
 
-    public WebSecurityConfig(AuthenticationSuccessHandler getSuccessHandler, UserDetailService userDetailService, LoginHistoryService loginHistoryService) {
-        this.getSuccessHandler = getSuccessHandler;
-        this.userDetailService = userDetailService;
-        this.loginHistoryService = loginHistoryService;
-    }
-
     @Bean
     public WebSecurityCustomizer configure() {
         return (web) -> web
@@ -63,7 +57,7 @@ public class WebSecurityConfig{
                 )
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/login")
-                        .successHandler(getSuccessHandler())
+                        .successHandler(getSuccessHandler)
                         .defaultSuccessUrl("/api/articles"));
 
         http
@@ -85,10 +79,10 @@ public class WebSecurityConfig{
     }
 
     // 로그인 성공시 동작하는 UserAuthenticationSuccessHandler 핸들러 추가
-    @Bean
-    UserAuthenticationSuccessHandler getSuccessHandler() {
-        return new UserAuthenticationSuccessHandler(loginHistoryService, userDetailService);
-    }
+//    @Bean
+//    UserAuthenticationSuccessHandler getSuccessHandler() {
+//        return new UserAuthenticationSuccessHandler(loginHistoryService, userDetailService);
+//    }
 
 
 
