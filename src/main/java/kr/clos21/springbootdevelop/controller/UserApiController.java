@@ -58,7 +58,14 @@ public class UserApiController {
 
             String username = userDetails.getUsername();
             User user = userDetailService.loadUserByUsername(username);
-            String clientIp = request.getRemoteAddr();
+
+            String clientIp = "";
+            if (request != null) {
+                clientIp = request.getHeader("X-Forwarded-For");
+                if (clientIp == null || clientIp.isEmpty()) {
+                    clientIp = request.getRemoteAddr();
+                }
+            }
             String userAgent = request.getHeader("User-Agent");
 
             AddLoginHistoryRequest addRequest = new AddLoginHistoryRequest();
