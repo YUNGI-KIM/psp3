@@ -37,8 +37,10 @@ public class WebSecurityConfig{
     private final LoginHistoryService loginHistoryService;
     private final AuthenticationSuccessHandler getSuccessHandler;
 
-    public WebSecurityConfig(AuthenticationSuccessHandler getSuccessHandler) {
+    public WebSecurityConfig(AuthenticationSuccessHandler getSuccessHandler, UserDetailService userDetailService, LoginHistoryService loginHistoryService) {
         this.getSuccessHandler = getSuccessHandler;
+        this.userDetailService = userDetailService;
+        this.loginHistoryService = loginHistoryService;
     }
 
     @Bean
