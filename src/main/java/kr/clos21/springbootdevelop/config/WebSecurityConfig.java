@@ -79,10 +79,7 @@ public class WebSecurityConfig{
     }
 
     // 로그인 성공시 동작하는 UserAuthenticationSuccessHandler 핸들러 추가
-//    @Bean
-//    UserAuthenticationSuccessHandler getSuccessHandler() {
-//        return new UserAuthenticationSuccessHandler(loginHistoryService, userDetailService);
-//    }
+
 
 
 

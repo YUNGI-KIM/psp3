@@ -7,25 +7,20 @@ import kr.clos21.springbootdevelop.domain.User;
 import kr.clos21.springbootdevelop.dto.AddLoginHistoryRequest;
 import kr.clos21.springbootdevelop.service.LoginHistoryService;
 import kr.clos21.springbootdevelop.service.UserDetailService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-@RequiredArgsConstructor
-@Component
-public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+public class UserAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private final LoginHistoryService loginHistoryService;
     private final UserDetailService userDetailService;
 
-//    public UserAuthenticationSuccessHandler(LoginHistoryService loginHistoryService, UserDetailService userDetailService) {
-//        this.loginHistoryService = loginHistoryService;
-//        this.userDetailService = userDetailService;
-//    }
+    public UserAuthenticationSuccessHandler(LoginHistoryService loginHistoryService, UserDetailService userDetailService) {
+        this.loginHistoryService = loginHistoryService;
+        this.userDetailService = userDetailService;
+    }
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
@@ -45,7 +40,7 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
             addRequest.setClientIp(clientIp);
             loginHistoryService.saveLogonLogin(addRequest);
 
-            response.sendRedirect("/api/articles");
+            super.onAuthenticationSuccess(request, response, authentication);
         } catch (Exception e) {
             throw new ServletException("Error during authentication success handling", e);
         }
