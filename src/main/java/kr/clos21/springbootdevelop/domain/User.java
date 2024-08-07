@@ -36,7 +36,6 @@ public class User implements UserDetails {
     private String password;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "purchased_product_list")
     @OrderBy("id asc")
     private List<Product> purchasedProducts;
 
