@@ -35,7 +35,7 @@ public class User implements UserDetails {
     @JsonIgnore
     private String password;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @OrderBy("id asc")
     private List<Product> purchasedProducts;
 
