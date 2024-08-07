@@ -35,12 +35,20 @@ public class User implements UserDetails {
     @JsonIgnore
     private String password;
 
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "purchased_product_list")
+    @OrderBy("id asc")
+    private List<Product> purchasedProducts;
+
     @Builder
     public User(String email, String password, String auth) {
         this.email = email;
         this.password = password;
     }
 
+    public void addPurchasedProduct(Product product) {
+        this.purchasedProducts.add(product);
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
