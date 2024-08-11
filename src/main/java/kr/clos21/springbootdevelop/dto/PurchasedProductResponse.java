@@ -12,7 +12,6 @@ public class PurchasedProductResponse {
     private final Long userId;
     private final Long productId;
     private final LocalDateTime createdAt;
-    private final LocalDateTime updatedAt;
 
     public PurchasedProductResponse(PurchasedProduct purchasedProduct) {
         this.id = purchasedProduct.getId();
