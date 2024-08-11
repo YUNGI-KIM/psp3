@@ -1,5 +1,6 @@
 package kr.clos21.springbootdevelop.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -45,6 +46,7 @@ public class Product extends BaseTimeEntity {
     private User user;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private Set<PurchasedProduct> purchasedProducts = new HashSet<>();
 
 //    @OneToMany(mappedBy = "article", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
