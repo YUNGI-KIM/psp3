@@ -13,7 +13,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Table(name = "user")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -35,18 +37,13 @@ public class User implements UserDetails {
     @JsonIgnore
     private String password;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    @OrderBy("id asc")
-    private List<Product> purchasedProducts;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<PurchasedProduct> purchasedProducts = new HashSet<>();
 
     @Builder
     public User(String email, String password, String auth) {
         this.email = email;
         this.password = password;
-    }
-
-    public void addPurchasedProduct(Product product) {
-        this.purchasedProducts.add(product);
     }
 
     @Override
@@ -82,5 +79,15 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void addPurchasedProduct(PurchasedProduct purchasedProduct) {
+        purchasedProducts.add(purchasedProduct);
+//        product.getPurchasedProducts().add(purchasedProduct);
+    }
+
+    public void removePurchasedProduct(PurchasedProduct purchasedProduct) {
+//        product.getPurchasedProducts().remove(purchasedProduct);
+        purchasedProducts.remove(purchasedProduct);
     }
 }
