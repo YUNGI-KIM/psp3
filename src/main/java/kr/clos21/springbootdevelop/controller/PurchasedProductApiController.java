@@ -26,8 +26,9 @@ public class PurchasedProductApiController {
     private final PurchasedProductService purchasedProductService;
 
     @PostMapping("/api/products/purchased/{productId}")
-    public ResponseEntity<PurchasedProduct> addPurchasedProduct(@RequestBody AddPurchasedProductRequest request, @PathVariable Long productId) {
+    public ResponseEntity<PurchasedProduct> addPurchasedProduct(@PathVariable Long productId) {
         try {
+            AddPurchasedProductRequest request = new AddPurchasedProductRequest();
             User writer = userDetailService.loadUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()); //유저 정보 요펑
             Product product = productService.findById(productId); //Product 요청
 
