@@ -86,6 +86,20 @@ public class PurchasedProductApiController {
         }
     }
 
+    @GetMapping("/api/products/{productId}/purchased")
+    public ResponseEntity<List<PurchasedProductResponse>> findPurchasedProductsByProductId(@PathVariable Long productId) {
+        try{
+            List<PurchasedProductResponse> purchasedProducts = purchasedProductService.findPurchasedProductsByProductId(productId)
+                    .stream()
+                    .toList();
+            return ResponseEntity.ok()
+                    .body(purchasedProducts);
+        } catch (EntityNotFoundException ENFE) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
+
+
     @DeleteMapping("/api/products/purchased/{id}")
     public ResponseEntity<Void> deletePurchasedProduct(@PathVariable long id) {
         purchasedProductService.delete(id);
