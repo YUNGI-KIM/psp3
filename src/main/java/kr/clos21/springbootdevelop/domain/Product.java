@@ -45,13 +45,13 @@ public class Product extends BaseTimeEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OrderBy("id asc") // 댓글 정렬
+    private List<Review> reviews;
+
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private Set<PurchasedProduct> purchasedProducts = new HashSet<>();
-
-//    @OneToMany(mappedBy = "article", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-//    @OrderBy("id asc") // 댓글 정렬
-//    private List<Comment> comments;
 
     @Builder
     public Product(String name, String description, Long originalPrice, String status, User user, LocalDateTime createdAt, LocalDateTime updatedAt) {
