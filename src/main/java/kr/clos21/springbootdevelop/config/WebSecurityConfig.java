@@ -38,7 +38,7 @@ public class WebSecurityConfig{
 
     @Bean
     public WebSecurityCustomizer configure() {
-        return (web) -> web
+        return web -> web
                 .ignoring()
                 .requestMatchers("/img/**", "/css/**", "/js/**");
     }
@@ -50,16 +50,16 @@ public class WebSecurityConfig{
                     .anyRequest().requiresSecure()
                 );
         http
-                .authorizeHttpRequests((auth) -> auth
+                .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login", "/signup", "/user", "/logout", "/success", "/").permitAll()
                         .anyRequest().authenticated()
                 )
-                .formLogin((formLogin) -> formLogin
+                .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .defaultSuccessUrl("/login-success"));
 
         http
-                .logout((logout) -> logout
+                .logout(logout -> logout
                         .invalidateHttpSession(true)
                         .logoutSuccessHandler(((request, response, authentication) -> {
                             response.sendRedirect("/success");
