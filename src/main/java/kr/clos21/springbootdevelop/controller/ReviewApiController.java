@@ -1,14 +1,14 @@
 package kr.clos21.springbootdevelop.controller;
 
 import jakarta.persistence.EntityNotFoundException;
-import kr.clos21.springbootdevelop.domain.Comment;
+import kr.clos21.springbootdevelop.domain.Review;
 import kr.clos21.springbootdevelop.domain.User;
 import kr.clos21.springbootdevelop.dto.AddReviewRequest;
 import kr.clos21.springbootdevelop.dto.ReviewResponse;
-import kr.clos21.springbootdevelop.dto.UpdateCommentRequest;
+import kr.clos21.springbootdevelop.dto.UpdateReviewRequest;
 import kr.clos21.springbootdevelop.repository.ArticleRepository;
 import kr.clos21.springbootdevelop.repository.ProductRepository;
-import kr.clos21.springbootdevelop.service.CommentService;
+import kr.clos21.springbootdevelop.service.ReviewService;
 import kr.clos21.springbootdevelop.service.ReviewService;
 import kr.clos21.springbootdevelop.service.UserDetailService;
 import lombok.RequiredArgsConstructor;
@@ -60,7 +60,7 @@ public class ReviewApiController {
 
     //댓글 생성
     @PostMapping("/api/products/{productId}/reviews")
-    public ResponseEntity<Comment> create(@RequestBody AddReviewRequest request, @PathVariable Long productId){
+    public ResponseEntity<Review> create(@RequestBody AddReviewRequest request, @PathVariable Long productId){
         try {
             request.setProduct(productRepository.findById(productId)
                     .orElseThrow(() -> new EntityNotFoundException("not found : " + productId)));
@@ -77,8 +77,8 @@ public class ReviewApiController {
 
     //댓글 수정
     @PutMapping("/api/products/reviews/{id}")
-    public ResponseEntity<Comment> update(@PathVariable Long id,
-                                             @RequestBody UpdateCommentRequest request){
+    public ResponseEntity<Review> update(@PathVariable Long id,
+                                             @RequestBody UpdateReviewRequest request){
         try {
             reviewService.update(id, request);
             return ResponseEntity.ok().build();
@@ -90,7 +90,7 @@ public class ReviewApiController {
 
     //댓글 삭제
     @DeleteMapping("/api/products/reviews/{id}")
-    public ResponseEntity<Comment> delete(@PathVariable Long id){
+    public ResponseEntity<Review> delete(@PathVariable Long id){
         reviewService.delete(id);
         return ResponseEntity.ok()
                 .build();
