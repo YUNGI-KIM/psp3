@@ -22,7 +22,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework:spring-context'
 	implementation 'org.springframework:spring-tx'
-	implementation 'org.jetbrains.externalAnnotations.com.fasterxml.jackson.core:jackson-databind:2.9.6-an1'
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4.1'
     testImplementation 'org.projectlombok:lombok:1.18.28'
 	testImplementation 'org.projectlombok:lombok:1.18.28'
 	testImplementation 'org.projectlombok:lombok:1.18.28'
