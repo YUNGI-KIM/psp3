@@ -1,6 +1,5 @@
 package kr.clos21.springbootdevelop.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import kr.clos21.springbootdevelop.domain.Article;
 import kr.clos21.springbootdevelop.domain.Notification;
@@ -17,7 +16,7 @@ public class AddNotificationRequest {
     private String title;
     private String content;
     private Boolean emergency;
-    @JsonBackReference
+    @JsonIgnore
     private User user;
 
     public Notification toEntity() {

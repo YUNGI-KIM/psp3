@@ -1,6 +1,5 @@
 package kr.clos21.springbootdevelop.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import kr.clos21.springbootdevelop.domain.Product;
 import kr.clos21.springbootdevelop.domain.PurchasedProduct;
@@ -15,9 +14,9 @@ import lombok.*;
 @Getter
 @Setter
 public class AddPurchasedProductRequest {
-    @JsonBackReference
+    @JsonIgnore
     private User user;
-    @JsonBackReference
+    @JsonIgnore
     private Product product;
 
     public PurchasedProduct toEntity() {

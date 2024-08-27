@@ -1,6 +1,5 @@
 package kr.clos21.springbootdevelop.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import kr.clos21.springbootdevelop.domain.LoginHistory;
 import lombok.*;
@@ -15,7 +14,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class AddLoginHistoryRequest {
-    @JsonBackReference
+    @JsonIgnore
     private User user;
     private String clientIp;
     private String userAgent;
