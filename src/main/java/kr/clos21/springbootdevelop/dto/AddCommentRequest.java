@@ -1,5 +1,6 @@
 package kr.clos21.springbootdevelop.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import kr.clos21.springbootdevelop.domain.Article;
@@ -17,9 +18,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Setter
 public class AddCommentRequest {
     private Long id;
-    @JsonIgnore
+    @JsonBackReference
     private Article article;
-    @JsonIgnore
+    @JsonBackReference
     private User user;
     private String comment;
 

@@ -1,5 +1,6 @@
 package kr.clos21.springbootdevelop.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import kr.clos21.springbootdevelop.domain.*;
 import lombok.*;
@@ -12,9 +13,9 @@ import lombok.*;
 @Setter
 public class AddReviewRequest {
     private Long id;
-    @JsonIgnore
+    @JsonBackReference
     private Product product;
-    @JsonIgnore
+    @JsonBackReference
     private User user;
     private String content;
     private Float rate;

@@ -1,5 +1,6 @@
 package kr.clos21.springbootdevelop.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import kr.clos21.springbootdevelop.domain.Article;
 import kr.clos21.springbootdevelop.domain.Product;
@@ -17,7 +18,7 @@ public class AddProductRequest {
     private String description;
     private Long originalPrice;
     private String status;
-    @JsonIgnore
+    @JsonBackReference
     private User user;
 
 

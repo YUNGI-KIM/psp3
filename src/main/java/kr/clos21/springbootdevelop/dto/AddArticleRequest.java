@@ -1,5 +1,6 @@
 package kr.clos21.springbootdevelop.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import kr.clos21.springbootdevelop.domain.User;
 import lombok.*;
@@ -14,7 +15,7 @@ import kr.clos21.springbootdevelop.domain.Article;
 public class AddArticleRequest {
     private String title;
     private String content;
-    @JsonIgnore
+    @JsonBackReference
     private User user;
 
     public Article toEntity() {
