@@ -33,6 +33,7 @@ public class Review extends BaseTimeEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
     @Builder

@@ -1,5 +1,6 @@
 package kr.clos21.springbootdevelop.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -23,10 +24,12 @@ public class Comment extends BaseTimeEntity {
 
     @ManyToOne
     @JoinColumn(name = "article_id")
+    @JsonBackReference
     private Article article;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
     @Builder

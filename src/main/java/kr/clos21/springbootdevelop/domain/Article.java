@@ -1,5 +1,7 @@
 package kr.clos21.springbootdevelop.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -31,10 +33,12 @@ public class Article extends BaseTimeEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
     @OneToMany(mappedBy = "article", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @OrderBy("id asc") // 댓글 정렬
+    @JsonManagedReference
     private List<Comment> comments;
 
     @Builder

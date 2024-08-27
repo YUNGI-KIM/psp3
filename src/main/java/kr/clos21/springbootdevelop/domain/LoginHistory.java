@@ -1,5 +1,6 @@
 package kr.clos21.springbootdevelop.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import lombok.*;
@@ -26,6 +27,7 @@ public class LoginHistory {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
     @CreatedDate
