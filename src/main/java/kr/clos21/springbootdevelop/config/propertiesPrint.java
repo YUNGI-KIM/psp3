@@ -1,18 +1,21 @@
 package kr.clos21.springbootdevelop.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.PropertySource;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-
 @Component
-public class propertiesPrint {
+public class propertiesPrint implements CommandLineRunner {
 
-    @Value("${default:default_value}")
-    private String yourProperty;
+    @Autowired
+    private Environment env;
 
-    @PostConstruct
-    public void printProperties() {
-        System.out.println("Your property: " + yourProperty);
+    @Override
+    public void run(String... args) throws Exception {
+        for (PropertySource<?> propertySource : ((org.springframework.core.env.AbstractEnvironment) env).getPropertySources()) {
+            System.out.println(propertySource.getName() + ": " + propertySource.getSource());
+        }
     }
 }
