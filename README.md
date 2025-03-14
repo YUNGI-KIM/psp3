@@ -4,6 +4,9 @@ Problem Solving Project Group 3
 Cell Car / Vroom
 
 
+초기화면 , 어드민화면 , 차량 구매 화면 , 로그인 및 회원가입 화면(?) , 본인이 짠 견적 화면 , CBTI 질문 , 
+
+
 -초기화면
   당신에게 맞는 차량은? -> 당신의 Car MBTI는? ( 통칭 CBTI )
   -> 브랜드 혹은 가격대 , 차량 종류 별로 당신에게 맞는 차량을 추천해주는 질문지
