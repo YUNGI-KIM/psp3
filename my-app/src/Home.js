@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
-
+// 사각형 길이 커스텀 해서 비율 맞게 하기
+// 색 조정 
+// 문구 조정
 function Home() {
   return (
    
