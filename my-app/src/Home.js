@@ -9,7 +9,7 @@ function Home() {
         <div class="flex items-end justify-center min-h-screen px-4  pt-4 pb-20 text-center sm:block sm:p-0">
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
             </span>
-            <div class="relative inline-block overflow-hidden transition-all transform sm:align-middle sm:max-w-" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+            <div class="relative inline-block overflow-hidden transition-all transform sm:align-middle sm:w-flex" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                 <div>
                     <div class="rounded-lg p-8 bg-white shadow">
                         <div class="bg-white dark:bg-gray-800 ">
