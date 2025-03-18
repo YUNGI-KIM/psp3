@@ -22,6 +22,13 @@ function Q2Page() {
         </button>
         </div>
         </Link>
+        <div class="block p-4 m-auto bg-white rounded-lg shadow w-72">
+            <div class="w-full h-4 bg-gray-400 rounded-full mt-3">
+                <div class="w-1/5 h-full text-center text-xs text-white bg-green-500 rounded-full">
+                    20%
+                </div>
+            </div>
+        </div>
     </div>
   );
 }
