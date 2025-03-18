@@ -5,6 +5,8 @@ import Q2page from "./Q2page";
 import Q3page from "./Q3page";
 import Q4page from "./Q4page";
 import Q5page from "./Q5page";
+import CBTIResult from "./CBTIResult";
+
 
 
 function App() {
@@ -17,6 +19,7 @@ function App() {
         <Route path="/Q3page" element={<Q3page />} />  {/* 질문페이지3 */}
         <Route path="/Q4page" element={<Q4page />} />  {/* 질문페이지4 */}
         <Route path="/Q5page" element={<Q5page />} />  {/* 질문페이지5 */}
+        <Route path="/result" element={<CBTIResult />} />  {/* 질문페이지5 */}
       </Routes>
     </Router>
   );

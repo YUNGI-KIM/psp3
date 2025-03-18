@@ -1,4 +1,3 @@
-// ButtonGroup.js
 import { Link } from "react-router-dom";
 
 function ButtonGroup({ noPath, yesPath }) {

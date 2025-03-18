@@ -1,4 +1,5 @@
 import CBTIButton from "./CBTIButton"; 
+import PreviousButton from "./previousButton";
 
 function Q1page() {
   return (
@@ -37,6 +38,11 @@ function Q1page() {
                     </div>
                   </div>
                 </div>
+                {/*이전 버튼*/}
+                <div className="mt-12">
+                  <PreviousButton undoPath="/" />
+                </div>
+
               </div>
             </div>
           </div>
