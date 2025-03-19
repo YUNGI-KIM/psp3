@@ -1,7 +1,8 @@
-import CBTIButton from "./CBTIButton";
-import PreviousButton from "./previousButton";
+import CBTIButton from "./ButtonJS/CBTIButton";
+import PreviousButton from "./ButtonJS/previousButton";
 
-function Q4page() {
+
+function Q5page() {
   return (
     <div className="relative">
       <div className="inset-0 z-10 w-full h-screen overflow-y-auto">
@@ -21,27 +22,27 @@ function Q4page() {
               <div className="text-center w-full mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20">
                 {/* 질문 텍스트 */}
                 <h2 className="text-3xl font-extrabold text-black dark:text-white sm:text-4xl">
-                  <span className="block">질문 4번</span>
+                  <span className="block">질문 5번</span>
                   <span className="block text-indigo-500">집에 가고 싶으신가요?</span>
                 </h2>
 
                 {/* 버튼 영역 */}
                 <div className="mt-12">
-                  <CBTIButton noPath="/Q5page" yesPath="/Q5page" />
+                  <CBTIButton noPath="/result" yesPath="/result" />
                 </div>
 
                 {/* 진행률 바 */}
                 <div className="mt-8 mx-auto w-72">
                   <div className="w-full h-4 bg-gray-400 rounded-full">
-                    <div className="w-4/5 h-full text-center text-xs text-white bg-green-500 rounded-full">
-                      80%
+                    <div className="w-5/5 h-full text-center text-xs text-white bg-green-500 rounded-full">
+                      100%
                     </div>
                   </div>
                 </div>
 
-                  {/*이전 버튼*/}
-                <div className="mt-12">
-                  <PreviousButton undoPath="/Q3page" />
+                   {/*이전 버튼*/}
+                 <div className="mt-12">
+                  <PreviousButton undoPath="/Q4page" />
                 </div>
 
               </div>
@@ -53,4 +54,4 @@ function Q4page() {
   );
 }
 
-export default Q4page;
+export default Q5page;
