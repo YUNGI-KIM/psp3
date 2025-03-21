@@ -18,7 +18,7 @@ function Q4page() {
             aria-modal="true"
             aria-labelledby="modal-headline"
           >
-            <div className="rounded-lg p-8 bg-white shadow">
+            <div className="rounded-3xl p-8 bg-white shadow">
               <div className="text-center w-full mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20">
                 {/* 질문 텍스트 */}
                 <h2 className="text-3xl font-extrabold text-black dark:text-white sm:text-4xl">
@@ -42,7 +42,7 @@ function Q4page() {
 
                   {/*이전 버튼*/}
                 <div className="mt-12">
-                  <PreviousButton undoPath="/Q3page" />
+                  <PreviousButton undoPath="/Q3page" NextPath="/Q5page" />
                 </div>
 
               </div>

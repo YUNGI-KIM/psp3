@@ -5,7 +5,7 @@ import PreviousButton from "./ButtonJS/previousButton";
 const questionNumberMentionList = ["질문 1번","질문 2번","질문 3번","질문 4번","질문 5번",];
 const questionMentionList=["집에 가고 싶으신가요?","집에 가고 싶으신가요?","집에 가고 싶으신가요?","집에 가고 싶으신가요?","집에 가고 싶으신가요?"];
 const progressBarNumberList=["20","40","60","80","100"];
-const i = 0;
+var i = 0;
 
 function Q1page() {
   return (
@@ -23,7 +23,7 @@ function Q1page() {
             aria-modal="true"
             aria-labelledby="modal-headline"
           >
-            <div className="rounded-lg p-8 bg-white shadow">
+            <div className="rounded-3xl p-8 bg-white shadow">
               <div className="text-center w-full mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20">
                 {/* 질문 텍스트 */}
                 <h2 className="text-3xl font-extrabold text-black dark:text-white sm:text-4xl">
@@ -46,7 +46,7 @@ function Q1page() {
                 </div>
                 {/*이전 버튼*/}
                 <div className="mt-12">
-                  <PreviousButton undoPath="/" />
+                  <PreviousButton undoPath = "/"  NextPath="/Q2page" />
                 </div>
 
               </div>

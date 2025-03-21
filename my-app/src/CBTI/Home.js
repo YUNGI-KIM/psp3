@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 function Home() {
   return (
    
-    
+
 
 
 <div class="relative">
@@ -14,7 +14,7 @@ function Home() {
             </span>
             <div class="relative inline-block overflow-hidden transition-all transform sm:align-middle sm:w-flex" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                 <div>
-                    <div class="rounded-lg p-8 bg-white shadow">
+                    <div class="rounded-3xl p-8 bg-white shadow">
                         <div class="bg-white dark:bg-gray-800 ">
                             <div class="text-center w-full mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20">
                                 
