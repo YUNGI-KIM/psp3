@@ -25,7 +25,7 @@ function Home() {
                                     </span>
 
                                     <span class="block text-indigo-500">
-                                        쉽고 빠른 CBTI를 통해 
+                                        쉽고 빠른 CBTI검사를 통해 
                                     </span>
 
                                     <span class="block text-indigo-500">
@@ -38,7 +38,7 @@ function Home() {
                                     <div class="mt-12 inline-flex rounded-md shadow">
                                       <Link to= "/Q1page">
                                         <button type="button" class="py-4 px-6  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
-                                            지금 추천 받기 
+                                        CBTI 검사 시작하기
                                         </button>
                                         </Link>
                                     </div>
