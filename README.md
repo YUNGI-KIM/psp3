@@ -89,4 +89,5 @@ CBTI 질문 -> 말 그대로 질문지 간단하게 5~6개정도 준비
 -고민할 것
   검색란에 통합검색란을 만들 것 인지, ex) ![image](https://github.com/user-attachments/assets/238c0104-446c-4ebd-8caa-aaea9bb0b227)
 
-  모든 메뉴 페이지의 디자인을 통합 할 것인지
+  모든 메뉴 페이지의 디자인을 통합 할 것인지 
+  슬라이드 화살표 or ...
