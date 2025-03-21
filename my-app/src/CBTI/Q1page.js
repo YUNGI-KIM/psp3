@@ -2,6 +2,11 @@ import CBTIButton from "./ButtonJS/CBTIButton";
 import PreviousButton from "./ButtonJS/previousButton";
 
 
+const questionNumberMentionList = ["질문 1번","질문 2번","질문 3번","질문 4번","질문 5번",];
+const questionMentionList=["집에 가고 싶으신가요?","집에 가고 싶으신가요?","집에 가고 싶으신가요?","집에 가고 싶으신가요?","집에 가고 싶으신가요?"];
+const progressBarNumberList=["20","40","60","80","100"];
+const i = 0;
+
 function Q1page() {
   return (
     <div className="relative">
@@ -22,8 +27,8 @@ function Q1page() {
               <div className="text-center w-full mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20">
                 {/* 질문 텍스트 */}
                 <h2 className="text-3xl font-extrabold text-black dark:text-white sm:text-4xl">
-                  <span className="block">질문 1번</span>
-                  <span className="block text-indigo-500">집에 가고 싶으신가요?</span>
+                  <span className="block">{questionNumberMentionList[i]}</span>
+                  <span className="block text-indigo-500">{questionMentionList[i]}</span>
                 </h2>
 
                 {/* 버튼 영역 */}
@@ -35,7 +40,7 @@ function Q1page() {
                 <div className="mt-8 mx-auto w-72">
                   <div className="w-full h-4 bg-gray-400 rounded-full">
                     <div className="w-1/5 h-full text-center text-xs text-white bg-green-500 rounded-full">
-                      20%
+                      {progressBarNumberList[i]}
                     </div>
                   </div>
                 </div>
