@@ -7,6 +7,7 @@ import Q4page from "./CBTI/Q4page";
 import Q5page from "./CBTI/Q5page";
 import CBTIResult from "./CBTI/CBTIResult";
 import Login from "./Login/Login";
+import Register from "./Login/Register";
 
 
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/Q5page" element={<Q5page />} />  {/* 질문페이지5 */}
         <Route path="/result" element={<CBTIResult />} />  {/* 질문페이지5 */}
         <Route path="/login" element={<Login/>} />  {/* 홈 페이지 */}
+        <Route path="/register" element={<Register/>} />  {/* 홈 페이지 */}
       </Routes>
     </Router>
   );
