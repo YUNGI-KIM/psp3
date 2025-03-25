@@ -3,8 +3,6 @@ function Home() {
   return (
    
 
-
-
 <div class="relative">
     <div class="inset-0 z-10 w-full h-screen overflow-y-auto">
         <div class="absolute inset-0 w-full h-full bg-gray-500 opacity-75">
