@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 
 function Login() {
   return (
-<div class="bg-white rounded-lg shadow sm:max-w-md sm:w-full sm:mx-auto sm:overflow-hidden">
+
+
+<div class="bg-white rounded-lg shadow sm:max-w-md sm:w-full sm:mx-auto sm:mt-60 sm:overflow-hidden">
     <div class="px-4 py-8 sm:px-10">
         <div class="relative mt-6">
             <div class="absolute inset-0 flex items-center">
