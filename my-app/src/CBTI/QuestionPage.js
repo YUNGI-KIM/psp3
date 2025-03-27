@@ -1,18 +1,33 @@
 import { useState } from "react";
-import PreviousButton from "./ButtonJS/previousButton";
+import { useNavigate } from "react-router-dom";
 
 function QuestionPage() {
+  const navigate = useNavigate();
   const [index, setIndex] = useState(0);
 
-  function count() {
-    setIndex(index + 1);
+  function nextQuestion() {
+    if (index >= questions.length - 1) {
+      navigate("/result");
+    } else {
+      setIndex(index + 1);
+    }
   }
-  const [QNum, setQNum] = useState(["질문 1번", "질문 2번", "질문 3번", "질문 4번", "질문 5번",]);
-  const [QList, setQList] = useState(["집에 가고 싶으신가요?", "집에 가고 싶으신가요?", "집에 가고 싶으신가요?", "집에 가고 싶으신가요?", "집에 가고 싶으신가요?"]);
-  const [QPerNum, setQPerNum] = useState(["20", "40", "60", "80", "100"]);
+
+  function prevQuestion() {
+    if (index > 0) {
+      setIndex(index - 1);
+    }
+  }
+  const questions = [
+    { num: "질문 1번", text: "집에 가고 싶으신가요?", progress: "20%" },
+    { num: "질문 2번", text: "공부를 좋아하시나요?", progress: "40%" },
+    { num: "질문 3번", text: "운동을 즐기시나요?", progress: "60%" },
+    { num: "질문 4번", text: "음악을 좋아하시나요?", progress: "80%" },
+    { num: "질문 5번", text: "여행을 자주 가시나요?", progress: "100%" },
+  ];
 
   return (
-    <div className="relative">
+    <div className="relative ">
       <div className="inset-0 z-10 w-full h-screen overflow-y-auto">
         {/* 배경 오버레이 */}
         <div className="absolute inset-0 w-full h-full bg-gray-500 opacity-75"></div>
@@ -30,14 +45,14 @@ function QuestionPage() {
               <div className="text-center w-full mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20">
                 {/* 질문 텍스트 */}
                 <h2 className="text-3xl font-extrabold text-black dark:text-white sm:text-4xl">
-                  <span className="block">{QNum[index]}</span>
-                  <span className="block text-indigo-500">{QList[index]}</span>
+                  <span className="block">{questions[index].num}</span>
+                  <span className="block text-indigo-500">{questions[index].text}</span>
                 </h2>
 
-                <div className="flex justify-center space-x-4">
+                <div className="flex justify-center my-5 space-x-4">
 
                   <button
-                    onClick={count}
+                    onClick={nextQuestion}
                     type="button"
                     className="py-2 px-4 flex justify-center items-center bg-green-500 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white w-32 transition ease-in duration-200 text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
                   >
@@ -55,7 +70,7 @@ function QuestionPage() {
                   </button>
 
                   <button
-                    onClick={count}
+                    onClick={nextQuestion}
                     type="button"
                     className="py-2 px-4 flex justify-center items-center bg-red-500 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-32 transition ease-in duration-200 text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
                   >
@@ -76,15 +91,50 @@ function QuestionPage() {
                 {/* 진행률 바 */}
                 <div className="mt-8 mx-auto w-72">
                   <div className="w-full h-4 bg-gray-400 rounded-full">
-                    <div className="w-1/5 h-full text-center text-xs text-white bg-green-500 rounded-full">
-                      {QPerNum[index]}
+                    <div
+                      className="h-full text-center text-xs text-white bg-green-500 rounded-full"
+                      style={{ width: questions[index].progress }}
+                    >
+                      {questions[index].progress}
                     </div>
                   </div>
                 </div>
 
                 {/*이전 버튼*/}
-                <div className="mt-12">
-                  <PreviousButton undoPath="/" NextPath="/Q2page" />
+                <div className="flex justify-center my-5 space-x-4">
+
+                  <button
+                    onClick={prevQuestion}
+                    type="button"
+                    className="py-2 px-4 flex justify-center items-center bg-gray-400 hover:bg-gray-900 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in duration-200 shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
+                  >
+                    <svg
+                      width="20"
+                      height="20"
+                      fill="currentColor"
+                      viewBox="0 0 448 512"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+                    </svg>
+                  </button>
+
+                  <button
+                    onClick={nextQuestion}
+                    type="button"
+                    className="py-2 px-4 flex justify-center items-center bg-gray-400 hover:bg-gray-900 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in duration-200 shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
+                  >
+                    <svg
+                      width="20"
+                      height="20"
+                      fill="currentColor"
+                      viewBox="0 0 448 512"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
+                    </svg>
+                  </button>
+
                 </div>
 
               </div>
