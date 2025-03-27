@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-function Home() {
+function StartCBTI() {
   return (
 <div class="relative">
     <div class="inset-0 z-10 w-full h-screen overflow-y-auto">
@@ -49,4 +49,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default StartCBTI;

@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./CBTI/Home";
+import StartCBTI from "./CBTI/StartCBTI";
 import QuestionPage from "./CBTI/QuestionPage";
 import CBTIResult from "./CBTI/CBTIResult";
 import Login from "./Login/Login";
@@ -11,7 +11,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home/>} />  {/* 스타트 페이지 */}
+        <Route path="/startCBTI" element={<StartCBTI/>} />  {/* 스타트 페이지 */}
         <Route path="/QuestionPage" element={<QuestionPage />} />  {/* 질문페이지들 */}
         <Route path="/result" element={<CBTIResult />} />  {/* 결과페이지 */}
         <Route path="/login" element={<Login/>} />  {/* 로그인 페이지 */}
