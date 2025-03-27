@@ -16,6 +16,8 @@ function QuestionPage() {
   function prevQuestion() {
     if (index > 0) {
       setIndex(index - 1);
+    }else{
+      navigate("/startCBTI")
     }
   }
   const questions = [

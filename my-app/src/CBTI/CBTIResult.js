@@ -26,7 +26,7 @@ function CBTIResult() {
 
                 {/* 버튼 영역 */}
                 <div className="mt-12 flex justify-center space-x-4">
-                  <Link to="/">
+                  <Link to="/startCBTI">
                     <button
                       type="button"
                       className="py-2 px-4 flex justify-center items-center bg-red-500 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-32 transition ease-in duration-200 text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
@@ -45,7 +45,7 @@ function CBTIResult() {
                     </button>
                   </Link>
 
-                  <Link to="/">
+                  <Link to="/startCBTI">
                     <button
                       type="button"
                       className="py-2 px-4 flex justify-center items-center bg-green-500 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white w-32 transition ease-in duration-200 text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
