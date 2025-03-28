@@ -38,14 +38,19 @@ public class User implements UserDetails {
     @JsonIgnore
     private String password;
 
+    @Column(name= "name", nullable = false)
+    @JsonProperty("name")
+    private String name;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private Set<PurchasedProduct> purchasedProducts = new HashSet<>();
 
     @Builder
-    public User(String email, String password, String auth) {
+    public User(String email, String password, String name, String auth) {
         this.email = email;
         this.password = password;
+        this.name = name;
     }
 
     @Override
