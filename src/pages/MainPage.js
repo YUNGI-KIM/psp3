@@ -2,8 +2,6 @@ import React from 'react';
 import Logo from './logo2.png';
 import { useNavigate } from "react-router-dom";
 
-
-
 const MainPage = () => {
   const navigate = useNavigate();
   function goLogin(){
