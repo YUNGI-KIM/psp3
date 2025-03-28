@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import Logo from './logo2.png'
 const MainPage = () => {
 
   return (
     <div>
-      <nav class="bg-black dark:bg-gray-800 shadow">
+      <nav class="bg-white dark:bg-gray-800 shadow">
         <div class="px-8 mx-auto max-w-7xl">
           <div class="flex items-center justify-between h-16">
             <div class=" flex items-center">
               <a class="flex-shrink-0" href="/">
-                <img class="w-8 h-8" src="/icons/rocket.svg" alt="Workflow" />
+                <img class="w-30 h-8" src={Logo}/>
               </a>
               <div>
                 <div class="flex items-baseline ml-10 space-x-4">
