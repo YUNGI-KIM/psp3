@@ -1,7 +1,17 @@
 import React from 'react';
 import Logo from './logo2.png';
+import { useNavigate } from "react-router-dom";
+
+
 
 const MainPage = () => {
+  const navigate = useNavigate();
+  function goLogin(){
+      navigate("/login");
+    }
+    function goRegister(){
+      navigate("/register");
+    }
   return (
     <div className="flex flex-col h-screen">
       {/* 상단 헤더 */}
@@ -18,10 +28,10 @@ const MainPage = () => {
             className="w-full px-4 text-sm rounded-full focus:outline-none"
           />
         </span>
-          <button type="button" className="py-2  bg-slate-50 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-black w-20 transition ease-in duration-200 text-center text-base font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg ml-70">
+          <button onClick={goLogin} type="button"className="py-2  bg-slate-50 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-black w-20 transition ease-in duration-200 text-center text-base font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg ml-70">
             로그인
           </button>
-          <button type="button" className="py-2  bg-gray-900 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-25 transition ease-in duration-200 text-center text-base font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg mr-20">
+          <button onClick={goRegister} type="button" className="py-2  bg-gray-900 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-25 transition ease-in duration-200 text-center text-base font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg mr-20">
             회원가입
           </button>
         </div>
