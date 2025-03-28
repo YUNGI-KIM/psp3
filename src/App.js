@@ -15,10 +15,14 @@ function App() {
     <div className='App'>
     <BrowserRouter>
     <Routes>
-      <Route path = "/" element={<MainPage/>}></Route>
+      <Route path = "/" element={<MainPage/>} />
+      </Routes>
+      <Routes>
       <Route path="/startCBTI" element={<StartCBTI/>} />  {/* 스타트 페이지 */}
         <Route path="/QuestionPage" element={<QuestionPage />} />  {/* 질문페이지들 */}
         <Route path="/result" element={<CBTIResult />} />  {/* 결과페이지 */}
+        </Routes>
+        <Routes>
         <Route path="/login" element={<Login/>} />  {/* 로그인 페이지 */}
         <Route path="/register" element={<Register/>} />  {/* 가입 페이지 */}
     </Routes>
