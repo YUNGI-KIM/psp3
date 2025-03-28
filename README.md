@@ -1,4 +1,4 @@
-# Spring Boot Develop Practice
+# Spring Boot Develop
 ## Settings
 
 - This project used Spring Boot.
