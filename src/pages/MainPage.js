@@ -1,5 +1,6 @@
 import React from 'react';
-import Logo from './logo2.png';
+import Logo from '../Image/logo2.png';
+import test from '../Image/sideImage/test.png';
 import { useNavigate } from "react-router-dom";
 
 const MainPage = () => {
@@ -53,14 +54,16 @@ const MainPage = () => {
         </div>
       </nav>
         {/* 슬라이드 부분 */}
-    <div class="bg-white dark:bg-gray-800 overflow-hidden relative lg:flex lg:items-center">
-        <div class="flex items-center gap-8 p-8 lg:p-24">
-            <img src="/images/landscape/3.jpg" class="w-1/2 rounded-lg" alt="Tree"/>
+    <div class="relative w-full">
+        <img src={test} class="w-full h-160 rounded-lg" alt="Test"/>
+        
+
+        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+            <button id="sButton1" onclick="sliderButton1()" class="bg-gray-800 rounded-full w-4 h-4"></button>
+            <button id="sButton2" onclick="sliderButton2()" class="bg-gray-800 rounded-full w-4 h-4"></button>
         </div>
     </div>
-
-
-      </div>
+</div>
 
   );
 };
