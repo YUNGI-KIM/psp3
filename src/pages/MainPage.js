@@ -4,10 +4,6 @@ import test from '../Image/sideImage/test.png';
 import { useNavigate } from "react-router-dom";
 
 const MainPage = () => {
-<<<<<<< HEAD
-=======
-
->>>>>>> 24a7423449e3c9d0566752583e23b2a911a6b31c
   const navigate = useNavigate();
   function goLogin(){
       navigate("/login");
@@ -31,11 +27,7 @@ const MainPage = () => {
             className="w-full px-4 text-sm rounded-full focus:outline-none"
           />
         </span>
-<<<<<<< HEAD
           <button onClick={goLogin} type="button"className="py-2  bg-slate-50 hover:bg-gray-300 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-black w-20 transition ease-in duration-200 text-center text-base font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg ml-130">
-=======
-          <button onClick={goLogin} type="button"className="py-2  bg-slate-50 hover:bg-gray-300 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-black w-25 transition ease-in duration-200 text-center text-base font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg ml-130">
->>>>>>> 24a7423449e3c9d0566752583e23b2a911a6b31c
             로그인
           </button>
           <button onClick={goRegister} type="button" className="py-2  bg-gray-900 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-25 transition ease-in duration-200 text-center text-base font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg mr-20">
