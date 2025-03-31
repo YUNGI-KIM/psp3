@@ -4,13 +4,26 @@ import test from '../Image/sideImage/test.png';
 import { useNavigate } from "react-router-dom";
 
 const MainPage = () => {
+
   const navigate = useNavigate();
-  function goLogin(){
-      navigate("/login");
-    }
-    function goRegister(){
-      navigate("/register");
-    }
+
+  function goLogin() {
+    navigate("/login");
+  }
+
+  function goRegister() {
+    navigate("/register");
+  }
+
+  function sliderButton1(){
+    alert("click Button 1");
+  }
+
+  function sliderButton2(){
+    alert("click Button 2");
+  }
+
+
   return (
     <div className="flex flex-col h-screen">
       {/* 상단 헤더 */}
@@ -19,15 +32,15 @@ const MainPage = () => {
           <img className="w-50 h-15" src={Logo} />
         </a>
         <div className="flex items-center justify-between w-full p-4 bg-white ml-75">
-        <span className="flex h-10 w-130 text-sm border border-gray-300 rounded-full cursor-pointer">
-          <input
-            type="search"
-            name="serch"
-            placeholder="Search"
-            className="w-full px-4 text-sm rounded-full focus:outline-none"
-          />
-        </span>
-          <button onClick={goLogin} type="button"className="py-2  bg-slate-50 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-black w-20 transition ease-in duration-200 text-center text-base font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg ml-70">
+          <span className="flex h-10 w-130 text-sm border border-gray-300 rounded-full cursor-pointer">
+            <input
+              type="search"
+              name="serch"
+              placeholder="Search"
+              className="w-full px-4 text-sm rounded-full focus:outline-none"
+            />
+          </span>
+          <button onClick={goLogin} type="button" className="py-2  bg-slate-50 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-black w-20 transition ease-in duration-200 text-center text-base font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg ml-70">
             로그인
           </button>
           <button onClick={goRegister} type="button" className="py-2  bg-gray-900 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-25 transition ease-in duration-200 text-center text-base font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg mr-20">
@@ -53,17 +66,15 @@ const MainPage = () => {
           </div>
         </div>
       </nav>
-        {/* 슬라이드 부분 */}
-    <div class="relative w-full">
-        <img src={test} class="w-full h-160 rounded-lg" alt="Test"/>
-        
-
+      {/* 슬라이드 부분 */}
+      <div class="relative w-full">
+        <img src={test} class="w-full h-160 rounded-lg" alt="Test" />
         <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-            <button id="sButton1" onclick="sliderButton1()" class="bg-gray-800 rounded-full w-4 h-4"></button>
-            <button id="sButton2" onclick="sliderButton2()" class="bg-gray-800 rounded-full w-4 h-4"></button>
+          <button id="sButton1" onClick={sliderButton1} class="bg-gray-800 rounded-full w-4 h-4"></button>
+          <button id="sButton2" onClick={sliderButton2} class="bg-gray-800 rounded-full w-4 h-4"></button>
         </div>
+      </div>
     </div>
-</div>
 
   );
 };
