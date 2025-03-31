@@ -1,11 +1,16 @@
 import React from 'react';
 import Logo from '../Image/logo2.png';
 import test from '../Image/sideImage/test.png';
+import test2 from '../Image/sideImage/test2.png';
+import test3 from '../Image/sideImage/test3.png';
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 
 const MainPage = () => {
 
   const navigate = useNavigate();
+  const [index, setIndex] = useState(0);
 
   function goLogin() {
     navigate("/login");
@@ -15,14 +20,29 @@ const MainPage = () => {
     navigate("/register");
   }
 
-  function sliderButton1(){
-    alert("click Button 1");
+  function sliderButton() {
+    var num;
+    document.querySelectorAll("button").forEach((btn) => {
+      btn.addEventListener("click", function (event) {
+          console.log("클릭된 버튼의 ID:", event.target.id);
+          num = event.target.id;
+      
+  console.log(num);
+    if(num=="sButton1"){
+      setIndex(0);
+    }
+    else if(num=="sButton2"){
+      setIndex(1);
+    }
+    else if(num=="sButton3"){
+      setIndex(2);
+    }
+  });
+});
+
   }
 
-  function sliderButton2(){
-    alert("click Button 2");
-  }
-
+  const slidSrc = [test,test2,test3]
 
   return (
     <div className="flex flex-col h-screen">
@@ -67,11 +87,14 @@ const MainPage = () => {
         </div>
       </nav>
       {/* 슬라이드 부분 */}
+      
       <div class="relative w-full">
-        <img src={test} class="w-full h-160 rounded-lg" alt="Test" />
-        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          <button id="sButton1" onClick={sliderButton1} class="bg-gray-800 rounded-full w-4 h-4"></button>
-          <button id="sButton2" onClick={sliderButton2} class="bg-gray-800 rounded-full w-4 h-4"></button>
+        <img src={slidSrc[index]} class="w-full h-160 rounded-lg" alt="Test" />
+
+        <div className='slidButton' class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          <button id="sButton1" onClick={sliderButton}  class="bg-gray-800 rounded-full w-4 h-4"></button>
+          <button id="sButton2" onClick={sliderButton} class="bg-gray-800 rounded-full w-4 h-4"></button>
+          <button id="sButton3" onClick={sliderButton} class="bg-gray-800 rounded-full w-4 h-4"></button>
         </div>
       </div>
     </div>
