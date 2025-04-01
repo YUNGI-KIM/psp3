@@ -4,6 +4,10 @@ import test from '../Image/sideImage/test.png';
 import test2 from '../Image/sideImage/test2.png';
 import test3 from '../Image/sideImage/test3.png';
 import hyundai from '../Image/companyLogo/hyundai.png'
+import kia from '../Image/companyLogo/kia.svg'
+import chevrolet from '../Image/companyLogo/chevrolet.png'
+import gen from '../Image/companyLogo/gen.png'
+import kgm from '../Image/companyLogo/kgm.svg'
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -54,13 +58,13 @@ const MainPage = () => {
         <div className="flex items-center space-x-4">
           <button
             onClick={() => navigate('/login')}
-            className="px-4 py-2 bg-gray-50 hover:bg-indigo-700 text-black rounded-lg text-base"
+            className="px-4 py-2 bg-gray-50 hover:bg-slate-600 text-black rounded-lg text-base"
           >
             로그인
           </button>
           <button
             onClick={() => navigate('/register')}
-            className="px-4 py-2 bg-gray-900 hover:bg-indigo-700 text-white rounded-lg text-base"
+            className="px-4 py-2 bg-gray-900 hover:bg-gray-400 text-white rounded-lg text-base"
           >
             회원가입
           </button>
@@ -93,11 +97,11 @@ const MainPage = () => {
       {/*로고 부분*/}
 
       <div className="flex justify-between w-full max-w-screen-xlg mx-auto pt-5" >
-        <img alt="blog photo" src={hyundai} onClick={() => navigate("/hyundai")} className='pl-10'/>
-        <img alt="blog photo" src={hyundai} />
-        <img alt="blog photo" src={hyundai} />
-        <img alt="blog photo" src={hyundai} />
-        <img alt="blog photo" src={hyundai} className='pr-10' />
+        <img alt="blog photo" src={hyundai} onClick={() => navigate("/hyundai")} className='w-25 pl-10 hover:bg-indigo-800'/>
+        <img alt="blog photo" src={kia} className='hover:bg-indigo-800 w-25 ' />
+        <img alt="blog photo" src={chevrolet} className='hover:bg-indigo-800 w-25'/>
+        <img alt="blog photo" src={kgm} className='hover:bg-indigo-800'/>
+        <img alt="blog photo" src={gen} className='pr-10 hover:bg-indigo-800 w-35' />
 
       </div>
 
