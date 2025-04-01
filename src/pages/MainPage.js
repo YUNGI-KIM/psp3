@@ -3,6 +3,7 @@ import Logo from '../Image/logo2.png';
 import test from '../Image/sideImage/test.png';
 import test2 from '../Image/sideImage/test2.png';
 import test3 from '../Image/sideImage/test3.png';
+import hyundai from '../Image/companyLogo/hyundai.png'
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -97,6 +98,25 @@ const MainPage = () => {
           <button id="sButton3" onClick={sliderButton} class="bg-gray-800 rounded-full w-4 h-4"></button>
         </div>
       </div>
+
+      {/*로고 부분*/}
+
+            <div className= "flex flex-row h-screen" >
+            <img alt="blog photo" src={hyundai} class="w-40"/> 
+            <img alt="blog photo" src={hyundai} class="w-40"/> 
+            <img alt="blog photo" src={hyundai} class="w-40"/> 
+            <img alt="blog photo" src={hyundai} class="w-40"/> 
+            <img alt="blog photo" src={hyundai} class="w-40"/> 
+            <img alt="blog photo" src={hyundai} class="w-40"/> 
+
+            </div> 
+                  
+            
+
+
+
+
+
     </div>
 
   );
