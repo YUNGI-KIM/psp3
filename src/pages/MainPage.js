@@ -106,12 +106,6 @@ const MainPage = () => {
       </div>
 
 
-
-
-
-
-
-
     </div>
 
   );
