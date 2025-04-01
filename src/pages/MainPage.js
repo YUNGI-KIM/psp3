@@ -92,13 +92,12 @@ const MainPage = () => {
 
       {/*로고 부분*/}
 
-      <div className="flex flex-row relative w-full" >
-        <img alt="blog photo" src={hyundai} onClick={() => navigate("/hyundai")} class="w-40" />
-        <img alt="blog photo" src={hyundai} class="w-40" />
-        <img alt="blog photo" src={hyundai} class="w-40" />
-        <img alt="blog photo" src={hyundai} class="w-40" />
-        <img alt="blog photo" src={hyundai} class="w-40" />
-        <img alt="blog photo" src={hyundai} class="w-40" />
+      <div className="flex justify-between w-full max-w-screen-xlg mx-auto pt-5" >
+        <img alt="blog photo" src={hyundai} onClick={() => navigate("/hyundai")} className='pl-10'/>
+        <img alt="blog photo" src={hyundai} />
+        <img alt="blog photo" src={hyundai} />
+        <img alt="blog photo" src={hyundai} />
+        <img alt="blog photo" src={hyundai} className='pr-10' />
 
       </div>
 
