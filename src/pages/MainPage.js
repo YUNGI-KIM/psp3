@@ -52,13 +52,13 @@ const MainPage = () => {
           <input
             type="search"
             placeholder="Search"
-            className="border rounded-full px-4 py-2 w-40 sm:w-100 focus:outline-none text-base"
+            className="border rounded-full px-4 py-2 w-40 sm:w-140 ml-15.5 focus:outline-none text-base"
           />
         </div>
         <div className="flex items-center space-x-4">
           <button
             onClick={() => navigate('/login')}
-            className="px-4 py-2 bg-gray-50 hover:bg-slate-600 text-black rounded-lg text-base"
+            className="px-4 py-2 bg-gray-50 hover:bg-gray-400 text-black rounded-lg text-base"
           >
             로그인
           </button>
@@ -88,20 +88,20 @@ const MainPage = () => {
         <img src={slidSrc[index]} class="w-full h-160 rounded-lg" alt="Test" />
 
         <div className='slidButton' class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          <button id="sButton1" onClick={sliderButton} class="bg-gray-800 rounded-full w-4 h-4"></button>
-          <button id="sButton2" onClick={sliderButton} class="bg-gray-800 rounded-full w-4 h-4"></button>
-          <button id="sButton3" onClick={sliderButton} class="bg-gray-800 rounded-full w-4 h-4"></button>
+          <button id="sButton1" onClick={sliderButton} class="hover:bg-gray-400 bg-gray-800 rounded-full w-4 h-4"></button>
+          <button id="sButton2" onClick={sliderButton} class="hover:bg-gray-400 bg-gray-800 rounded-full w-4 h-4"></button>
+          <button id="sButton3" onClick={sliderButton} class="hover:bg-gray-400 bg-gray-800 rounded-full w-4 h-4"></button>
         </div>
       </div>
 
       {/*로고 부분*/}
 
-      <div className="flex justify-between w-full max-w-screen-xlg mx-auto pt-5" >
-        <img alt="blog photo" src={hyundai} onClick={() => navigate("/hyundai")} className='w-25 pl-10 hover:bg-indigo-800'/>
+      <div className="flex justify-between w-full max-w-screen-xlg mx-auto pt-12" >
+        <img alt="blog photo" src={hyundai} onClick={() => navigate("/hyundai")} className='w-30 pl-10 hover:bg-indigo-800'/>
         <img alt="blog photo" src={kia} className='hover:bg-indigo-800 w-25 ' />
         <img alt="blog photo" src={chevrolet} className='hover:bg-indigo-800 w-25'/>
         <img alt="blog photo" src={kgm} className='hover:bg-indigo-800'/>
-        <img alt="blog photo" src={gen} className='pr-10 hover:bg-indigo-800 w-35' />
+        <img alt="blog photo" src={gen} className='pr-10 hover:bg-indigo-800 w-25' />
 
       </div>
 
