@@ -8,8 +8,6 @@ import CBTIResult from "./CBTI/CBTIResult";
 import Login from "./Login/Login";
 import Register from "./Login/Register";
 import Support from "./Login/Support";
-import Estimate from "./Login/Estimate";
-
 
 function App() {
 
@@ -29,7 +27,9 @@ function App() {
         <Route path="/login" element={<Login/>} />  {/* 로그인 페이지 */}
         <Route path="/register" element={<Register/>} />  {/* 가입 페이지 */}
         <Route path="/Support" element={<Support/>} /> 
-        <Route path="/Estimate" element={<Estimate/>} />
+    </Routes>
+    <Routes>
+        <Route path="/hyundai" element={<Hyundai/>} /> 
     </Routes>
     </BrowserRouter>
     </div>
