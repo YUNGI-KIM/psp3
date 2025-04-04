@@ -1,7 +1,7 @@
 import DropDown from "./functions/DropDown";
 import Header from "./functions/Header";
 import PricingCard from "./functions/PricingCard";
-function Hyundai() {
+function Kia() {
     return (
         <div className="flex flex-col w-full">
 
@@ -25,4 +25,4 @@ function Hyundai() {
         </div>
     );
 }
-export default Hyundai;
+export default Kia;

@@ -99,10 +99,10 @@ const MainPage = () => {
 
       <div className="pr-15 pl-15 flex justify-between w-full max-w-screen-xlg mx-auto pt-12">
     <img alt="blog photo" src={hyundai} onClick={() => navigate("/hyundai")} className='w-35 h-20 hover:bg-indigo-800 mx-2'/>
-    <img alt="blog photo" src={kia} className='hover:bg-indigo-800 w-30 h-20 mx-2' />
+    <img alt="blog photo" src={kia} onClick={() => navigate("/kia")} className='hover:bg-indigo-800 w-30 h-20 mx-2' />
     <img alt="blog photo" src={chevrolet} className='hover:bg-indigo-800 w-30 h-20 mx-2'/>
     <img alt="blog photo" src={Reno} className='hover:bg-indigo-800 w-20 h-20 mx-2'/>
-    <img alt="blog photo" src={kgm} className='hover:bg-indigo-800 w-35 h-20 mx-2'/>
+    <img alt="blog photo" src={kgm} onClick={() => navigate("/kgm")} className='hover:bg-indigo-800 w-35 h-20 mx-2'/>
     <img alt="blog photo" src={gen} className='hover:bg-indigo-800 w-40 h-20 mx-2'/>
 </div>
 
