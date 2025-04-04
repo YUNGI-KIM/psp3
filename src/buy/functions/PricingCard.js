@@ -4,8 +4,7 @@ import sonata from '../../Image/Estimate/Hyundai/Sonata/sonataInterior.png';
 
 function PricingCard() {
     return (
-
-        <div className="flex">
+        <div className="flex pt-3">
             <div class="relative max-w-screen-xl px-4 mx-auto sm:px-6 lg:px-8">
                 <div class="max-w-lg mx-auto overflow-hidden rounded-lg shadow-lg icing-box lg:max-w-none lg:flex">
                     <div class="px-6 py-8 bg-white dark:bg-gray-800 lg:flex-shrink-1 lg:p-12">

@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from '../Image/logo2.png';
-import test from '../Image/sideImage/test.png';
+import FindCar from '../Image/sideImage/FindCar.png'
 import test2 from '../Image/sideImage/test2.png';
 import test3 from '../Image/sideImage/test3.png';
 import hyundai from '../Image/companyLogo/hyundai.png'
@@ -36,11 +36,11 @@ const MainPage = () => {
           setIndex(2);
         }
       });
-    });
+    }); 
 
   }
 
-  const slidSrc = [test, test2, test3]
+  const slidSrc = [FindCar, test2, test3]
 
   return (
     <div className="flex flex-col w-full">
@@ -86,7 +86,7 @@ const MainPage = () => {
       {/* 슬라이드 부분 */}
 
       <div class="relative w-full">
-        <img src={slidSrc[index]} class="w-full h-160 rounded-lg" alt="Test" />
+        <img src={slidSrc[index]} class="w-full h-140 rounded-lg" alt="Test" />
 
         <div className='slidButton' class="absolute justify-cneter bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
           <button id="sButton1" onClick={sliderButton} class="hover:bg-gray-400 bg-gray-800 rounded-full w-4 h-4"></button>
@@ -97,14 +97,31 @@ const MainPage = () => {
 
       {/*로고 부분*/}
 
-      <div className="pr-15 pl-15 flex justify-between w-full max-w-screen-xlg mx-auto pt-12">
-        <img alt="blog photo" src={hyundai} onClick={() => navigate("/hyundai")} className='w-35 h-20 hover:bg-indigo-800 mx-2' />
-        <img alt="blog photo" src={kia} onClick={() => navigate("/kia")} className='hover:bg-indigo-800 w-30 h-20 mx-2' />
-        <img alt="blog photo" src={chevrolet} className='hover:bg-indigo-800 w-30 h-20 mx-2' />
-        <img alt="blog photo" src={Reno} className='hover:bg-indigo-800 w-20 h-20 mx-2' />
-        <img alt="blog photo" src={kgm} onClick={() => navigate("/kgm")} className='hover:bg-indigo-800 w-35 h-20 mx-2' />
-        <img alt="blog photo" src={gen} className='hover:bg-indigo-800 w-40 h-20 mx-2' />
-      </div>
+
+      <div className="w-full flex justify-center items-center space-x-4 mt-12">
+  {/* 왼쪽 화살표 */}
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+  </svg>
+
+  {/* 로고 리스트 */}
+  <div className="flex justify-between items-center w-full  px-6">
+    <img alt="blog photo" src={hyundai} onClick={() => navigate("/hyundai")} className='w-35 h-20 hover:bg-yellow-100 mx-2' />
+    <img alt="blog photo" src={kia} onClick={() => navigate("/kia")} className='hover:bg-yellow-100 w-30 h-20 mx-2' />
+    <img alt="blog photo" src={chevrolet} className='hover:bg-yellow-100 w-30 h-25 mx-2' />
+    <img alt="blog photo" src={Reno} className='hover:bg-yellow-100 w-20 h-25 mx-2' />
+    <img alt="blog photo" src={kgm} onClick={() => navigate("/kgm")} className='hover:bg-yellow-100 w-35 h-20 mx-2' />
+    <img alt="blog photo" src={gen} className='hover:bg-yellow-100 w-40 h-20 mx-2' />
+  </div>
+
+  {/* 오른쪽 화살표 */}
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer">
+    <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+  </svg>
+</div>
+
+
+
 
     </div>
 
