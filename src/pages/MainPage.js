@@ -8,7 +8,7 @@ import kia from '../Image/companyLogo/kia.svg'
 import chevrolet from '../Image/companyLogo/chevrolet.svg'
 import gen from '../Image/companyLogo/gen.png'
 import kgm from '../Image/companyLogo/kgm.svg'
-import Reno from'../Image/companyLogo/Renault.png'
+import Reno from '../Image/companyLogo/Renault.png'
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -76,11 +76,11 @@ const MainPage = () => {
       {/* 내비게이션 바 */}
       <nav className="flex-1 bg-black text-gray-300 p-4 md:flex justify-center text-lg">
         <div className="flex justify-between w-full max-w-screen-xlg mx-auto px-4 md:px-10 lg:px-20 xl:px-32">
-                <a className="text-gray-300 hover:text-yellow-200 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/#">차량구매</a>
-                <a className="text-gray-300 hover:text-yellow-200 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/#">부속부품</a>
-                <a className="text-gray-300 hover:text-yellow-200 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/Estimate">견적</a>
-                <a className="text-gray-300 hover:text-yellow-200 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/#">차량정보</a>
-                <a className="text-gray-300 hover:text-yellow-200 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/Support">고객지원</a>
+          <a className="text-gray-300 hover:text-yellow-200 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/#">차량구매</a>
+          <a className="text-gray-300 hover:text-yellow-200 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/#">부속부품</a>
+          <a className="text-gray-300 hover:text-yellow-200 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/Estimate">견적</a>
+          <a className="text-gray-300 hover:text-yellow-200 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/#">차량정보</a>
+          <a className="text-gray-300 hover:text-yellow-200 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/Support">고객지원</a>
         </div>
       </nav>
       {/* 슬라이드 부분 */}
@@ -98,13 +98,13 @@ const MainPage = () => {
       {/*로고 부분*/}
 
       <div className="pr-15 pl-15 flex justify-between w-full max-w-screen-xlg mx-auto pt-12">
-    <img alt="blog photo" src={hyundai} onClick={() => navigate("/hyundai")} className='w-35 h-20 hover:bg-indigo-800 mx-2'/>
-    <img alt="blog photo" src={kia} onClick={() => navigate("/kia")} className='hover:bg-indigo-800 w-30 h-20 mx-2' />
-    <img alt="blog photo" src={chevrolet} className='hover:bg-indigo-800 w-30 h-20 mx-2'/>
-    <img alt="blog photo" src={Reno} className='hover:bg-indigo-800 w-20 h-20 mx-2'/>
-    <img alt="blog photo" src={kgm} onClick={() => navigate("/kgm")} className='hover:bg-indigo-800 w-35 h-20 mx-2'/>
-    <img alt="blog photo" src={gen} className='hover:bg-indigo-800 w-40 h-20 mx-2'/>
-</div>
+        <img alt="blog photo" src={hyundai} onClick={() => navigate("/hyundai")} className='w-35 h-20 hover:bg-indigo-800 mx-2' />
+        <img alt="blog photo" src={kia} onClick={() => navigate("/kia")} className='hover:bg-indigo-800 w-30 h-20 mx-2' />
+        <img alt="blog photo" src={chevrolet} className='hover:bg-indigo-800 w-30 h-20 mx-2' />
+        <img alt="blog photo" src={Reno} className='hover:bg-indigo-800 w-20 h-20 mx-2' />
+        <img alt="blog photo" src={kgm} onClick={() => navigate("/kgm")} className='hover:bg-indigo-800 w-35 h-20 mx-2' />
+        <img alt="blog photo" src={gen} className='hover:bg-indigo-800 w-40 h-20 mx-2' />
+      </div>
 
     </div>
 
