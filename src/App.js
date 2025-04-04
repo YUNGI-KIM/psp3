@@ -10,6 +10,8 @@ import Register from "./Login/Register";
 import Support from "./Login/Support";
 import Hyundai from './buy/hyundai';
 import Estimate from'./Login/Estimate';
+import Kia from './buy/kia';
+import Kgm from './buy/kgm';
 
 function App() {
 
@@ -33,6 +35,8 @@ function App() {
     </Routes>
     <Routes>
         <Route path="/hyundai" element={<Hyundai/>} /> 
+        <Route path="/kia" element={<Kia/>} /> 
+        <Route path="/kgm" element={<Kgm/>} /> 
     </Routes>
     </BrowserRouter>
     </div>
