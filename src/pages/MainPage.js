@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from '../Image/logo2.png';
 import FindCar from '../Image/sideImage/FindCar.png'
-import test2 from '../Image/sideImage/test2.png';
+import CBTIGO from '../Image/sideImage/CBTIGO.png';
 import test3 from '../Image/sideImage/test3.png';
 import hyundai from '../Image/companyLogo/hyundai.png'
 import kia from '../Image/companyLogo/kia.svg'
@@ -9,7 +9,7 @@ import chevrolet from '../Image/companyLogo/chevrolet.svg'
 import gen from '../Image/companyLogo/gen.png'
 import kgm from '../Image/companyLogo/kgm.svg'
 import Reno from '../Image/companyLogo/Renault.png'
-import { useNavigate } from "react-router-dom";
+import { href, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 
@@ -39,8 +39,12 @@ const MainPage = () => {
     }); 
 
   }
-
-  const slidSrc = [FindCar, test2, test3]
+  const slidSrc = [
+    {src:FindCar,href:'/startCBTI'}, 
+    {src:CBTIGO,href:'/startCBTI'}, 
+    {src:test3,href:'/startCBTI'}
+  ]
+  
 
   return (
     <div className="flex flex-col w-full">
@@ -84,9 +88,11 @@ const MainPage = () => {
         </div>
       </nav>
       {/* 슬라이드 부분 */}
+      
+
 
       <div class="relative w-full">
-        <img src={slidSrc[index]} class="w-full h-140 rounded-lg" alt="Test" />
+        <img src={slidSrc[index].src} onClick={()=>navigate(slidSrc[index].href)} class="w-full h-140 rounded-lg" alt="Test" />
 
         <div className='slidButton' class="absolute justify-cneter bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
           <button id="sButton1" onClick={sliderButton} class="hover:bg-gray-400 bg-gray-800 rounded-full w-4 h-4"></button>
