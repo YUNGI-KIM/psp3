@@ -5,9 +5,10 @@ import test2 from '../Image/sideImage/test2.png';
 import test3 from '../Image/sideImage/test3.png';
 import hyundai from '../Image/companyLogo/hyundai.png'
 import kia from '../Image/companyLogo/kia.svg'
-import chevrolet from '../Image/companyLogo/chevrolet.png'
+import chevrolet from '../Image/companyLogo/chevrolet.svg'
 import gen from '../Image/companyLogo/gen.png'
 import kgm from '../Image/companyLogo/kgm.svg'
+import Reno from'../Image/companyLogo/Renault.png'
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -87,7 +88,7 @@ const MainPage = () => {
       <div class="relative w-full">
         <img src={slidSrc[index]} class="w-full h-160 rounded-lg" alt="Test" />
 
-        <div className='slidButton' class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <div className='slidButton' class="absolute justify-cneter bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
           <button id="sButton1" onClick={sliderButton} class="hover:bg-gray-400 bg-gray-800 rounded-full w-4 h-4"></button>
           <button id="sButton2" onClick={sliderButton} class="hover:bg-gray-400 bg-gray-800 rounded-full w-4 h-4"></button>
           <button id="sButton3" onClick={sliderButton} class="hover:bg-gray-400 bg-gray-800 rounded-full w-4 h-4"></button>
@@ -96,15 +97,14 @@ const MainPage = () => {
 
       {/*로고 부분*/}
 
-      <div className="flex justify-between w-full max-w-screen-xlg mx-auto pt-12" >
-        <img alt="blog photo" src={hyundai} onClick={() => navigate("/hyundai")} className='w-30 pl-10 hover:bg-indigo-800'/>
-        <img alt="blog photo" src={kia} className='hover:bg-indigo-800 w-25 ' />
-        <img alt="blog photo" src={chevrolet} className='hover:bg-indigo-800 w-25'/>
-        <img alt="blog photo" src={kgm} className='hover:bg-indigo-800'/>
-        <img alt="blog photo" src={gen} className='pr-10 hover:bg-indigo-800 w-25' />
-
-      </div>
-
+      <div className="pr-15 pl-15 flex justify-between w-full max-w-screen-xlg mx-auto pt-12">
+    <img alt="blog photo" src={hyundai} onClick={() => navigate("/hyundai")} className='w-35 h-20 hover:bg-indigo-800 mx-2'/>
+    <img alt="blog photo" src={kia} className='hover:bg-indigo-800 w-30 h-20 mx-2' />
+    <img alt="blog photo" src={chevrolet} className='hover:bg-indigo-800 w-30 h-20 mx-2'/>
+    <img alt="blog photo" src={Reno} className='hover:bg-indigo-800 w-20 h-20 mx-2'/>
+    <img alt="blog photo" src={kgm} className='hover:bg-indigo-800 w-35 h-20 mx-2'/>
+    <img alt="blog photo" src={gen} className='hover:bg-indigo-800 w-40 h-20 mx-2'/>
+</div>
 
     </div>
 
