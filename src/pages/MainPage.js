@@ -9,7 +9,7 @@ import chevrolet from '../Image/companyLogo/chevrolet.svg'
 import gen from '../Image/companyLogo/gen.png'
 import kgm from '../Image/companyLogo/kgm.svg'
 import Reno from '../Image/companyLogo/Renault.png'
-import { href, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 
