@@ -4,7 +4,7 @@
 function DropDown(){
     return(
 <div className="mt-1 border rounded-full mr-10 ml-10 ">
-                <div className="mb-1 flex mr-40 ml-40 justify-between">
+                <div className="mb-1 flex mr-40 ml-40 justify-center">
                     <label class="text-gray-700" for="animals">
                         제조사
                         <select id="animals" class="block px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm w-52 focus:outline-none focus:ring-primary-500 focus:border-primary-500" name="animals">
@@ -110,13 +110,14 @@ function DropDown(){
                         </select>
                     </label>
 
-                </div>
+                
                 <div className=" mt-2 mb-2 flex-1 flex justify-center">
                     <input
                         type="search"
                         placeholder="Search"
                         className="border rounded-full px-4 py-2 w-40 sm:w-140 ml-15.5 focus:outline-none text-base"
                     />
+                </div>
                 </div>
             </div>
     );
