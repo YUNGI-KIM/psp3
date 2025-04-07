@@ -110,7 +110,7 @@ function DropDown() {
                     </select>
                 </label>
 
-                <div className=" ml-2    mt-2 mb-2 flex-1 flex justify-center border rounded-full">
+                <div className=" ml-2 mt-2 mb-2 flex-1 flex justify-center border rounded-full">
                     <input
                         type="text"
                         class="w-full bg-[#0d1829] flex bg-transparent pl-2 text-[#cccccc] outline-0"
