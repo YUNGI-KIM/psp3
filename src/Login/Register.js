@@ -1,17 +1,16 @@
 import { useNavigate } from "react-router-dom";
-
+import Logo from "../Image/logo2.png"
 
 
 function Register() {
     const navigate = useNavigate();
 
     return (
-        <div class="bg-white rounded-lg shadow sm:max-w-md sm:w-full sm:mx-auto sm:mt-60 sm:overflow-hidden">
-
-
-            <span class="justify-center text-sm text-center text-gray-500 flex-items-center dark:text-gray-400">
+        <div class="bg-white text-center rounded-lg shadow-xl sm:max-w-md sm:w-full sm:mx-auto sm:mt-60 sm:overflow-hidden">
+            <img src={Logo}/>
+            <span class="text-sm text-gray-500 flex-items-center dark:text-gray-400">
                 Already have an account ?
-                <a href="/login" target="_blank" class="text-sm text-blue-500 underline hover:text-blue-700">
+                <a href="/login" target="_blank"class="text-sm text-blue-500 underline hover:text-blue-700">
                     Sign in
                 </a>
             </span>
@@ -36,7 +35,7 @@ function Register() {
                         </div>
                     </div>
                     <div class="flex w-full my-4">
-                        <button type="button" onClick={()=>navigate('/')} class="py-2 px-4  bg-black hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-3xl ">
+                        <button type="button" onClick={() => navigate('/')} class="py-2 px-4  bg-black hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-3xl ">
                             Commit
                         </button>
                     </div>
