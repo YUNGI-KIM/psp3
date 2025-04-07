@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Logo from '../Image/logo2.png';
 import sonataInterior from '../Image/Estimate/Hyundai/Sonata/sonataInterior.png';
