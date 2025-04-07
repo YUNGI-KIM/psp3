@@ -7,7 +7,7 @@ function Support(){
     
     return (
     <div>
-        {Header()}
+        {Header()}  
         
         <div className="w-full h-full bg-gray-200 absolute space-y-2 pt-10"> 
             
