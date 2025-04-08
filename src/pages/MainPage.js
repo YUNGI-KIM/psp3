@@ -47,9 +47,9 @@ const MainPage = () => {
 
   return (
     <div className="flex flex-col w-full">
-      
+      {/*헤더부분START*/}
       {Header()}
-
+      {/*헤더부분END*/}
       <div class="relative w-full">
         <img src={slidSrc[index].src} onClick={()=>navigate(slidSrc[index].href)} class="w-full h-140 rounded-lg" alt="Test" />
 
