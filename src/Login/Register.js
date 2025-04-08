@@ -7,7 +7,7 @@ function Register() {
 
     return (
         <div class="bg-white text-center rounded-lg shadow-xl sm:max-w-md sm:w-full sm:mx-auto sm:mt-60 sm:overflow-hidden">
-            <img src={Logo}/>
+            <img className="p-10" src={Logo}/>
             <span class="text-sm text-gray-500 flex-items-center dark:text-gray-400">
                 Already have an account ?
                 <a href="/login" target="_blank"class="text-sm text-blue-500 underline hover:text-blue-700">
@@ -31,7 +31,12 @@ function Register() {
                     </div>
                     <div class="flex flex-col mb-2">
                         <div class=" relative ">
-                            <input type="text" id="create-account-pseudo" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" name="PW" placeholder="Password" />
+                            <input type="password" id="create-account-pseudo" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" name="PW" placeholder="Password" />
+                        </div>
+                    </div>
+                    <div class="flex flex-col mb-2">
+                        <div class=" relative ">
+                            <input type="password" id="create-account-pseudo" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" name="PW" placeholder="Password Confirm" />
                         </div>
                     </div>
                     <div class="flex w-full my-4">
