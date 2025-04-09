@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion, useMotionValue, animate, useTransform } from "framer-motion";
 import Header from "../buy/functions/Header";
 
@@ -36,6 +36,7 @@ export default function Estimator() {
     const [model, setModel] = useState("Avante");
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [imageKey, setImageKey] = useState(0);
+
     const price = useMotionValue(0);
     const displayedPrice = useTransform(price, (value) =>
         Math.floor(value).toLocaleString("ko-KR") + "원"
@@ -47,17 +48,17 @@ export default function Estimator() {
                 ? prev.filter((o) => o !== option)
                 : [...prev, option]
         );
-        setImageKey(prev => prev + 1);
+        setImageKey((prev) => prev + 1);
     };
 
-    const calculatePrice = () => {
+    const calculatePrice = useCallback(() => {
         const basePrice = basePrices[model] || 0;
         const optionsPrice = selectedOptions.reduce(
             (sum, option) => sum + options.find((o) => o.name === option)?.price,
             0
         );
         return basePrice + optionsPrice;
-    };
+    }, [model, selectedOptions]); // ✅ basePrices, options 의존성 제거!
 
     useEffect(() => {
         const controls = animate(price, calculatePrice(), {
@@ -65,7 +66,7 @@ export default function Estimator() {
             ease: "easeInOut",
         });
         return controls.stop;
-    }, [model, selectedOptions]);
+    }, [model, selectedOptions, price, calculatePrice]);
 
     useEffect(() => {
         if (brand && brands[brand] && brands[brand].length > 0) {
@@ -84,6 +85,8 @@ export default function Estimator() {
                     transition={{ duration: 0.5 }}
                 >
                     <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">차량 견적 페이지</h1>
+
+                    {/* 차량 이미지 */}
                     <motion.img
                         src={carImages[model]}
                         alt={model}
@@ -93,7 +96,9 @@ export default function Estimator() {
                         animate={{ opacity: 1, scale: 1.02 }}
                         transition={{ duration: 0.5 }}
                     />
+
                     <div className="grid gap-6">
+                        {/* 브랜드와 모델 선택 */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label className="text-sm font-semibold">브랜드 선택</label>
@@ -121,6 +126,7 @@ export default function Estimator() {
                             </div>
                         </div>
 
+                        {/* 추가 옵션 선택 */}
                         <div>
                             <h2 className="text-lg font-semibold mb-2">추가 옵션</h2>
                             <div className="flex flex-wrap gap-2 sm:gap-4">
@@ -132,12 +138,15 @@ export default function Estimator() {
                                             onChange={() => handleOptionChange(option.name)}
                                             className="w-5 h-5"
                                         />
-                                        <span className="text-sm sm:text-base">{option.name} (+{option.price.toLocaleString("ko-KR")}원)</span>
+                                        <span className="text-sm sm:text-base">
+                      {option.name} (+{option.price.toLocaleString("ko-KR")}원)
+                    </span>
                                     </div>
                                 ))}
                             </div>
                         </div>
 
+                        {/* 최종 견적 금액 */}
                         <div className="mt-6 text-center">
                             <motion.h2
                                 className="text-xl sm:text-2xl font-bold"
