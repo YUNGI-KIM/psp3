@@ -11,6 +11,7 @@ import Hyundai from './buy/hyundai';
 import Estimate from'./Login/Estimate';
 import Kia from './buy/kia';
 import Kgm from './buy/kgm';
+import Estimator from "./pages/Estimator";
 
 function App() {
 
@@ -30,7 +31,8 @@ function App() {
         <Route path="/login" element={<Login/>} />  {/* 로그인 페이지 */}
         <Route path="/register" element={<Register/>} />  {/* 가입 페이지 */}
         <Route path="/Support" element={<Support/>} /> 
-        <Route path="/Estimate" element={<Estimate/>} /> 
+        <Route path="/Estimate" element={<Estimate/>} />
+        <Route path="/Estimator" element={<Estimator/>} />
     </Routes>
     <Routes>
         <Route path="/hyundai" element={<Hyundai/>} /> 
