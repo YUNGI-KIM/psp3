@@ -44,3 +44,4 @@ out/
 node_modules
 
 
+*.p12
