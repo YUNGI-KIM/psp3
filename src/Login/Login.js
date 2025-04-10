@@ -6,7 +6,7 @@ function Login() {
     return (
 
         <div class="bg-white rounded-lg shadow sm:max-w-md sm:w-full sm:mx-auto sm:mt-60 sm:overflow-hidden">
-            <img className="pl-6 pt-1"  src={Logo}/>
+            <img alt="Logo" className="pl-6 pt-1"  src={Logo}/>
             <div class="px-4 py-2 sm:px-10">
                 <div class="relative">
                     <div class="absolute inset-0 flex items-center">
