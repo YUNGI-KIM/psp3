@@ -7,7 +7,7 @@ function Register() {
 
     return (
         <div class="bg-white text-center rounded-lg shadow-xl sm:max-w-md sm:w-full sm:mx-auto sm:mt-60 sm:overflow-hidden">
-            <img className="p-10" src={Logo}/>
+            <img alt="Logo" className="p-10" src={Logo}/>
             <span class="text-sm text-gray-500 flex-items-center dark:text-gray-400">
                 Already have an account ?
                 <a href="/login" target="_blank"class="text-sm text-blue-500 underline hover:text-blue-700">
