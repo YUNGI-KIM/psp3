@@ -1,6 +1,5 @@
 import DropDown from "./functions/DropDown";
 import Header from "./functions/Header";
-import PricingCard from "./functions/PricingCard";
 import ProductCatalog from "./functions/PricingCard";
 function Hyundai() {
     return (
