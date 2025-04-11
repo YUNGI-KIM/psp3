@@ -20,22 +20,24 @@ const defaultProductsData = [
 ]
 function ProductCard({ product }) {
     return (
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 flex flex-col w-full h-full transition-transform transform hover:scale-105">
-            <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">{product.name}</h3>
-                <span className="text-xs bg-indigo-500 text-white px-2 py-1 rounded-full">{product.category}</span>
-            </div>
-            <img src={product.image} alt={product.name} className="h-48 w-full object-cover rounded mb-4" />
-            <ul className="flex-1 space-y-2 mb-4">
-                {product.features.map((feature, idx) => (
-                    <li key={idx} className="text-sm text-gray-600 dark:text-gray-300">• {feature}</li>
-                ))}
-            </ul>
-            <div className="text-center mt-auto">
-                <p className="text-lg font-bold text-gray-900 dark:text-white">{product.price}₩</p>
-                <button className="mt-3 w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg">
-                    {product.buttonText}
-                </button>
+        <div className="flex flex-col bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden w-full h-full transition-transform hover:scale-105">
+            <img src={product.image} alt={product.name} className="w-full h-60 object-cover" />
+            <div className="p-6 flex flex-col flex-grow">
+                <div className="flex justify-between items-center mb-4">
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white">{product.name}</h3>
+                    <span className="text-xs bg-indigo-500 text-white px-2 py-1 rounded-full">{product.category}</span>
+                </div>
+                <ul className="flex-1 space-y-2 mb-4">
+                    {product.features.map((feature, idx) => (
+                        <li key={idx} className="text-sm text-gray-600 dark:text-gray-300">• {feature}</li>
+                    ))}
+                </ul>
+                <div className="mt-auto text-center">
+                    <p className="text-lg font-bold text-gray-900 dark:text-white">{product.price}₩</p>
+                    <button className="mt-3 w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg">
+                        {product.buttonText}
+                    </button>
+                </div>
             </div>
         </div>
     );
@@ -87,7 +89,7 @@ function ProductCatalog({ pageType, showFilter = true, customTitle, products = d
                 onCategoryChange={setActiveCategory}
                 showFilter={showFilter && categories.length > 1}
             />
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredProducts.map((product) => (
                     <ProductCard key={product.id} product={product} />
                 ))}
