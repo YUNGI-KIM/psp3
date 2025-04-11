@@ -12,10 +12,6 @@ import Kia from './buy/kia';
 import Kgm from './buy/kgm';
 import Estimator from "./pages/Estimator";
 import AccForCar from "./pages/AccForCar";
-import Genesis from "./buy/genesis"
-import Reno from "./buy/reno";
-import Chevo from "./buy/chevo";
-
 
 function App() {
 
