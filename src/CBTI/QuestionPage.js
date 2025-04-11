@@ -21,11 +21,11 @@ function QuestionPage() {
     }
   }
   const questions = [
-    { num: "질문 1번", text: "집에 가고 싶으신가요?", progress: "20%" },
-    { num: "질문 2번", text: "공부를 좋아하시나요?", progress: "40%" },
-    { num: "질문 3번", text: "운동을 즐기시나요?", progress: "60%" },
-    { num: "질문 4번", text: "음악을 좋아하시나요?", progress: "80%" },
-    { num: "질문 5번", text: "여행을 자주 가시나요?", progress: "100%" },
+    { num: "질문 1번", text: "가족 구성원이 2명 초과 즉, 3명 이상인가요?", progress: "20%" },
+    { num: "질문 2번", text: "장거리 운행이 많은가요?", progress: "40%" },
+    { num: "질문 3번", text: "출퇴근 용도 이외 차량을 자주 운행하는가 ?", progress: "60%" },
+    { num: "질문 4번", text: "차박 ( 차량을 텐트 삼아 캠핑을 가는 것 ) 을 선호하는가 ?", progress: "80%" },
+    { num: "질문 5번", text: "속도감 있는 운전을 좋아하는가 ?", progress: "100%" },
   ];
 
   return (
