@@ -6,11 +6,12 @@ import QuestionPage from "./CBTI/QuestionPage";
 import CBTIResult from "./CBTI/CBTIResult";
 import Login from "./Login/Login";
 import Register from "./Login/Register";
-import Support from "./Login/Support";
+import Support from "./pages/Support";
 import Hyundai from './buy/hyundai';
 import Kia from './buy/kia';
 import Kgm from './buy/kgm';
 import Estimator from "./pages/Estimator";
+import AccForCar from "./pages/AccForCar";
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
         <Route path="/register" element={<Register/>} />  {/* 가입 페이지 */}
         <Route path="/Support" element={<Support/>} /> 
         <Route path="/Estimator" element={<Estimator/>} />
+        <Route path="/AccForCar" element={<AccForCar/>} />
     </Routes>
     <Routes>
         <Route path="/hyundai" element={<Hyundai/>} /> 
