@@ -1,6 +1,41 @@
+import React from 'react';
 import sonata from '../../Image/Estimate/Hyundai/Sonata/sonataInterior.png';
+import avante from '../../Image/Estimate/Hyundai/Sonata/sonataInterior.png';
 
-function PricingCard() {
+// 차량 데이터
+const carsData = [
+    {
+        id: 1,
+        name: "아반떼",
+        image: avante,
+        features: [
+            "LED 헤드라이트",
+            "스마트 크루즈 컨트롤",
+            "운전자 주의 경고",
+            "8인치 인포테인먼트",
+            "무선 충전"
+        ],
+        price: "2,500만"
+    },
+    {
+        id: 2,
+        name: "소나타",
+        image: sonata,
+        features: [
+            "파노라마 선루프",
+            "Bose 프리미엄 사운드",
+            "10.25인치 내비게이션",
+            "앰비언트 라이트",
+            "스마트 트렁크",
+            "헤드업 디스플레이",
+            "주차 거리 경고"
+        ],
+        price: "3,200만"
+    }
+];
+
+// 단일 카드 컴포넌트
+function PricingCard({ car }) {
     return (
         <div className="flex pt-3">
             <div className="relative max-w-screen-xl px-4 mx-auto sm:px-6 lg:px-8">
@@ -9,10 +44,10 @@ function PricingCard() {
                     {/* 왼쪽 카드 내용 */}
                     <div className="px-6 py-8 bg-white dark:bg-gray-800 lg:flex-shrink-1 lg:p-12">
                         <h3 className="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white">
-                            아반떼밀이
+                            {car.name}
                         </h3>
 
-                        <img alt="Sonata Interior" src={sonata} className="w-full rounded-xl object-cover mt-6" />
+                        <img alt={`${car.name} Interior`} src={car.image} className="w-full rounded-xl object-cover mt-6" />
 
                         <div className="mt-8">
                             <div className="flex items-center">
@@ -24,15 +59,7 @@ function PricingCard() {
                             </div>
 
                             <ul className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-5">
-                                {[
-                                    "All unlimited components",
-                                    "Own custom Tailwind styles",
-                                    "Unlimited Templates",
-                                    "Free premium dashboard",
-                                    "Best ranking",
-                                    "Premium SVG",
-                                    "My wife",
-                                ].map((text, index) => (
+                                {car.features.map((feature, index) => (
                                     <li key={index} className="flex items-start">
                                         <div className="flex-shrink-0">
                                             <svg className="w-6 h-6 mr-2 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
@@ -40,7 +67,7 @@ function PricingCard() {
                                             </svg>
                                         </div>
                                         <p className="ml-3 text-sm text-gray-700 dark:text-gray-200">
-                                            {text}
+                                            {feature}
                                         </p>
                                     </li>
                                 ))}
@@ -54,7 +81,7 @@ function PricingCard() {
                             가격
                         </p>
                         <div className="flex items-center justify-center mt-4 text-5xl font-extrabold text-gray-900 dark:text-white">
-                            <span>1억₩</span>
+                            <span>{car.price}₩</span>
                         </div>
                         <div className="mt-6">
                             <button type="button" className="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in-out duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
@@ -62,11 +89,21 @@ function PricingCard() {
                             </button>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     );
 }
 
-export default PricingCard;
+// 메인 컴포넌트
+function PricingCardList() {
+    return (
+        <div className="space-y-10 py-10">
+            {carsData.map((car) => (
+                <PricingCard key={car.id} car={car} />
+            ))}
+        </div>
+    );
+}
+
+export default PricingCardList;
