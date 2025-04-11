@@ -27,22 +27,21 @@ function AccForCar() {
         {id: 6, name: '안전 삼각대', category: '차량 악세서리', image: AccForCarSafetyBar, features: ['기능1', '기능2'], price: '2만', buttonText: '구매'},
         {id: 7, name: '불꽃 안전 신호기', category: '차량 악세서리', image: AccForCarSemaphore, features: ['기능1', '기능2'], price: '2만', buttonText: '구매'}
 
-        
-
-
-
-
-        
-
     ];
     return (
-<>
+        <>
         <div>{Header()}</div>
         <div>
             <ProductCatalog pageType="차량 악세서리" showFilter={false} products={productData} />
         </div>
-        </>
+        </>                        
+
+
+
     );
+
+
+
 
 }
 
