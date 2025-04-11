@@ -21,7 +21,10 @@ const defaultProductsData = [
 
 function ProductCard({ product }) {
     return (
-        <div className="flex flex-col bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden w-full h-full transition-transform hover:scale-105">
+        <div
+            className="flex flex-col bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden w-full h-full transition-transform hover:scale-105"
+            style={{ boxShadow: "10px 10px 20px rgba(0, 0, 0, 0.1), 6px 6px 6px rgba(0, 0, 0, 0.1)" }}
+        >
             <img src={product.image} alt={product.name} className="w-full h-60 object-cover" />
             <div className="p-6 flex flex-col flex-grow">
                 <div className="flex justify-between items-center mb-4">
