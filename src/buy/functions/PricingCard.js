@@ -1,109 +1,103 @@
 import React from 'react';
-import sonata from '../../Image/Estimate/Hyundai/Sonata/sonataInterior.png';
-import avante from '../../Image/Estimate/Hyundai/Sonata/sonataInterior.png';
 
-// 차량 데이터
-const carsData = [
-    {
-        id: 1,
-        name: "아반떼",
-        image: avante,
-        features: [
-            "LED 헤드라이트",
-            "스마트 크루즈 컨트롤",
-            "운전자 주의 경고",
-            "8인치 인포테인먼트",
-            "무선 충전"
-        ],
-        price: "2,500만"
-    },
-    {
-        id: 2,
-        name: "소나타",
-        image: sonata,
-        features: [
-            "파노라마 선루프",
-            "Bose 프리미엄 사운드",
-            "10.25인치 내비게이션",
-            "앰비언트 라이트",
-            "스마트 트렁크",
-            "헤드업 디스플레이",
-            "주차 거리 경고"
-        ],
-        price: "3,200만"
-    }
+import productImage1 from '../../Image/Estimate/Hyundai/Sonata/sonataInterior.png';
+import productImage2 from '../../Image/Estimate/Hyundai/Sonata/sonataInterior.png';
+import carImage1 from '../../Image/Estimate/Hyundai/Sonata/sonataInterior.png';
+import carImage2 from '../../Image/Estimate/Hyundai/Sonata/sonataInterior.png';
+
+const defaultProductsData = [
+    { id: 1, name: '스마트폰', category: '전자기기', image: productImage1, features: ['6.7인치 올레드 디스플레이', '트리플 카메라 시스템', '5G 지원', '방수 및 방진 기능', '고속 충전'], price: '120만', buttonText: '구매하기' },
+    { id: 2, name: '노트북', category: '전자기기', image: productImage2, features: ['15.6인치 FHD 디스플레이', '인텔 i7 프로세서', '16GB RAM', '512GB SSD', '백라이트 키보드', '지문 인식 센서', '10시간 배터리 수명'], price: '150만', buttonText: '장바구니에 담기' },
+    { id: 3, name: '소나타', category: '자동차', image: carImage1, features: ['파노라마 선루프', 'Bose 프리미엄 사운드', '10.25인치 내비게이션', '앰비언트 라이트', '스마트 트렁크', '헤드업 디스플레이'], price: '3,200만', buttonText: '시승 신청' },
+    { id: 4, name: '아반떼', category: '자동차', image: carImage2, features: ['LED 헤드라이트', '스마트 크루즈 컨트롤', '운전자 주의 경고', '8인치 인포테인먼트', '무선 충전'], price: '2,500만', buttonText: '시승 신청' },
+    { id: 5, name: '아반떼', category: '자동차', image: carImage2, features: ['LED 헤드라이트', '스마트 크루즈 컨트롤', '운전자 주의 경고', '8인치 인포테인먼트', '무선 충전'], price: '2,500만', buttonText: '시승 신청' },
+    { id: 6, name: '아반떼', category: '자동차', image: carImage2, features: ['LED 헤드라이트', '스마트 크루즈 컨트롤', '운전자 주의 경고', '8인치 인포테인먼트', '무선 충전'], price: '2,500만', buttonText: '시승 신청' },
+    { id: 7, name: '아반떼', category: '자동차', image: carImage2, features: ['LED 헤드라이트', '스마트 크루즈 컨트롤', '운전자 주의 경고', '8인치 인포테인먼트', '무선 충전'], price: '2,500만', buttonText: '시승 신청' },
+    { id: 8, name: '아반떼', category: '자동차', image: carImage2, features: ['LED 헤드라이트', '스마트 크루즈 컨트롤', '운전자 주의 경고', '8인치 인포테인먼트', '무선 충전'], price: '2,500만', buttonText: '시승 신청' },
+    { id: 9, name: '아반떼', category: '자동차', image: carImage2, features: ['LED 헤드라이트', '스마트 크루즈 컨트롤', '운전자 주의 경고', '8인치 인포테인먼트', '무선 충전'], price: '2,500만', buttonText: '시승 신청' },
+    { id: 10, name: '아반떼', category: '자동차', image: carImage2, features: ['LED 헤드라이트', '스마트 크루즈 컨트롤', '운전자 주의 경고', '8인치 인포테인먼트', '무선 충전'], price: '2,500만', buttonText: '시승 신청' },
+    { id: 11, name: '아반떼', category: '자동차', image: carImage2, features: ['LED 헤드라이트', '스마트 크루즈 컨트롤', '운전자 주의 경고', '8인치 인포테인먼트', '무선 충전'], price: '2,500만', buttonText: '시승 신청' }
 ];
 
-// 단일 카드 컴포넌트
-function PricingCard({ car }) {
+function ProductCard({ product }) {
     return (
-        <div className="flex pt-3">
-            <div className="relative max-w-screen-xl px-4 mx-auto sm:px-6 lg:px-8">
-                <div className="max-w-lg mx-auto overflow-hidden rounded-lg shadow-lg icing-box lg:max-w-none lg:flex">
-
-                    {/* 왼쪽 카드 내용 */}
-                    <div className="px-6 py-8 bg-white dark:bg-gray-800 lg:flex-shrink-1 lg:p-12">
-                        <h3 className="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white">
-                            {car.name}
-                        </h3>
-
-                        <img alt={`${car.name} Interior`} src={car.image} className="w-full rounded-xl object-cover mt-6" />
-
-                        <div className="mt-8">
-                            <div className="flex items-center">
-                                <div className="flex-1 border-t-2 border-gray-200"></div>
-                                <h4 className="flex-shrink-0 px-4 text-sm font-semibold text-indigo-600 uppercase bg-white dark:bg-gray-800">
-                                    설명
-                                </h4>
-                                <div className="flex-1 border-t-2 border-gray-200"></div>
-                            </div>
-
-                            <ul className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-5">
-                                {car.features.map((feature, index) => (
-                                    <li key={index} className="flex items-start">
-                                        <div className="flex-shrink-0">
-                                            <svg className="w-6 h-6 mr-2 text-green-500" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M20.285 6.708l-11.02 11.02-5.657-5.657 1.414-1.415 4.243 4.243 9.606-9.606z" />
-                                            </svg>
-                                        </div>
-                                        <p className="ml-3 text-sm text-gray-700 dark:text-gray-200">
-                                            {feature}
-                                        </p>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-
-                    {/* 오른쪽 가격 카드 */}
-                    <div className="px-6 py-8 text-center bg-gray-50 dark:bg-gray-700 lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-center lg:p-12">
-                        <p className="text-lg font-bold text-gray-900 dark:text-white">
-                            가격
-                        </p>
-                        <div className="flex items-center justify-center mt-4 text-5xl font-extrabold text-gray-900 dark:text-white">
-                            <span>{car.price}₩</span>
-                        </div>
-                        <div className="mt-6">
-                            <button type="button" className="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in-out duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
-                                구매
-                            </button>
-                        </div>
-                    </div>
-                </div>
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 flex flex-col w-full h-full transition-transform transform hover:scale-105">
+            <div className="flex justify-between items-center mb-4">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">{product.name}</h3>
+                <span className="text-xs bg-indigo-500 text-white px-2 py-1 rounded-full">{product.category}</span>
+            </div>
+            <img src={product.image} alt={product.name} className="h-48 w-full object-cover rounded mb-4" />
+            <ul className="flex-1 space-y-2 mb-4">
+                {product.features.map((feature, idx) => (
+                    <li key={idx} className="text-sm text-gray-600 dark:text-gray-300">• {feature}</li>
+                ))}
+            </ul>
+            <div className="text-center mt-auto">
+                <p className="text-lg font-bold text-gray-900 dark:text-white">{product.price}₩</p>
+                <button className="mt-3 w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg">
+                    {product.buttonText}
+                </button>
             </div>
         </div>
     );
 }
 
-// 메인 컴포넌트
-function PricingCardList() {
+function CategoryFilter({ categories, activeCategory, onCategoryChange, showFilter }) {
+    if (!showFilter) return null;
     return (
-        <div className="space-y-10 py-10">
-            {carsData.map((car) => (
-                <PricingCard key={car.id} car={car} />
+        <div className="flex flex-wrap justify-center space-x-2 mb-8">
+            <button
+                className={`px-4 py-2 mb-2 rounded-full ${activeCategory === 'all' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}
+                onClick={() => onCategoryChange('all')}
+            >
+                전체 상품
+            </button>
+            {categories.map(category => (
+                <button
+                    key={category}
+                    className={`px-4 py-2 mb-2 rounded-full ${activeCategory === category ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}
+                    onClick={() => onCategoryChange(category)}
+                >
+                    {category}
+                </button>
             ))}
         </div>
     );
 }
 
-export default PricingCardList;
+function ProductCatalog({ pageType, showFilter = true, customTitle, products = defaultProductsData }) {
+    const [activeCategory, setActiveCategory] = React.useState(pageType === 'all' ? 'all' : pageType);
+
+    let availableProducts = products;
+    if (pageType !== 'all') {
+        availableProducts = products.filter(product => product.category === pageType);
+    }
+
+    const categories = [...new Set(availableProducts.map(product => product.category))];
+
+    const filteredProducts = activeCategory === 'all' ? availableProducts : availableProducts.filter(product => product.category === activeCategory);
+
+    const pageTitle = customTitle || (pageType === 'all' ? '전체 상품' : `${pageType} 판매`);
+
+    return (
+        <div className="py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 className="text-3xl font-bold text-center mb-8">{pageTitle}</h1>
+            <CategoryFilter
+                categories={categories}
+                activeCategory={activeCategory}
+                onCategoryChange={setActiveCategory}
+                showFilter={showFilter && categories.length > 1}
+            />
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredProducts.map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                ))}
+                {filteredProducts.length === 0 && (
+                    <p className="text-center text-gray-500">해당 카테고리에 상품이 없습니다.</p>
+                )}
+            </div>
+        </div>
+    );
+}
+
+export default ProductCatalog;
