@@ -12,6 +12,7 @@ import kgm from '../Image/companyLogo/kgm.svg';
 import Reno from '../Image/companyLogo/Renault.png';
 import Header from '../buy/functions/Header';
 
+
 const MainPage = () => {
   const navigate = useNavigate();
   const [index, setIndex] = useState(0);
