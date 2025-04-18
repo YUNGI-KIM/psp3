@@ -1,6 +1,8 @@
 import DropDown from "./functions/DropDown";
 import Header from "./functions/Header";
 import ProductCatalog from "./functions/PricingCard";
+import PricingCard from "./functions/PricingCard";
+import ProductCatalog from "./functions/PricingCard";
 function Hyundai() {
     return (
         <div className="flex flex-col w-full">
