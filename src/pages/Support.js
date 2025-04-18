@@ -7,9 +7,9 @@ function Support() {
     const navigate = useNavigate();
 
     return (
-        <div>
-            <div>{Header()}
-            </div>
+
+    <div>
+        <div>{Header()}</div>
 
             {/* 고객지원 본문 */}
             <div className="flex justify-center py-12 px-4">
