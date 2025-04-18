@@ -15,6 +15,7 @@ function Support() {
 
     <div>
         <div>{Header()}</div>
+<<<<<<< HEAD
 
             {/* 고객지원 본문 */}
             <div className="flex justify-center py-12 px-4">
@@ -85,6 +86,8 @@ function Support() {
         <div>
             <div>{Header()}
             </div>
+=======
+>>>>>>> fabb5ab (Rebase Complete)
 
             {/* 고객지원 본문 */}
             <div className="flex justify-center py-12 px-4">
