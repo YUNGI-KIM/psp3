@@ -2,14 +2,17 @@
 import { useNavigate } from "react-router-dom";
 import Header from "../buy/functions/Header";
 
+import Header from "../buy/functions/Header";
+
 
 function Support() {
     const navigate = useNavigate();
 
-    return (
 
-    <div>
-        <div>{Header()}</div>
+    return (
+        <div>
+            <div>{Header()}
+            </div>
 
             {/* 고객지원 본문 */}
             <div className="flex justify-center py-12 px-4">
