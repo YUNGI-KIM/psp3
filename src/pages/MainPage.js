@@ -42,7 +42,7 @@ const MainPage = () => {
           <img
               src={slidSrc[index].src}
               onClick={() => navigate(slidSrc[index].href)}
-              className="w-full h-140 rounded-lg cursor-pointer"
+              className="w-full h-150 rounded-lg cursor-pointer"
               alt={`Slide ${index + 1}`}
           />
 
