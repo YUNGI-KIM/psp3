@@ -18,24 +18,15 @@ function App() {
       <div className='App'>
         <BrowserRouter>
           <Routes>
-            {/* 메인 */}
             <Route path="/" element={<MainPage />} />
-
-            {/* CBTI 관련 */}
             <Route path="/startCBTI" element={<StartCBTI />} />
             <Route path="/QuestionPage" element={<QuestionPage />} />
             <Route path="/result" element={<CBTIResult />} />
-
-            {/* 로그인 관련 */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-
-            {/* 기타 기능 */}
             <Route path="/support" element={<Support />} />
             <Route path="/estimator" element={<Estimator />} />
             <Route path="/accForCar" element={<AccForCar />} />
-
-            {/* 차량 브랜드 */}
             <Route path="/hyundai" element={<Hyundai />} />
             <Route path="/kia" element={<Kia />} />
             <Route path="/kgm" element={<Kgm />} />
