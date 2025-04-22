@@ -1,41 +1,33 @@
 package kr.clos21.springbootdevelop.config;
 
+import jakarta.servlet.http.HttpServletResponse;
+import kr.clos21.springbootdevelop.controller.UserApiController;
 import kr.clos21.springbootdevelop.service.LoginHistoryService;
 import kr.clos21.springbootdevelop.service.UserDetailService;
-import kr.clos21.springbootdevelop.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.stereotype.Component;
-
-import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @RequiredArgsConstructor
 @Configuration
-public class WebSecurityConfig{
+public class WebSecurityConfig {
 
-//    private final OAuth2UserCustomService oAuth2UserCustomService;
-//    private final TokenProvider tokenProvider;
-//    private final RefreshTokenRepository refreshTokenRepository;
     private final UserDetailService userDetailService;
     private final LoginHistoryService loginHistoryService;
-
+    private final UserApiController userApiController;
+    // 1. 정적 자원 무시
     @Bean
     public WebSecurityCustomizer configure() {
         return web -> web
@@ -43,113 +35,72 @@ public class WebSecurityConfig{
                 .requestMatchers("/img/**", "/css/**", "/js/**");
     }
 
+    // 2. 보안 설정
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        http.
-                requiresChannel(channel -> channel
-                    .anyRequest().requiresSecure()
-                );
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .requiresChannel(channel -> channel.anyRequest().requiresSecure())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login", "/signup", "/user", "/logout", "/success", "/").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
-                        .defaultSuccessUrl("/login-success"));
-
-        http
+                        .successHandler((request, response, authentication) -> {
+                            userApiController.onAuthenticationSuccess(request, response, authentication);
+                            response.setContentType("application/json;charset=UTF-8");
+                            response.setStatus(HttpServletResponse.SC_OK);
+                            response.getWriter().write("{\"message\": \"Login success\"}");
+                        })
+                        .failureHandler((request, response, exception) -> {
+                            response.setContentType("application/json;charset=UTF-8");
+                            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                            response.getWriter().write("{\"message\": \"Login failed\"}");
+                        })
+                )
                 .logout(logout -> logout
                         .invalidateHttpSession(true)
-                        .logoutSuccessHandler(((request, response, authentication) -> {
+                        .logoutSuccessHandler((request, response, authentication) -> {
                             response.sendRedirect("/success");
-                        }))
-
+                        })
+                )
+                .csrf(AbstractHttpConfigurer::disable)
+                .exceptionHandling(exception -> exception
+                        .defaultAuthenticationEntryPointFor(
+                                new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED),
+                                new AntPathRequestMatcher("/api/**"))
                 );
-
-        http.csrf(AbstractHttpConfigurer::disable);
-
-        http.exceptionHandling(exceptionHandling -> exceptionHandling
-                .defaultAuthenticationEntryPointFor(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED),
-                        new AntPathRequestMatcher("/api/**")));
 
         return http.build();
     }
 
-    // 로그인 성공시 동작하는 UserAuthenticationSuccessHandler 핸들러 추가
-
-
-
-
-
-
-
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http.csrf(AbstractHttpConfigurer::disable)
-//                .httpBasic(AbstractHttpConfigurer::disable)
-////                .formLogin(AbstractHttpConfigurer::disable)
-//                .logout(AbstractHttpConfigurer::disable);
-//
-////        http.sessionManagement(sessionManagement -> sessionManagement
-////                .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-//
-////        http.addFilterBefore(tokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-//
-//        http.authorizeHttpRequests(request -> request
-//                .requestMatchers("/api/token").permitAll()
-//                .requestMatchers("/api/**").authenticated()
-//                .anyRequest().permitAll());
-//
-////        http.oauth2Login(oauth2Login -> oauth2Login
-////                .loginPage("/login")
-////                .authorizationEndpoint(authorizationEndpoint -> authorizationEndpoint
-////                        .authorizationRequestRepository(oAuth2AuthorizationRequestBasedOnCookieRepository()))
-////                .successHandler(oAuth2SuccessHandler())
-////                .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint
-////                        .userService(oAuth2UserCustomService)));
-//
-//
-//
-//        http.exceptionHandling(exceptionHandling -> exceptionHandling
-//                .defaultAuthenticationEntryPointFor(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED),
-//                        new AntPathRequestMatcher("/api/**")));
-//
-//
-//        return http.build();
-//    }
-
-//    @Bean
-//    public OAuth2SuccessHandler oAuth2SuccessHandler() {
-//        return new OAuth2SuccessHandler(tokenProvider,
-//                refreshTokenRepository,
-//                oAuth2AuthorizationRequestBasedOnCookieRepository(),
-//                userService
-//        );
-//    }
-
-//    @Bean
-//    public TokenAuthenticationFilter tokenAuthenticationFilter() {
-//        return new TokenAuthenticationFilter(tokenProvider);
-//    }
-//
-//    @Bean
-//    public OAuth2AuthorizationRequestBasedOnCookieRepository oAuth2AuthorizationRequestBasedOnCookieRepository() {
-//        return new OAuth2AuthorizationRequestBasedOnCookieRepository();
-//    }
-
+    // 3. 인증 공급자 설정
     @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider() throws Exception {
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-
-        daoAuthenticationProvider.setUserDetailsService(userDetailService);
-        daoAuthenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
-
-        return daoAuthenticationProvider;
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailService);
+        provider.setPasswordEncoder(bCryptPasswordEncoder());
+        return provider;
     }
 
+    // 4. 비밀번호 암호화 설정
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    // 5. CORS 설정
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("https://psp.clos21.kr") // React 앱 도메인
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedHeaders("*")
+                        .allowCredentials(true);
+            }
+        };
     }
 }
