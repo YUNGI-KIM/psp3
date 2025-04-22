@@ -27,6 +27,7 @@ function Login() {
 
             const data = await response.json();
             console.log("로그인 성공:", data);
+            alert("로그인 성공:", data);
             navigate("/"); // 로그인 성공 후 홈으로 이동
         } catch (error) {
             console.error("로그인 오류:", error);
