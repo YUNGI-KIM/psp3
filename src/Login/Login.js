@@ -13,6 +13,7 @@ function Login() {
         formData.append("password", password);
 
         try {
+            console.log(formData);
             const response = await fetch("https://clos21.kr/login", {
                 method: "POST",
                 body: formData,
