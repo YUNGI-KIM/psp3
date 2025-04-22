@@ -17,21 +17,23 @@ function Login() {
                 method: "POST",
                 body: formData,
             });
-            console.log(response);
+
+            console.log("📡 서버 응답 상태코드:", response.status);
 
             if (!response.ok) {
                 const errorData = await response.json();
+                console.warn("❌ 로그인 실패:", errorData.message);
                 setErrorMsg(errorData.message || "로그인 실패");
-                console.log(response);
                 return;
             }
 
             const data = await response.json();
-            console.log(response);
-            alert("로그인 성공:", data);
+            console.log("✅ 로그인 성공:", data);
 
+            alert("로그인 성공!");
+            navigate("/");
         } catch (error) {
-            console.error("로그인 오류:", error);
+            console.error("🚨 로그인 중 오류 발생:", error);
             setErrorMsg("서버 오류 발생");
         }
     };
