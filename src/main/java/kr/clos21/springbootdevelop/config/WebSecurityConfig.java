@@ -26,7 +26,7 @@ public class WebSecurityConfig {
 
     private final UserDetailService userDetailService;
     private final LoginHistoryService loginHistoryService;
-    private final UserApiController userApiController;
+    private final LoginLogger loginLogger;
     // 1. 정적 자원 무시
     @Bean
     public WebSecurityCustomizer configure() {
@@ -47,7 +47,7 @@ public class WebSecurityConfig {
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .successHandler((request, response, authentication) -> {
-                            userApiController.onAuthenticationSuccess(request, response, authentication);
+                            loginLogger.recordLogin(request, authentication);
                             response.setContentType("application/json;charset=UTF-8");
                             response.setStatus(HttpServletResponse.SC_OK);
                             response.getWriter().write("{\"message\": \"Login success\"}");
