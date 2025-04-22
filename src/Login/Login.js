@@ -22,7 +22,8 @@ function Login() {
 
             console.log("📡 서버 응답 상태코드:", response.status);
 
-            const data = await response.json();
+            const data = await response.text();
+            console.log(data);
 
             if (!response.ok) {
                 console.warn("❌ 로그인 실패:", data.message);
