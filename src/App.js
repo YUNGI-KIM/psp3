@@ -14,33 +14,34 @@ import Estimator from "./pages/Estimator";
 import AccForCar from "./pages/AccForCar";
 
 function App() {
-
-  
   return (
-    <div className='App'>
-    <BrowserRouter>
-    <Routes>
-      <Route path = "/" element={<MainPage/>} />
-      </Routes>
-      <Routes>
-      <Route path="/startCBTI" element={<StartCBTI/>} />  {/* 스타트 페이지 */}
-        <Route path="/QuestionPage" element={<QuestionPage />} />  {/* 질문페이지들 */}
-        <Route path="/result" element={<CBTIResult />} />  {/* 결과페이지 */}
-        </Routes>
-        <Routes>
-        <Route path="/login" element={<Login/>} />  {/* 로그인 페이지 */}
-        <Route path="/register" element={<Register/>} />  {/* 가입 페이지 */}
-        <Route path="/Support" element={<Support/>} /> 
-        <Route path="/Estimator" element={<Estimator/>} />
-        <Route path="/AccForCar" element={<AccForCar/>} />
-    </Routes>
-    <Routes>
-        <Route path="/hyundai" element={<Hyundai/>} /> 
-        <Route path="/kia" element={<Kia/>} /> 
-        <Route path="/kgm" element={<Kgm/>} /> 
-    </Routes>
-    </BrowserRouter>
-    </div>
+      <div className='App'>
+        <BrowserRouter>
+          <Routes>
+            {/* 메인 */}
+            <Route path="/" element={<MainPage />} />
+
+            {/* CBTI 관련 */}
+            <Route path="/startCBTI" element={<StartCBTI />} />
+            <Route path="/QuestionPage" element={<QuestionPage />} />
+            <Route path="/result" element={<CBTIResult />} />
+
+            {/* 로그인 관련 */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+
+            {/* 기타 기능 */}
+            <Route path="/support" element={<Support />} />
+            <Route path="/estimator" element={<Estimator />} />
+            <Route path="/accForCar" element={<AccForCar />} />
+
+            {/* 차량 브랜드 */}
+            <Route path="/hyundai" element={<Hyundai />} />
+            <Route path="/kia" element={<Kia />} />
+            <Route path="/kgm" element={<Kgm />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
   );
 }
 
