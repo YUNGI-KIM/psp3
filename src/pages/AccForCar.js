@@ -10,6 +10,9 @@ import AccForCarSafetyBar from '../Image/AccForCar/SafetyBar.jpg';
 import AccForCarSemaphore from '../Image/AccForCar/Semaphore.jpg';
 
 
+
+
+
 function AccForCar() {
     const navigate = useNavigate();
     const productData = [
