@@ -3,6 +3,7 @@ import Logo from "../Image/logo2.png";
 import { useState } from "react";
 
 function Login() {
+    const navigate = useNavigate();
     const [userId, setUserId] = useState("");
     const [password, setPassword] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
