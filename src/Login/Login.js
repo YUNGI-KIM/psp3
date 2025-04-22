@@ -4,7 +4,6 @@ import Logo from "../Image/logo2.png";
 
 function Login() {
     return (
-
         <div class="bg-white rounded-lg shadow sm:max-w-md sm:w-full sm:mx-auto sm:mt-60 sm:overflow-hidden">
             <img alt="Logo" className="pl-6 pt-1"  src={Logo}/>
             <div class="px-4 py-2 sm:px-10">
@@ -23,7 +22,7 @@ function Login() {
                     <div class="w-full space-y-6">
                         <div class="w-full">
                             <div class=" relative ">
-                                <input type="id" id="search-form-price" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Your ID" />
+                                <input type="id" id="" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Your ID" />
                             </div>
                         </div>
                         <div class="w-full">
