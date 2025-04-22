@@ -1,7 +1,6 @@
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../Image/logo2.png";
-import {useState} from "react";
-
+import { useState } from "react";
 
 function Login() {
     const [userId, setUserId] = useState("");
@@ -9,27 +8,26 @@ function Login() {
     const [errorMsg, setErrorMsg] = useState("");
     const navigate = useNavigate();
 
-
     const handleLogin = async () => {
         const formData = new FormData();
         formData.append("userId", userId);
         formData.append("password", password);
+
         try {
             const response = await fetch("https://clos21.kr/login", {
                 method: "POST",
-                body: formData
+                body: formData,
             });
 
-            const data = await response.json();
-            console.log(data);
-            if (response.ok) {
-                // 로그인 성공 시
-                console.log("로그인 성공:", data);
-                navigate("/");
-            } else {
-                // 로그인 실패 시
-                setErrorMsg(data.message || "로그인 실패");
+            if (!response.ok) {
+                const errorData = await response.json();
+                setErrorMsg(errorData.message || "로그인 실패");
+                return;
             }
+
+            const data = await response.json();
+            console.log("로그인 성공:", data);
+            navigate("/"); // 로그인 성공 후 홈으로 이동
         } catch (error) {
             console.error("로그인 오류:", error);
             setErrorMsg("서버 오류 발생");
@@ -37,7 +35,6 @@ function Login() {
     };
 
     return (
-
         <div className="bg-white rounded-lg shadow sm:max-w-md sm:w-full sm:mx-auto sm:mt-60 sm:overflow-hidden">
             <img alt="Logo" className="pl-6 pt-1" src={Logo} />
             <div className="px-4 py-2 sm:px-10">
@@ -93,7 +90,6 @@ function Login() {
                 <p className="text-xs text-gray-500">This data are test</p>
             </div>
         </div>
-
     );
 }
 
