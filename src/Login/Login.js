@@ -17,6 +17,7 @@ function Login() {
                 method: "POST",
                 body: formData,
             });
+            console.log(response);
 
             if (!response.ok) {
                 const errorData = await response.json();
@@ -26,7 +27,7 @@ function Login() {
             }
 
             const data = await response.json();
-            console.log("로그인 성공:", response);
+            console.log(response);
             alert("로그인 성공:", data);
 
         } catch (error) {
