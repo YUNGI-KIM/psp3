@@ -16,20 +16,20 @@ function Login() {
             const response = await fetch("https://clos21.kr/login", {
                 method: "POST",
                 body: formData,
+                credentials: "include", // ✅ 쿠키 인증 위해 필요
             });
 
             console.log("📡 서버 응답 상태코드:", response.status);
 
+            const data = await response.json();
+
             if (!response.ok) {
-                const errorData = await response.json();
-                console.warn("❌ 로그인 실패:", errorData.message);
-                setErrorMsg(errorData.message || "로그인 실패");
+                console.warn("❌ 로그인 실패:", data.message);
+                setErrorMsg(data.message || "로그인 실패");
                 return;
             }
 
-            const data = await response.json();
             console.log("✅ 로그인 성공:", data);
-
             alert("로그인 성공!");
             navigate("/");
         } catch (error) {
@@ -37,6 +37,7 @@ function Login() {
             setErrorMsg("서버 오류 발생");
         }
     };
+
 
     return (
         <div className="bg-white rounded-lg shadow sm:max-w-md sm:w-full sm:mx-auto sm:mt-60 sm:overflow-hidden">
