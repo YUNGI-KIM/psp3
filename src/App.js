@@ -38,6 +38,9 @@ function App() {
         <Route path="/hyundai" element={<Hyundai/>} /> 
         <Route path="/kia" element={<Kia/>} /> 
         <Route path="/kgm" element={<Kgm/>} /> 
+        <Route path="/kgm" element={<Genesis/>} /> 
+        <Route path="/kgm" element={<Reno/>} /> 
+        <Route path="/kgm" element={<Chevo/>} />     
     </Routes>
     </BrowserRouter>
     </div>
