@@ -10,7 +10,7 @@ function Login() {
 
     const handleLogin = async () => {
         const formData = new FormData();
-        formData.append("userId", userId);
+        formData.append("username", userId);
         formData.append("password", password);
 
         try {
