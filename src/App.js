@@ -12,6 +12,10 @@ import Kia from './buy/kia';
 import Kgm from './buy/kgm';
 import Estimator from "./pages/Estimator";
 import AccForCar from "./pages/AccForCar";
+import Genesis from "./buy/genesis"
+import Reno from "./buy/reno";
+import Chevo from "./buy/chevo";
+
 
 function App() {
 
@@ -38,9 +42,9 @@ function App() {
         <Route path="/hyundai" element={<Hyundai/>} /> 
         <Route path="/kia" element={<Kia/>} /> 
         <Route path="/kgm" element={<Kgm/>} /> 
-        <Route path="/kgm" element={<Genesis/>} /> 
-        <Route path="/kgm" element={<Reno/>} /> 
-        <Route path="/kgm" element={<Chevo/>} />     
+        <Route path="/Genesis" element={<Genesis/>} /> 
+        <Route path="/Reno" element={<Reno/>} /> 
+        <Route path="/Chevo" element={<Chevo/>} />     
     </Routes>
     </BrowserRouter>
     </div>

@@ -66,10 +66,10 @@ const MainPage = () => {
           <div className="flex justify-between items-center w-full px-6">
             <img alt="Hyundai" src={hyundai} onClick={() => navigate("/hyundai")} className="w-35 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
             <img alt="Kia" src={kia} onClick={() => navigate("/kia")} className="w-30 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
-            <img alt="Chevrolet" src={chevrolet} className="w-30 h-25 hover:bg-yellow-100 mx-2 cursor-pointer" />
-            <img alt="Renault" src={Reno} className="w-20 h-25 hover:bg-yellow-100 mx-2 cursor-pointer" />
+            <img alt="Chevrolet" src={chevrolet} onClick={() => navigate("/Chevo")} className="w-30 h-25 hover:bg-yellow-100 mx-2 cursor-pointer" />
+            <img alt="Renault" src={Reno} onClick={() => navigate("/Reno")} className="w-20 h-25 hover:bg-yellow-100 mx-2 cursor-pointer" />
             <img alt="KGM" src={kgm} onClick={() => navigate("/kgm")} className="w-35 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
-            <img alt="Genesis" src={gen} className="w-40 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
+            <img alt="Genesis" src={gen} onClick={() => navigate("/Genesis")} className="w-40 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
           </div>
 
           {/* 오른쪽 화살표 */}
