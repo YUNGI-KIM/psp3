@@ -6,7 +6,6 @@ function Login() {
     const [userId, setUserId] = useState("");
     const [password, setPassword] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
-    const navigate = useNavigate();
 
     const handleLogin = async () => {
         const formData = new FormData();
