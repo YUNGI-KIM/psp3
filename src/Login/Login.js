@@ -12,7 +12,6 @@ function Login() {
         const formData = new FormData();
         formData.append("username", userId);
         formData.append("password", password);
-
         try {
             console.log(formData);
             const response = await fetch("https://clos21.kr/login", {
