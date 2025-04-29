@@ -1,15 +1,18 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
 import Logo from '../../Image/logo2.png';
-import {useEffect} from "react";
 
 function Header() {
     const { user, setUser } = useUser();
     const navigate = useNavigate();
+
+    // user 상태가 바뀔 때마다 로그 찍기 (디버깅용)
     useEffect(() => {
-        console.log("🧠 Header user 상태 바뀜:", user);
+        console.log("🧠 Header user 상태 변경됨:", user);
     }, [user]);
 
+    // 로그아웃 핸들러
     const handleLogout = async () => {
         try {
             const response = await fetch("https://clos21.kr/logout", {
@@ -27,12 +30,13 @@ function Header() {
         }
 
         localStorage.removeItem("user");
-        setUser(null);
-        navigate("/login");
+        setUser(null); // ✅ user 상태 초기화
+        navigate("/login", { replace: true }); // ✅ 이동
     };
 
     return (
         <div>
+            {/* 상단 헤더 */}
             <div className="flex items-center justify-between p-4">
                 <a href="/">
                     <img className="w-40" src={Logo} alt="Logo" />
@@ -64,7 +68,7 @@ function Header() {
                     </button>
                 </div>
 
-                {/* 로그인/로그아웃 영역 */}
+                {/* 로그인/로그아웃 버튼 */}
                 <div className="flex items-center space-x-4">
                     {user ? (
                         <>
@@ -95,14 +99,14 @@ function Header() {
                 </div>
             </div>
 
-            {/* 내비게이션 */}
+            {/* 내비게이션 메뉴 */}
             <nav className="flex-1 bg-black text-gray-300 p-4 md:flex justify-center text-lg">
                 <div className="flex justify-between w-full max-w-screen-xlg mx-auto px-4 md:px-10 lg:px-20 xl:px-32">
-                    <a href="/#" className="text-gray-300 hover:text-yellow-200 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">차량구매</a>
-                    <a href="/AccForCar" className="text-gray-300 hover:text-yellow-200 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">차량용품</a>
-                    <a href="/Estimator" className="text-gray-300 hover:text-yellow-200 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">견적</a>
-                    <a href="/#" className="text-gray-300 hover:text-yellow-200 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">차량정보</a>
-                    <a href="/Support" className="text-gray-300 hover:text-yellow-200 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">고객지원</a>
+                    <a href="/#" className="text-gray-300 hover:text-yellow-200 px-3 py-2 rounded-md text-sm font-medium">차량구매</a>
+                    <a href="/AccForCar" className="text-gray-300 hover:text-yellow-200 px-3 py-2 rounded-md text-sm font-medium">차량용품</a>
+                    <a href="/Estimator" className="text-gray-300 hover:text-yellow-200 px-3 py-2 rounded-md text-sm font-medium">견적</a>
+                    <a href="/#" className="text-gray-300 hover:text-yellow-200 px-3 py-2 rounded-md text-sm font-medium">차량정보</a>
+                    <a href="/Support" className="text-gray-300 hover:text-yellow-200 px-3 py-2 rounded-md text-sm font-medium">고객지원</a>
                 </div>
             </nav>
         </div>
