@@ -11,11 +11,14 @@ import gen from '../Image/companyLogo/gen.png';
 import kgm from '../Image/companyLogo/kgm.svg';
 import Reno from '../Image/companyLogo/Renault.png';
 import Header from '../buy/functions/Header';
+import LoginSessionVerify from "../buy/functions/LoginSessionVerify";
 
 
 const MainPage = () => {
   const navigate = useNavigate();
   const [index, setIndex] = useState(0);
+
+  LoginSessionVerify();
 
   const slidSrc = [
     { src: FindCar, href: '/startCBTI' },
