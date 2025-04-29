@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
 
 import FindCar from '../Image/sideImage/FindCar.png';
@@ -12,13 +12,15 @@ import kgm from '../Image/companyLogo/kgm.svg';
 import Reno from '../Image/companyLogo/Renault.png';
 import Header from '../buy/functions/Header';
 import LoginSessionVerify from "../buy/functions/LoginSessionVerify";
+import {useUser} from "../contexts/UserContext";
 
 
 const MainPage = () => {
   const navigate = useNavigate();
+  const { setUser } = useUser();  // 추가!!
   const [index, setIndex] = useState(0);
 
-  LoginSessionVerify();
+
 
   const slidSrc = [
     { src: FindCar, href: '/startCBTI' },
@@ -38,6 +40,7 @@ const MainPage = () => {
 
   return (
       <div className="flex flex-col w-full">
+        <LoginSessionVerify />
         {/* 헤더 */}
         <Header />
 
