@@ -12,6 +12,7 @@ function Login() {
         const formData = new FormData();
         formData.append("username", userId);
         formData.append("password", password);
+
         try {
             console.log(formData);
             const response = await fetch("https://clos21.kr/login", {
@@ -32,14 +33,21 @@ function Login() {
             }
 
             console.log("✅ 로그인 성공:", data);
+
+            // ✅ 로컬스토리지에 저장
+            localStorage.setItem("user", JSON.stringify({ name: userId }));
+
+            // ✅ storage 이벤트 수동 발생
+            window.dispatchEvent(new StorageEvent("storage", { key: "user", newValue: JSON.stringify({ name: userId }) }));
+
             alert("로그인 성공!");
             navigate("/");
+
         } catch (error) {
             console.error("🚨 로그인 중 오류 발생:", error);
             setErrorMsg("서버 오류 발생");
         }
     };
-
 
     return (
         <div className="bg-white rounded-lg shadow sm:max-w-md sm:w-full sm:mx-auto sm:mt-60 sm:overflow-hidden">
