@@ -12,26 +12,30 @@ import Kia from './buy/kia';
 import Kgm from './buy/kgm';
 import Estimator from "./pages/Estimator";
 import AccForCar from "./pages/AccForCar";
+import { UserProvider } from './contexts/UserContext';
 
 function App() {
   return (
       <div className='App'>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/startCBTI" element={<StartCBTI />} />
-            <Route path="/QuestionPage" element={<QuestionPage />} />
-            <Route path="/result" element={<CBTIResult />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/support" element={<Support />} />
-            <Route path="/estimator" element={<Estimator />} />
-            <Route path="/accForCar" element={<AccForCar />} />
-            <Route path="/hyundai" element={<Hyundai />} />
-            <Route path="/kia" element={<Kia />} />
-            <Route path="/kgm" element={<Kgm />} />
-          </Routes>
-        </BrowserRouter>
+        <UserProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<MainPage />} />
+              <Route path="/startCBTI" element={<StartCBTI />} />
+              <Route path="/QuestionPage" element={<QuestionPage />} />
+              <Route path="/result" element={<CBTIResult />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/support" element={<Support />} />
+              <Route path="/estimator" element={<Estimator />} />
+              <Route path="/accForCar" element={<AccForCar />} />
+              <Route path="/hyundai" element={<Hyundai />} />
+              <Route path="/kia" element={<Kia />} />
+              <Route path="/kgm" element={<Kgm />} />
+            </Routes>
+          </BrowserRouter>
+        </UserProvider>
+
       </div>
   );
 }

@@ -1,8 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "../Image/logo2.png";
 import { useState } from "react";
+import { useUser } from "../contexts/UserContext"; // ✅ 추가
+import Logo from "../Image/logo2.png";
 
 function Login() {
+    const { setUser } = useUser();
     const navigate = useNavigate();
     const [userId, setUserId] = useState("");
     const [password, setPassword] = useState("");
@@ -12,38 +14,37 @@ function Login() {
         const formData = new FormData();
         formData.append("username", userId);
         formData.append("password", password);
-
         try {
-            console.log(formData);
             const response = await fetch("https://clos21.kr/login", {
                 method: "POST",
                 body: formData,
-                credentials: "include", // ✅ 쿠키 인증 위해 필요
+                credentials: "include",
             });
 
-            console.log("📡 서버 응답 상태코드:", response.status);
-
             const data = await response.text();
-            console.log(data);
+            console.log("📡 서버 응답 상태코드:", response.status, data);
 
             if (!response.ok) {
-                console.warn("❌ 로그인 실패:", data.message);
-                setErrorMsg(data.message || "로그인 실패");
+                console.warn("❌ 로그인 실패:", data);
+                setErrorMsg("로그인 실패");
                 return;
             }
 
-            console.log("✅ 로그인 성공:", data);
+            // 로그인 성공 후 세션 확인
+            const userResponse = await fetch("https://clos21.kr/user/me", {
+                method: "GET",
+                credentials: "include",
+            });
 
-            // ✅ 로그인 성공 → localStorage 저장
-            localStorage.setItem("user", JSON.stringify({ name: userId }));
-
-            // ✅ storage 이벤트 수동 발생
-            window.dispatchEvent(new StorageEvent("storage", { key: "user", newValue: JSON.stringify({ name: userId }) }));
-
-            alert("로그인 성공!");
-
-            // ✅ navigate("/") 대신 강제 새로고침 이동
-            window.location.href = "/";
+            if (userResponse.ok) {
+                const userInfo = await userResponse.json();
+                localStorage.setItem("user", JSON.stringify(userInfo));
+                setUser(userInfo); // ✅ 상태 업데이트
+                alert("로그인 성공!");
+                navigate("/");
+            } else {
+                console.warn("❌ 세션 사용자 정보 불러오기 실패");
+            }
 
         } catch (error) {
             console.error("🚨 로그인 중 오류 발생:", error);
@@ -65,36 +66,27 @@ function Login() {
                 </div>
                 <div className="mt-3">
                     <div className="w-full space-y-6">
-                        <div className="w-full">
-                            <input
-                                type="text"
-                                placeholder="Your ID"
-                                value={userId}
-                                onChange={(e) => setUserId(e.target.value)}
-                                className="rounded-lg border border-gray-300 w-full py-2 px-4 shadow-sm focus:ring-2 focus:ring-purple-600"
-                            />
-                        </div>
-                        <div className="w-full">
-                            <input
-                                type="password"
-                                placeholder="Your Password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                className="rounded-lg border border-gray-300 w-full py-2 px-4 shadow-sm focus:ring-2 focus:ring-purple-600"
-                            />
-                        </div>
-
-                        {errorMsg && (
-                            <div className="text-red-500 text-sm text-center">{errorMsg}</div>
-                        )}
-
+                        <input
+                            type="text"
+                            placeholder="Your ID"
+                            value={userId}
+                            onChange={(e) => setUserId(e.target.value)}
+                            className="rounded-lg border border-gray-300 w-full py-2 px-4 shadow-sm focus:ring-2 focus:ring-purple-600"
+                        />
+                        <input
+                            type="password"
+                            placeholder="Your Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="rounded-lg border border-gray-300 w-full py-2 px-4 shadow-sm focus:ring-2 focus:ring-purple-600"
+                        />
+                        {errorMsg && <div className="text-red-500 text-center">{errorMsg}</div>}
                         <button
                             onClick={handleLogin}
                             className="py-2 px-4 bg-black hover:bg-indigo-700 text-white w-full font-semibold rounded-3xl"
                         >
                             Login!
                         </button>
-
                         <Link to="/register">
                             <button className="py-2 px-4 bg-black hover:bg-indigo-700 text-white w-full font-semibold rounded-3xl">
                                 Register
