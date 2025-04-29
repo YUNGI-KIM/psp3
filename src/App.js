@@ -13,11 +13,13 @@ import Kgm from './buy/kgm';
 import Estimator from "./pages/Estimator";
 import AccForCar from "./pages/AccForCar";
 import { UserProvider } from './contexts/UserContext';
+import LoginSessionVerify from "./buy/functions/LoginSessionVerify";
 
 function App() {
   return (
         <UserProvider>
           <BrowserRouter>
+            <LoginSessionVerify />
             <Routes>
               <Route path="/" element={<MainPage />} />
               <Route path="/startCBTI" element={<StartCBTI />} />
