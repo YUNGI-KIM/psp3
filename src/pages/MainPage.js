@@ -41,7 +41,7 @@ const MainPage = () => {
 
   return (
       <div className="flex flex-col w-full">
-        <LoginSessionVerify />
+        {/*<LoginSessionVerify />*/}
         {/* 헤더 */}
         <Header />
 
