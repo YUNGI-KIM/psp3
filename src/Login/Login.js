@@ -44,7 +44,7 @@ function Login() {
                 setUser(userInfo); // ✅ UserContext 상태 반영
                 alert("로그인 성공!");
 
-                window.location.href = "/";
+                navigate("/", { replace: true });
             } else {
                 console.warn("❌ 세션 사용자 정보 불러오기 실패");
             }
