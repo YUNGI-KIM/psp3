@@ -17,7 +17,7 @@ import {useUser} from "../contexts/UserContext";
 
 const MainPage = () => {
   const navigate = useNavigate();
-  const { setUser } = useUser();  // 추가!!
+  const { user } = useUser();  // 추가!!
   const [index, setIndex] = useState(0);
 
 
@@ -43,7 +43,7 @@ const MainPage = () => {
       <div className="flex flex-col w-full">
         {/*<LoginSessionVerify />*/}
         {/* 헤더 */}
-        <Header />
+        <Header key={user ? "logged-in" : "logged-out"}/>
 
         {/* 슬라이더 영역 */}
         <div className="relative w-full">
