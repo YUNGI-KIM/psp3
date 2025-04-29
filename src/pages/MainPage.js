@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
 
 import FindCar from '../Image/sideImage/FindCar.png';
@@ -11,11 +11,17 @@ import gen from '../Image/companyLogo/gen.png';
 import kgm from '../Image/companyLogo/kgm.svg';
 import Reno from '../Image/companyLogo/Renault.png';
 import Header from '../buy/functions/Header';
-import LoginSessionVerify from "../buy/functions/LoginSessionVerify"; 
+import LoginSessionVerify from "../buy/functions/LoginSessionVerify";
+import {useUser} from "../contexts/UserContext";
+
 
 const MainPage = () => {
   const navigate = useNavigate();
+  const { setUser } = useUser();  // 추가!!
   const [index, setIndex] = useState(0);
+
+
+
 
   const slidSrc = [
     { src: FindCar, href: '/startCBTI' },
@@ -36,11 +42,10 @@ const MainPage = () => {
   return (
       <div className="flex flex-col w-full">
         <LoginSessionVerify />
-
         {/* 헤더 */}
         <Header />
 
-        {/* 슬라이더 */}
+        {/* 슬라이더 영역 */}
         <div className="relative w-full">
           <img
               src={slidSrc[index].src}
@@ -49,6 +54,7 @@ const MainPage = () => {
               alt={`Slide ${index + 1}`}
           />
 
+          {/* 슬라이더 버튼 */}
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
             <button id="sButton1" onClick={() => handleButtonClick("sButton1")} className="hover:bg-gray-400 bg-gray-800 rounded-full w-4 h-4" />
             <button id="sButton2" onClick={() => handleButtonClick("sButton2")} className="hover:bg-gray-400 bg-gray-800 rounded-full w-4 h-4" />
@@ -56,13 +62,27 @@ const MainPage = () => {
           </div>
         </div>
 
-        {/* 브랜드 로고 */}
+        {/* 브랜드 로고 리스트 */}
         <div className="w-full flex justify-center items-center space-x-4 mt-12">
-          <svg xmlns="http://www.w3.org/2000/svg" ... />
+          {/* 왼쪽 화살표 */}
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+          </svg>
+
+          {/* 브랜드 로고 */}
           <div className="flex justify-between items-center w-full px-6">
-            {/* 로고들 */}
+            <img alt="Hyundai" src={hyundai} onClick={() => navigate("/hyundai")} className="w-35 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
+            <img alt="Kia" src={kia} onClick={() => navigate("/kia")} className="w-30 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
+            <img alt="Chevrolet" src={chevrolet} className="w-30 h-25 hover:bg-yellow-100 mx-2 cursor-pointer" />
+            <img alt="Renault" src={Reno} className="w-20 h-25 hover:bg-yellow-100 mx-2 cursor-pointer" />
+            <img alt="KGM" src={kgm} onClick={() => navigate("/kgm")} className="w-35 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
+            <img alt="Genesis" src={gen} className="w-40 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
           </div>
-          <svg xmlns="http://www.w3.org/2000/svg" ... />
+
+          {/* 오른쪽 화살표 */}
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer">
+            <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+          </svg>
         </div>
       </div>
   );
