@@ -17,11 +17,8 @@ import {useUser} from "../contexts/UserContext";
 
 const MainPage = () => {
   const navigate = useNavigate();
-  const { user } = useUser();  // 추가!!
+  const { user } = useUser();
   const [index, setIndex] = useState(0);
-
-
-
 
   const slidSrc = [
     { src: FindCar, href: '/startCBTI' },
