@@ -1,6 +1,6 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Logo from '../../Image/logo2.png';
-import { useEffect, useState } from "react";
 
 function Header() {
     const navigate = useNavigate();
@@ -13,6 +13,28 @@ function Header() {
         }
     }, []);
 
+    const handleLogout = async () => {
+        try {
+            const response = await fetch("https://clos21.kr/logout", {
+                method: "GET",
+                credentials: "include",
+            });
+
+            if (response.ok) {
+                console.log("✅ 서버 로그아웃 성공");
+            } else {
+                console.warn("❌ 서버 로그아웃 실패");
+            }
+        } catch (error) {
+            console.error("🚨 서버 로그아웃 요청 실패:", error);
+        }
+
+        // 무조건 로컬 세션 정리
+        localStorage.removeItem("user");
+        setUser(null);
+        navigate("/login");
+    };
+
     return (
         <div>
             <div className="flex items-center justify-between p-4">
@@ -20,13 +42,13 @@ function Header() {
                     <img className="w-40" src={Logo} alt="Logo" />
                 </a>
 
+                {/* 가운데 검색창 */}
                 <div className="flex-1 flex justify-center">
                     <input
                         type="search"
                         placeholder="Search"
                         className="border rounded-full px-4 py-2 w-40 sm:w-140 ml-15.5 focus:outline-none text-base"
                     />
-
                     <button type="submit" className="relative p-2 rounded-full">
                         <svg
                             width="30px"
@@ -46,11 +68,18 @@ function Header() {
                     </button>
                 </div>
 
+                {/* 오른쪽 버튼 */}
                 <div className="flex items-center space-x-4">
                     {user ? (
-                        <div className="text-base font-semibold text-black">
-                            {user.name}님
-                        </div>
+                        <>
+                            <span className="text-black text-base font-semibold">{user.name}님</span>
+                            <button
+                                onClick={handleLogout}
+                                className="px-4 py-2 bg-gray-50 hover:bg-gray-400 text-black rounded-lg text-base"
+                            >
+                                로그아웃
+                            </button>
+                        </>
                     ) : (
                         <>
                             <button
@@ -70,7 +99,7 @@ function Header() {
                 </div>
             </div>
 
-            {/* 내비게이션 바 */}
+            {/* 내비게이션 */}
             <nav className="flex-1 bg-black text-gray-300 p-4 md:flex justify-center text-lg">
                 <div className="flex justify-between w-full max-w-screen-xlg mx-auto px-4 md:px-10 lg:px-20 xl:px-32">
                     <a className="text-gray-300 hover:text-yellow-200 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/#">차량구매</a>
