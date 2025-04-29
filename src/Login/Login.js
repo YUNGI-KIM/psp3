@@ -93,7 +93,7 @@ function Login() {
                     >
                         Login!
                     </button>
-                    
+
                     <button
                         onClick={() => navigate('/register')}
                         className="py-2 px-4 bg-black hover:bg-indigo-700 text-white w-full font-semibold rounded-3xl"
