@@ -6,13 +6,33 @@ function Header() {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
 
+    // 🔥 로그인 상태 체크 + storage 이벤트로 감지
     useEffect(() => {
-        const storedUser = localStorage.getItem("user");
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
-        }
+        const fetchUser = () => {
+            const storedUser = localStorage.getItem("user");
+            if (storedUser) {
+                setUser(JSON.parse(storedUser));
+            } else {
+                setUser(null);
+            }
+        };
+
+        fetchUser(); // 컴포넌트 처음 마운트할 때 호출
+
+        const handleStorageChange = (event) => {
+            if (event.key === "user") {
+                fetchUser(); // user 키가 바뀌었을 때만 다시 불러오기
+            }
+        };
+
+        window.addEventListener("storage", handleStorageChange);
+
+        return () => {
+            window.removeEventListener("storage", handleStorageChange);
+        };
     }, []);
 
+    // 🔥 로그아웃 처리
     const handleLogout = async () => {
         try {
             const response = await fetch("https://clos21.kr/logout", {
@@ -29,7 +49,7 @@ function Header() {
             console.error("🚨 서버 로그아웃 요청 실패:", error);
         }
 
-        // 무조건 로컬 세션 정리
+        // 로컬 세션 삭제 후 페이지 이동
         localStorage.removeItem("user");
         setUser(null);
         navigate("/login");
@@ -37,6 +57,7 @@ function Header() {
 
     return (
         <div>
+            {/* 상단 헤더 */}
             <div className="flex items-center justify-between p-4">
                 <a href="/">
                     <img className="w-40" src={Logo} alt="Logo" />
@@ -50,25 +71,16 @@ function Header() {
                         className="border rounded-full px-4 py-2 w-40 sm:w-140 ml-15.5 focus:outline-none text-base"
                     />
                     <button type="submit" className="relative p-2 rounded-full">
-                        <svg
-                            width="30px"
-                            height="30px"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
+                        <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
-                                stroke="#999"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
+                                stroke="#999" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
                             />
                         </svg>
                     </button>
                 </div>
 
-                {/* 오른쪽 버튼 */}
+                {/* 오른쪽 버튼 영역 */}
                 <div className="flex items-center space-x-4">
                     {user ? (
                         <>
@@ -99,7 +111,7 @@ function Header() {
                 </div>
             </div>
 
-            {/* 내비게이션 */}
+            {/* 내비게이션 바 */}
             <nav className="flex-1 bg-black text-gray-300 p-4 md:flex justify-center text-lg">
                 <div className="flex justify-between w-full max-w-screen-xlg mx-auto px-4 md:px-10 lg:px-20 xl:px-32">
                     <a className="text-gray-300 hover:text-yellow-200 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/#">차량구매</a>
