@@ -19,6 +19,10 @@ const MainPage = () => {
   const navigate = useNavigate();
   const { user } = useUser();
   const [index, setIndex] = useState(0);
+  
+  useEffect(() => {
+    console.log("MainPage 감지: user 상태 변화", user);
+  }, [user]);
 
   const slidSrc = [
     { src: FindCar, href: '/startCBTI' },
@@ -40,7 +44,7 @@ const MainPage = () => {
       <div className="flex flex-col w-full">
         {/*<LoginSessionVerify />*/}
         {/* 헤더 */}
-        <Header key={user ? "logged-in" : "logged-out"}/>
+        <Header key={user ? user.id : "guest"} />
 
         {/* 슬라이더 영역 */}
         <div className="relative w-full">
