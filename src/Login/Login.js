@@ -34,14 +34,16 @@ function Login() {
 
             console.log("✅ 로그인 성공:", data);
 
-            // ✅ 로컬스토리지에 저장
+            // ✅ 로그인 성공 → localStorage 저장
             localStorage.setItem("user", JSON.stringify({ name: userId }));
 
             // ✅ storage 이벤트 수동 발생
             window.dispatchEvent(new StorageEvent("storage", { key: "user", newValue: JSON.stringify({ name: userId }) }));
 
             alert("로그인 성공!");
-            navigate("/");
+
+            // ✅ navigate("/") 대신 강제 새로고침 이동
+            window.location.href = "/";
 
         } catch (error) {
             console.error("🚨 로그인 중 오류 발생:", error);
