@@ -1,8 +1,17 @@
 import { useNavigate } from "react-router-dom";
 import Logo from '../../Image/logo2.png';
+import { useEffect, useState } from "react";
 
 function Header() {
     const navigate = useNavigate();
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem("user");
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+    }, []);
 
     return (
         <div>
@@ -26,32 +35,38 @@ function Header() {
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
                         >
-                            <g id="SVGRepo_iconCarrier">
-                                <path
-                                    d="M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
-                                    stroke="#999"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                            </g>
+                            <path
+                                d="M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+                                stroke="#999"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                            />
                         </svg>
                     </button>
                 </div>
 
                 <div className="flex items-center space-x-4">
-                    <button
-                        onClick={() => navigate('/login')}
-                        className="px-4 py-2 bg-gray-50 hover:bg-gray-400 text-black rounded-lg text-base"
-                    >
-                        로그인
-                    </button>
-                    <button
-                        onClick={() => navigate('/register')}
-                        className="px-4 py-2 bg-gray-900 hover:bg-gray-400 text-white rounded-lg text-base"
-                    >
-                        회원가입
-                    </button>
+                    {user ? (
+                        <div className="text-base font-semibold text-black">
+                            {user.name}님
+                        </div>
+                    ) : (
+                        <>
+                            <button
+                                onClick={() => navigate('/login')}
+                                className="px-4 py-2 bg-gray-50 hover:bg-gray-400 text-black rounded-lg text-base"
+                            >
+                                로그인
+                            </button>
+                            <button
+                                onClick={() => navigate('/register')}
+                                className="px-4 py-2 bg-gray-900 hover:bg-gray-400 text-white rounded-lg text-base"
+                            >
+                                회원가입
+                            </button>
+                        </>
+                    )}
                 </div>
             </div>
 
