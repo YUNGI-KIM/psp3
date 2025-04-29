@@ -4,6 +4,7 @@ import Logo from '../../Image/logo2.png';
 
 function Header() {
     const { user, setUser } = useUser();
+    console.log("Header re-rendered with user:", user);
     const navigate = useNavigate();
 
     const handleLogout = async () => {
