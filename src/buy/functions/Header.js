@@ -1,11 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
 import Logo from '../../Image/logo2.png';
+import {useEffect} from "react";
 
 function Header() {
     const { user, setUser } = useUser();
-    console.log("Header re-rendered with user:", user);
     const navigate = useNavigate();
+    useEffect(() => {
+        console.log("🧠 Header user 상태 바뀜:", user);
+    }, [user]);
 
     const handleLogout = async () => {
         try {

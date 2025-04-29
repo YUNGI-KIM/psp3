@@ -43,6 +43,7 @@ function Login() {
                 localStorage.setItem("user", JSON.stringify(userInfo));
                 setUser(userInfo); // ✅ UserContext 상태 반영
                 alert("로그인 성공!");
+
                 navigate("/", { replace: true });
             } else {
                 console.warn("❌ 세션 사용자 정보 불러오기 실패");
