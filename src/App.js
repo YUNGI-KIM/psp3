@@ -13,6 +13,7 @@ import Kgm from './buy/kgm';
 import Reno from './buy/reno';
 import Chevo from './buy/chevo';
 import Gen from './buy/genesis';
+import BMW from './buy/BMW';
 import Estimator from "./pages/Estimator";
 import AccForCar from "./pages/AccForCar";
 import { UserProvider } from './contexts/UserContext';
