@@ -78,7 +78,7 @@ const MainPage = () => {
             <img alt="Chevrolet" src={chevrolet} onClick={() => navigate("/Chevo")} className="w-30 h-25 hover:bg-yellow-100 mx-2 cursor-pointer" />
             <img alt="Renault" src={Reno} onClick={() => navigate("/Reno")} className="w-20 h-25 hover:bg-yellow-100 mx-2 cursor-pointer" />
             <img alt="KGM" src={kgm} onClick={() => navigate("/kgm")} className="w-35 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
-            <img alt="Genesis" src={gen} onClick={() => navigate("/Genesis")} className="w-40 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
+            <img alt="Genesis" src={gen} onClick={() => navigate("/Gen")} className="w-40 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
           </div>
 
           {/* 오른쪽 화살표 */}
