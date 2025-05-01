@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
 
 import FindCar from '../Image/sideImage/FindCar.png';
@@ -11,11 +11,19 @@ import gen from '../Image/companyLogo/gen.png';
 import kgm from '../Image/companyLogo/kgm.svg';
 import Reno from '../Image/companyLogo/Renault.png';
 import Header from '../buy/functions/Header';
+import LoginSessionVerify from "../buy/functions/LoginSessionVerify";
+import {useUser} from "../contexts/UserContext";
+
 
 
 const MainPage = () => {
   const navigate = useNavigate();
+  const { user } = useUser();
   const [index, setIndex] = useState(0);
+  
+  useEffect(() => {
+    console.log("MainPage 감지: user 상태 변화", user);
+  }, [user]);
 
   const slidSrc = [
     { src: FindCar, href: '/startCBTI' },
@@ -35,8 +43,9 @@ const MainPage = () => {
 
   return (
       <div className="flex flex-col w-full">
+        {/*<LoginSessionVerify />*/}
         {/* 헤더 */}
-        <Header />
+        <Header key={user ? user.id : "guest"} />
 
         {/* 슬라이더 영역 */}
         <div className="relative w-full">

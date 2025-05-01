@@ -12,38 +12,30 @@ import Kia from './buy/kia';
 import Kgm from './buy/kgm';
 import Estimator from "./pages/Estimator";
 import AccForCar from "./pages/AccForCar";
+import { UserProvider } from './contexts/UserContext';
+import LoginSessionVerify from "./buy/functions/LoginSessionVerify";
 
 function App() {
-
-  
   return (
-    <div className='App'>
-    <BrowserRouter>
-    <Routes>
-      <Route path = "/" element={<MainPage/>} />
-      </Routes>
-      <Routes>
-      <Route path="/startCBTI" element={<StartCBTI/>} />  {/* 스타트 페이지 */}
-        <Route path="/QuestionPage" element={<QuestionPage />} />  {/* 질문페이지들 */}
-        <Route path="/result" element={<CBTIResult />} />  {/* 결과페이지 */}
-        </Routes>
-        <Routes>
-        <Route path="/login" element={<Login/>} />  {/* 로그인 페이지 */}
-        <Route path="/register" element={<Register/>} />  {/* 가입 페이지 */}
-        <Route path="/Support" element={<Support/>} /> 
-        <Route path="/Estimator" element={<Estimator/>} />
-        <Route path="/AccForCar" element={<AccForCar/>} />
-    </Routes>
-    <Routes>
-        <Route path="/hyundai" element={<Hyundai/>} /> 
-        <Route path="/kia" element={<Kia/>} /> 
-        <Route path="/kgm" element={<Kgm/>} /> 
-        <Route path="/Genesis" element={<Genesis/>} /> 
-        <Route path="/Reno" element={<Reno/>} /> 
-        <Route path="/Chevo" element={<Chevo/>} />     
-    </Routes>
-    </BrowserRouter>
-    </div>
+        <UserProvider>
+          <BrowserRouter>
+            <LoginSessionVerify />
+            <Routes>
+              <Route path="/" element={<MainPage />} />
+              <Route path="/startCBTI" element={<StartCBTI />} />
+              <Route path="/QuestionPage" element={<QuestionPage />} />
+              <Route path="/result" element={<CBTIResult />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/support" element={<Support />} />
+              <Route path="/estimator" element={<Estimator />} />
+              <Route path="/accForCar" element={<AccForCar />} />
+              <Route path="/hyundai" element={<Hyundai />} />
+              <Route path="/kia" element={<Kia />} />
+              <Route path="/kgm" element={<Kgm />} />
+            </Routes>
+          </BrowserRouter>
+        </UserProvider>
   );
 }
 
