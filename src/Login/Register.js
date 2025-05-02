@@ -13,7 +13,7 @@ function Register() {
     const [errorMsg, setErrorMsg] = useState("");
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault();  // 반드시 필요
 
         if (password !== confirmPassword) {
             setErrorMsg("비밀번호가 일치하지 않습니다.");
@@ -38,7 +38,7 @@ function Register() {
 
             if (response.ok) {
                 alert("회원가입 성공!");
-                navigate("/login");
+                navigate("/login"); // 로그인 페이지로만 이동!
             } else {
                 setErrorMsg(result || "회원가입 실패");
             }
@@ -59,7 +59,7 @@ function Register() {
             </span>
 
             <div className="p-6 mt-8">
-                <form onSubmit={handleSubmit}>
+                <div>
                     <div className="flex gap-4 mb-2">
                         <input type="text" placeholder="성" value={firstName} onChange={(e) => setFirstName(e.target.value)}
                                className="rounded-lg border-gray-300 w-full py-2 px-4 shadow-sm" />
@@ -71,21 +71,22 @@ function Register() {
                                className="rounded-lg border-gray-300 w-full py-2 px-4 shadow-sm" />
                     </div>
                     <div className="mb-2">
-                        <input type="password" id="create-account-password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}
+                        <input type="password" id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}
                                className="rounded-lg border-gray-300 w-full py-2 px-4 shadow-sm" />
                     </div>
                     <div className="mb-2">
-                        <input type="password" id="create-account-password-confirm" placeholder="Password Confirm" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}
+                        <input type="password" id="password-confirm" placeholder="Password Confirm" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}
                                className="rounded-lg border-gray-300 w-full py-2 px-4 shadow-sm" />
                     </div>
 
                     {errorMsg && <div className="text-red-500 text-sm mb-2">{errorMsg}</div>}
 
-                    <button type="submit"
+                    <button type="button"
+                            onClick={handleSubmit}
                             className="py-2 px-4 bg-black hover:bg-indigo-700 text-white w-full font-semibold rounded-3xl">
                         Commit
                     </button>
-                </form>
+                </div>
             </div>
         </div>
     );
