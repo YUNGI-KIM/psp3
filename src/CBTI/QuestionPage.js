@@ -31,8 +31,10 @@ function QuestionPage() {
     { num: "질문 "+[index+1]+"번", text: "유지 관리가 쉬운 차량을 선호하십니까? ", progress: "100%",yes:"korean",no:"notkorean" },
   ];
 
+
+
   function CBTILogic(){
-    console.log("hello");
+    
   }
 
   return (
@@ -61,7 +63,7 @@ function QuestionPage() {
                 <div className="flex justify-center my-5 space-x-4">
 
                   <button
-                    onClick={() => { nextQuestion(); CBTILogic(); }}
+                    onClick={() => { nextQuestion(); CBTILogic("yes"); }}
                     type="button"
                     className="py-2 px-4 flex justify-center items-center bg-green-500 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white w-32 transition ease-in duration-200 text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
                   >
@@ -79,7 +81,7 @@ function QuestionPage() {
                   </button>
 
                   <button
-                    onClick={nextQuestion}
+                    onClick={() => { nextQuestion(); CBTILogic("no"); }}
                     type="button"
                     className="py-2 px-4 flex justify-center items-center bg-red-500 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white w-32 transition ease-in duration-200 text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
                   >
