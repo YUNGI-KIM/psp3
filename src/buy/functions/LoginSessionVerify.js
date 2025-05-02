@@ -37,7 +37,7 @@ export default function LoginSessionVerify() {
 
     useEffect(() => {
         loginVerify();
-    }, []);
+    }, [loginVerify]);
 
     return null; // 화면에 아무것도 출력하지 않음
 }
