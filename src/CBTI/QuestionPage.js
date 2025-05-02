@@ -21,13 +21,19 @@ function QuestionPage() {
     }
   }
   const questions = [
-    { num: "질문 "+[index+1]+"번", text: "국산 브랜드 차량을 원하시나요?", progress: "10%" },
-    { num: "질문 "+[index+1]+"번", text: "가족 구성원이 2명 초과 즉, 3명 이상인가요?", progress: "20%" },
-    { num: "질문 "+[index+1]+"번", text: "장거리 운행이 많은가요?", progress: "40%" },
-    { num: "질문 "+[index+1]+"번", text: "출퇴근 용도 이외 차량을 자주 운행하는가 ?", progress: "60%" },
-    { num: "질문 "+[index+1]+"번", text: "차박 ( 차량을 텐트 삼아 캠핑을 가는 것 ) 을 선호하는가 ?", progress: "80%" },
-    { num: "질문 "+[index+1]+"번", text: "속도감 있는 운전을 좋아하는가 ?", progress: "100%" },
+    { num: "질문 "+[index+1]+"번", text: "국산 브랜드 차량을 원하시나요?", progress: "10%" ,yes: "korean" , no: "notkorean" },
+    { num: "질문 "+[index+1]+"번", text: "가족 구성원이 2명 초과 즉, 3명 이상인가요?", progress: "20%",yes:"sports",no:"notsports" },
+    { num: "질문 "+[index+1]+"번", text: "장거리 운행이 많은가요?", progress: "40%" ,yes:"comfort",no:"notcomfort" },
+    { num: "질문 "+[index+1]+"번", text: "출퇴근 용도 이외 차량을 자주 운행하는가 ?", progress: "50%",yes:"play",no:"noplay" },
+    { num: "질문 "+[index+1]+"번", text: "차박 ( 차량을 텐트 삼아 캠핑을 가는 것 ) 을 선호하는가 ?", progress: "60%",yes:"play",no:"noplay" },
+    { num: "질문 "+[index+1]+"번", text: "속도감 있는 운전을 좋아하는가 ?", progress: "70%",yes:"sports",no:"nosports" },
+    { num: "질문 "+[index+1]+"번", text: "주행시 차량 소음이 중요한가 ? ", progress: "85%",yes:"comfort",no:"nocomfort" },
+    { num: "질문 "+[index+1]+"번", text: "유지 관리가 쉬운 차량을 선호하십니까? ", progress: "100%",yes:"korean",no:"notkorean" },
   ];
+
+  function CBTILogic(){
+    console.log("hello");
+  }
 
   return (
     <div className="relative ">
@@ -55,7 +61,7 @@ function QuestionPage() {
                 <div className="flex justify-center my-5 space-x-4">
 
                   <button
-                    onClick={nextQuestion}
+                    onClick={() => { nextQuestion(); CBTILogic(); }}
                     type="button"
                     className="py-2 px-4 flex justify-center items-center bg-green-500 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white w-32 transition ease-in duration-200 text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-full"
                   >
