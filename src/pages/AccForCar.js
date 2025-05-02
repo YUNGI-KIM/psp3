@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import Header from "../buy/functions/Header";
 import AccForCarFilter from '../Image/AccForCar/Filter.jpg';
 import AccForCarWiper from '../Image/AccForCar/Wiper.jpeg';
