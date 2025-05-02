@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion"; // 추가
-
 import FindCar from '../Image/sideImage/FindCar.png';
 import CBTIGO from '../Image/sideImage/CBTIGO.png';
 import test3 from '../Image/sideImage/test3.png';
@@ -12,11 +11,11 @@ import gen from '../Image/companyLogo/gen.png';
 import kgm from '../Image/companyLogo/kgm.svg';
 import Reno from '../Image/companyLogo/Renault.png';
 import BMW from '../Image/companyLogo/BMW.SVG'
+import Audi from '../Image/companyLogo/Audi.png'
+import Benz from '../Image/companyLogo/Benz.png'
 import Header from '../buy/functions/Header';
 import LoginSessionVerify from "../buy/functions/LoginSessionVerify";
 import { useUser } from "../contexts/UserContext";
-
-
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -24,7 +23,6 @@ const MainPage = () => {
   const [index, setIndex,] = useState(0);
   const [slidePage, setSlidePage] = useState(0);
   const [direction, setDirection] = useState(1); // 1: 오른쪽, -1: 왼쪽
-
 
   useEffect(() => {
     console.log("MainPage 감지: user 상태 변화", user);
@@ -46,9 +44,6 @@ const MainPage = () => {
     }
   };
 
-
-
-
   const ClickButtonSlideLogo = [
     { alt: "hyundai", src: hyundai, href: '/hyundai' },
     { alt: " kia", src: kia, href: '/kia' },
@@ -57,16 +52,12 @@ const MainPage = () => {
     { alt: "kgm", src: kgm, href: '/kgm' },
     { alt: "gen", src: gen, href: '/Gen' },
     { alt: "BMW", src: BMW, href: '/BMW' },
+    { alt: "Audi", src: Audi, href: '/Audi' },
+    { alt: "Benz", src: Benz, href: '/Benz' },
     { alt: "BMW", src: BMW, href: '/BMW' },
     { alt: "BMW", src: BMW, href: '/BMW' },
     { alt: "BMW", src: BMW, href: '/BMW' },
-    { alt: "BMW", src: BMW, href: '/BMW' },
-    { alt: "BMW", src: BMW, href: '/BMW' },
-
-
-
   ];
-
 
 
   const SlideToLeft = () => {
@@ -78,8 +69,8 @@ const MainPage = () => {
 
   const SlideToRight = () => {
     if (slidePage + 5 < ClickButtonSlideLogo.length - 1) {
-      setDirection(1);
-      setSlidePage(slidePage + 1);
+      setDirection(4);
+      setSlidePage(slidePage+4);
     }
   };
 
@@ -125,15 +116,12 @@ const MainPage = () => {
             className="flex justify-between items-center w-full px-6"
           >
             <div className="flex justify-between items-center w-full px-6">
-
-            <div className="flex justify-between items-center w-full px-6">
               <img alt={ClickButtonSlideLogo[slidePage].alt} src={ClickButtonSlideLogo[slidePage].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage].href)} className="w-35 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
               <img alt={ClickButtonSlideLogo[slidePage + 1].alt} src={ClickButtonSlideLogo[slidePage + 1].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage + 1].href)} className="w-30 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
               <img alt={ClickButtonSlideLogo[slidePage + 2].alt} src={ClickButtonSlideLogo[slidePage + 2].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage + 2].href)} className="w-30 h-25 hover:bg-yellow-100 mx-2 cursor-pointer" />
               <img alt={ClickButtonSlideLogo[slidePage + 3].alt} src={ClickButtonSlideLogo[slidePage + 3].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage + 3].href)} className="w-20 h-25 hover:bg-yellow-100 mx-2 cursor-pointer" />
               <img alt={ClickButtonSlideLogo[slidePage + 4].alt} src={ClickButtonSlideLogo[slidePage + 4].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage + 4].href)} className="w-35 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
               <img alt={ClickButtonSlideLogo[slidePage + 5].alt} src={ClickButtonSlideLogo[slidePage + 5].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage + 5].href)} className="w-40 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
-            </div>
             </div>
           </motion.div>
         </AnimatePresence>
