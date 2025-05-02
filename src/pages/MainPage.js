@@ -14,8 +14,8 @@ import BMW from '../Image/companyLogo/BMW.SVG'
 import Audi from '../Image/companyLogo/Audi.png'
 import Benz from '../Image/companyLogo/Benz.png'
 import Header from '../buy/functions/Header';
-import LoginSessionVerify from "../buy/functions/LoginSessionVerify";
-import { useUser } from "../contexts/UserContext";
+import {useUser} from "../contexts/UserContext";
+
 
 const MainPage = () => {
   const navigate = useNavigate();
