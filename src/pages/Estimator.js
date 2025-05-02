@@ -32,7 +32,7 @@ const carImages = {
     Sonata: "/image/Estimate/Hyundai/Sonata/Sonata.png",
     Grandeur: "/image/Estimate/Hyundai/Grandeur/Grandeur.png",
     Santafe: "/image/Estimate/Hyundai/Santafe/santafe2.png",
-    Casper: "/image/Estimate/Hyundai/Casper/casper.png",
+    Casper: "/image/Estimate/Hyundai/Casper/casper2.png",
     Porter: "/image/Estimate/Hyundai/Porter/porter2.png",
     Ioniq6: "/image/Estimate/Hyundai/Ioniq/ioniq.png",
     Palisade: "/image/Estimate/Hyundai/Palisade/palisade2.png",
