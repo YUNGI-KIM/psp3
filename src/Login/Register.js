@@ -21,7 +21,7 @@ function Register() {
         }
 
         const formData = new FormData();
-        formData.append("name", lastName + firstName);
+        formData.append("name", firstName + lastName);
         formData.append("email", email);
         formData.append("password", password);
 
