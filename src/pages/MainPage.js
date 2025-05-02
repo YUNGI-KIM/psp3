@@ -23,6 +23,7 @@ const MainPage = () => {
   const { user } = useUser();
   const [index, setIndex,] = useState(0);
   const [slidePage, setSlidePage] = useState(0);
+  const [direction, setDirection] = useState(1); // 1: 오른쪽, -1: 왼쪽
 
 
   useEffect(() => {
@@ -66,11 +67,20 @@ const MainPage = () => {
 
   ];
 
-  const SlideToRight = () => {
-    setSlidePage(6);
-  };
+
+
   const SlideToLeft = () => {
-    setSlidePage(0);
+    if (slidePage > 0) {
+      setDirection(-1);
+      setSlidePage(slidePage - 1);
+    }
+  };
+
+  const SlideToRight = () => {
+    if (slidePage + 5 < ClickButtonSlideLogo.length - 1) {
+      setDirection(1);
+      setSlidePage(slidePage + 1);
+    }
   };
 
 
@@ -105,16 +115,17 @@ const MainPage = () => {
         </svg>
 
         {/* 브랜드 로고 */}
-
         <AnimatePresence mode="wait">
           <motion.div
-            key={slidePage} // 슬라이드 인덱스가 변경될 때마다 새롭게 렌더링됨
-            initial={{ x: 300, opacity: 0 }}
+            key={slidePage}
+            initial={{ x: direction === 1 ? 300 : -300, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            exit={{ x: -300, opacity: 0 }}
+            exit={{ x: direction === 1 ? -300 : 300, opacity: 0 }}
             transition={{ duration: 0.5 }}
             className="flex justify-between items-center w-full px-6"
           >
+            <div className="flex justify-between items-center w-full px-6">
+
             <div className="flex justify-between items-center w-full px-6">
               <img alt={ClickButtonSlideLogo[slidePage].alt} src={ClickButtonSlideLogo[slidePage].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage].href)} className="w-35 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
               <img alt={ClickButtonSlideLogo[slidePage + 1].alt} src={ClickButtonSlideLogo[slidePage + 1].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage + 1].href)} className="w-30 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
@@ -123,7 +134,7 @@ const MainPage = () => {
               <img alt={ClickButtonSlideLogo[slidePage + 4].alt} src={ClickButtonSlideLogo[slidePage + 4].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage + 4].href)} className="w-35 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
               <img alt={ClickButtonSlideLogo[slidePage + 5].alt} src={ClickButtonSlideLogo[slidePage + 5].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage + 5].href)} className="w-40 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
             </div>
-
+            </div>
           </motion.div>
         </AnimatePresence>
 
