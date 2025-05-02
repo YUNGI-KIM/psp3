@@ -3,7 +3,7 @@ import { motion, useMotionValue, animate, useTransform } from "framer-motion";
 import Header from "../buy/functions/Header";
 
 const brands = {
-    Hyundai: ["Avante", "Sonata", "Grandeur"],
+    Hyundai: ["Avante", "Sonata", "Grandeur", "Santafe", "Casper", "Porter", "Ioniq"],
     Kia: ["K5", "K7", "Carnival"],
 };
 
@@ -11,6 +11,10 @@ const basePrices = {
     Avante: 21000000,
     Sonata: 27000000,
     Grandeur: 38000000,
+    Santafe: 1111111,
+    Casper: 111111,
+    Porter: 1111111,
+    Ioniq: 1111111,
     K5: 27000000,
     K7: 35000000,
     Carnival: 33000000,
@@ -26,6 +30,10 @@ const carImages = {
     Avante: "/image/Estimate/Hyundai/Avante/Avante.png",
     Sonata: "/image/Estimate/Hyundai/Sonata/Sonata.png",
     Grandeur: "/image/Estimate/Hyundai/Grandeur/Grandeur.png",
+    Santafe: "/image/Estimate/Hyundai/Santafe/santa_fe.webp",
+    Casper: "/image/Estimate/Hyundai/Casper/casper.png",
+    Porter: "/image/Estimate/Hyundai/Porter/porter.png",
+    Ioniq: "/image/Estimate/Hyundai/Ioniq/IONIQ.webp",
     K5: "/image/Estimate/Kia/K5/K5.jpg",
     K7: "/image/Estimate/Kia/K7/K7.jpg",
     Carnival: "/image/Estimate/Kia/Carnival/Carnival.webp",
