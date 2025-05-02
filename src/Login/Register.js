@@ -33,8 +33,8 @@ function Register() {
             });
 
             const result = await response.text();
-            console.log("🛰 상태:", response.status);
-            console.log("📨 응답:", result);
+            console.log("status:", response.status);
+            console.log("res:", result);
 
             if (response.ok) {
                 alert("회원가입 성공!");
@@ -43,7 +43,7 @@ function Register() {
                 setErrorMsg(result || "회원가입 실패");
             }
         } catch (error) {
-            console.error("🚨 회원가입 오류:", error);
+            console.error("Register Error:", error);
             setErrorMsg("서버 오류가 발생했습니다.");
         }
     };
