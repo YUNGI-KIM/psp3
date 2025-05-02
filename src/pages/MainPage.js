@@ -100,7 +100,7 @@ const MainPage = () => {
       {/* 브랜드 로고 리스트 */}
       <div className="w-full flex justify-center items-center space-x-4 mt-12">
         {/* 왼쪽 화살표 */}
-        <svg onClick={SlideToLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:bg-yellow-100">
+        <svg onClick={SlideToLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-16 h-12 mx-2 cursor-pointer transition-transform duration-300 hover:scale-110">
           <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
         </svg>
 
@@ -116,19 +116,19 @@ const MainPage = () => {
             className="flex justify-between items-center w-full px-6"
           >
             <div className="flex justify-between items-center w-full px-6">
-              <img alt={ClickButtonSlideLogo[slidePage].alt} src={ClickButtonSlideLogo[slidePage].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage].href)} className="w-35 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
-              <img alt={ClickButtonSlideLogo[slidePage + 1].alt} src={ClickButtonSlideLogo[slidePage + 1].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage + 1].href)} className="w-30 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
-              <img alt={ClickButtonSlideLogo[slidePage + 2].alt} src={ClickButtonSlideLogo[slidePage + 2].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage + 2].href)} className="w-30 h-25 hover:bg-yellow-100 mx-2 cursor-pointer" />
-              <img alt={ClickButtonSlideLogo[slidePage + 3].alt} src={ClickButtonSlideLogo[slidePage + 3].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage + 3].href)} className="w-20 h-25 hover:bg-yellow-100 mx-2 cursor-pointer" />
-              <img alt={ClickButtonSlideLogo[slidePage + 4].alt} src={ClickButtonSlideLogo[slidePage + 4].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage + 4].href)} className="w-35 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
-              <img alt={ClickButtonSlideLogo[slidePage + 5].alt} src={ClickButtonSlideLogo[slidePage + 5].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage + 5].href)} className="w-40 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
+              <img alt={ClickButtonSlideLogo[slidePage].alt} src={ClickButtonSlideLogo[slidePage].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage].href)} className="object-contain w-24 h-16 mx-2 cursor-pointer transition-transform duration-300 hover:scale-110" />
+              <img alt={ClickButtonSlideLogo[slidePage + 1].alt} src={ClickButtonSlideLogo[slidePage + 1].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage + 1].href)} className="object-contain w-24 h-16 mx-2 cursor-pointer transition-transform duration-300 hover:scale-110" />
+              <img alt={ClickButtonSlideLogo[slidePage + 2].alt} src={ClickButtonSlideLogo[slidePage + 2].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage + 2].href)} className="object-contain w-24 h-16 mx-2 cursor-pointer transition-transform duration-300 hover:scale-110" />
+              <img alt={ClickButtonSlideLogo[slidePage + 3].alt} src={ClickButtonSlideLogo[slidePage + 3].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage + 3].href)} className="object-contain w-24 h-16 mx-2 cursor-pointer transition-transform duration-300 hover:scale-110" />
+              <img alt={ClickButtonSlideLogo[slidePage + 4].alt} src={ClickButtonSlideLogo[slidePage + 4].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage + 4].href)} className="object-contain w-24 h-16 mx-2 cursor-pointer transition-transform duration-300 hover:scale-110" />
+              <img alt={ClickButtonSlideLogo[slidePage + 5].alt} src={ClickButtonSlideLogo[slidePage + 5].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage + 5].href)} className="object-contain w-24 h-16 mx-2 cursor-pointer transition-transform duration-300 hover:scale-110" />
             </div>
 
           </motion.div>
         </AnimatePresence>
 
         {/* 오른쪽 화살표 */}
-        <svg onClick={SlideToRight} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:bg-yellow-100">
+        <svg onClick={SlideToRight} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-16 h-12 mx-2 cursor-pointer transition-transform duration-300 hover:scale-110">
           <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
         </svg>
       </div>
