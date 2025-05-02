@@ -11,7 +11,6 @@ import gen from '../Image/companyLogo/gen.png';
 import kgm from '../Image/companyLogo/kgm.svg';
 import Reno from '../Image/companyLogo/Renault.png';
 import Header from '../buy/functions/Header';
-import LoginSessionVerify from "../buy/functions/LoginSessionVerify";
 import {useUser} from "../contexts/UserContext";
 
 
