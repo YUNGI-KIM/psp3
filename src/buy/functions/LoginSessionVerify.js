@@ -13,24 +13,24 @@ export default function LoginSessionVerify() {
                 });
 
                 if (response.status === 401) {
-                    console.warn("❌ 인증 실패 (401)");
+                    console.warn("Unauthorized (401)");
                     localStorage.removeItem("user");
-                    setUser(null); // ✅ context도 초기화
+                    setUser(null);
                     return;
                 }
 
                 if (response.ok) {
                     const data = await response.json();
-                    console.log("✅ 인증 성공", data);
+                    console.log("Authorized", data);
                     localStorage.setItem("user", JSON.stringify(data));
-                    setUser(data); // ✅ context 반영
+                    setUser(data);
                 } else {
-                    console.warn(`❌ 인증 실패 (status: ${response.status})`);
+                    console.warn(`Authorized Failed (status: ${response.status})`);
                     localStorage.removeItem("user");
                     setUser(null);
                 }
             } catch (error) {
-                console.error("🚨 로그인 중 네트워크 오류:", error);
+                console.error("Error:", error);
                 localStorage.removeItem("user");
                 setUser(null);
             }
