@@ -12,7 +12,9 @@ function Register() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
         if (password !== confirmPassword) {
             setErrorMsg("비밀번호가 일치하지 않습니다.");
             return;
@@ -30,9 +32,9 @@ function Register() {
                 credentials: "include",
             });
 
-            console.log("📨 서버 응답 상태:", response.status);
             const result = await response.text();
-            console.log("📨 서버 응답 내용:", result);
+            console.log("🛰 상태:", response.status);
+            console.log("📨 응답:", result);
 
             if (response.ok) {
                 alert("회원가입 성공!");
@@ -57,7 +59,7 @@ function Register() {
             </span>
 
             <div className="p-6 mt-8">
-                <div>
+                <form onSubmit={handleSubmit}>
                     <div className="flex gap-4 mb-2">
                         <input type="text" placeholder="성" value={firstName} onChange={(e) => setFirstName(e.target.value)}
                                className="rounded-lg border-gray-300 w-full py-2 px-4 shadow-sm" />
@@ -79,12 +81,11 @@ function Register() {
 
                     {errorMsg && <div className="text-red-500 text-sm mb-2">{errorMsg}</div>}
 
-                    <button type="button"
-                            onClick={handleSubmit}
+                    <button type="submit"
                             className="py-2 px-4 bg-black hover:bg-indigo-700 text-white w-full font-semibold rounded-3xl">
                         Commit
                     </button>
-                </div>
+                </form>
             </div>
         </div>
     );
