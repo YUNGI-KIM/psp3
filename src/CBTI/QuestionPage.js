@@ -34,7 +34,7 @@ function QuestionPage() {
 
 
   function CBTILogic(){
-    
+    if()
   }
 
   return (
