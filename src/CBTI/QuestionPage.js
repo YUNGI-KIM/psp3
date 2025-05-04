@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 function QuestionPage() {
   const navigate = useNavigate();
   const [index, setIndex] = useState(0);
+  const [answers, setAnswers] = useState([]);
 
   function nextQuestion() {
     if (index >= questions.length - 1) {
@@ -20,22 +21,37 @@ function QuestionPage() {
       navigate("/startCBTI")
     }
   }
-  const questions = [
-    { num: "질문 "+[index+1]+"번", text: "국산 브랜드 차량을 원하시나요?", progress: "10%" ,yes: "korean" , no: "notkorean" },
-    { num: "질문 "+[index+1]+"번", text: "가족 구성원이 2명 초과 즉, 3명 이상인가요?", progress: "20%",yes:"sports",no:"notsports" },
-    { num: "질문 "+[index+1]+"번", text: "장거리 운행이 많은가요?", progress: "40%" ,yes:"comfort",no:"notcomfort" },
-    { num: "질문 "+[index+1]+"번", text: "출퇴근 용도 이외 차량을 자주 운행하는가 ?", progress: "50%",yes:"play",no:"noplay" },
-    { num: "질문 "+[index+1]+"번", text: "차박 ( 차량을 텐트 삼아 캠핑을 가는 것 ) 을 선호하는가 ?", progress: "60%",yes:"play",no:"noplay" },
-    { num: "질문 "+[index+1]+"번", text: "속도감 있는 운전을 좋아하는가 ?", progress: "70%",yes:"sports",no:"nosports" },
-    { num: "질문 "+[index+1]+"번", text: "주행시 차량 소음이 중요한가 ? ", progress: "85%",yes:"comfort",no:"nocomfort" },
-    { num: "질문 "+[index+1]+"번", text: "유지 관리가 쉬운 차량을 선호하십니까? ", progress: "100%",yes:"korean",no:"notkorean" },
+    const questions = [
+      { num: "질문 " + (index + 1) + "번", text: "운전 중 운전자 보조 시스템을 자주 사용하시나요?", progress: "14%", yes: "tech", no: "basic" },
+      { num: "질문 " + (index + 1) + "번", text: "장거리 운행이 많으신가요?", progress: "21%", yes: "comfort", no: "sports" },
+      { num: "질문 " + (index + 1) + "번", text: "SUV를 선호하시나요?", progress: "28%", yes: "suv", no: "seben" },
+      { num: "질문 " + (index + 1) + "번", text: "유지보수가 쉬운 차량을 원하시나요?", progress: "35%", yes: "korean", no: "foreign" },
+      { num: "질문 " + (index + 1) + "번", text: "고속도로 주행이 잦은 편인가요?", progress: "42%", yes: "comfort", no: "sports" },
+      { num: "질문 " + (index + 1) + "번", text: "터치스크린, 무선 업데이트 같은 최신 기능이 중요하신가요?", progress: "49%", yes: "tech", no: "basic" },
+      { num: "질문 " + (index + 1) + "번", text: "오프로드 환경에서도 운전하는 일이 있나요?", progress: "56%", yes: "suv", no: "sedan" },
+      { num: "질문 " + (index + 1) + "번", text: "국산 차량 정비소를 자주 이용하십니까?", progress: "63%", yes: "korean", no: "foreign" },
+      { num: "질문 " + (index + 1) + "번", text: "주행 시 차량 소음에 민감하신가요?", progress: "70%", yes: "comfort", no: "sports" },
+      { num: "질문 " + (index + 1) + "번", text: "SUV가 도심 주행에도 적합하다고 생각하시나요?", progress: "77%", yes: "suv", no: "sedan" },
+      { num: "질문 " + (index + 1) + "번", text: "국산 브랜드의 가성비를 신뢰하십니까?", progress: "84%", yes: "korean", no: "foreign" },
+      { num: "질문 " + (index + 1) + "번", text: "스마트 크루즈 컨트롤 기능을 자주 사용하시나요?", progress: "91%", yes: "tech", no: "basic" },
+      { num: "질문 " + (index + 1) + "번", text: "국산 브랜드 차량을 원하시나요?", progress: "7%", yes: "korean", no: "foreign" },
+      { num: "질문 " + (index + 1) + "번", text: "승차감이 중요한 요소라고 생각하시나요?", progress: "100%", yes: "comfort", no: "sports" },
   ];
 
 
+  const current = questions[index];
 
-  function CBTILogic(){
-    if()
+  function CBTILogic(answerKey){
+    if(answerKey=="no"){
+      current[index]=questions[index].no;
+    }
+    else if(answerKey=="yes"){
+      current[index]=questions[index].yes;
+    }
+    console.log(current[index]);
+
   }
+
 
   return (
     <div className="relative ">
