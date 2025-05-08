@@ -3,7 +3,7 @@ import { motion, useMotionValue, animate, useTransform } from "framer-motion";
 import Header from "../buy/functions/Header";
 
 const brands = {
-    Hyundai: ["Avante", "Sonata", "Grandeur"],
+    Hyundai: ["Avante", "Sonata", "Grandeur", "Santafe", "Casper", "Porter", "Ioniq6", "Palisade"],
     Kia: ["K5", "K7", "Carnival"],
 };
 
@@ -11,6 +11,11 @@ const basePrices = {
     Avante: 21000000,
     Sonata: 27000000,
     Grandeur: 38000000,
+    Santafe: 35000000,
+    Casper: 14000000,
+    Porter: 21000000,
+    Ioniq6: 50000000,
+    Palisade: 45000000,
     K5: 27000000,
     K7: 35000000,
     Carnival: 33000000,
@@ -26,6 +31,11 @@ const carImages = {
     Avante: "/image/Estimate/Hyundai/Avante/Avante.png",
     Sonata: "/image/Estimate/Hyundai/Sonata/Sonata.png",
     Grandeur: "/image/Estimate/Hyundai/Grandeur/Grandeur.png",
+    Santafe: "/image/Estimate/Hyundai/Santafe/santafe2.png",
+    Casper: "/image/Estimate/Hyundai/Casper/casper2.png",
+    Porter: "/image/Estimate/Hyundai/Porter/porter2.png",
+    Ioniq6: "/image/Estimate/Hyundai/Ioniq/ioniq.png",
+    Palisade: "/image/Estimate/Hyundai/Palisade/palisade2.png",
     K5: "/image/Estimate/Kia/K5/K5.jpg",
     K7: "/image/Estimate/Kia/K7/K7.jpg",
     Carnival: "/image/Estimate/Kia/Carnival/Carnival.webp",
@@ -38,8 +48,29 @@ export default function Estimator() {
     const [imageKey, setImageKey] = useState(0);
 
     const price = useMotionValue(0);
+
+    const acquisitionTax = useTransform(price, (value) => Math.floor(value * 0.07));
+    
+    const registrationFee = useTransform(acquisitionTax, (acqTax) =>
+        acqTax + 2600 + 25000 + 55000
+    );
+
+    const totalPrice = useTransform([price, registrationFee], ([p, r]) => p + r);
+
     const displayedPrice = useTransform(price, (value) =>
         Math.floor(value).toLocaleString("ko-KR") + "원"
+    );
+
+    const displayedAcqTax = useTransform(acquisitionTax, (value) =>
+        value.toLocaleString("ko-KR") + "원"
+    );
+
+    const displayedRegFee = useTransform(registrationFee, (value) =>
+        value.toLocaleString("ko-KR") + "원"
+    );
+
+    const displayedTotalPrice = useTransform(totalPrice, (value) =>
+        value.toLocaleString("ko-KR") + "원"
     );
 
     const handleOptionChange = (option) => {
@@ -58,7 +89,20 @@ export default function Estimator() {
             0
         );
         return basePrice + optionsPrice;
-    }, [model, selectedOptions]); // ✅ basePrices, options 의존성 제거!
+    }, [model, selectedOptions]);
+
+    const registrationDetails = [
+        { name: "취득세", value: displayedAcqTax, motion: true },
+        { name: "증지대", value: "2,600 원" },
+        { name: "차량번호판", value: "25,000 원" },
+        { name: "등록 대행 수수료", value: "55,000 원" },
+    ];
+
+    const paymentConditions = [
+        { name: "계약금", value: "100,000 원" },
+        { name: "단기의무보험료", value: "1,900 원" },
+        { name: "인도금", value: displayedPrice, motion: true },
+    ];
 
     useEffect(() => {
         const controls = animate(price, calculatePrice(), {
@@ -90,7 +134,7 @@ export default function Estimator() {
                     <motion.img
                         src={carImages[model]}
                         alt={model}
-                        className="w-full h-48 object-cover rounded-lg mb-6"
+                        className="w-full sm:w-[500px] h-48 sm:h-[300px] object-contain rounded-lg mx-auto mb-6"
                         key={model + imageKey}
                         initial={{ opacity: 0.7, scale: 1 }}
                         animate={{ opacity: 1, scale: 1.02 }}
@@ -139,11 +183,70 @@ export default function Estimator() {
                                             className="w-5 h-5"
                                         />
                                         <span className="text-sm sm:text-base">
-                      {option.name} (+{option.price.toLocaleString("ko-KR")}원)
-                    </span>
+                                            {option.name} (+{option.price.toLocaleString("ko-KR")}원)
+                                        </span>
                                     </div>
                                 ))}
                             </div>
+                        </div>
+
+                        {/* 등록비 테이블 */}
+                        <div className="mt-6 border-t border-b border-gray-300">
+                            <h2 className="text-lg font-semibold my-4">등록비 내역</h2>
+                            <table className="w-full text-sm">
+                                <tbody>
+                                    {registrationDetails.map((item) => (
+                                        <tr key={item.name}>
+                                            <td className="p-3 font-semibold text-gray-800">{item.name}</td>
+                                            <td className="p-3 text-right text-black">
+                                                {item.motion ? <motion.span>{item.value}</motion.span> : item.value}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                                <tfoot>
+                                    <tr className="border-t font-semibold">
+                                        <td className="p-3 text-gray-800">등록비용</td>
+                                        <td className="p-3 text-right text-black"><motion.span>{displayedRegFee}</motion.span></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        {/* 결제 방법 */}
+                        <div className="mt-6 border-t border-b border-gray-300">
+                            <h2 className="text-lg font-semibold my-4">결제 방법</h2>
+                            <table className="w-full text-sm">
+                                <tbody>
+                                    <tr className="bg-gray-100">
+                                        <td className="w-1/4 p-3 font-semibold text-gray-800">결제 수단</td>
+                                        <td className="p-3">현금/신용카드</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-3 font-semibold text-gray-800">지불 조건</td>
+                                        <td className="p-3">
+                                            <table className="w-full">
+                                                <tbody>
+                                                    {paymentConditions.map((item) => (
+                                                        <tr key={item.name} className={item.name === "인도금" ? "bg-gray-100" : ""}>
+                                                            <td className="p-2 text-gray-700">{item.name}</td>
+                                                            <td className="p-2 text-right text-black">
+                                                                {item.motion ? <motion.span>{item.value}</motion.span> : item.value}
+                                                            </td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr className="border-t">
+                                        <td className="p-3 font-semibold text-gray-800">출고 전 납입 총액</td>
+                                        <motion.td className="p-3 text-right text-lg font-bold text-black">{displayedPrice}</motion.td>
+                                    </tr>
+                                </tfoot>
+                            </table>
                         </div>
 
                         {/* 최종 견적 금액 */}
@@ -154,7 +257,7 @@ export default function Estimator() {
                                 animate={{ scale: 1 }}
                                 transition={{ duration: 0.3 }}
                             >
-                                최종 견적: <motion.span>{displayedPrice}</motion.span>
+                                최종 견적: <motion.span>{displayedTotalPrice}</motion.span>
                             </motion.h2>
                         </div>
                     </div>
