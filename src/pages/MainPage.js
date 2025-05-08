@@ -16,7 +16,6 @@ import Benz from '../Image/companyLogo/Benz.png'
 import Header from '../buy/functions/Header';
 import {useUser} from "../contexts/UserContext";
 
-
 const MainPage = () => {
   const navigate = useNavigate();
   const { user } = useUser();
