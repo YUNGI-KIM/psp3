@@ -14,13 +14,7 @@ import BMW from '../Image/companyLogo/BMW.SVG'
 import Audi from '../Image/companyLogo/Audi.png'
 import Benz from '../Image/companyLogo/Benz.png'
 import Header from '../buy/functions/Header';
-<<<<<<< HEAD
 import {useUser} from "../contexts/UserContext";
-
-=======
-import LoginSessionVerify from "../buy/functions/LoginSessionVerify";
-import { useUser } from "../contexts/UserContext";
->>>>>>> origin/feature_lhs9275
 
 const MainPage = () => {
   const navigate = useNavigate();
