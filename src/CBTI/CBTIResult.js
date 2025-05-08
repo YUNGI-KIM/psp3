@@ -29,10 +29,9 @@ const top4Keys = top4.map(([key, _]) => key);
 
 console.log(top4Keys);
 
-for(let i=0; i< top4Keys.length; i++){
-  top4Keys[i]=top4Keys[i].slice(0,1);
+for (let i = 0; i < top4Keys.length; i++) {
+  top4Keys[i] = top4Keys[i].slice(0, 1).toUpperCase();
 }
-
 console.log("Top 4 Keys:", top4Keys);
 
 
