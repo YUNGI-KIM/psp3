@@ -20,6 +20,7 @@ const MainPage = () => {
   const navigate = useNavigate();
   const { user } = useUser();
   const [index, setIndex] = useState(0);
+  const {slidePage, setslidePage} = useState(0);
 
   useEffect(() => {
     console.log("MainPage 감지: user 상태 변화", user);
