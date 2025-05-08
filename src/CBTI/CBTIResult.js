@@ -1,42 +1,60 @@
-import { useLocation,Link } from "react-router-dom";
-
- 
+import { useLocation, Link } from "react-router-dom";
 
 function CBTIResult() {
-const location = useLocation();
-const receivedArray = location.state?.data;
+  const location = useLocation();
+  const receivedArray = location.state?.data;
 
-const results = {
-  tech: 0,
-  comfort: 0,
-  utility: 0,
-  korean: 0,
-  basic: 0,
-  athletic: 0,
-  sedan: 0,
-  foreign: 0
-};
+  const results = {
+    tech: 0,
+    comfort: 0,
+    utility: 0,
+    korean: 0,
+    basic: 0,
+    athletic: 0,
+    sedan: 0,
+    foreign: 0
+  };
 
-  for(let j=0; j<receivedArray.length;j++){
-    if(receivedArray[j] in results){
+  const CBTIGuide = [
+    { CBTI: 'T', Guide: '최신기술' },
+    { CBTI: 'C', Guide: '편안함'},
+    { CBTI: 'U', Guide: 'SUV'},
+    { CBTI: 'K', Guide: '국산'},
+    { CBTI: 'B', Guide: '기본'},
+    { CBTI: 'A', Guide: '스포츠성'},
+    { CBTI: 'S', Guide: '세단'},
+    { CBTI: 'F', Guide: '수입'}
+  ];
+
+  {/* ----------------------CBTI 판별 로직------------------------ */}
+  for (let j = 0; j < receivedArray.length; j++) {
+    if (receivedArray[j] in results) {
       results[receivedArray[j]]++;
     }
   }
-const top4 = Object.entries(results)
-  .sort((a, b) => b[1] - a[1]) // 값 기준 내림차순
-  .slice(0, 4);                // 상위 4개
-const top4Keys = top4.map(([key, _]) => key);
-
-console.log(top4Keys);
-
-for (let i = 0; i < top4Keys.length; i++) {
-  top4Keys[i] = top4Keys[i].slice(0, 1).toUpperCase();
-}
-console.log("Top 4 Keys:", top4Keys);
+  const top4 = Object.entries(results)
+    .sort((a, b) => b[1] - a[1]) // 값 기준 내림차순
+    .slice(0, 4);                // 상위 4개
+  const top4Keys = top4.map(([key, _]) => key);
 
 
+  for (let i = 0; i < top4Keys.length; i++) {
+    top4Keys[i] = top4Keys[i].slice(0, 1).toUpperCase();
+
+  }
+
+  const Guide = top4Keys.map(letter => {
+    const item = CBTIGuide.find(obj => obj.CBTI === letter);
+    return item ? item.Guide : '';
+  });
+
+  console.log("Top 4 Keys:", top4Keys);
+  console.log(" Guide :", Guide);
 
 
+{/*_______________________________________________________________*/}
+
+  
 
   return (
     <div className="relative">
@@ -56,10 +74,12 @@ console.log("Top 4 Keys:", top4Keys);
             <div className="rounded-3xl p-8 bg-white shadow">
               <div className="text-center w-full mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20">
                 {/* 질문 텍스트 */}
-                <h2 className="text-3xl font-extrabold text-black dark:text-white sm:text-4xl">
-                  <span className="block">결과</span>
+                <h1 className="text-3xl font-extrabold  dark:text-white sm:text-4xl">
+                <span className="text-4xl font-extrabold  text-indigo-500">결과</span>
                   <span className="block text-indigo-500">{top4Keys}</span>
-                </h2>
+                <span className="block text-indigo-500">당신의 자동차를 4단어로 설명하면?</span>
+                <span className="block text-indigo-500">{Guide}</span>
+                </h1>
 
                 {/* 버튼 영역 */}
                 <div className="mt-12 flex justify-center space-x-4">
