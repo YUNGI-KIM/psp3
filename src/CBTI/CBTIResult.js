@@ -16,17 +16,17 @@ function CBTIResult() {
   };
 
   const CBTIGuide = [
-    { CBTI: 'T', Guide: '최신기술' },
-    { CBTI: 'C', Guide: '편안함'},
-    { CBTI: 'U', Guide: 'SUV'},
-    { CBTI: 'K', Guide: '국산'},
-    { CBTI: 'B', Guide: '기본'},
-    { CBTI: 'A', Guide: '스포츠성'},
-    { CBTI: 'S', Guide: '세단'},
-    { CBTI: 'F', Guide: '수입'}
+    { CBTI: 'T', Guide: '최신기술\n' },
+    { CBTI: 'C', Guide: '편안함\n' },
+    { CBTI: 'U', Guide: 'SUV\n' },
+    { CBTI: 'K', Guide: '국산\n' },
+    { CBTI: 'B', Guide: '기본\n' },
+    { CBTI: 'A', Guide: '스포츠성\n' },
+    { CBTI: 'S', Guide: '세단\n' },
+    { CBTI: 'F', Guide: '수입\n' }
   ];
 
-  {/* ----------------------CBTI 판별 로직------------------------ */}
+  {/* ----------------------CBTI 판별 로직------------------------ */ }
   for (let j = 0; j < receivedArray.length; j++) {
     if (receivedArray[j] in results) {
       results[receivedArray[j]]++;
@@ -52,9 +52,9 @@ function CBTIResult() {
   console.log(" Guide :", Guide);
 
 
-{/*_______________________________________________________________*/}
+  {/*_______________________________________________________________*/ }
 
-  
+
 
   return (
     <div className="relative">
@@ -66,19 +66,19 @@ function CBTIResult() {
         <div className="flex items-center justify-center min-h-screen px-4 text-center sm:block sm:p-0">
           <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true"></span>
           <div
-            className="relative inline-block overflow-hidden transition-all transform sm:align-middle w-full sm:max-w-lg"
+            className="relative inline-block overflow-hidden transition-all transform sm:align-middle sm:max-w-2lg"
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-headline"
           >
-            <div className="rounded-3xl p-8 bg-white shadow">
+            <div className="rounded-3xl p-4 bg-white shadow">
               <div className="text-center w-full mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20">
                 {/* 질문 텍스트 */}
                 <h1 className="text-3xl font-extrabold  dark:text-white sm:text-4xl">
-                <span className="text-4xl font-extrabold  text-indigo-500">결과</span>
+                  <span className="text-4xl font-extrabold  text-indigo-500">결과</span>
                   <span className="block text-indigo-500">{top4Keys}</span>
-                <span className="block text-indigo-500">당신의 자동차를 4단어로 설명하면?</span>
-                <span className="block text-indigo-500">{Guide}</span>
+                  <span className="block text-indigo-500">당신의 자동차를 4단어로 설명하면?</span>
+                  <span className="block text-indigo-500">{Guide}</span>
                 </h1>
 
                 {/* 버튼 영역 */}
