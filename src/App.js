@@ -10,6 +10,10 @@ import Support from "./pages/Support";
 import Hyundai from './buy/hyundai';
 import Kia from './buy/kia';
 import Kgm from './buy/kgm';
+import Reno from './buy/reno';
+import Chevo from './buy/chevo';
+import Gen from './buy/genesis';
+import BMW from './buy/BMW';
 import Estimator from "./pages/Estimator";
 import AccForCar from "./pages/AccForCar";
 import { UserProvider } from './contexts/UserContext';
@@ -33,6 +37,10 @@ function App() {
               <Route path="/hyundai" element={<Hyundai />} />
               <Route path="/kia" element={<Kia />} />
               <Route path="/kgm" element={<Kgm />} />
+              <Route path="/reno" element={<Reno />} />
+              <Route path="/Chevo" element={<Chevo />} />
+              <Route path="/Gen" element={<Gen />} />
+
             </Routes>
           </BrowserRouter>
         </UserProvider>
