@@ -19,8 +19,9 @@ import {useUser} from "../contexts/UserContext";
 const MainPage = () => {
   const navigate = useNavigate();
   const { user } = useUser();
-  const [index, setIndex] = useState(0);
-  const {slidePage, setslidePage} = useState(0);
+  const [index, setIndex,] = useState(0);
+  const [slidePage, setSlidePage] = useState(0);
+  const [direction, setDirection] = useState(1); // 1: 오른쪽, -1: 왼쪽
 
   useEffect(() => {
     console.log("MainPage 감지: user 상태 변화", user);
