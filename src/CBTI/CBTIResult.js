@@ -9,10 +9,10 @@ const receivedArray = location.state?.data;
 const results = {
   tech: 0,
   comfort: 0,
-  suv: 0,
+  utility: 0,
   korean: 0,
   basic: 0,
-  sports: 0,
+  athletic: 0,
   sedan: 0,
   foreign: 0
 };
@@ -22,6 +22,19 @@ const results = {
       results[receivedArray[j]]++;
     }
   }
+const top4 = Object.entries(results)
+  .sort((a, b) => b[1] - a[1]) // 값 기준 내림차순
+  .slice(0, 4);                // 상위 4개
+const top4Keys = top4.map(([key, _]) => key);
+
+console.log(top4Keys);
+
+for(let i=0; i< top4Keys.length; i++){
+  top4Keys[i]=top4Keys[i].slice(0,1);
+}
+
+console.log("Top 4 Keys:", top4Keys);
+
 
 
 
@@ -46,7 +59,7 @@ const results = {
                 {/* 질문 텍스트 */}
                 <h2 className="text-3xl font-extrabold text-black dark:text-white sm:text-4xl">
                   <span className="block">결과</span>
-                  <span className="block text-indigo-500">집에 가라</span>
+                  <span className="block text-indigo-500">{top4Keys}</span>
                 </h2>
 
                 {/* 버튼 영역 */}
