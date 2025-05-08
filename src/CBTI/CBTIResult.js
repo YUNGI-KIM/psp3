@@ -1,6 +1,31 @@
-import { Link } from "react-router-dom";
+import { useLocation,Link } from "react-router-dom";
+
+ 
 
 function CBTIResult() {
+const location = useLocation();
+const receivedArray = location.state?.data;
+
+const results = {
+  tech: 0,
+  comfort: 0,
+  suv: 0,
+  korean: 0,
+  basic: 0,
+  sports: 0,
+  sedan: 0,
+  foreign: 0
+};
+
+  for(let j=0; j<receivedArray.length;j++){
+    if(receivedArray[j] in results){
+      results[receivedArray[j]]++;
+    }
+  }
+
+
+
+
   return (
     <div className="relative">
       <div className="inset-0 z-10 w-full h-screen overflow-y-auto">
