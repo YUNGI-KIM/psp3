@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import FindCar from '../Image/sideImage/FindCar.png';
@@ -20,7 +20,8 @@ const MainPage = () => {
     const navigate = useNavigate();
     const { user } = useUser();
     const [index, setIndex] = useState(0);
-    const [slideState, setSlideState] = useState({ page: 0, direction: 0 });
+    const [page, setPage] = useState(0);
+    const directionRef = useRef(0);
 
     useEffect(() => {
         console.log("MainPage 감지: user 상태 변화", user);
@@ -47,14 +48,16 @@ const MainPage = () => {
     ];
 
     const SlideToLeft = () => {
-        if (slideState.page > 0) {
-            setSlideState({ page: slideState.page - 1, direction: -1 });
+        if (page > 0) {
+            directionRef.current = -1;
+            setPage((prev) => prev - 1);
         }
     };
 
     const SlideToRight = () => {
-        if (slideState.page + 6 < ClickButtonSlideLogo.length) {
-            setSlideState({ page: slideState.page + 1, direction: 1 });
+        if (page + 6 < ClickButtonSlideLogo.length) {
+            directionRef.current = 1;
+            setPage((prev) => prev + 1);
         }
     };
 
@@ -87,14 +90,14 @@ const MainPage = () => {
 
                 <AnimatePresence mode="wait">
                     <motion.div
-                        key={slideState.page}
-                        initial={{ x: slideState.direction === 1 ? 300 : -300, opacity: 0 }}
+                        key={page}
+                        initial={{ x: directionRef.current === 1 ? 300 : -300, opacity: 0 }}
                         animate={{ x: 0, opacity: 1 }}
-                        exit={{ x: slideState.direction === 1 ? -300 : 300, opacity: 0 }}
+                        exit={{ x: directionRef.current === 1 ? -300 : 300, opacity: 0 }}
                         transition={{ duration: 0.5 }}
                         className="flex justify-center items-center flex-grow gap-4"
                     >
-                        {ClickButtonSlideLogo.slice(slideState.page, slideState.page + 6).map((logo, i) => (
+                        {ClickButtonSlideLogo.slice(page, page + 6).map((logo, i) => (
                             <img
                                 key={i}
                                 alt={logo.alt}
