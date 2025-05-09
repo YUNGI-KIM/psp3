@@ -2,6 +2,7 @@ import Header from "../buy/functions/Header"
 import AdminSupportFn from "../buy/functions/AdminSupportFn";
 
 function receviedSupport() {
+
     return (
         <div>
             {Header()}

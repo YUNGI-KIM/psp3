@@ -78,11 +78,11 @@ function CBTIResult() {
             </div>
 
             {/* 버튼 영역 */}
-            <div className="mt-6 flex justify-center space-x-16">
+            <div className="flex-1 flex flex-wrap items-center justify-center gap-4 sm:gap-8">
               <Link to="/startCBTI">
                 <button
                   type="button"
-                  className="py-2 px-9 bg-red-500 hover:bg-red-700 text-white text-xl font-semibold rounded-full shadow-md transition"
+                  className="py-2 px-6 sm:px-9 bg-red-500 hover:bg-red-700 text-white text-base sm:text-xl font-semibold rounded-full transition"
                 >
                   다시하기
                 </button>
@@ -91,7 +91,8 @@ function CBTIResult() {
               <Link to="/startCBTI">
                 <button
                   type="button"
-                   className="py-2 px-9 bg-green-500 hover:bg-green-700 text-white  text-xl font-semibold rounded-full shadow-md transition">
+                  className="py-2 px-6 sm:px-9 bg-green-500 hover:bg-green-700 text-white text-base sm:text-xl font-semibold rounded-full transition"
+                >
                   내 차 보기
                 </button>
               </Link>
