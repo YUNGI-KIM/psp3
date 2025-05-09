@@ -1,13 +1,16 @@
+import Header from"../buy/functions/Header"
+import AdminSupportFn from "../buy/functions/AdminSupportFn";
 
 
 function receviedSupport(){
 
-
-const status=["Completed","Incomplete"]
-
-
 return(
+    <div>
+    {Header()}    
+    
+
 <div class="container max-w-3xl px-4 mx-auto sm:px-8">
+
     <div class="py-8">
         <div class="flex flex-row justify-between w-full mb-1 sm:mb-0">
             <h2 class="text-2xl leading-tight">
@@ -24,6 +27,7 @@ return(
                     </form>
                 </div>
             </div>
+
             <div class="px-4 py-4 -mx-4 overflow-x-auto sm:-mx-8 sm:px-8">
                 <div class="inline-block min-w-full overflow-hidden rounded-lg shadow">
                     <table class="min-w-full leading-normal">
@@ -47,80 +51,10 @@ return(
                         </thead>
                         <tbody>
 
-
-
-                                                {/* function gogo */}
-
-
-                            <tr>
-                                <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
-                                    <div class="flex items-center">
-                                        <div class="ml-3">
-                                            <p class="text-gray-900 whitespace-no-wrap">
-                                                Jean marc
-                                            </p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
-                                    <p class="text-gray-900 whitespace-no-wrap">
-                                        
-                                    </p>
-                                </td>
-                                <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
-                                    <p class="text-gray-900 whitespace-no-wrap">
-
-                                    </p>
-                                </td>
-                                <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
-                                    <span class="relative inline-block px-3 py-1 font-semibold leading-tight text-green-900">
-                                        <span aria-hidden="true" class="absolute inset-0 bg-green-200 rounded-full opacity-50">
-                                        </span>
-                                        <span class="relative">
-                                            {status[0]}
-                                        </span>
-                                    </span>
-                                </td>
-                                <td class="px-5 py-5 text-sm bg-white border-b border-gray-200">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">
-                                        Edit
-                                    </a>
-                                </td>
-                            </tr>
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                        {AdminSupportFn()}
+                        {AdminSupportFn()}
+                        {AdminSupportFn()}
+                        {AdminSupportFn()}
 
                         </tbody>
                     </table>
@@ -128,6 +62,7 @@ return(
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
     );
 } export default receviedSupport;
