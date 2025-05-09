@@ -113,7 +113,7 @@ const MainPage = () => {
                         animate="center"
                         exit="exit"
                         transition={{ duration: 0.5 }}
-                        className="flex justify-between items-center flex-grow gap-4 h-full"
+                        className="flex justify-between items-center flex-grow gap-4 h-full px-4"
                     >
                         {ClickButtonSlideLogo.slice(page, page + logosPerPage).map((logo, i) => (
                             <img
