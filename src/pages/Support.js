@@ -24,6 +24,7 @@ function Support() {
                 headers: {
                     "Content-Type": "application/json",
                 },
+                credentials: "include",
                 body: JSON.stringify({
                     title: `[고객지원] ${form.name} / ${form.phone}`,
                     content: `이메일: ${form.email}\n\n${form.content}`,
