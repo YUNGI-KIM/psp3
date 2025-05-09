@@ -21,7 +21,7 @@ const MainPage = () => {
     const { user } = useUser();
     const [index, setIndex] = useState(0);
     const [slidePage, setSlidePage] = useState(0);
-    const [direction, setDirection] = useState(1);
+    const [prevPage, setPrevPage] = useState(0);
 
     useEffect(() => {
         console.log("MainPage 감지: user 상태 변화", user);
@@ -49,17 +49,19 @@ const MainPage = () => {
 
     const SlideToLeft = () => {
         if (slidePage > 0) {
-            setDirection(-1);
+            setPrevPage(slidePage);
             setSlidePage(slidePage - 1);
         }
     };
 
     const SlideToRight = () => {
         if (slidePage + 6 < ClickButtonSlideLogo.length) {
-            setDirection(1);
+            setPrevPage(slidePage);
             setSlidePage(slidePage + 1);
         }
     };
+
+    const direction = slidePage > prevPage ? 1 : -1;
 
     return (
         <div className="flex flex-col w-full min-h-screen">
