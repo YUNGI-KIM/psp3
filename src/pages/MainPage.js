@@ -81,7 +81,7 @@ const MainPage = () => {
         <div className="flex flex-col w-full min-h-screen">
             <Header key={user ? user.id : "guest"} />
 
-            <div className="relative w-full h-[55vh] sm:h-[60vh]">
+            <div className="relative w-full h-[calc(100vh-125px)]">
                 <img
                     src={slidSrc[index].src}
                     onClick={() => navigate(slidSrc[index].href)}
@@ -99,7 +99,7 @@ const MainPage = () => {
                 </div>
             </div>
 
-            <div className="w-full h-[150px] flex justify-between items-center px-2 mt-4">
+            <div className="w-full h-[125px] flex justify-between items-center px-2 mt-4">
                 <svg onClick={SlideToLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:bg-yellow-100">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                 </svg>
