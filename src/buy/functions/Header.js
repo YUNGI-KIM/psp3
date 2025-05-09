@@ -9,7 +9,7 @@ function Header() {
 
     // user 상태가 바뀔 때마다 로그 찍기 (디버깅용)
     useEffect(() => {
-        console.log("🧠 Header user 상태 변경됨:", user);
+        console.log("Header user status Changed:", user);
     }, [user]);
 
     // 로그아웃 핸들러
@@ -21,17 +21,17 @@ function Header() {
             });
 
             if (response.ok) {
-                console.log("✅ 서버 로그아웃 성공");
+                console.log("Server Logout Success");
             } else {
-                console.warn("❌ 서버 로그아웃 실패");
+                console.warn("Server Logout failed");
             }
         } catch (error) {
-            console.error("🚨 서버 로그아웃 요청 실패:", error);
+            console.error("Server Logout req failed:", error);
         }
 
         localStorage.removeItem("user");
-        setUser(null); // ✅ user 상태 초기화
-        navigate("/login", { replace: true }); // ✅ 이동
+        setUser(null);
+        navigate("/login", { replace: true });
     };
 
     return (
