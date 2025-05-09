@@ -41,6 +41,7 @@ const MainPage = () => {
     const [index, setIndex] = useState(0);
     const [page, setPage] = useState(0);
     const [logosPerPage, setLogosPerPage] = useState(5);
+    const [logosPerPage, setLogosPerPage] = useState(5);
     const directionRef = useRef(0);
 
     useEffect(() => {
@@ -56,9 +57,6 @@ const MainPage = () => {
         return () => window.removeEventListener('resize', updateLogoCount);
     }, []);
 
-    useEffect(() => {
-        console.log("MainPage 감지: user 상태 변화", user);
-    }, [user]);
     useEffect(() => {
         console.log("MainPage 감지: user 상태 변화", user);
     }, [user]);
@@ -141,7 +139,7 @@ const MainPage = () => {
                                 alt={logo.alt}
                                 src={logo.src}
                                 onClick={() => navigate(logo.href)}
-                                className={`h-full object-contain cursor-pointer hover:bg-yellow-100 rounded-lg ${logo.alt === "hyundai" ? "scale-110" : ""}`}
+                                className="h-full object-contain cursor-pointer hover:bg-yellow-100 rounded-lg"
                                 style={{ maxWidth: `${100 / logosPerPage - 2}%` }}
                             />
                         ))}
