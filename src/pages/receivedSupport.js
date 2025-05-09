@@ -30,16 +30,16 @@ return(
                     <table class="min-w-full leading-normal">
                         <thead>
                             <tr>
-                                <th scope="col" class="px-5 py-3 text-sm font-normal text-left text-gray-800  bg-white border-b border-gray-200">
+                                <th scope="col" class="px-5 py-3 text-sm font-normal text-left text-gray-800  bg-white border-b border-gray-200  hidden md:table-cell">
                                     User
                                 </th>
-                                <th scope="col" class="px-5 py-3 text-sm font-normal text-left text-gray-800  bg-white border-b border-gray-200">
+                                <th scope="col" class="px-5 py-3 text-sm font-normal text-left text-gray-800  bg-white border-b border-gray-200  hidden md:table-cell">
                                     Requset at
                                 </th>
                                 <th scope="col" class="px-5 py-3 text-sm font-normal text-left text-gray-800  bg-white border-b border-gray-200">
                                     Title
                                 </th>
-                                <th scope="col" class="px-5 py-3 text-sm font-normal text-left text-gray-800  bg-white border-b border-gray-200">
+                                <th scope="col" class="px-5 py-3 text-sm font-normal text-left text-gray-800  bg-white border-b border-gray-200 hidden md:table-cell">
                                     Status
                                 </th>
                                 <th scope="col" class="px-5 py-3 text-sm font-normal text-left text-gray-800  bg-white border-b border-gray-200">
