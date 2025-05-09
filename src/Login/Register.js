@@ -71,8 +71,11 @@ function Register() {
                                className="rounded-lg border-gray-300 w-full py-2 px-4 shadow-sm" />
                     </div>
                     <div className="mb-2">
-
-                        <input type="password" id="create-account-password-confirm" placeholder="Password Confirm" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}
+                        <input type="password" id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}
+                               className="rounded-lg border-gray-300 w-full py-2 px-4 shadow-sm" />
+                    </div>
+                    <div className="mb-2">
+                        <input type="password" id="password-confirm" placeholder="Password Confirm" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}
                                className="rounded-lg border-gray-300 w-full py-2 px-4 shadow-sm" />
                     </div>
 
