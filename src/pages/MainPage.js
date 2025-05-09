@@ -16,6 +16,21 @@ import Benz from '../Image/companyLogo/Benz.png';
 import Header from '../buy/functions/Header';
 import { useUser } from "../contexts/UserContext";
 
+const variants = {
+    enter: (direction) => ({
+        x: direction === 1 ? 300 : -300,
+        opacity: 0
+    }),
+    center: {
+        x: 0,
+        opacity: 1
+    },
+    exit: (direction) => ({
+        x: direction === 1 ? -300 : 300,
+        opacity: 0
+    })
+};
+
 const MainPage = () => {
     const navigate = useNavigate();
     const { user } = useUser();
@@ -88,12 +103,14 @@ const MainPage = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                 </svg>
 
-                <AnimatePresence mode="wait">
+                <AnimatePresence mode="wait" custom={directionRef.current}>
                     <motion.div
                         key={page}
-                        initial={{ x: directionRef.current === 1 ? 300 : -300, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        exit={{ x: directionRef.current === 1 ? -300 : 300, opacity: 0 }}
+                        custom={directionRef.current}
+                        variants={variants}
+                        initial="enter"
+                        animate="center"
+                        exit="exit"
                         transition={{ duration: 0.5 }}
                         className="flex justify-center items-center flex-grow gap-4"
                     >
