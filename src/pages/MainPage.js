@@ -40,8 +40,21 @@ const MainPage = () => {
     const { user } = useUser();
     const [index, setIndex] = useState(0);
     const [page, setPage] = useState(0);
+    const [logosPerPage, setLogosPerPage] = useState(5);
     const directionRef = useRef(0);
-    const logosPerPage = 5;
+
+    useEffect(() => {
+        const updateLogoCount = () => {
+            const width = window.innerWidth;
+            if (width < 400) setLogosPerPage(2);
+            else if (width < 640) setLogosPerPage(3);
+            else if (width < 768) setLogosPerPage(4);
+            else setLogosPerPage(5);
+        };
+        updateLogoCount();
+        window.addEventListener('resize', updateLogoCount);
+        return () => window.removeEventListener('resize', updateLogoCount);
+    }, []);
 
     useEffect(() => {
         console.log("MainPage 감지: user 상태 변화", user);
@@ -128,7 +141,8 @@ const MainPage = () => {
                                 alt={logo.alt}
                                 src={logo.src}
                                 onClick={() => navigate(logo.href)}
-                                className="w-full max-w-[19%] h-full object-contain cursor-pointer hover:bg-yellow-100 rounded-lg"
+                                className="h-full object-contain cursor-pointer hover:bg-yellow-100 rounded-lg"
+                                style={{ maxWidth: `${100 / logosPerPage - 2}%` }}
                             />
                         ))}
                     </motion.div>
