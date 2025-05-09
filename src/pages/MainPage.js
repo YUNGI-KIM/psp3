@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import FindCar from '../Image/sideImage/FindCar.png';
@@ -30,6 +31,9 @@ const variants = {
         opacity: 0
     })
 };
+import { useUser } from "../contexts/UserContext";
+
+
 
 const MainPage = () => {
     const navigate = useNavigate();
@@ -39,6 +43,9 @@ const MainPage = () => {
     const directionRef = useRef(0);
     const logosPerPage = 5;
 
+    useEffect(() => {
+        console.log("MainPage 감지: user 상태 변화", user);
+    }, [user]);
     useEffect(() => {
         console.log("MainPage 감지: user 상태 변화", user);
     }, [user]);
@@ -81,7 +88,7 @@ const MainPage = () => {
         <div className="flex flex-col w-full min-h-screen">
             <Header key={user ? user.id : "guest"} />
 
-            <div className="relative w-full h-[calc(100vh-125px)]">
+            <div className="relative w-full h-[calc(100vh-125px-170px)]">
                 <img
                     src={slidSrc[index].src}
                     onClick={() => navigate(slidSrc[index].href)}
