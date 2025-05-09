@@ -45,15 +45,20 @@ const MainPage = () => {
     { alt: "Benz", src: Benz, href: '/Benz' },
   ];
 
+  const getVisibleLogos = () => {
+    const isMobile = window.innerWidth < 768;
+    return isMobile ? ClickButtonSlideLogo : ClickButtonSlideLogo.slice(0, 5);
+  };
+
   return (
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col w-full min-h-screen">
         <Header key={user ? user.id : "guest"} />
 
-        <div className="relative w-full">
+        <div className="relative w-full h-[60vh] sm:h-[70vh]">
           <img
               src={slidSrc[index].src}
               onClick={() => navigate(slidSrc[index].href)}
-              className="w-full h-auto max-h-[400px] object-cover cursor-pointer"
+              className="w-full h-full object-cover cursor-pointer"
               alt={`Slide ${index + 1}`}
           />
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
@@ -67,14 +72,14 @@ const MainPage = () => {
           </div>
         </div>
 
-        <div className="w-full overflow-x-auto flex px-4 py-6 space-x-4 scrollbar-hide">
-          {ClickButtonSlideLogo.map((logo, i) => (
+        <div className="w-full max-w-6xl mx-auto flex flex-wrap justify-center px-4 py-8 gap-4">
+          {getVisibleLogos().map((logo, i) => (
               <img
                   key={i}
                   alt={logo.alt}
                   src={logo.src}
                   onClick={() => navigate(logo.href)}
-                  className="min-w-[80px] h-16 md:h-20 object-contain cursor-pointer hover:bg-yellow-100 rounded-lg"
+                  className="w-24 h-16 sm:w-28 sm:h-20 object-contain cursor-pointer hover:bg-yellow-100 rounded-lg"
               />
           ))}
         </div>
