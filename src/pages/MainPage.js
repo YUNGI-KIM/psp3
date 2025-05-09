@@ -13,9 +13,7 @@ import kgm from '../Image/companyLogo/kgm.svg';
 import Reno from '../Image/companyLogo/Renault.png';
 import BMW from '../Image/companyLogo/BMW.SVG'
 import Header from '../buy/functions/Header';
-import LoginSessionVerify from "../buy/functions/LoginSessionVerify";
-import { useUser } from "../contexts/UserContext";
-
+import {useUser} from "../contexts/UserContext";
 
 
 const MainPage = () => {
