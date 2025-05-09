@@ -139,7 +139,7 @@ const MainPage = () => {
                                 alt={logo.alt}
                                 src={logo.src}
                                 onClick={() => navigate(logo.href)}
-                                className="h-full object-contain cursor-pointer hover:bg-yellow-100 rounded-lg"
+                                className={`h-full object-contain cursor-pointer hover:bg-yellow-100 rounded-lg ${logo.alt === "hyundai" ? "scale-110" : ""}`}
                                 style={{ maxWidth: `${100 / logosPerPage - 2}%` }}
                             />
                         ))}
