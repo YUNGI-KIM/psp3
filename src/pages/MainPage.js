@@ -81,7 +81,7 @@ const MainPage = () => {
         <div className="flex flex-col w-full min-h-screen">
             <Header key={user ? user.id : "guest"} />
 
-            <div className="relative w-full h-[calc(100vh-125px)]">
+            <div className="relative w-full h-[calc(100vh-125px-147px)]">
                 <img
                     src={slidSrc[index].src}
                     onClick={() => navigate(slidSrc[index].href)}
