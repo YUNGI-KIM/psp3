@@ -5,7 +5,6 @@ function StartCBTI() {
     <div className="relative">
       {/* 배경 오버레이 */}
       <div className="fixed inset-0 bg-gray-500 opacity-75 z-0"></div>
-
       {/* 모달 박스 */}
       <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full sm:max-w-2xl px-4 z-10">
         <div className="rounded-3xl p-12 bg-white shadow-2xl h-[500px]">
@@ -14,7 +13,7 @@ function StartCBTI() {
               <span className="block">
                 어떤 차를 사야할지 고민되시나요?
               </span>
-              <span className="block text-indigo-500">
+              <span className="block text-indigo-500 mt-3">
                 쉽고 빠른 CBTI검사를 통해
               </span>
               <span className="block text-indigo-500">
@@ -37,6 +36,5 @@ function StartCBTI() {
       </div>
     </div>
   );
-}
-
+} 
 export default StartCBTI;
