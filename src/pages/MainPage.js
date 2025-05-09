@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import FindCar from '../Image/sideImage/FindCar.png';
@@ -17,6 +16,8 @@ import Benz from '../Image/companyLogo/Benz.png';
 import Header from '../buy/functions/Header';
 import { useUser } from "../contexts/UserContext";
 
+
+
 const variants = {
     enter: (direction) => ({
         x: direction === 1 ? 300 : -300,
@@ -31,7 +32,6 @@ const variants = {
         opacity: 0
     })
 };
-import { useUser } from "../contexts/UserContext";
 
 
 
