@@ -41,7 +41,6 @@ const MainPage = () => {
     const [index, setIndex] = useState(0);
     const [page, setPage] = useState(0);
     const [logosPerPage, setLogosPerPage] = useState(5);
-    const [logosPerPage, setLogosPerPage] = useState(5);
     const directionRef = useRef(0);
 
     useEffect(() => {
