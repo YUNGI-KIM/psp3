@@ -1,6 +1,3 @@
-
-
-
 function DropDown() {
     return (
         <div className="mt-1 border rounded-full mr-10 ml-10 ">
