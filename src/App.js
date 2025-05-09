@@ -16,6 +16,7 @@ import Gen from './buy/genesis';
 import BMW from './buy/BMW';
 import Estimator from "./pages/Estimator";
 import AccForCar from "./pages/AccForCar";
+import ReceviedSupport from"./pages/receivedSupport";
 import { UserProvider } from './contexts/UserContext';
 import LoginSessionVerify from "./buy/functions/LoginSessionVerify";
 
@@ -33,6 +34,7 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/support" element={<Support />} />
               <Route path="/estimator" element={<Estimator />} />
+              <Route path='/receviedSupport' element={<ReceviedSupport/>} />
               <Route path="/accForCar" element={<AccForCar />} />
               <Route path="/hyundai" element={<Hyundai />} />
               <Route path="/kia" element={<Kia />} />
@@ -40,6 +42,8 @@ function App() {
               <Route path="/reno" element={<Reno />} />
               <Route path="/Chevo" element={<Chevo />} />
               <Route path="/Gen" element={<Gen />} />
+              <Route path="/BMW" element={<BMW />} />
+              
 
             </Routes>
           </BrowserRouter>
