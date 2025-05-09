@@ -7,10 +7,7 @@ function receviedSupport(){
 return(
     <div>
     {Header()}    
-    
-
 <div class="container max-w-3xl px-4 mx-auto sm:px-8">
-
     <div class="py-8">
         <div class="flex flex-row justify-between w-full mb-1 sm:mb-0">
             <h2 class="text-2xl leading-tight">
@@ -33,19 +30,19 @@ return(
                     <table class="min-w-full leading-normal">
                         <thead>
                             <tr>
-                                <th scope="col" class="px-5 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-white border-b border-gray-200">
+                                <th scope="col" class="px-5 py-3 text-sm font-normal text-left text-gray-800  bg-white border-b border-gray-200">
                                     User
                                 </th>
-                                <th scope="col" class="px-5 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-white border-b border-gray-200">
+                                <th scope="col" class="px-5 py-3 text-sm font-normal text-left text-gray-800  bg-white border-b border-gray-200">
                                     Requset at
                                 </th>
-                                <th scope="col" class="px-5 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-white border-b border-gray-200">
-                                    title
+                                <th scope="col" class="px-5 py-3 text-sm font-normal text-left text-gray-800  bg-white border-b border-gray-200">
+                                    Title
                                 </th>
-                                <th scope="col" class="px-5 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-white border-b border-gray-200">
-                                    status
+                                <th scope="col" class="px-5 py-3 text-sm font-normal text-left text-gray-800  bg-white border-b border-gray-200">
+                                    Status
                                 </th>
-                                <th scope="col" class="px-5 py-3 text-sm font-normal text-left text-gray-800 uppercase bg-white border-b border-gray-200">
+                                <th scope="col" class="px-5 py-3 text-sm font-normal text-left text-gray-800  bg-white border-b border-gray-200">
                                 </th>
                             </tr>
                         </thead>
