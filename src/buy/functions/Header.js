@@ -7,12 +7,10 @@ function Header() {
     const { user, setUser } = useUser();
     const navigate = useNavigate();
 
-    // user 상태가 바뀔 때마다 로그 찍기 (디버깅용)
     useEffect(() => {
         console.log("Header user status Changed:", user);
     }, [user]);
 
-    // 로그아웃 핸들러
     const handleLogout = async () => {
         try {
             const response = await fetch("https://clos21.kr/logout", {
@@ -35,19 +33,19 @@ function Header() {
     };
 
     return (
-        <div>
+        <div className="w-full">
             {/* 상단 헤더 */}
-            <div className="flex items-center justify-between p-4">
+            <div className="flex flex-col sm:flex-row items-center justify-between p-4 gap-4 sm:gap-0">
                 <a href="/">
                     <img className="w-40" src={Logo} alt="Logo" />
                 </a>
 
                 {/* 검색창 */}
-                <div className="flex-1 flex justify-center">
+                <div className="w-full sm:w-auto flex justify-center">
                     <input
                         type="search"
                         placeholder="Search"
-                        className="border rounded-full px-4 py-2 w-40 sm:w-140 ml-15.5 focus:outline-none text-base"
+                        className="border rounded-full px-4 py-2 w-full sm:w-80 focus:outline-none text-base"
                     />
                     <button type="submit" className="relative p-2 rounded-full">
                         <svg
@@ -69,10 +67,10 @@ function Header() {
                 </div>
 
                 {/* 로그인/로그아웃 버튼 */}
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-2 sm:space-x-4">
                     {user ? (
                         <>
-                            <span className="text-black text-base font-semibold">{user.name}님</span>
+                            <span className="text-black text-base font-semibold whitespace-nowrap">{user.name}님</span>
                             <button
                                 onClick={handleLogout}
                                 className="px-4 py-2 bg-gray-50 hover:bg-gray-400 text-black rounded-lg text-base"
@@ -100,13 +98,13 @@ function Header() {
             </div>
 
             {/* 내비게이션 메뉴 */}
-            <nav className="flex-1 bg-black text-gray-300 p-4 md:flex justify-center text-lg">
-                <div className="flex justify-between w-full max-w-screen-xlg mx-auto px-4 md:px-10 lg:px-20 xl:px-32">
-                    <a href="/#" className="text-gray-300 hover:text-yellow-200 px-3 py-2 rounded-md text-sm font-medium">차량구매</a>
-                    <a href="/AccForCar" className="text-gray-300 hover:text-yellow-200 px-3 py-2 rounded-md text-sm font-medium">차량용품</a>
-                    <a href="/Estimator" className="text-gray-300 hover:text-yellow-200 px-3 py-2 rounded-md text-sm font-medium">견적</a>
-                    <a href="/#" className="text-gray-300 hover:text-yellow-200 px-3 py-2 rounded-md text-sm font-medium">차량정보</a>
-                    <a href="/Support" className="text-gray-300 hover:text-yellow-200 px-3 py-2 rounded-md text-sm font-medium">고객지원</a>
+            <nav className="bg-black text-gray-300 p-4 text-sm sm:text-base">
+                <div className="flex flex-wrap justify-center gap-2 sm:gap-6 max-w-screen-xl mx-auto">
+                    <a href="/#" className="text-gray-300 hover:text-yellow-200 px-3 py-2 rounded-md font-medium">차량구매</a>
+                    <a href="/AccForCar" className="text-gray-300 hover:text-yellow-200 px-3 py-2 rounded-md font-medium">차량용품</a>
+                    <a href="/Estimator" className="text-gray-300 hover:text-yellow-200 px-3 py-2 rounded-md font-medium">견적</a>
+                    <a href="/#" className="text-gray-300 hover:text-yellow-200 px-3 py-2 rounded-md font-medium">차량정보</a>
+                    <a href="/Support" className="text-gray-300 hover:text-yellow-200 px-3 py-2 rounded-md font-medium">고객지원</a>
                 </div>
             </nav>
         </div>
