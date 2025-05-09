@@ -37,6 +37,7 @@ const MainPage = () => {
     const [index, setIndex] = useState(0);
     const [page, setPage] = useState(0);
     const directionRef = useRef(0);
+    const logosPerPage = 5;
 
     useEffect(() => {
         console.log("MainPage 감지: user 상태 변화", user);
@@ -70,7 +71,7 @@ const MainPage = () => {
     };
 
     const SlideToRight = () => {
-        if (page + 6 < ClickButtonSlideLogo.length) {
+        if (page + logosPerPage < ClickButtonSlideLogo.length) {
             directionRef.current = 1;
             setPage((prev) => prev + 1);
         }
@@ -80,7 +81,7 @@ const MainPage = () => {
         <div className="flex flex-col w-full min-h-screen">
             <Header key={user ? user.id : "guest"} />
 
-            <div className="relative w-full h-[60vh] sm:h-[70vh]">
+            <div className="relative w-full h-[55vh] sm:h-[60vh]">
                 <img
                     src={slidSrc[index].src}
                     onClick={() => navigate(slidSrc[index].href)}
@@ -98,7 +99,7 @@ const MainPage = () => {
                 </div>
             </div>
 
-            <div className="w-full flex justify-between items-center px-2 mt-12">
+            <div className="w-full h-[150px] flex justify-between items-center px-2 mt-4">
                 <svg onClick={SlideToLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:bg-yellow-100">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                 </svg>
@@ -112,15 +113,15 @@ const MainPage = () => {
                         animate="center"
                         exit="exit"
                         transition={{ duration: 0.5 }}
-                        className="flex justify-center items-center flex-grow gap-4"
+                        className="flex justify-between items-center flex-grow gap-4 h-full"
                     >
-                        {ClickButtonSlideLogo.slice(page, page + 6).map((logo, i) => (
+                        {ClickButtonSlideLogo.slice(page, page + logosPerPage).map((logo, i) => (
                             <img
                                 key={i}
                                 alt={logo.alt}
                                 src={logo.src}
                                 onClick={() => navigate(logo.href)}
-                                className="flex-1 max-w-[15%] h-16 sm:h-20 object-contain cursor-pointer hover:bg-yellow-100 rounded-lg"
+                                className="w-full max-w-[19%] h-full object-contain cursor-pointer hover:bg-yellow-100 rounded-lg"
                             />
                         ))}
                     </motion.div>
