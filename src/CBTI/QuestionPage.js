@@ -69,16 +69,16 @@ function QuestionPage() {
           </div>
 
           {/* 버튼 영역 */}
-          <div className="flex-1 flex items-center justify-center space-x-16">
+          <div className="flex-1 flex flex-wrap items-center justify-center gap-4 sm:gap-8">
             <button
               onClick={() => handleAnswer("yes")}
-              className="py-2 px-9 bg-green-500 hover:bg-green-700 text-white  text-xl font-semibold rounded-full shadow-md transition"
+              className="py-2 px-6 sm:px-9 bg-green-500 hover:bg-green-700 text-white text-base sm:text-xl font-semibold rounded-full transition"
             >
               그렇다
             </button>
             <button
               onClick={() => handleAnswer("no")}
-              className="py-2 px-9 bg-red-500 hover:bg-red-700 text-white text-xl font-semibold rounded-full shadow-md transition"
+              className="py-2 px-6 sm:px-9 bg-red-500 hover:bg-red-700 text-white text-base sm:text-xl font-semibold rounded-full transition"
             >
               아니다
             </button>
@@ -86,7 +86,7 @@ function QuestionPage() {
 
           {/* 하단 영역 */}
           <div className="h-[80px] flex flex-col justify-end space-y-6">
-            <div className="w-72 mx-auto">
+            <div className="w-52 sm:w-72  mx-auto">
               <div className="w-full h-5 bg-gray-300 rounded-full">
                 <div
                   className="h-full text-center text-sm text-white bg-green-500 rounded-full"
