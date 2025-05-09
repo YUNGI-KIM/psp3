@@ -20,6 +20,8 @@ const MainPage = () => {
   const navigate = useNavigate();
   const { user } = useUser();
   const [index, setIndex] = useState(0);
+  const [logoPage, setLogoPage] = useState(0);
+  const logosPerPage = 5;
 
   useEffect(() => {
     console.log("MainPage 감지: user 상태 변화", user);
@@ -45,9 +47,19 @@ const MainPage = () => {
     { alt: "Benz", src: Benz, href: '/Benz' },
   ];
 
-  const getVisibleLogos = () => {
-    const isMobile = window.innerWidth < 768;
-    return isMobile ? ClickButtonSlideLogo : ClickButtonSlideLogo.slice(0, 5);
+  const totalPages = Math.ceil(ClickButtonSlideLogo.length / logosPerPage);
+
+  const handleLogoPrev = () => {
+    if (logoPage > 0) setLogoPage(logoPage - 1);
+  };
+
+  const handleLogoNext = () => {
+    if (logoPage < totalPages - 1) setLogoPage(logoPage + 1);
+  };
+
+  const getCurrentLogoSlice = () => {
+    const start = logoPage * logosPerPage;
+    return ClickButtonSlideLogo.slice(start, start + logosPerPage);
   };
 
   return (
@@ -72,16 +84,23 @@ const MainPage = () => {
           </div>
         </div>
 
-        <div className="w-full max-w-6xl mx-auto flex flex-wrap justify-center px-4 py-8 gap-4">
-          {getVisibleLogos().map((logo, i) => (
-              <img
-                  key={i}
-                  alt={logo.alt}
-                  src={logo.src}
-                  onClick={() => navigate(logo.href)}
-                  className="w-24 h-16 sm:w-28 sm:h-20 object-contain cursor-pointer hover:bg-yellow-100 rounded-lg"
-              />
-          ))}
+        <div className="w-full max-w-6xl mx-auto px-4 py-8">
+          <div className="flex justify-between items-center mb-4">
+            <button onClick={handleLogoPrev} disabled={logoPage === 0} className="px-3 py-1 bg-gray-300 rounded disabled:opacity-50">◀</button>
+            <button onClick={handleLogoNext} disabled={logoPage >= totalPages - 1} className="px-3 py-1 bg-gray-300 rounded disabled:opacity-50">▶</button>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-4">
+            {getCurrentLogoSlice().map((logo, i) => (
+                <img
+                    key={i}
+                    alt={logo.alt}
+                    src={logo.src}
+                    onClick={() => navigate(logo.href)}
+                    className="w-24 h-16 sm:w-28 sm:h-20 object-contain cursor-pointer hover:bg-yellow-100 rounded-lg"
+                />
+            ))}
+          </div>
         </div>
       </div>
   );
