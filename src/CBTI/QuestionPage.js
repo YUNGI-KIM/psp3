@@ -58,7 +58,7 @@ function QuestionPage() {
 
           {/* 질문 영역 */}
           <div className="flex-1 flex items-center justify-center text-center">
-            <h2 className="text-3xl font-extrabold text-black leading-snug">
+            <h2 className="text-4xl font-extrabold text-black leading-snug">
               <span>{current.num}</span><br />
             </h2>
           </div>
@@ -85,11 +85,11 @@ function QuestionPage() {
           </div>
 
           {/* 하단 영역 */}
-          <div className="h-[80px] flex flex-col justify-end space-y-3">
+          <div className="h-[80px] flex flex-col justify-end space-y-6">
             <div className="w-72 mx-auto">
-              <div className="w-full h-4 bg-gray-300 rounded-full">
+              <div className="w-full h-5 bg-gray-300 rounded-full">
                 <div
-                  className="h-full text-center text-xs text-white bg-green-500 rounded-full"
+                  className="h-full text-center text-sm text-white bg-green-500 rounded-full"
                   style={{ width: current.progress }}
                 >
                   {current.progress}
