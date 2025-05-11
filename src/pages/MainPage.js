@@ -57,19 +57,6 @@ const MainPage = () => {
     }, []);
 
     useEffect(() => {
-        const updateLogoCount = () => {
-            const width = window.innerWidth;
-            if (width < 400) setLogosPerPage(2);
-            else if (width < 640) setLogosPerPage(3);
-            else if (width < 768) setLogosPerPage(4);
-            else setLogosPerPage(5);
-        };
-        updateLogoCount();
-        window.addEventListener('resize', updateLogoCount);
-        return () => window.removeEventListener('resize', updateLogoCount);
-    }, []);
-
-    useEffect(() => {
         console.log("MainPage 감지: user 상태 변화", user);
     }, [user]);
 
