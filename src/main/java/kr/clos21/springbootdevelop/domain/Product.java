@@ -23,55 +23,78 @@ public class Product extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false)
     private Long id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(nullable = false)
+    private String name; // 예: 소나타
 
-    @Column(name = "description")
-    @ColumnDefault("''")
+    @Column
     private String description;
 
-    @Column(name = "original_price", nullable = false)
+    @Column(nullable = false)
     private Long originalPrice;
 
-    @Column(name = "discounted_price")
     private Long discountedPrice;
 
-    @Column(name = "status", nullable = false)
-    private String status;
+    @Column(nullable = false)
+    private String status; // 판매중, 시승가능 등
 
-    @ManyToOne
+    // ✅ 상품 카테고리: car, electronics, etc
+    @Column
+    private String category;
+
+    // ✅ 이미지 URL
+    @Column
+    private String image;
+
+    // ✅ 자동차 기능 리스트
+    @ElementCollection
+    @CollectionTable(name = "product_features", joinColumns = @JoinColumn(name = "product_id"))
+    @Column(name = "feature")
+    private List<String> features;
+
+    // ✅ 프론트 버튼 텍스트 (예: "시승 신청")
+    @Column
+    private String buttonText;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonBackReference
     private User user;
-
-    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    @OrderBy("id asc") // 댓글 정렬
-    @JsonManagedReference
-    private List<Review> reviews;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private Set<PurchasedProduct> purchasedProducts = new HashSet<>();
 
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OrderBy("id asc")
+    @JsonManagedReference
+    private List<Review> reviews;
+
     @Builder
-    public Product(String name, String description, Long originalPrice, String status, User user, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Product(String name, String description, Long originalPrice, String status, String category,
+                   String image, List<String> features, String buttonText, User user) {
         this.name = name;
         this.description = description;
         this.originalPrice = originalPrice;
         this.status = status;
+        this.category = category;
+        this.image = image;
+        this.features = features;
+        this.buttonText = buttonText;
         this.user = user;
-        super.createdAt = createdAt;
-        super.updatedAt = updatedAt;
     }
 
-    public void update(String name, String description, Long originalPrice, Long discountedPrice, String status) {
+    public void update(String name, String description, Long originalPrice, Long discountedPrice, String status,
+                       String category, String image, List<String> features, String buttonText) {
         this.name = name;
         this.description = description;
         this.originalPrice = originalPrice;
         this.discountedPrice = discountedPrice;
         this.status = status;
+        this.category = category;
+        this.image = image;
+        this.features = features;
+        this.buttonText = buttonText;
     }
 }

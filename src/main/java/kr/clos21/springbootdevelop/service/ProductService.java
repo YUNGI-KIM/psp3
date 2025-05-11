@@ -1,10 +1,8 @@
 package kr.clos21.springbootdevelop.service;
 
 import jakarta.persistence.EntityNotFoundException;
-import kr.clos21.springbootdevelop.domain.Article;
 import kr.clos21.springbootdevelop.domain.Product;
 import kr.clos21.springbootdevelop.dto.*;
-import kr.clos21.springbootdevelop.repository.ArticleRepository;
 import kr.clos21.springbootdevelop.repository.ProductRepository;
 import kr.clos21.springbootdevelop.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,19 +28,16 @@ public class ProductService {
         return productRepository.save(request.toEntity());
     }
 
-
     @Cacheable(cacheNames = "products")
     public List<Product> findAll() {
         return productRepository.findAll();
     }
-
 
     @Cacheable(cacheNames = "products", key = "#id")
     public Product findById(long id) {
         return productRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("not found : " + id));
     }
-
 
     @Cacheable(cacheNames = "products", key="#userId")
     public List<ProductResponse> findProductsByUserId(long userId) {
@@ -65,7 +60,17 @@ public class ProductService {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("not found : " + id));
 
-        product.update(request.getName(), request.getDescription(), request.getOriginalPrice(), request.getDiscountedPrice(), request.getStatus());
+        product.update(
+                request.getName(),
+                request.getDescription(),
+                request.getOriginalPrice(),
+                request.getDiscountedPrice(),
+                request.getStatus(),
+                request.getCategory(),
+                request.getImage(),
+                request.getFeatures(),
+                request.getButtonText()
+        );
 
         return product;
     }
