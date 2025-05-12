@@ -1,7 +1,29 @@
 import Header from "../buy/functions/Header"
 import AdminSupportFn from "../buy/functions/AdminSupportFn";
+import { useEffect, useState } from "react";
 
 function receviedSupport() {
+
+    const [articles, setArticles] = useState([]);
+
+    useEffect(() => {
+        fetch("https://clos21.kr/api/articles", {
+            method: "GET",
+            credentials: "include"
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error("Failed to fetch articles");
+                }
+                return res.json();
+            })
+            .then((data) => {
+                setArticles(data);
+            })
+            .catch((err) => {
+                console.error("Error loading articles:", err);
+            });
+    }, []);
 
     return (
         <div>
@@ -46,12 +68,9 @@ function receviedSupport() {
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                    {AdminSupportFn(0)}
-                                    {AdminSupportFn(1)}
-                                    {AdminSupportFn(2)}
-                                    {AdminSupportFn(3)}
-
+                                    {articles.map((article, index) => (
+                                        <AdminSupportFn key={index} data={article} />
+                                    ))}
                                 </tbody>
                             </table>
 
