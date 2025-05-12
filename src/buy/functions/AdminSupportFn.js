@@ -13,7 +13,7 @@ function AdminSupportFn(i) {
     ];
 
     const Data = [
-        { Name: "user", RequestDate: "2025/04/12", title: "집에 보내주세요", status: 1 },
+        { Name: "user", RequestDate: "2025/04/12", title: "집에 ㅁaaㅁㅁaaㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁaaaㅁㅁㅁㅁㅁ보ㅁㅁ내주세요", status: 1 },
         { Name: "aaaa", RequestDate: "2025/05/02", title: "asdfasfasf", status: 0 },
         { Name: "bbbb", RequestDate: "2025/04/30", title: "asdf", status: 0 },
         { Name: "cccc", RequestDate: "2025/05/01", title: "집에 보내주세요", status: 1 }
@@ -40,14 +40,14 @@ function AdminSupportFn(i) {
             </td>
 
             {/* 제목 (항상 보이게) */}
-            <td className="px-3 py-4.5 text-xs sm:px-4 sm:py-3 sm:text-sm md:px-5 md:py-5 md:text-base text-sm bg-white border-b border-gray-200">
+            <td className="px-3 py-4.5 text-xs break-all sm:px-4 sm:py-3 sm:text-sm md:px-5 md:py-5 md:text-base text-sm bg-white border-b border-gray-200">
                 <p className="text-gray-900 whitespace-no-wrap">
                     {Data[i].title}
                 </p>
             </td>
 
             {/* 상태 */}
-            <td className="py-2 text-xs sm:px-4 sm:py-3 sm:text-sm md:px-5 md:py-5 md:text-base bg-white border-b border-gray-200">
+            <td className="py-2 text-xs text-right sm:px-4 sm:py-3 sm:text-sm md:px-5 md:py-5 md:text-base bg-white border-b border-gray-200">
                 <span className={status[Data[i].status].text}>
                     <span aria-hidden="true" className={status[Data[i].status].color}></span>
                     <span className="relative">
@@ -57,7 +57,7 @@ function AdminSupportFn(i) {
             </td>
 
             {/* 답변 링크 (항상 보이게) */}
-            <td className="py-2 text-xs sm:px-4 sm:py-3 sm:text-sm md:px-5 md:py-5 md:text-base bg-white border-b border-gray-200">
+            <td className="py-2 px-2 text-xs text-right sm:px-4 sm:py-3 sm:text-sm md:px-5 md:py-5 md:text-base bg-white border-b border-gray-200">
                 <a href="#" className="text-indigo-600 hover:text-indigo-900">
                     Answer
                 </a>
