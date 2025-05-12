@@ -14,7 +14,7 @@ function AdminSupportFn(i) {
 
     const Data = [
         { Name: "user", RequestDate: "2025/04/12", title: "지금 이 문장은 자동으로 엔터가 쳐지는지 테스트를 하기 위해 있는 문장이니 수정을 엄금합니다.", status: 1 },
-        { Name: "aaaa", RequestDate: "2025/05/02", title: "received.js", status: 0 },
+        { Name: "aaaa", RequestDate: "2025/05/02", title: "receivec", status: 0 },
         { Name: "bbbb", RequestDate: "2025/04/30", title: "asdf", status: 0 },
         { Name: "cccc", RequestDate: "2025/05/01", title: "집에 보내주세요", status: 1 }
     ];
@@ -40,7 +40,7 @@ function AdminSupportFn(i) {
             </td>
 
             {/* 제목 (항상 보이게) */}
-            <td className="px-3 py-4.5 text-xs break-all sm:px-4 sm:py-3 sm:text-sm md:px-5 md:py-5 md:text-base text-sm bg-white border-b border-gray-200">
+            <td className="pl-3 pr-1 py-4.5 text-xs break-all sm:px-4 sm:py-3 sm:text-sm md:px-5 md:py-5 md:text-base text-sm bg-white border-b border-gray-200">
                 <p className="text-gray-900 whitespace-no-wrap">
                     {Data[i].title}
                 </p>
