@@ -16,7 +16,7 @@ import Gen from './buy/genesis';
 import BMW from './buy/BMW';
 import Estimator from "./pages/Estimator";
 import AccForCar from "./pages/AccForCar";
-import ReceviedSupport from"./pages/receivedSupport";
+import ReceviedSupport from "./pages/ReceivedSupport";
 import { UserProvider } from './contexts/UserContext';
 import LoginSessionVerify from "./buy/functions/LoginSessionVerify";
 
