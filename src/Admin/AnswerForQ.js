@@ -1,4 +1,3 @@
-import React from 'react';
 import Header from "../buy/functions/Header";
 
 function AnswerForQ() {
