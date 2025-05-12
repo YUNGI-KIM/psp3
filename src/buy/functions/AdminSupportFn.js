@@ -47,7 +47,7 @@ function AdminSupportFn({ data }) {
             </td>
 
             {/* 제목 (항상 보이게) */}
-            <td className="pl-3 pr-1 py-4.5 text-xs break-all sm:px-4 sm:py-3 sm:text-sm md:px-5 md:py-5 md:text-base text-sm bg-white border-b border-gray-200">
+            <td className="pl-3 pr-4 py-4.5 text-xs break-all sm:px-4 sm:py-3 sm:text-sm md:px-5 md:py-5 md:text-base text-sm bg-white border-b border-gray-200">
                 <p className="text-gray-900 whitespace-no-wrap">
                     {data.title}
                 </p>
