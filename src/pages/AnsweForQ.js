@@ -1,49 +1,88 @@
-import Header from "../buy/functions/Header"
+import React from 'react';
+import Header from "../buy/functions/Header";
 
 function AnswerForQ() {
-    const questions = [
-        { name: "user", requestDate: "2025/04/12", title: "테스트 제목입니다", detail: " 지금 이 문장은 자동으로 엔터가 쳐지는지 테스트를 하기 위해 있는 문장이니 수정을 엄금합니다.", status: 1 },
-        { name: "aaaa", requestDate: "2025/05/02", title: "receivec", status: 0 },
-        { name: "bbbb", requestDate: "2025/04/30", title: "asdf", status: 0 },
-        { name: "cccc", requestDate: "2025/05/01", title: "집에 보내주세요", status: 1 }
-    ]
+  const questions = [
+    {
+      name: "user",
+      requestDate: "2025/04/12",
+      title: "테스트 제목입니다",
+      detail:
+        "지금 이 문장은 자동으로 엔터가 쳐지는지 테스트를 하기 위해 있는 문장이니 수정을 엄금합니다.",
+      status: 1
+    },
+    { name: "aaaa", requestDate: "2025/05/02", title: "receivec", status: 0 },
+    { name: "bbbb", requestDate: "2025/04/30", title: "asdf", status: 0 },
+    { name: "cccc", requestDate: "2025/05/01", title: "집에 보내주세요", status: 1 }
+  ];
 
-    return (
-        <div>
-            {Header()}
+  // 두 번째 질문(인덱스 1)을 기반으로 답변 페이지 렌더링
+  const question = questions[1];
+  const detail = questions[0].detail;
 
-            <form class="flex justify-center w-full  space-x-3">
+  return (
+    <>
+      <Header />
+      <div className="container mx-auto px-4 sm:px-8 py-10">
+        <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
+          <h1 className="text-2xl font-semibold text-gray-800 mb-6">Answer Page</h1>
 
-                <div class="w-full  text-center max-w-2xl px-5 py-10 m-auto mt-10 bg-white rounded-lg shadow dark:bg-gray-800">
-                    Answer - {questions[1].title}
-                    <div class="mb-6 text-3xl font-light text-center text-gray-800 dark:text-white">
-                    </div>
+          {/* 질문 정보 요약 */}
+          <div className="space-y-2 mb-8">
+            <p className="text-gray-600">
+              <span className="font-medium">Request Date:</span> {question.requestDate}
+            </p>
+            <p className="text-gray-600">
+              <span className="font-medium">Title:</span> {question.title}
+            </p>
+            <p className="text-gray-600">
+              <span className="font-medium">User Name:</span> {question.name}
+            </p>
+            <p className="text-gray-600">
+              <span className="font-medium">Detail:</span> {detail}
+            </p>
+          </div>
 
-                    <div class="col-span-2">
-                        <div class="col-span-2 lg:col-span-1">
-                            <div class=" relative  py-5">
-                                <input type="text" id="title" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="title" />
-                            </div>
-                        </div>
-                        
-                        <div class="col-span-2">
-                            <label class="text-gray-700" for="name">
-                                <textarea class="flex-1 w-full px-4 py-2 text-base text-gray-700 placeholder-gray-400 bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" id="comment" placeholder="Enter your comment" name="comment" rows="5" cols="40">
-                                </textarea>
-                            </label>
-                        </div>
+          {/* 답변 폼 */}
+          <form className="space-y-6">
+            <div>
+              <label htmlFor="answerTitle" className="block text-gray-700 font-medium mb-2">
+                답변 제목
+              </label>
+              <input
+                type="text"
+                id="answerTitle"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                placeholder="답변 제목을 입력하세요"
+              />
+            </div>
 
-                        <div class="col-span-2 text-right">
-                            <button type="submit" class="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
-                                Send
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </form>
+            <div>
+              <label htmlFor="comment" className="block text-gray-700 font-medium mb-2">
+                답변 내용
+              </label>
+              <textarea
+                id="comment"
+                name="comment"
+                rows="5"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                placeholder="답변 내용을 입력하세요"
+              ></textarea>
+            </div>
+
+            <div className="text-right">
+              <button
+                type="submit"
+                className="px-6 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              >
+                Send
+              </button>
+            </div>
+          </form>
         </div>
-
-    );
-
+      </div>
+    </>
+  );
 }
+
 export default AnswerForQ;
