@@ -31,9 +31,11 @@ function ReceviedSupport() {
             <div class="container max-w-3xl px-4 mx-auto sm:px-8">
                 <div class="py-8">
                     <div class="flex flex-row justify-between w-full mb-1 sm:mb-0">
-                        <h2 class="text-2xl leading-tight">
+                        <div className=" py-5 sm:py-0">
+                        <h2 class="text-2xl leading-tight text-center">
                             Admin Support Session
                         </h2>
+                        </div>
                         <div class="text-end">
                             <form class="flex flex-col justify-center w-3/4 max-w-sm space-y-3 md:flex-row md:w-full md:space-x-3 md:space-y-0">
                                 <div class=" relative ">
