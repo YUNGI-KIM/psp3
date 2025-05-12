@@ -16,7 +16,7 @@ function AnswerForQ() {
     { name: "cccc", requestDate: "2025/05/01", title: "집에 보내주세요", status: 1 }
   ];
 
-  // 두 번째 질문(인덱스 1)을 기반으로 답변 페이지 렌더링
+
   const question = questions[1];
   const detail = questions[0].detail;
 
@@ -27,7 +27,7 @@ function AnswerForQ() {
         <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
           <h1 className="text-2xl font-semibold text-gray-800 mb-6">Answer Page</h1>
 
-          {/* 질문 정보 요약 */}
+
           <div className="space-y-2 mb-8">
             <p className="text-gray-600">
               <span className="font-medium">Request Date:</span> {question.requestDate}
@@ -43,11 +43,11 @@ function AnswerForQ() {
             </p>
           </div>
 
-          {/* 답변 폼 */}
+
           <form className="space-y-6">
             <div>
               <label htmlFor="answerTitle" className="block text-gray-700 font-medium mb-2">
-                답변 제목
+              제목
               </label>
               <input
                 type="text"
@@ -59,7 +59,7 @@ function AnswerForQ() {
 
             <div>
               <label htmlFor="comment" className="block text-gray-700 font-medium mb-2">
-                답변 내용
+              내용
               </label>
               <textarea
                 id="comment"
