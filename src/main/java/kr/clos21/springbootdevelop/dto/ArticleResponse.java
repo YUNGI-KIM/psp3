@@ -13,6 +13,7 @@ public class ArticleResponse {
     private final String title;
     private final String content;
     private final Long userId;
+    private final String name;
     private final List<CommentResponse> comments;
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
@@ -23,6 +24,7 @@ public class ArticleResponse {
         this.title = article.getTitle();
         this.content = article.getContent();
         this.userId = article.getUser().getId();
+        this.name = article.getUser().getName();
         this.comments = article.getComments().stream().map(CommentResponse::new).collect(Collectors.toList());
         this.createdAt = article.getCreatedAt();
         this.updatedAt = article.getUpdatedAt();
