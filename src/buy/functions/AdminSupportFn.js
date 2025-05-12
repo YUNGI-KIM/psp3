@@ -1,3 +1,9 @@
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/ko";
+dayjs.extend(relativeTime);
+dayjs.locale("ko");
+
 function AdminSupportFn({ data }) {
     const status = [
         {
@@ -11,6 +17,12 @@ function AdminSupportFn({ data }) {
             text: "relative inline-block px-1.5 py-0.5 text-xs sm:px-3 sm:py-1 sm:text-sm md:px-4 md:py-1.5 md:text-base font-semibold leading-tight text-green-900"
         }
     ];
+
+    const now = dayjs();
+    const created = dayjs(data.createdAt);
+    const formatted = created.format("YYYY.MM.DD HH:mm");
+    const relative = created.fromNow();
+    const showRelative = now.diff(created, "hour") <= 24;
 
     return (
         <tr>
@@ -28,7 +40,7 @@ function AdminSupportFn({ data }) {
             {/* 요청 날짜 */}
             <td className="px-5 py-5 text-sm bg-white border-b border-gray-200 hidden md:table-cell">
                 <p className="text-gray-900 whitespace-no-wrap">
-                    {data.createdAt}
+                    {showRelative ? relative : formatted}
                 </p>
             </td>
 
