@@ -1,13 +1,12 @@
 package kr.clos21.springbootdevelop.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 public class UpdateArticleRequest {
     private String title;
     private String content;
+    private int status = 0;
 }

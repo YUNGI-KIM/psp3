@@ -74,6 +74,19 @@ public class ArticleApiController {
         }
     }
 
+    @GetMapping("/api/articles/status/{status}")
+    public ResponseEntity<List<ArticleResponse>> findArticlesByStatus(@PathVariable int status) {
+        try {
+            List<ArticleResponse> articles = articleService.findArticlesByStatus(status)
+                    .stream()
+                    .toList();
+            return ResponseEntity.ok()
+                    .body(articles);
+        } catch (EntityNotFoundException ENFE) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @DeleteMapping("/api/articles/{id}")
     public ResponseEntity<Void> deleteArticle(@PathVariable long id) {
         articleService.delete(id);
@@ -97,4 +110,3 @@ public class ArticleApiController {
     }
 
 }
-

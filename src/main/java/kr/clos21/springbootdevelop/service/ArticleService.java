@@ -65,8 +65,17 @@ public class ArticleService {
         Article article = articleRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("not found : " + id));
 
-        article.update(request.getTitle(), request.getContent());
+        article.update(request.getTitle(), request.getContent(), request.getStatus());
 
         return article;
     }
+
+    @Cacheable(cacheNames = "articles", key = "'status_' + #status")
+    public List<ArticleResponse> findArticlesByStatus(int status) {
+        List<Article> articles = articleRepository.findArticlesByStatus(status);
+        return articles.stream()
+                .map(ArticleResponse::new)
+                .collect(Collectors.toList());
+    }
 }
+

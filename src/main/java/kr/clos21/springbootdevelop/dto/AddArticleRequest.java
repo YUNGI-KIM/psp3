@@ -14,6 +14,7 @@ import kr.clos21.springbootdevelop.domain.Article;
 public class AddArticleRequest {
     private String title;
     private String content;
+    private int status = 0;
     @JsonIgnore
     private User user;
 
@@ -21,6 +22,7 @@ public class AddArticleRequest {
         return Article.builder()
                 .title(title)
                 .content(content)
+                .status(status)
                 .user(user)
                 .build();
     }

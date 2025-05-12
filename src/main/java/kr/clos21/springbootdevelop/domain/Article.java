@@ -31,6 +31,9 @@ public class Article extends BaseTimeEntity {
     @Column(name = "content", nullable = false)
     private String content;
 
+    @Column(name = "status", nullable = false, columnDefinition = "int default 0")
+    private int status;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     @JsonBackReference
@@ -42,16 +45,18 @@ public class Article extends BaseTimeEntity {
     private List<Comment> comments;
 
     @Builder
-    public Article(String title, String content, User user, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Article(String title, String content, User user, LocalDateTime createdAt, LocalDateTime updatedAt, int status) {
         this.title = title;
         this.content = content;
         this.user = user;
         super.createdAt = createdAt;
         super.updatedAt = updatedAt;
+        this.status = status;
     }
 
-    public void update(String title, String content) {
+    public void update(String title, String content, int status) {
         this.title = title;
         this.content = content;
+        this.status = status;
     }
 }

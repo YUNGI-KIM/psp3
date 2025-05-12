@@ -16,6 +16,7 @@ public class ArticleResponse {
     private final List<CommentResponse> comments;
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
+    private final int status;
 
     public ArticleResponse(Article article) {
         this.id = article.getId();
@@ -25,5 +26,6 @@ public class ArticleResponse {
         this.comments = article.getComments().stream().map(CommentResponse::new).collect(Collectors.toList());
         this.createdAt = article.getCreatedAt();
         this.updatedAt = article.getUpdatedAt();
+        this.status = article.getStatus();
     }
 }
