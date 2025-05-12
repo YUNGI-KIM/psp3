@@ -36,7 +36,7 @@ function App() {
               <Route path="/support" element={<Support />} />
               <Route path="/estimator" element={<Estimator />} />
               <Route path='/receviedSupport' element={<ReceviedSupport/>} />
-              <Route path='/AnsweForQ' element={<AnsweForQ/>} />
+              <Route path='/answeForQ' element={<AnsweForQ/>} />
               <Route path="/accForCar" element={<AccForCar />} />
               <Route path="/hyundai" element={<Hyundai />} />
               <Route path="/kia" element={<Kia />} />
