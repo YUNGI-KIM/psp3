@@ -62,7 +62,7 @@ function AdminSupportFn({ data }) {
             </td>
 
             {/* 답변 링크 (항상 보이게) */}
-            <td className="py-2 px-2 text-xs text-right sm:px-4 sm:py-3 sm:text-sm md:px-5 md:py-5 md:text-base bg-white border-b border-gray-200">
+            <td className="py-2 px-2.5 text-xs text-right sm:px-4 sm:py-3 sm:text-sm md:px-5 md:py-5 md:text-base bg-white border-b border-gray-200">
                 <a onClick={()=>navigate("/AnsweForQ")} className="text-indigo-600 hover:text-indigo-900">
                     Answer
                 </a>
