@@ -13,6 +13,5 @@ const questions=[
 
 
 ]
-return(
 
-);}
+}

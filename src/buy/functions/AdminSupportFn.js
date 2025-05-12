@@ -1,10 +1,12 @@
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko";
+import { useNavigate } from "react-router-dom";
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
 
 function AdminSupportFn({ data }) {
+    const navigate = useNavigate();
     const status = [
         {
             word: "Incomplete",
