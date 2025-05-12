@@ -19,6 +19,7 @@ import AccForCar from "./pages/AccForCar";
 import ReceviedSupport from"./pages/receivedSupport";
 import { UserProvider } from './contexts/UserContext';
 import LoginSessionVerify from "./buy/functions/LoginSessionVerify";
+import AnsweForQ from "./pages/AnsweForQ"
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
               <Route path="/support" element={<Support />} />
               <Route path="/estimator" element={<Estimator />} />
               <Route path='/receviedSupport' element={<ReceviedSupport/>} />
+              <Route path='/AnsweForQ' element={<AnsweForQ/>} />
               <Route path="/accForCar" element={<AccForCar />} />
               <Route path="/hyundai" element={<Hyundai />} />
               <Route path="/kia" element={<Kia />} />
@@ -43,7 +45,6 @@ function App() {
               <Route path="/Chevo" element={<Chevo />} />
               <Route path="/Gen" element={<Gen />} />
               <Route path="/BMW" element={<BMW />} />
-              
 
             </Routes>
           </BrowserRouter>
