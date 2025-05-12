@@ -2,7 +2,7 @@ import Header from "../buy/functions/Header"
 import AdminSupportFn from "../buy/functions/AdminSupportFn";
 import { useEffect, useState } from "react";
 
-function receviedSupport() {
+function ReceviedSupport() {
 
     const [articles, setArticles] = useState([]);
 
@@ -80,4 +80,4 @@ function receviedSupport() {
             </div>
         </div>
     );
-} export default receviedSupport;
+} export default ReceviedSupport;
