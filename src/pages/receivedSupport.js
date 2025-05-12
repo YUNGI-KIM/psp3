@@ -38,10 +38,10 @@ function receviedSupport() {
                                         <th scope="col" class="px-5 py-3 sm:px-2 sm:py-1 sm:text-sm text-sm font-normal text-left text-gray-800  bg-white border-b border-gray-200 ">
                                             Title
                                         </th>
-                                        <th scope="col" class="px-5 py-3 sm:px-2 sm:py-1 sm:text-sm text-sm font-normal text-left text-gray-800  bg-white border-b border-gray-200 ">
+                                        <th scope="col" class="px-5 py-3 sm:px-2 sm:py-1 sm:text-sm text-sm font-normal text-right text-gray-800  bg-white border-b border-gray-200 ">
                                             Status
                                         </th>
-                                        <th scope="col" class="px-5 py-3 sm:px-2 sm:py-1 sm:text-sm text-sm font-normal text-left text-gray-800  bg-white border-b border-gray-200 ">
+                                        <th scope="col" class="px-5 py-3 sm:px-2 sm:py-1 sm:text-sm text-sm font-normal text-right text-gray-800  bg-white border-b border-gray-200 ">
                                         </th>
                                     </tr>
                                 </thead>
