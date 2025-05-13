@@ -1,4 +1,4 @@
-import Header from "../buy/functions/Header";
+import Header from "../functions/Header";
 
 function AnswerForQ() {
   const questions = [

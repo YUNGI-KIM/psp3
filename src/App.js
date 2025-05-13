@@ -18,7 +18,7 @@ import AccForCar from "./pages/AccForCar";
 import ReceviedSupport from "./Admin/ReceivedSupport";
 import AdminMainPage from './Admin/AdminMain';
 import { UserProvider } from './contexts/UserContext';
-import LoginSessionVerify from "./buy/functions/LoginSessionVerify";
+import LoginSessionVerify from "./functions/LoginSessionVerify";
 import AnswerForQ from "./Admin/AnswerForQ"
 
 function App() {
