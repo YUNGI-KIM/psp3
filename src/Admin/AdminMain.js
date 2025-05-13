@@ -1,10 +1,8 @@
 
-import Header from '../buy/functions/Header';
-import DropDown from '../buy/functions/DropDown';
-import ReceivedSupport from '../Admin/ReceivedSupport';
+import Header from '../functions/Header';
 
 function AdminMainPage() {
-  // (임시) 모의 데이터
+
   const adminName = '홍길동';
   const adminRole = '슈퍼 관리자';
   const unansweredCount = 5;
@@ -39,19 +37,9 @@ function AdminMainPage() {
             />
           </div>
         </section>
-
-        {/* 4. 필터 바 */}
-        <section>
-          <DropDown />
-        </section>
-
-        {/* 5. 서포트 요청 테이블 */}
-        <section className="mt-6 overflow-x-auto">
-          <ReceivedSupport />
-        </section>
       </main>
     </div>
   );
 }
 
-export default AdminMainPage;
+export default AdminMainPage;33

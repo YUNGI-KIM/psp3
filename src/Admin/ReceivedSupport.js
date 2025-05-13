@@ -1,5 +1,5 @@
-import Header from "../buy/functions/Header"
-import AdminSupportFn from "../buy/functions/AdminSupportFn";
+import Header from "../functions/Header"
+import AdminSupportFn from "../functions/AdminSupportFn";
 import { useEffect, useState } from "react";
 
 function ReceviedSupport() {

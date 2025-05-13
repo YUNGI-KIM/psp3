@@ -13,7 +13,7 @@ import Reno from '../Image/companyLogo/Renault.png';
 import BMW from '../Image/companyLogo/BMW.SVG';
 import Audi from '../Image/companyLogo/Audi.png';
 import Benz from '../Image/companyLogo/Benz.png';
-import Header from '../buy/functions/Header';
+import Header from '../functions/Header';
 import { useUser } from "../contexts/UserContext";
 
 
