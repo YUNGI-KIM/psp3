@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../buy/functions/Header";
+import Header from "../functions/Header";
 
 function Support() {
     const navigate = useNavigate();
