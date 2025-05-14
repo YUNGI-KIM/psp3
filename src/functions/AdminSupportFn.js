@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko";
@@ -5,6 +6,7 @@ dayjs.extend(relativeTime);
 dayjs.locale("ko");
 
 function AdminSupportFn({ data }) {
+    const navigate = useNavigate();
     const status = [
         {
             word: "Incomplete",
@@ -45,7 +47,7 @@ function AdminSupportFn({ data }) {
             </td>
 
             {/* 제목 (항상 보이게) */}
-            <td className="px-3 py-4.5 text-xs sm:px-4 sm:py-3 sm:text-sm md:px-5 md:py-5 md:text-base text-sm bg-white border-b border-gray-200">
+            <td className="pl-3 pr-4 py-4.5 text-xs break-all sm:px-4 sm:py-3 sm:text-sm md:px-5 md:py-5 md:text-base text-sm bg-white border-b border-gray-200">
                 <p className="text-gray-900 whitespace-no-wrap">
                     {data.title}
                 </p>
@@ -62,8 +64,8 @@ function AdminSupportFn({ data }) {
             </td>
 
             {/* 답변 링크 (항상 보이게) */}
-            <td className="py-2 text-xs sm:px-4 sm:py-3 sm:text-sm md:px-5 md:py-5 md:text-base bg-white border-b border-gray-200">
-                <a href="#" className="text-indigo-600 hover:text-indigo-900">
+            <td className="py-2 px-2.5 text-xs text-right sm:px-4 sm:py-3 sm:text-sm md:px-5 md:py-5 md:text-base bg-white border-b border-gray-200">
+                <a onClick={()=>navigate("/AnsweForQ")} className="text-indigo-600 hover:text-indigo-900">
                     Answer
                 </a>
             </td>

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../../contexts/UserContext";
-import Logo from '../../Image/logo2.png';
+import { useUser } from "../contexts/UserContext";
+import Logo from '../Image/logo2.png';
 
 function Header() {
     const { user, setUser } = useUser();
@@ -36,7 +36,7 @@ function Header() {
         <div className="w-full">
             {/* 상단 헤더 */}
             <div className="flex flex-col lg:flex-row items-center justify-between p-4 gap-3 lg:gap-0 max-w-screen-xl mx-auto w-full px-4">
-                <a href="/">
+                <a href="/public">
                     <img className="w-32 sm:w-36 md:w-40" src={Logo} alt="Logo" />
                 </a>
 
@@ -100,10 +100,10 @@ function Header() {
             {/* 내비게이션 메뉴 */}
             <nav className="bg-black text-gray-300 p-2 sm:p-4 text-xs sm:text-sm md:text-base">
                 <div className="flex flex-wrap justify-center gap-1 sm:gap-4 md:gap-6 max-w-screen-xl mx-auto">
-                    <a href="/#" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">차량구매</a>
+                    <a href="/public#" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">차량구매</a>
                     <a href="/AccForCar" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">차량용품</a>
                     <a href="/Estimator" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">견적</a>
-                    <a href="/#" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">차량정보</a>
+                    <a href="/public#" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">차량정보</a>
                     <a href="/Support" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">고객지원</a>
                 </div>
             </nav>

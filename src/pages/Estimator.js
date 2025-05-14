@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { motion, useMotionValue, animate, useTransform } from "framer-motion";
-import Header from "../buy/functions/Header";
+import Header from "../functions/Header";
 
 const brands = {
     Hyundai: ["Avante", "Sonata", "Grandeur", "Santafe", "Casper", "Porter", "Ioniq6", "Palisade"],
