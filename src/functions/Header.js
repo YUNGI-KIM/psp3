@@ -36,7 +36,7 @@ function Header() {
         <div className="w-full">
             {/* 상단 헤더 */}
             <div className="flex flex-col lg:flex-row items-center justify-between p-4 gap-3 lg:gap-0 max-w-screen-xl mx-auto w-full px-4">
-                <a href="/public">
+                <a href="/">
                     <img className="w-32 sm:w-36 md:w-40" src={Logo} alt="Logo" />
                 </a>
 
