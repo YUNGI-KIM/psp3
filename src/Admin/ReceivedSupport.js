@@ -1,10 +1,5 @@
-<<<<<<<< HEAD:src/pages/ReceivedSupport.js
 import Header from "../buy/functions/Header"
 import AdminSupportFn from "../buy/functions/AdminSupportFn";
-========
-import Header from "../functions/Header"
-import AdminSupportFn from "../functions/AdminSupportFn";
->>>>>>>> origin/feature_lhs9275:src/Admin/ReceivedSupport.js
 import { useEffect, useState } from "react";
 
 function ReceviedSupport() {
