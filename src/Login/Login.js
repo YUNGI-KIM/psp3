@@ -24,11 +24,11 @@ function Login() {
 
             const data = await response.json();
 
-            console.log("📡 서버 응답 상태코드:", response.status, data);
+            console.log("res status:", response.status, data);
 
             if (!response.ok) {
-                console.warn("❌ 로그인 실패:", data.message);
-                setErrorMsg(data.message || "로그인 실패"); // ✅ 서버 메시지 있으면 표시
+                console.warn("Login failed:", data.message);
+                setErrorMsg(data.message || "로그인 실패"); // 서버 메시지 있으면 표시
                 return;
             }
 
@@ -41,16 +41,16 @@ function Login() {
             if (userResponse.ok) {
                 const userInfo = await userResponse.json();
                 localStorage.setItem("user", JSON.stringify(userInfo));
-                setUser(userInfo); // ✅ UserContext 상태 반영
+                setUser(userInfo);
                 alert("로그인 성공!");
 
                 window.location.href = "/";
             } else {
-                console.warn("❌ 세션 사용자 정보 불러오기 실패");
+                console.warn("Session load failed");
             }
         } catch (error) {
-            console.error("🚨 로그인 중 오류 발생:", error);
-            setErrorMsg("서버 오류 발생");
+            console.error("login error", error);
+            setErrorMsg("Server Error");
         }
     };
 

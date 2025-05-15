@@ -3,7 +3,7 @@ import { motion, useMotionValue, animate, useTransform } from "framer-motion";
 import Header from "../buy/functions/Header";
 
 const brands = {
-    Hyundai: ["Avante", "Sonata", "Grandeur"],
+    Hyundai: ["Avante", "Sonata", "Grandeur", "Santafe", "Casper", "Porter", "Ioniq6", "Palisade"],
     Kia: ["K5", "K7", "Carnival"],
 };
 
@@ -11,6 +11,11 @@ const basePrices = {
     Avante: 21000000,
     Sonata: 27000000,
     Grandeur: 38000000,
+    Santafe: 35000000,
+    Casper: 14000000,
+    Porter: 21000000,
+    Ioniq6: 50000000,
+    Palisade: 45000000,
     K5: 27000000,
     K7: 35000000,
     Carnival: 33000000,
@@ -26,6 +31,11 @@ const carImages = {
     Avante: "/image/Estimate/Hyundai/Avante/Avante.png",
     Sonata: "/image/Estimate/Hyundai/Sonata/Sonata.png",
     Grandeur: "/image/Estimate/Hyundai/Grandeur/Grandeur.png",
+    Santafe: "/image/Estimate/Hyundai/Santafe/santafe2.png",
+    Casper: "/image/Estimate/Hyundai/Casper/casper2.png",
+    Porter: "/image/Estimate/Hyundai/Porter/porter2.png",
+    Ioniq6: "/image/Estimate/Hyundai/Ioniq/ioniq.png",
+    Palisade: "/image/Estimate/Hyundai/Palisade/palisade2.png",
     K5: "/image/Estimate/Kia/K5/K5.jpg",
     K7: "/image/Estimate/Kia/K7/K7.jpg",
     Carnival: "/image/Estimate/Kia/Carnival/Carnival.webp",
@@ -41,7 +51,6 @@ export default function Estimator() {
     const price = useMotionValue(0);
 
     const acquisitionTax = useTransform(price, (value) => Math.floor(value * 0.07));
-
     const registrationFee = useTransform(acquisitionTax, (acqTax) =>
         acqTax + 2600 + 25000 + 55000
     );
@@ -129,7 +138,7 @@ export default function Estimator() {
                     <motion.img
                         src={carImages[model]}
                         alt={model}
-                        className="w-full h-48 object-cover rounded-lg mb-6"
+                        className="w-full sm:w-[500px] h-48 sm:h-[300px] object-contain rounded-lg mx-auto mb-6"
                         key={model + imageKey}
                         initial={{ opacity: 0.7, scale: 1 }}
                         animate={{ opacity: 1, scale: 1.02 }}

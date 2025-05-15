@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion"; // 추가
-
 import FindCar from '../Image/sideImage/FindCar.png';
 import CBTIGO from '../Image/sideImage/CBTIGO.png';
 import test3 from '../Image/sideImage/test3.png';
@@ -12,18 +11,17 @@ import gen from '../Image/companyLogo/gen.png';
 import kgm from '../Image/companyLogo/kgm.svg';
 import Reno from '../Image/companyLogo/Renault.png';
 import BMW from '../Image/companyLogo/BMW.SVG'
+import Audi from '../Image/companyLogo/Audi.png'
+import Benz from '../Image/companyLogo/Benz.png'
 import Header from '../buy/functions/Header';
-import LoginSessionVerify from "../buy/functions/LoginSessionVerify";
-import { useUser } from "../contexts/UserContext";
-
-
+import {useUser} from "../contexts/UserContext";
 
 const MainPage = () => {
   const navigate = useNavigate();
   const { user } = useUser();
   const [index, setIndex,] = useState(0);
   const [slidePage, setSlidePage] = useState(0);
-
+  const [direction, setDirection] = useState(1); // 1: 오른쪽, -1: 왼쪽
 
   useEffect(() => {
     console.log("MainPage 감지: user 상태 변화", user);
@@ -45,9 +43,6 @@ const MainPage = () => {
     }
   };
 
-
-
-
   const ClickButtonSlideLogo = [
     { alt: "hyundai", src: hyundai, href: '/hyundai' },
     { alt: " kia", src: kia, href: '/kia' },
@@ -56,21 +51,26 @@ const MainPage = () => {
     { alt: "kgm", src: kgm, href: '/kgm' },
     { alt: "gen", src: gen, href: '/Gen' },
     { alt: "BMW", src: BMW, href: '/BMW' },
+    { alt: "Audi", src: Audi, href: '/Audi' },
+    { alt: "Benz", src: Benz, href: '/Benz' },
     { alt: "BMW", src: BMW, href: '/BMW' },
     { alt: "BMW", src: BMW, href: '/BMW' },
     { alt: "BMW", src: BMW, href: '/BMW' },
-    { alt: "BMW", src: BMW, href: '/BMW' },
-    { alt: "BMW", src: BMW, href: '/BMW' },
-
-
-
   ];
 
-  const SlideToRight = () => {
-    setSlidePage(6);
-  };
+
   const SlideToLeft = () => {
-    setSlidePage(0);
+    if (slidePage > 0) {
+      setDirection(-1);
+      setSlidePage(slidePage - 1);
+    }
+  };
+
+  const SlideToRight = () => {
+    if (slidePage + 5 < ClickButtonSlideLogo.length - 1) {
+      setDirection(4);
+      setSlidePage(slidePage+4);
+    }
   };
 
 
@@ -105,13 +105,12 @@ const MainPage = () => {
         </svg>
 
         {/* 브랜드 로고 */}
-
         <AnimatePresence mode="wait">
           <motion.div
-            key={slidePage} // 슬라이드 인덱스가 변경될 때마다 새롭게 렌더링됨
-            initial={{ x: 300, opacity: 0 }}
+            key={slidePage}
+            initial={{ x: direction === 1 ? 300 : -300, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            exit={{ x: -300, opacity: 0 }}
+            exit={{ x: direction === 1 ? -300 : 300, opacity: 0 }}
             transition={{ duration: 0.5 }}
             className="flex justify-between items-center w-full px-6"
           >
@@ -123,7 +122,6 @@ const MainPage = () => {
               <img alt={ClickButtonSlideLogo[slidePage + 4].alt} src={ClickButtonSlideLogo[slidePage + 4].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage + 4].href)} className="w-35 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
               <img alt={ClickButtonSlideLogo[slidePage + 5].alt} src={ClickButtonSlideLogo[slidePage + 5].src} onClick={() => navigate(ClickButtonSlideLogo[slidePage + 5].href)} className="w-40 h-20 hover:bg-yellow-100 mx-2 cursor-pointer" />
             </div>
-
           </motion.div>
         </AnimatePresence>
 
