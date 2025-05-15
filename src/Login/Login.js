@@ -1,67 +1,113 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../contexts/UserContext";
 import Logo from "../Image/logo2.png";
 
-
 function Login() {
-    return (
+    const { setUser } = useUser();
+    const navigate = useNavigate();
+    const [userId, setUserId] = useState("");
+    const [password, setPassword] = useState("");
+    const [errorMsg, setErrorMsg] = useState("");
 
-        <div class="bg-white rounded-lg shadow sm:max-w-md sm:w-full sm:mx-auto sm:mt-60 sm:overflow-hidden">
-            <img alt="Logo" className="pl-6 pt-1"  src={Logo}/>
-            <div class="px-4 py-2 sm:px-10">
-                <div class="relative">
-                    <div class="absolute inset-0 flex items-center">
-                        <div class="w-full border-t border-gray-300">
-                        </div>
+    const handleLogin = async () => {
+        const formData = new FormData();
+        formData.append("username", userId);
+        formData.append("password", password);
+
+        try {
+            const response = await fetch("https://clos21.kr/login", {
+                method: "POST",
+                body: formData,
+                credentials: "include",
+            });
+
+            const data = await response.json();
+
+            console.log("res status:", response.status, data);
+
+            if (!response.ok) {
+                console.warn("Login failed:", data.message);
+                setErrorMsg(data.message || "로그인 실패"); // 서버 메시지 있으면 표시
+                return;
+            }
+
+            // 로그인 성공 후 세션 확인
+            const userResponse = await fetch("https://clos21.kr/user/me", {
+                method: "GET",
+                credentials: "include",
+            });
+
+            if (userResponse.ok) {
+                const userInfo = await userResponse.json();
+                localStorage.setItem("user", JSON.stringify(userInfo));
+                setUser(userInfo);
+                alert("로그인 성공!");
+
+                window.location.href = "/";
+            } else {
+                console.warn("Session load failed");
+            }
+        } catch (error) {
+            console.error("login error", error);
+            setErrorMsg("Server Error");
+        }
+    };
+
+    return (
+        <div className="bg-white rounded-lg shadow sm:max-w-md sm:w-full sm:mx-auto sm:mt-60 sm:overflow-hidden">
+            <img alt="Logo" className="pl-6 pt-1" src={Logo} />
+            <div className="px-4 py-2 sm:px-10">
+                <div className="relative">
+                    <div className="absolute inset-0 flex items-center">
+                        <div className="w-full border-t border-gray-300"></div>
                     </div>
-                    <div class="relative flex justify-center text-sm leading-5">
-                        <span class="px-2 text-gray-500 bg-white">
-                            Login Your Account
-                        </span>
+                    <div className="relative flex justify-center text-sm leading-5">
+                        <span className="px-2 text-gray-500 bg-white">Login Your Account</span>
                     </div>
                 </div>
-                <div class="mt-3">
-                    <div class="w-full space-y-6">
-                        <div class="w-full">
-                            <div class=" relative ">
-                                <input type="id" id="search-form-price" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Your ID" />
-                            </div>
-                        </div>
-                        <div class="w-full">
-                            <div class=" relative ">
-                                <input type="password" id="search-form-location" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Your PassWord" />
-                            </div>
-                        </div>
 
-                        <div>
-                            <span class="block w-full rounded-md ">
-                                <Link to="/">
-                                    <button type="button" class="py-2 px-4 bg-black hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-3xl ">
-                                        Login!
-                                    </button>
-                                </Link>
-                            </span>
-                        </div>
-                        <div>
-                            <span class="pb-2 block w-full rounded-md ">
-                                <Link to="/register">
-                                    <button type="button" class="py-2 px-4 bg-black hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-3xl ">
-                                        Resister
-                                    </button>
-                                </Link>
-                            </span>
-                        </div>
+                <div className="mt-3 w-full space-y-6">
+                    <input
+                        type="text"
+                        placeholder="Your ID"
+                        value={userId}
+                        onChange={(e) => setUserId(e.target.value)}
+                        className="rounded-lg border border-gray-300 w-full py-2 px-4 shadow-sm focus:ring-2 focus:ring-purple-600"
+                    />
+                    <input
+                        type="password"
+                        placeholder="Your Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="rounded-lg border border-gray-300 w-full py-2 px-4 shadow-sm focus:ring-2 focus:ring-purple-600"
+                    />
 
+                    {/* ✅ 오류 메시지 입력 폼 밑에 표시 */}
+                    {errorMsg && (
+                        <div className="text-red-500 text-sm text-center">{errorMsg}</div>
+                    )}
 
-                    </div>
+                    <button
+                        onClick={handleLogin}
+                        className="py-2 px-4 bg-black hover:bg-indigo-700 text-white w-full font-semibold rounded-3xl"
+                    >
+                        Login!
+                    </button>
+
+                    <button
+                        onClick={() => navigate('/register')}
+                        className="py-2 px-4 bg-black hover:bg-indigo-700 text-white w-full font-semibold rounded-3xl"
+                    >
+                        Register
+                    </button>
                 </div>
             </div>
-            <div class="px-4 py-4 border-t-2 border-gray-200 bg-gray-50 sm:px-10">
-                <p class="text-xs leading-5 text-gray-500">
-                    This data are test
-                </p>
+
+            <div className="px-4 py-4 border-t-2 border-gray-200 bg-gray-50 sm:px-10">
+                <p className="text-xs text-gray-500">This data are test</p>
             </div>
         </div>
-
     );
 }
 
