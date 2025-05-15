@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import StartCBTI from "./CBTI/StartCBTI";
@@ -6,39 +5,51 @@ import QuestionPage from "./CBTI/QuestionPage";
 import CBTIResult from "./CBTI/CBTIResult";
 import Login from "./Login/Login";
 import Register from "./Login/Register";
-import Support from "./Login/Support";
+import Support from "./pages/Support";
 import Hyundai from './buy/hyundai';
 import Kia from './buy/kia';
 import Kgm from './buy/kgm';
+import Reno from './buy/reno';
+import Chevo from './buy/chevo';
+import Gen from './buy/genesis';
+import BMW from './buy/BMW';
 import Estimator from "./pages/Estimator";
+import AccForCar from "./pages/AccForCar";
+import ReceviedSupport from "./Admin/ReceivedSupport";
+import AdminMainPage from './Admin/AdminMain';
+import { UserProvider } from './contexts/UserContext';
+import LoginSessionVerify from "./functions/LoginSessionVerify";
+import AnswerForQ from "./Admin/AnswerForQ"
 
 function App() {
-
-  
   return (
-    <div className='App'>
-    <BrowserRouter>
-    <Routes>
-      <Route path = "/" element={<MainPage/>} />
-      </Routes>
-      <Routes>
-      <Route path="/startCBTI" element={<StartCBTI/>} />  {/* 스타트 페이지 */}
-        <Route path="/QuestionPage" element={<QuestionPage />} />  {/* 질문페이지들 */}
-        <Route path="/result" element={<CBTIResult />} />  {/* 결과페이지 */}
-        </Routes>
-        <Routes>
-        <Route path="/login" element={<Login/>} />  {/* 로그인 페이지 */}
-        <Route path="/register" element={<Register/>} />  {/* 가입 페이지 */}
-        <Route path="/Support" element={<Support/>} /> 
-        <Route path="/Estimator" element={<Estimator/>} />
-    </Routes>
-    <Routes>
-        <Route path="/hyundai" element={<Hyundai/>} /> 
-        <Route path="/kia" element={<Kia/>} /> 
-        <Route path="/kgm" element={<Kgm/>} /> 
-    </Routes>
-    </BrowserRouter>
-    </div>
+        <UserProvider>
+          <BrowserRouter>
+            <LoginSessionVerify />
+            <Routes>
+              <Route path="/" element={<MainPage />} />
+              <Route path="/startCBTI" element={<StartCBTI />} />
+              <Route path="/QuestionPage" element={<QuestionPage />} />
+              <Route path="/result" element={<CBTIResult />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/support" element={<Support />} />
+              <Route path="/estimator" element={<Estimator />} />
+              <Route path='/receviedSupport' element={<ReceviedSupport/>} />
+              <Route path='/answerForQ' element={<AnswerForQ/>} />
+              <Route path='/adminMain' element={<AdminMainPage/>} />
+              <Route path="/accForCar" element={<AccForCar />} />
+              <Route path="/hyundai" element={<Hyundai />} />
+              <Route path="/kia" element={<Kia />} />
+              <Route path="/kgm" element={<Kgm />} />
+              <Route path="/reno" element={<Reno />} />
+              <Route path="/Chevo" element={<Chevo />} />
+              <Route path="/Gen" element={<Gen />} />
+              <Route path="/BMW" element={<BMW />} />
+
+            </Routes>
+          </BrowserRouter>
+        </UserProvider>
   );
 }
 
