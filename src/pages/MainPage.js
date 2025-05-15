@@ -83,14 +83,14 @@ const MainPage = () => {
     const SlideToLeft = () => {
         if (page > 0) {
             directionRef.current = -1;
-            setPage((prev) => prev - 1);
+            setPage((prev) => prev - 4);
         }
     };
 
     const SlideToRight = () => {
         if (page + logosPerPage < ClickButtonSlideLogo.length) {
             directionRef.current = 1;
-            setPage((prev) => prev + 1);
+            setPage((prev) => prev + 4);
         }
     };
 
