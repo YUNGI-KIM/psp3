@@ -105,7 +105,7 @@ function Header() {
                     <a href="/#" className="text-gray-300 hover:text-yellow-200 px-3 py-2 rounded-md text-sm font-medium">차량구매</a>
                     <a href="/AccForCar" className="text-gray-300 hover:text-yellow-200 px-3 py-2 rounded-md text-sm font-medium">차량용품</a>
                     <a href="/Estimator" className="text-gray-300 hover:text-yellow-200 px-3 py-2 rounded-md text-sm font-medium">견적</a>
-                    <a href="/#" className="text-gray-300 hover:text-yellow-200 px-3 py-2 rounded-md text-sm font-medium">차량정보</a>
+                    <a href="/CarInformation" className="text-gray-300 hover:text-yellow-200 px-3 py-2 rounded-md text-sm font-medium">차량정보</a>
                     <a href="/Support" className="text-gray-300 hover:text-yellow-200 px-3 py-2 rounded-md text-sm font-medium">고객지원</a>
                 </div>
             </nav>
