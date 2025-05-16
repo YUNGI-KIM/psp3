@@ -10,9 +10,10 @@ import chevrolet from '../Image/companyLogo/chevrolet.svg';
 import gen from '../Image/companyLogo/gen.png';
 import kgm from '../Image/companyLogo/kgm.svg';
 import Reno from '../Image/companyLogo/Renault.png';
-import BMW from '../Image/companyLogo/BMW.SVG';
+import BMW from '../Image/companyLogo/Bmw.png';
 import Audi from '../Image/companyLogo/Audi.png';
 import Benz from '../Image/companyLogo/Benz.png';
+import Tesla from '../Image/companyLogo/Tesla.png';
 import Header from '../functions/Header';
 import { useUser } from "../contexts/UserContext";
 
@@ -78,22 +79,34 @@ const MainPage = () => {
         { alt: "BMW", src: BMW, href: '/BMW' },
         { alt: "Audi", src: Audi, href: '/Audi' },
         { alt: "Benz", src: Benz, href: '/Benz' },
+        { alt: "Tesla", src: Tesla, href: '/Tesla' },
     ];
 
     const SlideToLeft = () => {
-        if (page > 0) {
+        const prevPage = page - logosPerPage;
+            if (prevPage >= 0) {
+                directionRef.current = -1;
+                setPage(prevPage);
+        } else {
+        // 처음에 도달했으면 맨 뒤로 이동
             directionRef.current = -1;
-            setPage((prev) => prev - 4);
-        }
-    };
+            const remainder = ClickButtonSlideLogo.length % logosPerPage;
+            const lastFullPageStart = ClickButtonSlideLogo.length - (remainder === 0 ? logosPerPage : remainder);
+            setPage(lastFullPageStart);
+    }
+};
 
     const SlideToRight = () => {
-        if (page + logosPerPage < ClickButtonSlideLogo.length) {
+        const nextPage = page + logosPerPage;
+        if (nextPage < ClickButtonSlideLogo.length) {
             directionRef.current = 1;
-            setPage((prev) => prev + 4);
-        }
-    };
-
+            setPage(nextPage);
+        } else {
+        // 끝에 도달했으므로 처음으로 돌아가기
+            directionRef.current = 1;
+            setPage(0);
+    }
+};
     return (
         <div className="flex flex-col w-full min-h-screen overflow-hidden">
             <Header key={user ? user.id : "guest"} />
