@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import StartCBTI from "./CBTI/StartCBTI";
@@ -17,8 +16,11 @@ import BMW from './buy/BMW';
 import Estimator from "./pages/Estimator";
 import AccForCar from "./pages/AccForCar";
 import CarInformation from "./pages/CarInformation";
+import ReceviedSupport from "./Admin/ReceivedSupport";
+import AdminMainPage from './Admin/AdminMain';
 import { UserProvider } from './contexts/UserContext';
-import LoginSessionVerify from "./buy/functions/LoginSessionVerify";
+import LoginSessionVerify from "./functions/LoginSessionVerify";
+import AnswerForQ from "./Admin/AnswerForQ"
 
 function App() {
   return (
@@ -34,6 +36,9 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/support" element={<Support />} />
               <Route path="/estimator" element={<Estimator />} />
+              <Route path='/receviedSupport' element={<ReceviedSupport/>} />
+              <Route path='/answerForQ' element={<AnswerForQ/>} />
+              <Route path='/adminMain' element={<AdminMainPage/>} />
               <Route path="/accForCar" element={<AccForCar />} />
               <Route path="/CarInformation" element={<CarInformation />} />
               <Route path="/hyundai" element={<Hyundai />} />
@@ -42,6 +47,7 @@ function App() {
               <Route path="/reno" element={<Reno />} />
               <Route path="/Chevo" element={<Chevo />} />
               <Route path="/Gen" element={<Gen />} />
+              <Route path="/BMW" element={<BMW />} />
 
             </Routes>
           </BrowserRouter>
