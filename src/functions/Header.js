@@ -45,7 +45,7 @@ function Header() {
                     <input
                         type="search"
                         placeholder="Search"
-                        className="border rounded-full px-4 py-2 w-full max-w-xs sm:max-w-sm md:max-w-md lg:w-80 focus:outline-none text-sm md:text-base"
+                        className="border rounded-full px-4 py-2 w-full max-w-xs sm:max-w-sm md:max-w-md lg:w-192 focus:outline-none text-sm md:text-base"
                     />
                     <button type="submit" className="relative p-2 rounded-full">
                         <svg
