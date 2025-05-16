@@ -20,6 +20,7 @@ import AdminMainPage from './Admin/AdminMain';
 import { UserProvider } from './contexts/UserContext';
 import LoginSessionVerify from "./functions/LoginSessionVerify";
 import AnswerForQ from "./Admin/AnswerForQ"
+import Buy from "./buy/buy";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/support" element={<Support />} />
               <Route path="/estimator" element={<Estimator />} />
+              <Route path="/buy" element={<Buy />} />
               <Route path='/receviedSupport' element={<ReceviedSupport/>} />
               <Route path='/answerForQ' element={<AnswerForQ/>} />
               <Route path='/adminMain' element={<AdminMainPage/>} />
