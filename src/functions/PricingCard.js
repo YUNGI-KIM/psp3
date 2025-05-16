@@ -1,9 +1,9 @@
 import React from 'react';
 
-import productImage1 from '../../Image/Estimate/Hyundai/Sonata/sonataInterior.png';
-import productImage2 from '../../Image/Estimate/Hyundai/Sonata/sonataInterior.png';
-import carImage1 from '../../Image/Estimate/Hyundai/Sonata/sonataInterior.png';
-import carImage2 from '../../Image/Estimate/Hyundai/Sonata/sonataInterior.png';
+import productImage1 from '../Image/Estimate/Hyundai/Sonata/sonataInterior.png';
+import productImage2 from '../Image/Estimate/Hyundai/Sonata/sonataInterior.png';
+import carImage1 from '../Image/Estimate/Hyundai/Sonata/sonataInterior.png';
+import carImage2 from '../Image/Estimate/Hyundai/Sonata/sonataInterior.png';
 
 const defaultProductsData = [
     { id: 1, name: '스마트폰', category: '전자기기', image: productImage1, features: ['6.7인치 올레드 디스플레이', '트리플 카메라 시스템', '5G 지원', '방수 및 방진 기능', '고속 충전'], price: '120만', buttonText: '구매하기' },

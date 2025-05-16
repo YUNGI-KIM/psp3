@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../buy/functions/Header";
+import Header from "../functions/Header";
 import Avante from "../Image/Estimate/Hyundai/Avante/Avante.png";
 import Casper from "../Image/Estimate/Hyundai/Casper/casper.png";
 import Grandeur from "../Image/Estimate/Hyundai/Grandeur/Grandeur.png";
 import Ioniq from "../Image/Estimate/Hyundai/Ioniq/ioniq.png";
 import Palisade from "../Image/Estimate/Hyundai/Palisade/Palisade.png";
 import K5 from "../Image/Estimate/Kia/Carnival/Carnival.webp";
-import K9 from "../Image/Estimate/Kia/K7/K7.jpg";
+import K9 from "../Image/Estimate/Kia/K9/K9.png";
 import { AnimatePresence, motion } from "framer-motion";
 
 const brandList = ["현대", "기아", "제네시스","르노","쉐보레","KGM","BMW","아우디","벤츠"];

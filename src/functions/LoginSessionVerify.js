@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useUser } from "../../contexts/UserContext"; // Context 가져오기
+import { useUser } from "../contexts/UserContext"; // Context 가져오기
 
 export default function LoginSessionVerify() {
     const { setUser } = useUser(); // Context 사용!
