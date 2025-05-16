@@ -88,7 +88,7 @@ const MainPage = () => {
                 directionRef.current = -1;
                 setPage(prevPage);
         } else {
-        // 처음에 도달했으면 맨 뒤로 이동
+        
             directionRef.current = -1;
             const remainder = ClickButtonSlideLogo.length % logosPerPage;
             const lastFullPageStart = ClickButtonSlideLogo.length - (remainder === 0 ? logosPerPage : remainder);
@@ -102,7 +102,7 @@ const MainPage = () => {
             directionRef.current = 1;
             setPage(nextPage);
         } else {
-        // 끝에 도달했으므로 처음으로 돌아가기
+        
             directionRef.current = 1;
             setPage(0);
     }
@@ -128,8 +128,22 @@ const MainPage = () => {
                 </div>
             </div>
 
-            <div className="w-full h-[125px] flex justify-between items-center px-2 mt-4">
-                <svg onClick={SlideToLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out">
+            <div className="w-full h-[125px] flex justify-between items-center px-2 mt-4"
+                style={{
+                    minWidth: '400px',    // 최소 너비 고정 (원하는 값으로 조절)
+                    maxWidth: '100%',     // 최대 너비 제한
+                    gap: '16px',          // 간격 고정 (Tailwind gap-4에 대응)
+                    }}>
+                <svg
+                    onClick={SlideToLeft}
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="4"
+                    stroke="currentColor"
+                    className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out"
+                    style={{ flexShrink: 0 }} // 크기 고정 방지
+                    >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                 </svg>
 
@@ -143,7 +157,11 @@ const MainPage = () => {
                         exit="exit"
                         transition={{ duration: 0.5 }}
                         className="flex justify-between items-center flex-grow gap-4 h-full px-4 overflow-hidden"
-                    >
+                        style={{
+                            minWidth: 'calc(100% - 88px)', // 좌우 화살표 제외한 영역 고정 (화살표 w-10 = 40px + 여백)
+                            boxSizing: 'border-box',
+                            }}
+                        >
                         {ClickButtonSlideLogo.slice(page, page + logosPerPage).map((logo, i) => (
                             <img
                                 key={i}
@@ -157,8 +175,17 @@ const MainPage = () => {
                     </motion.div>
                 </AnimatePresence>
 
-                <svg onClick={SlideToRight} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                <svg
+                    onClick={SlideToRight}
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="4"
+                    stroke="currentColor"
+                    className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out"
+                    style={{ flexShrink: 0 }}
+                >                    
+                <path strokeLinecap="round" strokeLinejoin="round" d="m3 4.5 7.5 7.5-7.5 7.5" />
                 </svg>
             </div>
         </div>
