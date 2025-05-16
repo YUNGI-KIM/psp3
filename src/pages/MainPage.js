@@ -5,6 +5,7 @@ import FindCar from '../Image/sideImage/FindCar.png';
 import main from '../Image/sideImage/main.jpg';
 import main2 from '../Image/sideImage/main2.jpg';
 import main3 from '../Image/sideImage/main3.jpg';
+import main4 from '../Image/sideImage/main4.jpg';
 import hyundai from '../Image/companyLogo/hyundai.svg';
 import kia from '../Image/companyLogo/kia.svg';
 import chevrolet from '../Image/companyLogo/chevrolet.svg';
@@ -67,6 +68,7 @@ const MainPage = () => {
         { src: main, href: '/startCBTI'},
         { src: main2, href: '/startCBTI'},
         { src: main3, href: '/startCBTI'},
+        { src: main4, href: '/startCBTI'},
     ];
 
     const handleButtonClick = (i) => setIndex(i);
