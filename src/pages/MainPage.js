@@ -1,6 +1,6 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {useNavigate} from "react-router-dom";
-import {motion, AnimatePresence} from "framer-motion";
+import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import FindCar from '../Image/sideImage/FindCar.png';
 import CBTIGO from '../Image/sideImage/CBTIGO.png';
 import test3 from '../Image/sideImage/test3.png';
@@ -15,7 +15,9 @@ import Audi from '../Image/companyLogo/Audi.png';
 import Benz from '../Image/companyLogo/Benz.png';
 import Tesla from '../Image/companyLogo/Tesla.png';
 import Header from '../functions/Header';
-import {useUser} from "../contexts/UserContext";
+import { useUser } from "../contexts/UserContext";
+
+
 
 const variants = {
     enter: (direction) => ({
@@ -32,9 +34,11 @@ const variants = {
     })
 };
 
+
+
 const MainPage = () => {
     const navigate = useNavigate();
-    const {user} = useUser();
+    const { user } = useUser();
     const [index, setIndex] = useState(0);
     const [page, setPage] = useState(0);
     const [logosPerPage, setLogosPerPage] = useState(5);
@@ -58,24 +62,24 @@ const MainPage = () => {
     }, [user]);
 
     const slidSrc = [
-        {src: FindCar, href: '/startCBTI'},
-        {src: CBTIGO, href: '/startCBTI'},
-        {src: test3, href: '/startCBTI'},
+        { src: FindCar, href: '/startCBTI' },
+        { src: CBTIGO, href: '/startCBTI' },
+        { src: test3, href: '/startCBTI' },
     ];
 
     const handleButtonClick = (i) => setIndex(i);
 
     const ClickButtonSlideLogo = [
-        {alt: "hyundai", src: hyundai, href: '/hyundai'},
-        {alt: "kia", src: kia, href: '/kia'},
-        {alt: "chevrolet", src: chevrolet, href: '/Chevo'},
-        {alt: "Reno", src: Reno, href: '/Reno'},
-        {alt: "kgm", src: kgm, href: '/kgm'},
-        {alt: "gen", src: gen, href: '/Gen'},
-        {alt: "BMW", src: BMW, href: '/BMW'},
-        {alt: "Audi", src: Audi, href: '/Audi'},
-        {alt: "Benz", src: Benz, href: '/Benz'},
-        {alt: "Tesla", src: Tesla, href: '/Tesla'},
+        { alt: "hyundai", src: hyundai, href: '/hyundai' },
+        { alt: "kia", src: kia, href: '/kia' },
+        { alt: "chevrolet", src: chevrolet, href: '/Chevo' },
+        { alt: "Reno", src: Reno, href: '/Reno' },
+        { alt: "kgm", src: kgm, href: '/kgm' },
+        { alt: "gen", src: gen, href: '/Gen' },
+        { alt: "BMW", src: BMW, href: '/BMW' },
+        { alt: "Audi", src: Audi, href: '/Audi' },
+        { alt: "Benz", src: Benz, href: '/Benz' },
+        { alt: "Tesla", src: Tesla, href: '/Tesla' },
     ];
 
     const SlideToLogoLeft = () => {
@@ -208,6 +212,7 @@ const MainPage = () => {
                                 alt={logo.alt}
                                 src={logo.src}
                                 onClick={() => navigate(logo.href)}
+                                title={logo.alt}
                                 className="h-full object-contain cursor-pointer transform transition-transform duration-300 hover:scale-105 ease-in-out"
                                 style={{maxWidth: `${100 / logosPerPage - 2}%`}}
                             />
