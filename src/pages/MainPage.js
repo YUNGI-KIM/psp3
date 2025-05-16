@@ -125,7 +125,7 @@ const MainPage = () => {
         <div className="flex flex-col w-full min-h-screen overflow-hidden">
             <Header key={user ? user.id : "guest"}/>
             <div className="relative w-full h-[calc(100vh-125px-170px)]">
-                <div className="absolute bottom-80 left-1/100 transform -translate-x-1/2 flex space-x-2">
+                <div className="absolute left-1/100 top-5/10 transform -translate-x-1/2 flex space-x-2">
                     <svg
                         onClick={SlideToLeft}
                         xmlns="http://www.w3.org/2000/svg"
@@ -145,7 +145,7 @@ const MainPage = () => {
                     className="w-full h-full object-cover cursor-pointer"
                     alt={`Slide ${index + 1}`}
                 />
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                <div className="absolute bottom-4 left-1/2 transform  -translate-x-1/2 flex space-x-2">
                     {slidSrc.map((_, i) => (
                         <button
                             key={i}
@@ -154,7 +154,7 @@ const MainPage = () => {
                         />
                     ))}
                 </div>
-                <div className="absolute bottom-80 left-995/1000 transform -translate-x-1/2 flex space-x-2">
+                <div className="absolute  left-995/1000 transform top-5/10 -translate-x-1/2  flex space-x-2">
                     <svg
                         onClick={SlideToRight}
                         xmlns="http://www.w3.org/2000/svg"
@@ -179,7 +179,7 @@ const MainPage = () => {
                     gap: '16px',          // 간격 고정 (Tailwind gap-4에 대응)
                     }}>
                 <svg
-                    onClick={SlideToLeft}
+                    onClick={SlideToLogoLeft}
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
