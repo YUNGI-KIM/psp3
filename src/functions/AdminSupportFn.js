@@ -1,7 +1,7 @@
+import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko";
-import { useNavigate } from "react-router-dom";
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
 
