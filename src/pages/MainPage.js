@@ -13,8 +13,10 @@ import Reno from '../Image/companyLogo/Renault.png';
 import BMW from '../Image/companyLogo/BMW.SVG';
 import Audi from '../Image/companyLogo/Audi.png';
 import Benz from '../Image/companyLogo/Benz.png';
-import Header from '../buy/functions/Header';
+import Header from '../functions/Header';
 import { useUser } from "../contexts/UserContext";
+
+
 
 const variants = {
     enter: (direction) => ({
@@ -31,13 +33,28 @@ const variants = {
     })
 };
 
+
+
 const MainPage = () => {
     const navigate = useNavigate();
     const { user } = useUser();
     const [index, setIndex] = useState(0);
     const [page, setPage] = useState(0);
+    const [logosPerPage, setLogosPerPage] = useState(5);
     const directionRef = useRef(0);
-    const logosPerPage = 5;
+
+    useEffect(() => {
+        const updateLogoCount = () => {
+            const width = window.innerWidth;
+            if (width < 400) setLogosPerPage(2);
+            else if (width < 640) setLogosPerPage(3);
+            else if (width < 768) setLogosPerPage(4);
+            else setLogosPerPage(5);
+        };
+        updateLogoCount();
+        window.addEventListener('resize', updateLogoCount);
+        return () => window.removeEventListener('resize', updateLogoCount);
+    }, []);
 
     useEffect(() => {
         console.log("MainPage 감지: user 상태 변화", user);
@@ -66,14 +83,14 @@ const MainPage = () => {
     const SlideToLeft = () => {
         if (page > 0) {
             directionRef.current = -1;
-            setPage((prev) => prev - 1);
+            setPage((prev) => prev - 4);
         }
     };
 
     const SlideToRight = () => {
         if (page + logosPerPage < ClickButtonSlideLogo.length) {
             directionRef.current = 1;
-            setPage((prev) => prev + 1);
+            setPage((prev) => prev + 4);
         }
     };
 
@@ -81,7 +98,7 @@ const MainPage = () => {
         <div className="flex flex-col w-full min-h-screen">
             <Header key={user ? user.id : "guest"} />
 
-            <div className="relative w-full h-[calc(100vh-125px)]">
+            <div className="relative w-full h-[calc(100vh-125px-170px)]">
                 <img
                     src={slidSrc[index].src}
                     onClick={() => navigate(slidSrc[index].href)}
@@ -121,7 +138,8 @@ const MainPage = () => {
                                 alt={logo.alt}
                                 src={logo.src}
                                 onClick={() => navigate(logo.href)}
-                                className="w-full max-w-[19%] h-full object-contain cursor-pointer hover:bg-yellow-100 rounded-lg"
+                                className={`h-full object-contain cursor-pointer hover:bg-yellow-100 rounded-lg`}
+                                style={{ maxWidth: `${100 / logosPerPage - 2}%` }}
                             />
                         ))}
                     </motion.div>
