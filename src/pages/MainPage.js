@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import React, {useEffect, useRef, useState} from 'react';
+import {useNavigate} from "react-router-dom";
+import {motion, AnimatePresence} from "framer-motion";
 import FindCar from '../Image/sideImage/FindCar.png';
 import CBTIGO from '../Image/sideImage/CBTIGO.png';
 import test3 from '../Image/sideImage/test3.png';
@@ -15,9 +15,7 @@ import Audi from '../Image/companyLogo/Audi.png';
 import Benz from '../Image/companyLogo/Benz.png';
 import Tesla from '../Image/companyLogo/Tesla.png';
 import Header from '../functions/Header';
-import { useUser } from "../contexts/UserContext";
-
-
+import {useUser} from "../contexts/UserContext";
 
 const variants = {
     enter: (direction) => ({
@@ -34,11 +32,9 @@ const variants = {
     })
 };
 
-
-
 const MainPage = () => {
     const navigate = useNavigate();
-    const { user } = useUser();
+    const {user} = useUser();
     const [index, setIndex] = useState(0);
     const [page, setPage] = useState(0);
     const [logosPerPage, setLogosPerPage] = useState(5);
@@ -62,55 +58,83 @@ const MainPage = () => {
     }, [user]);
 
     const slidSrc = [
-        { src: FindCar, href: '/startCBTI' },
-        { src: CBTIGO, href: '/startCBTI' },
-        { src: test3, href: '/startCBTI' },
+        {src: FindCar, href: '/startCBTI'},
+        {src: CBTIGO, href: '/startCBTI'},
+        {src: test3, href: '/startCBTI'},
     ];
 
     const handleButtonClick = (i) => setIndex(i);
 
     const ClickButtonSlideLogo = [
-        { alt: "hyundai", src: hyundai, href: '/hyundai' },
-        { alt: "kia", src: kia, href: '/kia' },
-        { alt: "chevrolet", src: chevrolet, href: '/Chevo' },
-        { alt: "Reno", src: Reno, href: '/Reno' },
-        { alt: "kgm", src: kgm, href: '/kgm' },
-        { alt: "gen", src: gen, href: '/Gen' },
-        { alt: "BMW", src: BMW, href: '/BMW' },
-        { alt: "Audi", src: Audi, href: '/Audi' },
-        { alt: "Benz", src: Benz, href: '/Benz' },
-        { alt: "Tesla", src: Tesla, href: '/Tesla' },
+        {alt: "hyundai", src: hyundai, href: '/hyundai'},
+        {alt: "kia", src: kia, href: '/kia'},
+        {alt: "chevrolet", src: chevrolet, href: '/Chevo'},
+        {alt: "Reno", src: Reno, href: '/Reno'},
+        {alt: "kgm", src: kgm, href: '/kgm'},
+        {alt: "gen", src: gen, href: '/Gen'},
+        {alt: "BMW", src: BMW, href: '/BMW'},
+        {alt: "Audi", src: Audi, href: '/Audi'},
+        {alt: "Benz", src: Benz, href: '/Benz'},
+        {alt: "Tesla", src: Tesla, href: '/Tesla'},
     ];
 
-    const SlideToLeft = () => {
+    const SlideToLogoLeft = () => {
         const prevPage = page - logosPerPage;
-            if (prevPage >= 0) {
-                directionRef.current = -1;
-                setPage(prevPage);
+        if (prevPage >= 0) {
+            directionRef.current = -1;
+            setPage(prevPage);
         } else {
-        
+
             directionRef.current = -1;
             const remainder = ClickButtonSlideLogo.length % logosPerPage;
             const lastFullPageStart = ClickButtonSlideLogo.length - (remainder === 0 ? logosPerPage : remainder);
             setPage(lastFullPageStart);
-    }
-};
+        }
+    };
 
-    const SlideToRight = () => {
+    const SlideToLogoRight = () => {
         const nextPage = page + logosPerPage;
         if (nextPage < ClickButtonSlideLogo.length) {
             directionRef.current = 1;
             setPage(nextPage);
         } else {
-        
+
             directionRef.current = 1;
             setPage(0);
-    }
-};
+        }
+    };
+
+
+    const SlideToRight = () => {
+        directionRef.current = 1;
+        setIndex((prevIndex) => (prevIndex + 1) % slidSrc.length);
+    };
+
+    const SlideToLeft = () => {
+        directionRef.current = -1;
+        setIndex((prevIndex) =>
+            prevIndex === 0 ? slidSrc.length - 1 : prevIndex - 1
+        );
+    };
+
     return (
         <div className="flex flex-col w-full min-h-screen overflow-hidden">
-            <Header key={user ? user.id : "guest"} />
+            <Header key={user ? user.id : "guest"}/>
             <div className="relative w-full h-[calc(100vh-125px-170px)]">
+                <div className="absolute bottom-80 left-1/100 transform -translate-x-1/2 flex space-x-2">
+                    <svg
+                        onClick={SlideToLeft}
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="4"
+                        stroke="currentColor"
+                        className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out"
+                        style={{flexShrink: 0}} // 크기 고정 방지
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
+                    </svg>
+                </div>
                 <img
                     src={slidSrc[index].src}
                     onClick={() => navigate(slidSrc[index].href)}
@@ -126,25 +150,41 @@ const MainPage = () => {
                         />
                     ))}
                 </div>
+                <div className="absolute bottom-80 left-995/1000 transform -translate-x-1/2 flex space-x-2">
+                    <svg
+                        onClick={SlideToRight}
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="4"
+                        stroke="currentColor"
+                        className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out"
+                        style={{flexShrink: 0}}
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m3 4.5 7.5 7.5-7.5 7.5"/>
+                    </svg>
+                </div>
             </div>
 
+
+
             <div className="w-full h-[125px] flex justify-between items-center px-2 mt-4"
-                style={{
-                    minWidth: '400px',    // 최소 너비 고정 (원하는 값으로 조절)
-                    maxWidth: '100%',     // 최대 너비 제한
-                    gap: '16px',          // 간격 고정 (Tailwind gap-4에 대응)
-                    }}>
+                 style={{
+                     minWidth: '400px',    // 최소 너비 고정 (원하는 값으로 조절)
+                     maxWidth: '100%',     // 최대 너비 제한
+                     gap: '16px',          // 간격 고정 (Tailwind gap-4에 대응)
+                 }}>
                 <svg
-                    onClick={SlideToLeft}
+                    onClick={SlideToLogoLeft}
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth="4"
                     stroke="currentColor"
                     className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out"
-                    style={{ flexShrink: 0 }} // 크기 고정 방지
-                    >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                    style={{flexShrink: 0}} // 크기 고정 방지
+                >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
                 </svg>
 
                 <AnimatePresence mode="wait" custom={directionRef.current}>
@@ -155,13 +195,13 @@ const MainPage = () => {
                         initial="enter"
                         animate="center"
                         exit="exit"
-                        transition={{ duration: 0.5 }}
+                        transition={{duration: 0.5}}
                         className="flex justify-between items-center flex-grow gap-4 h-full px-4 overflow-hidden"
                         style={{
                             minWidth: 'calc(100% - 88px)', // 좌우 화살표 제외한 영역 고정 (화살표 w-10 = 40px + 여백)
                             boxSizing: 'border-box',
-                            }}
-                        >
+                        }}
+                    >
                         {ClickButtonSlideLogo.slice(page, page + logosPerPage).map((logo, i) => (
                             <img
                                 key={i}
@@ -169,23 +209,23 @@ const MainPage = () => {
                                 src={logo.src}
                                 onClick={() => navigate(logo.href)}
                                 className="h-full object-contain cursor-pointer transform transition-transform duration-300 hover:scale-105 ease-in-out"
-                                style={{ maxWidth: `${100 / logosPerPage - 2}%` }}
+                                style={{maxWidth: `${100 / logosPerPage - 2}%`}}
                             />
                         ))}
                     </motion.div>
                 </AnimatePresence>
 
                 <svg
-                    onClick={SlideToRight}
+                    onClick={SlideToLogoRight}
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth="4"
                     stroke="currentColor"
                     className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out"
-                    style={{ flexShrink: 0 }}
-                >                    
-                <path strokeLinecap="round" strokeLinejoin="round" d="m3 4.5 7.5 7.5-7.5 7.5" />
+                    style={{flexShrink: 0}}
+                >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="m3 4.5 7.5 7.5-7.5 7.5"/>
                 </svg>
             </div>
         </div>
