@@ -4,16 +4,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import FindCar from '../Image/sideImage/FindCar.png';
 import CBTIGO from '../Image/sideImage/CBTIGO.png';
 import test3 from '../Image/sideImage/test3.png';
-import hyundai from '../Image/companyLogo/hyundai.png';
+import hyundai from '../Image/companyLogo/hyundai.svg';
 import kia from '../Image/companyLogo/kia.svg';
 import chevrolet from '../Image/companyLogo/chevrolet.svg';
-import gen from '../Image/companyLogo/gen.png';
+import gen from '../Image/companyLogo/gen.svg';
 import kgm from '../Image/companyLogo/kgm.svg';
-import Reno from '../Image/companyLogo/Renault.png';
-import BMW from '../Image/companyLogo/Bmw.png';
-import Audi from '../Image/companyLogo/Audi.png';
-import Benz from '../Image/companyLogo/Benz.png';
-import Tesla from '../Image/companyLogo/Tesla.png';
+import Reno from '../Image/companyLogo/Renault.svg';
+import BMW from '../Image/companyLogo/Bmw.svg';
+import Audi from '../Image/companyLogo/Audi.svg';
+import Benz from '../Image/companyLogo/Benz.svg';
+import Tesla from '../Image/companyLogo/Tesla.svg';
 import Header from '../functions/Header';
 import { useUser } from "../contexts/UserContext";
 
@@ -175,7 +175,7 @@ const MainPage = () => {
             <div className="w-full h-[125px] flex justify-between items-center px-2 mt-4"
                 style={{
                     minWidth: '400px',    // 최소 너비 고정 (원하는 값으로 조절)
-                    maxWidth: '98%',     // 최대 너비 제한
+                    maxWidth: '100%',     // 최대 너비 제한
                     gap: '16px',          // 간격 고정 (Tailwind gap-4에 대응)
                     }}>
                 <svg
@@ -228,7 +228,7 @@ const MainPage = () => {
                     strokeWidth="4"
                     stroke="currentColor"
                     className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out"
-                    style={{flexShrink: 0}}
+                    style={{flexShrink: 0, position: 'relative', right: '8px'}}
                 >
                     <path strokeLinecap="round" strokeLinejoin="round" d="m3 4.5 7.5 7.5-7.5 7.5"/>
                 </svg>
