@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import FindCar from '../Image/sideImage/FindCar.png';
-import CBTIGO from '../Image/sideImage/CBTIGO.png';
-import test3 from '../Image/sideImage/test3.png';
+import main from '../Image/sideImage/main.jpg';
+import main2 from '../Image/sideImage/main2.jpg';
+import main3 from '../Image/sideImage/main3.jpg';
 import hyundai from '../Image/companyLogo/hyundai.svg';
 import kia from '../Image/companyLogo/kia.svg';
 import chevrolet from '../Image/companyLogo/chevrolet.svg';
@@ -63,8 +64,9 @@ const MainPage = () => {
 
     const slidSrc = [
         { src: FindCar, href: '/startCBTI' },
-        { src: CBTIGO, href: '/startCBTI' },
-        { src: test3, href: '/startCBTI' },
+        { src: main, href: '/startCBTI'},
+        { src: main2, href: '/startCBTI'},
+        { src: main3, href: '/startCBTI'},
     ];
 
     const handleButtonClick = (i) => setIndex(i);
