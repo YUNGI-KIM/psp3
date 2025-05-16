@@ -70,16 +70,16 @@ const MainPage = () => {
     const handleButtonClick = (i) => setIndex(i);
 
     const ClickButtonSlideLogo = [
-        { alt: "hyundai", src: hyundai, href: '/hyundai' },
-        { alt: "kia", src: kia, href: '/kia' },
-        { alt: "chevrolet", src: chevrolet, href: '/Chevo' },
-        { alt: "Reno", src: Reno, href: '/Reno' },
-        { alt: "kgm", src: kgm, href: '/kgm' },
-        { alt: "gen", src: gen, href: '/Gen' },
+        { alt: "HYUNDAI", src: hyundai, href: '/hyundai' },
+        { alt: "KIA", src: kia, href: '/kia' },
+        { alt: "CHEVROLET", src: chevrolet, href: '/Chevo' },
+        { alt: "RENAULT", src: Reno, href: '/Reno' },
+        { alt: "KGM", src: kgm, href: '/kgm' },
+        { alt: "GENESIS", src: gen, href: '/Gen' },
         { alt: "BMW", src: BMW, href: '/BMW' },
-        { alt: "Audi", src: Audi, href: '/Audi' },
-        { alt: "Benz", src: Benz, href: '/Benz' },
-        { alt: "Tesla", src: Tesla, href: '/Tesla' },
+        { alt: "AUDI", src: Audi, href: '/Audi' },
+        { alt: "BENZ", src: Benz, href: '/Benz' },
+        { alt: "TESLA", src: Tesla, href: '/Tesla' },
     ];
 
     const SlideToLogoLeft = () => {
@@ -173,22 +173,22 @@ const MainPage = () => {
 
 
             <div className="w-full h-[125px] flex justify-between items-center px-2 mt-4"
-                 style={{
-                     minWidth: '400px',    // 최소 너비 고정 (원하는 값으로 조절)
-                     maxWidth: '100%',     // 최대 너비 제한
-                     gap: '16px',          // 간격 고정 (Tailwind gap-4에 대응)
-                 }}>
+                style={{
+                    minWidth: '400px',    // 최소 너비 고정 (원하는 값으로 조절)
+                    maxWidth: '98%',     // 최대 너비 제한
+                    gap: '16px',          // 간격 고정 (Tailwind gap-4에 대응)
+                    }}>
                 <svg
-                    onClick={SlideToLogoLeft}
+                    onClick={SlideToLeft}
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth="4"
                     stroke="currentColor"
                     className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out"
-                    style={{flexShrink: 0}} // 크기 고정 방지
-                >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
+                    style={{ flexShrink: 0, position: 'relative', right: '8px'}} // 크기 고정 방지
+                    >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                 </svg>
 
                 <AnimatePresence mode="wait" custom={directionRef.current}>
@@ -199,13 +199,13 @@ const MainPage = () => {
                         initial="enter"
                         animate="center"
                         exit="exit"
-                        transition={{duration: 0.5}}
-                        className="flex justify-between items-center flex-grow gap-4 h-full px-4 overflow-hidden"
+                        transition={{ duration: 0.5 }}
+                        className="flex justify-between items-center flex-grow gap-0 h-full px-4 overflow-hidden"
                         style={{
                             minWidth: 'calc(100% - 88px)', // 좌우 화살표 제외한 영역 고정 (화살표 w-10 = 40px + 여백)
                             boxSizing: 'border-box',
-                        }}
-                    >
+                            }}
+                        >
                         {ClickButtonSlideLogo.slice(page, page + logosPerPage).map((logo, i) => (
                             <img
                                 key={i}
