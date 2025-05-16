@@ -70,16 +70,16 @@ const MainPage = () => {
     const handleButtonClick = (i) => setIndex(i);
 
     const ClickButtonSlideLogo = [
-        { alt: "hyundai", src: hyundai, href: '/hyundai' },
-        { alt: "kia", src: kia, href: '/kia' },
-        { alt: "chevrolet", src: chevrolet, href: '/Chevo' },
-        { alt: "Reno", src: Reno, href: '/Reno' },
-        { alt: "kgm", src: kgm, href: '/kgm' },
-        { alt: "gen", src: gen, href: '/Gen' },
+        { alt: "HYUNDAI", src: hyundai, href: '/hyundai' },
+        { alt: "KIA", src: kia, href: '/kia' },
+        { alt: "CHEVROLET", src: chevrolet, href: '/Chevo' },
+        { alt: "RENAULT", src: Reno, href: '/Reno' },
+        { alt: "KGM", src: kgm, href: '/kgm' },
+        { alt: "GENESIS", src: gen, href: '/Gen' },
         { alt: "BMW", src: BMW, href: '/BMW' },
-        { alt: "Audi", src: Audi, href: '/Audi' },
-        { alt: "Benz", src: Benz, href: '/Benz' },
-        { alt: "Tesla", src: Tesla, href: '/Tesla' },
+        { alt: "AUDI", src: Audi, href: '/Audi' },
+        { alt: "BENZ", src: Benz, href: '/Benz' },
+        { alt: "TESLA", src: Tesla, href: '/Tesla' },
     ];
 
     const SlideToLeft = () => {
@@ -169,6 +169,7 @@ const MainPage = () => {
                                 alt={logo.alt}
                                 src={logo.src}
                                 onClick={() => navigate(logo.href)}
+                                title={logo.alt}
                                 className="h-full object-contain cursor-pointer transform transition-transform duration-300 hover:scale-105 ease-in-out"
                                 style={{ maxWidth: `${100 / logosPerPage - 2}%` }}
                             />
