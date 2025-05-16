@@ -1,4 +1,6 @@
 import Header from '../functions/Header';
+import ReceivedSupport from "./ReceivedSupport";
+
 
 function AdminMainPage() {
 
@@ -6,14 +8,6 @@ function AdminMainPage() {
     const todayUnAnsweredCount = 2;
 
     const Image=0;
-
-
-
-
-
-
-
-
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -60,6 +54,8 @@ function AdminMainPage() {
                     </div>
 
                     <div className="bg-white rounded-lg shadow p-4 flex flex-col items-center">
+                        <ReceivedSupport/>
+
                     </div>
                 </section>
 
@@ -74,7 +70,6 @@ function AdminMainPage() {
                             </span>
                         <span className="text-md pl-2 text-gray-800 dark:text-white">일간 매출</span>
                     </div>
-
                     <div className="space-y-4 text-sm">
                         <div className="flex justify-between">
                             <span className="dark:text-white">현대차</span>
