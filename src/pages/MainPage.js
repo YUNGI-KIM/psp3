@@ -95,7 +95,7 @@ const MainPage = () => {
     };
 
     return (
-        <div className="flex flex-col w-full min-h-screen">
+        <div className="flex flex-col w-full min-h-screen overflow-hidden">
             <Header key={user ? user.id : "guest"} />
 
             <div className="relative w-full h-[calc(100vh-125px-170px)]">
@@ -117,7 +117,7 @@ const MainPage = () => {
             </div>
 
             <div className="w-full h-[125px] flex justify-between items-center px-2 mt-4">
-                <svg onClick={SlideToLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:bg-yellow-100">
+                <svg onClick={SlideToLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                 </svg>
 
@@ -130,7 +130,7 @@ const MainPage = () => {
                         animate="center"
                         exit="exit"
                         transition={{ duration: 0.5 }}
-                        className="flex justify-between items-center flex-grow gap-4 h-full px-4"
+                        className="flex justify-between items-center flex-grow gap-4 h-full px-4 overflow-hidden"
                     >
                         {ClickButtonSlideLogo.slice(page, page + logosPerPage).map((logo, i) => (
                             <img
@@ -138,14 +138,14 @@ const MainPage = () => {
                                 alt={logo.alt}
                                 src={logo.src}
                                 onClick={() => navigate(logo.href)}
-                                className={`h-full object-contain cursor-pointer hover:bg-yellow-100 rounded-lg`}
+                                className="h-full object-contain cursor-pointer transform transition-transform duration-300 hover:scale-105 ease-in-out"
                                 style={{ maxWidth: `${100 / logosPerPage - 2}%` }}
                             />
                         ))}
                     </motion.div>
                 </AnimatePresence>
 
-                <svg onClick={SlideToRight} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:bg-yellow-100">
+                <svg onClick={SlideToRight} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out">
                     <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                 </svg>
             </div>
