@@ -100,7 +100,7 @@ function Header() {
             {/* 내비게이션 메뉴 */}
             <nav className="bg-black text-gray-300 p-2 sm:p-4 text-xs sm:text-sm md:text-base">
                 <div className="flex flex-wrap justify-center gap-1 sm:gap-4 md:gap-6 max-w-screen-xl mx-auto">
-                    <a href="/public#" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">차량구매</a>
+                    <a href="/buy" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">차량구매</a>
                     <a href="/AccForCar" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">차량용품</a>
                     <a href="/Estimator" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">견적</a>
                     <a href="/public#" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">차량정보</a>
