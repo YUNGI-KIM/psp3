@@ -4,7 +4,7 @@ import Header from "../functions/Header";
 
 const brands = {
     Hyundai: ["Avante", "Sonata", "Grandeur", "Santafe", "Casper", "Porter", "Ioniq6", "Palisade"],
-    Kia: ["K5", "K7", "Carnival"],
+    Kia: ["Bongo", "BongoEv", "Carnival", "Ev3", "Ev4", "Ev6", "K5", "K8", "K9", "Morning", "Ray", "Seltos", "Sorento", "Sprotage"],
 };
 
 const basePrices = {
@@ -17,8 +17,19 @@ const basePrices = {
     Ioniq6: 50000000,
     Palisade: 45000000,
     K5: 27000000,
-    K7: 35000000,
     Carnival: 33000000,
+    Bongo: 20000000,
+    BongoEv: 43000000,
+    Ev3: 40000000,
+    Ev4: 40400000,
+    Ev6: 46600000,
+    K8: 36800000,
+    K9: 58700000,
+    Morning: 13700000,
+    Ray: 13400000,
+    Seltos: 21600000,
+    Sorento: 35500000,
+    Sprotage: 27900000,
 };
 
 const options = [
@@ -36,9 +47,20 @@ const carImages = {
     Porter: "/image/Estimate/Hyundai/Porter/porter2.png",
     Ioniq6: "/image/Estimate/Hyundai/Ioniq/ioniq.png",
     Palisade: "/image/Estimate/Hyundai/Palisade/palisade2.png",
-    K5: "/image/Estimate/Kia/K5/K5.jpg",
-    K7: "/image/Estimate/Kia/K7/K7.jpg",
-    Carnival: "/image/Estimate/Kia/Carnival/Carnival.webp",
+    K5: "/image/Estimate/Kia/K5/k5.png",
+    Carnival: "/image/Estimate/Kia/Carnival/carnival.png",
+    Bongo: "/image/Estimate/Kia/Bongo/bongo.png",
+    BongoEv:"/image/Estimate/Kia/BongoEv/bongo-ev.png",
+    Ev3:"/image/Estimate/Kia/Ev3/ev3.png",
+    Ev4:"/image/Estimate/Kia/Ev4/ev4.png",
+    Ev6:"/image/Estimate/Kia/Ev6/ev6.png",
+    K8:"/image/Estimate/Kia/K8/k8.png",
+    K9:"/image/Estimate/Kia/K9/k9.png",
+    Morning:"/image/Estimate/Kia/Morning/morning.png",
+    Ray:"/image/Estimate/Kia/Ray/ray.png",
+    Seltos:"/image/Estimate/Kia/Seltos/seltos.png",
+    Sorento:"/image/Estimate/Kia/Sorento/sorento.png",
+    Sportage:"/image/Estimate/Kia/Sportage/sportage.png",
 };
 
 export default function Estimator() {
