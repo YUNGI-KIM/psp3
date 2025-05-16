@@ -1,156 +1,79 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
+import Logo from '../Image/logo2.png';
+import test from '../Image/sideImage/test.png';
 import { useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import FindCar from '../Image/sideImage/FindCar.png';
-import CBTIGO from '../Image/sideImage/CBTIGO.png';
-import test3 from '../Image/sideImage/test3.png';
-import hyundai from '../Image/companyLogo/hyundai.png';
-import kia from '../Image/companyLogo/kia.svg';
-import chevrolet from '../Image/companyLogo/chevrolet.svg';
-import gen from '../Image/companyLogo/gen.png';
-import kgm from '../Image/companyLogo/kgm.svg';
-import Reno from '../Image/companyLogo/Renault.png';
-import BMW from '../Image/companyLogo/BMW.SVG';
-import Audi from '../Image/companyLogo/Audi.png';
-import Benz from '../Image/companyLogo/Benz.png';
-import Header from '../functions/Header';
-import { useUser } from "../contexts/UserContext";
-
-
-
-const variants = {
-    enter: (direction) => ({
-        x: direction === 1 ? 300 : -300,
-        opacity: 0
-    }),
-    center: {
-        x: 0,
-        opacity: 1
-    },
-    exit: (direction) => ({
-        x: direction === 1 ? -300 : 300,
-        opacity: 0
-    })
-};
-
-
 
 const MainPage = () => {
-    const navigate = useNavigate();
-    const { user } = useUser();
-    const [index, setIndex] = useState(0);
-    const [page, setPage] = useState(0);
-    const [logosPerPage, setLogosPerPage] = useState(5);
-    const directionRef = useRef(0);
+<<<<<<< HEAD
+=======
 
-    useEffect(() => {
-        const updateLogoCount = () => {
-            const width = window.innerWidth;
-            if (width < 400) setLogosPerPage(2);
-            else if (width < 640) setLogosPerPage(3);
-            else if (width < 768) setLogosPerPage(4);
-            else setLogosPerPage(5);
-        };
-        updateLogoCount();
-        window.addEventListener('resize', updateLogoCount);
-        return () => window.removeEventListener('resize', updateLogoCount);
-    }, []);
-
-    useEffect(() => {
-        console.log("MainPage 감지: user 상태 변화", user);
-    }, [user]);
-
-    const slidSrc = [
-        { src: FindCar, href: '/startCBTI' },
-        { src: CBTIGO, href: '/startCBTI' },
-        { src: test3, href: '/startCBTI' },
-    ];
-
-    const handleButtonClick = (i) => setIndex(i);
-
-    const ClickButtonSlideLogo = [
-        { alt: "hyundai", src: hyundai, href: '/hyundai' },
-        { alt: "kia", src: kia, href: '/kia' },
-        { alt: "chevrolet", src: chevrolet, href: '/Chevo' },
-        { alt: "Reno", src: Reno, href: '/Reno' },
-        { alt: "kgm", src: kgm, href: '/kgm' },
-        { alt: "gen", src: gen, href: '/Gen' },
-        { alt: "BMW", src: BMW, href: '/BMW' },
-        { alt: "Audi", src: Audi, href: '/Audi' },
-        { alt: "Benz", src: Benz, href: '/Benz' },
-    ];
-
-    const SlideToLeft = () => {
-        if (page > 0) {
-            directionRef.current = -1;
-            setPage((prev) => prev - 4);
-        }
-    };
-
-    const SlideToRight = () => {
-        if (page + logosPerPage < ClickButtonSlideLogo.length) {
-            directionRef.current = 1;
-            setPage((prev) => prev + 4);
-        }
-    };
-
-    return (
-        <div className="flex flex-col w-full min-h-screen">
-            <Header key={user ? user.id : "guest"} />
-
-            <div className="relative w-full h-[calc(100vh-125px-170px)]">
-                <img
-                    src={slidSrc[index].src}
-                    onClick={() => navigate(slidSrc[index].href)}
-                    className="w-full h-full object-cover cursor-pointer"
-                    alt={`Slide ${index + 1}`}
-                />
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                    {slidSrc.map((_, i) => (
-                        <button
-                            key={i}
-                            onClick={() => handleButtonClick(i)}
-                            className="w-3 h-3 sm:w-4 sm:h-4 bg-gray-800 hover:bg-gray-400 rounded-full"
-                        />
-                    ))}
-                </div>
-            </div>
-
-            <div className="w-full h-[125px] flex justify-between items-center px-2 mt-4">
-                <svg onClick={SlideToLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:bg-yellow-100">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-                </svg>
-
-                <AnimatePresence mode="wait" custom={directionRef.current}>
-                    <motion.div
-                        key={page}
-                        custom={directionRef.current}
-                        variants={variants}
-                        initial="enter"
-                        animate="center"
-                        exit="exit"
-                        transition={{ duration: 0.5 }}
-                        className="flex justify-between items-center flex-grow gap-4 h-full px-4"
-                    >
-                        {ClickButtonSlideLogo.slice(page, page + logosPerPage).map((logo, i) => (
-                            <img
-                                key={i}
-                                alt={logo.alt}
-                                src={logo.src}
-                                onClick={() => navigate(logo.href)}
-                                className={`h-full object-contain cursor-pointer hover:bg-yellow-100 rounded-lg`}
-                                style={{ maxWidth: `${100 / logosPerPage - 2}%` }}
-                            />
-                        ))}
-                    </motion.div>
-                </AnimatePresence>
-
-                <svg onClick={SlideToRight} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:bg-yellow-100">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                </svg>
-            </div>
+>>>>>>> 24a7423449e3c9d0566752583e23b2a911a6b31c
+  const navigate = useNavigate();
+  function goLogin(){
+      navigate("/login");
+    }
+    function goRegister(){
+      navigate("/register");
+    }
+  return (
+    <div className="flex flex-col h-screen">
+      {/* 상단 헤더 */}
+      <div className="flex items-center ml-10">
+        <a className="flex-shrink-0" href="/">
+          <img className="w-50 h-15" src={Logo} />
+        </a>
+        <div className="flex items-center justify-between w-full p-4 bg-white ml-75">
+        <span className="flex h-10 w-130 text-sm border border-gray-300 rounded-full cursor-pointer">
+          <input
+            type="search"
+            name="serch"
+            placeholder="Search"
+            className="w-full px-4 text-sm rounded-full focus:outline-none"
+          />
+        </span>
+<<<<<<< HEAD
+          <button onClick={goLogin} type="button"className="py-2  bg-slate-50 hover:bg-gray-300 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-black w-20 transition ease-in duration-200 text-center text-base font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg ml-130">
+=======
+          <button onClick={goLogin} type="button"className="py-2  bg-slate-50 hover:bg-gray-300 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-black w-25 transition ease-in duration-200 text-center text-base font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg ml-130">
+>>>>>>> 24a7423449e3c9d0566752583e23b2a911a6b31c
+            로그인
+          </button>
+          <button onClick={goRegister} type="button" className="py-2  bg-gray-900 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-25 transition ease-in duration-200 text-center text-base font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg mr-20">
+            회원가입
+          </button>
         </div>
-    );
+      </div>
+
+      {/* 내비게이션 바 */}
+      <nav className="bg-black dark:bg-gray-800 shadow">
+        <div className="px-8 mx-auto max-w-7xl">
+          <div className="flex items-center justify-between h-16">
+            <div>
+              <div className="flex items-baseline ml-10 space-x-50">
+                <a className="text-gray-300 hover:text-yellow-200 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/#">차량구매</a>
+                <a className="text-gray-300 hover:text-yellow-200 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/#">부속부품</a>
+                <a className="text-gray-300 hover:text-yellow-200 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/#">견적</a>
+                <a className="text-gray-300 hover:text-yellow-200 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/#">차량정보</a>
+                {/* <a className="text-gray-300 hover:text-yellow-200 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/#">견적</a> */}
+                <a className="text-gray-300 hover:text-yellow-200 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium" href="/#">고객지원</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+        {/* 슬라이드 부분 */}
+    <div class="relative w-full">
+        <img src={test} class="w-full h-160 rounded-lg" alt="Test"/>
+        
+
+        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+            <button id="sButton1" onclick="sliderButton1()" class="bg-gray-800 rounded-full w-4 h-4"></button>
+            <button id="sButton2" onclick="sliderButton2()" class="bg-gray-800 rounded-full w-4 h-4"></button>
+        </div>
+    </div>
+</div>
+
+  );
 };
 
 export default MainPage;
