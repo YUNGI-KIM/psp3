@@ -110,7 +110,6 @@ const MainPage = () => {
     return (
         <div className="flex flex-col w-full min-h-screen overflow-hidden">
             <Header key={user ? user.id : "guest"} />
-
             <div className="relative w-full h-[calc(100vh-125px-170px)]">
                 <img
                     src={slidSrc[index].src}
