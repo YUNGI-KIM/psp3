@@ -213,7 +213,7 @@ const MainPage = () => {
                                 src={logo.src}
                                 onClick={() => navigate(logo.href)}
                                 title={logo.alt}
-                                className="h-full object-contain cursor-pointer transform transition-transform duration-300 hover:scale-105 ease-in-out"
+                                className="h-full w-auto object-contain cursor-pointer transform transition-transform duration-300 hover:scale-105 ease-in-out"
                                 style={{maxWidth: `${100 / logosPerPage - 2}%`}}
                             />
                         ))}
