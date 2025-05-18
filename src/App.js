@@ -21,6 +21,7 @@ import AdminMainPage from './Admin/AdminMain';
 import { UserProvider } from './contexts/UserContext';
 import LoginSessionVerify from "./functions/LoginSessionVerify";
 import AnswerForQ from "./Admin/AnswerForQ"
+import HyundaiIoniq from "./CarDetail/HyundaiIoniq";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
               <Route path="/Chevo" element={<Chevo />} />
               <Route path="/Gen" element={<Gen />} />
               <Route path="/BMW" element={<BMW />} />
+              <Route path="/CarDetail/HyundaiIoniq" element={<HyundaiIoniq />} />
 
             </Routes>
           </BrowserRouter>

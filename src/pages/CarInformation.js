@@ -25,10 +25,14 @@ const brandModels = {
     { title: "K9", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: K9 },
     { title: "K9", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: K9 }
   ],
+};
+
+const detailRoutes = {
+  "아이오닉": "/CarDetail/HyundaiIoniq",
 
 };
 
-function Support() {
+function CarInformation() {
   const navigate = useNavigate();
   const [brandIndex, setBrandIndex] = useState(0);
 
@@ -85,7 +89,19 @@ function Support() {
                     )) : <li>• 옵션 없음</li>}
                   </ul>
                   <div className="text-lg font-bold text-center mb-3">{model.price}₩</div>
-                  <button className="w-full py-2 rounded bg-indigo-500 text-white font-semibold hover:bg-indigo-600 transition">차량 상세 정보</button>
+                  <button
+                    onClick={() => {
+                      const path = detailRoutes[model.title];
+                      if (path) {
+                        navigate(path);
+                      } else {
+                        alert("이 차량에 대한 상세 페이지는 아직 없습니다.");
+                      }
+                    }}
+                    className="w-full py-2 rounded bg-indigo-500 text-white font-semibold hover:bg-indigo-600 transition"
+                  >
+                    차량 상세 정보
+                  </button>
                 </div>
               </div>
             )) : (
@@ -98,4 +114,4 @@ function Support() {
   );
 }
 
-export default Support;
+export default CarInformation;
