@@ -19,24 +19,11 @@ import Tesla from '../Image/companyLogo/Tesla.svg';
 import Header from '../functions/Header';
 import { useUser } from "../contexts/UserContext";
 
-
-
 const variants = {
-    enter: (direction) => ({
-        x: direction === 1 ? 300 : -300,
-        opacity: 0
-    }),
-    center: {
-        x: 0,
-        opacity: 1
-    },
-    exit: (direction) => ({
-        x: direction === 1 ? -300 : 300,
-        opacity: 0
-    })
+    enter: (direction) => ({ x: direction === 1 ? 300 : -300, opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit: (direction) => ({ x: direction === 1 ? -300 : 300, opacity: 0 })
 };
-
-
 
 const MainPage = () => {
     const navigate = useNavigate();
@@ -65,10 +52,10 @@ const MainPage = () => {
 
     const slidSrc = [
         { src: FindCar, href: '/startCBTI' },
-        { src: main, href: '/startCBTI'},
-        { src: main2, href: '/startCBTI'},
-        { src: main3, href: '/startCBTI'},
-        { src: main4, href: '/startCBTI'},
+        { src: main, href: '/startCBTI' },
+        { src: main2, href: '/startCBTI' },
+        { src: main3, href: '/startCBTI' },
+        { src: main4, href: '/startCBTI' },
     ];
 
     const handleButtonClick = (i) => setIndex(i);
@@ -88,12 +75,10 @@ const MainPage = () => {
 
     const SlideToLogoLeft = () => {
         const prevPage = page - logosPerPage;
+        directionRef.current = -1;
         if (prevPage >= 0) {
-            directionRef.current = -1;
             setPage(prevPage);
         } else {
-
-            directionRef.current = -1;
             const remainder = ClickButtonSlideLogo.length % logosPerPage;
             const lastFullPageStart = ClickButtonSlideLogo.length - (remainder === 0 ? logosPerPage : remainder);
             setPage(lastFullPageStart);
@@ -102,16 +87,13 @@ const MainPage = () => {
 
     const SlideToLogoRight = () => {
         const nextPage = page + logosPerPage;
+        directionRef.current = 1;
         if (nextPage < ClickButtonSlideLogo.length) {
-            directionRef.current = 1;
             setPage(nextPage);
         } else {
-
-            directionRef.current = 1;
             setPage(0);
         }
     };
-
 
     const SlideToRight = () => {
         directionRef.current = 1;
@@ -120,78 +102,37 @@ const MainPage = () => {
 
     const SlideToLeft = () => {
         directionRef.current = -1;
-        setIndex((prevIndex) =>
-            prevIndex === 0 ? slidSrc.length - 1 : prevIndex - 1
-        );
+        setIndex((prevIndex) => (prevIndex === 0 ? slidSrc.length - 1 : prevIndex - 1));
     };
 
     return (
-        <div className="flex flex-col w-full min-h-screen overflow-hidden">
-            <Header key={user ? user.id : "guest"}/>
-            <div className="relative w-full h-[calc(100vh-125px-170px)]">
-                <div className="absolute left-1/100 top-5/10 transform -translate-x-1/2 flex space-x-2">
-                    <svg
-                        onClick={SlideToLeft}
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="4"
-                        stroke="currentColor"
-                        className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out"
-                        style={{flexShrink: 0}} // 크기 고정 방지
-                    >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
+        <div className="flex flex-col w-full min-h-screen overflow-x-hidden">
+            <Header key={user ? user.id : "guest"} />
+
+            <div className="relative w-full h-[calc(100vh-125px-170px)] overflow-visible">
+                <div className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10">
+                    <svg onClick={SlideToLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:scale-110 transition-transform">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                     </svg>
                 </div>
-                <img
-                    src={slidSrc[index].src}
-                    onClick={() => navigate(slidSrc[index].href)}
-                    className="w-full h-full object-cover cursor-pointer"
-                    alt={`Slide ${index + 1}`}
-                />
-                <div className="absolute bottom-4 left-1/2 transform  -translate-x-1/2 flex space-x-2">
+
+                <img src={slidSrc[index].src} onClick={() => navigate(slidSrc[index].href)} className="w-full h-full object-cover cursor-pointer" alt={`Slide ${index + 1}`} />
+
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
                     {slidSrc.map((_, i) => (
-                        <button
-                            key={i}
-                            onClick={() => handleButtonClick(i)}
-                            className="w-3 h-3 sm:w-4 sm:h-4 bg-gray-800 hover:bg-gray-400 rounded-full"
-                        />
+                        <button key={i} onClick={() => handleButtonClick(i)} className="w-3 h-3 sm:w-4 sm:h-4 bg-gray-800 hover:bg-gray-400 rounded-full" />
                     ))}
                 </div>
-                <div className="absolute  left-995/1000 transform top-5/10 -translate-x-1/2  flex space-x-2">
-                    <svg
-                        onClick={SlideToRight}
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="4"
-                        stroke="currentColor"
-                        className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out"
-                        style={{flexShrink: 0}}
-                    >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="m3 4.5 7.5 7.5-7.5 7.5"/>
+
+                <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10">
+                    <svg onClick={SlideToRight} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:scale-110 transition-transform">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m3 4.5 7.5 7.5-7.5 7.5" />
                     </svg>
                 </div>
             </div>
 
-
-
-            <div className="w-full h-[125px] flex justify-between items-center px-2 mt-4"
-                style={{
-                    minWidth: '400px',    // 최소 너비 고정 (원하는 값으로 조절)
-                    maxWidth: '100%',     // 최대 너비 제한
-                    gap: '16px',          // 간격 고정 (Tailwind gap-4에 대응)
-                    }}>
-                <svg
-                    onClick={SlideToLogoLeft}
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="4"
-                    stroke="currentColor"
-                    className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out"
-                    style={{ flexShrink: 0, position: 'relative', right: '8px'}} // 크기 고정 방지
-                    >
+            <div className="w-full h-[125px] flex justify-between items-center px-4 mt-4 overflow-visible">
+                <svg onClick={SlideToLogoLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:scale-110 transition-transform">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                 </svg>
 
@@ -205,11 +146,8 @@ const MainPage = () => {
                         exit="exit"
                         transition={{ duration: 0.5 }}
                         className="flex justify-between items-center flex-grow gap-0 h-full px-4 overflow-hidden"
-                        style={{
-                            minWidth: 'calc(100% - 88px)', // 좌우 화살표 제외한 영역 고정 (화살표 w-10 = 40px + 여백)
-                            boxSizing: 'border-box',
-                            }}
-                        >
+                        style={{ minWidth: 'calc(100% - 88px)' }}
+                    >
                         {ClickButtonSlideLogo.slice(page, page + logosPerPage).map((logo, i) => (
                             <img
                                 key={i}
@@ -217,24 +155,15 @@ const MainPage = () => {
                                 src={logo.src}
                                 onClick={() => navigate(logo.href)}
                                 title={logo.alt}
-                                className="h-full w-auto object-contain cursor-pointer transform transition-transform duration-300 hover:scale-105 ease-in-out"
-                                style={{maxWidth: `${100 / logosPerPage - 2}%`}}
+                                className="h-full w-auto object-contain cursor-pointer transform transition-transform duration-300 hover:scale-105"
+                                style={{ maxWidth: `${100 / logosPerPage - 2}%` }}
                             />
                         ))}
                     </motion.div>
                 </AnimatePresence>
 
-                <svg
-                    onClick={SlideToLogoRight}
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="4"
-                    stroke="currentColor"
-                    className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out"
-                    style={{flexShrink: 0, position: 'relative', right: '8px'}}
-                >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="m3 4.5 7.5 7.5-7.5 7.5"/>
+                <svg onClick={SlideToLogoRight} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:scale-110 transition-transform">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="m3 4.5 7.5 7.5-7.5 7.5" />
                 </svg>
             </div>
         </div>
