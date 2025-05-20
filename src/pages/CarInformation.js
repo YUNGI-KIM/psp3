@@ -6,8 +6,13 @@ import Casper from "../Image/Estimate/Hyundai/Casper/casper.png";
 import Grandeur from "../Image/Estimate/Hyundai/Grandeur/Grandeur.png";
 import Ioniq from "../Image/Estimate/Hyundai/Ioniq/ioniq.png";
 import Palisade from "../Image/Estimate/Hyundai/Palisade/Palisade.png";
-import K5 from "../Image/Estimate/Kia/Carnival/Carnival.webp";
+import K5 from "../Image/Estimate/Kia/K9/K9.png";
 import K9 from "../Image/Estimate/Kia/K9/K9.png";
+import Ray from "../Image/Estimate/Kia/K9/K9.png";
+import Morning from "../Image/Estimate/Kia/K9/K9.png";
+import Sportage from "../Image/Estimate/Kia/K9/K9.png";
+import Sorento from "../Image/Estimate/Kia/K9/K9.png";
+
 import { AnimatePresence, motion } from "framer-motion";
 
 const brandList = ["현대", "기아", "제네시스","르노","쉐보레","KGM","BMW","아우디","벤츠"];
@@ -23,7 +28,12 @@ const brandModels = {
   기아: [
     { title: "카니발", label: "세단", color: "스노우 화이트 펄", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "31,200,000", image: K5 },
     { title: "K9", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: K9 },
-    { title: "K9", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: K9 }
+    { title: "레이", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: K9 },
+    { title: "모닝", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: K9 },
+    { title: "스포티지", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: K9 },
+    { title: "소", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: K9 }
+  
+  
   ],
 };
 
