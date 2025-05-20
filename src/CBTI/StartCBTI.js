@@ -2,39 +2,24 @@ import { Link } from "react-router-dom";
 
 function StartCBTI() {
   return (
-    <div className="relative">
-      {/* 배경 오버레이 */}
-      <div className="fixed inset-0 bg-gray-500 opacity-75 z-0"></div>
-      {/* 모달 박스 */}
-      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full sm:max-w-2xl px-4 z-10">
-        <div className="rounded-3xl p-12 bg-white shadow-2xl h-[500px]">
-          <div className="flex flex-col justify-center h-full text-center space-y-8">
-            <h2 className="text-4xl font-extrabold text-black">
-              <span className="block">
-                어떤 차를 사야할지 고민되시나요?
-              </span>
-              <span className="block text-indigo-500 mt-3">
-                쉽고 빠른 CBTI검사를 통해
-              </span>
-              <span className="block text-indigo-500">
-                추천 자동차를 만나보세요!!
-              </span>
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-tr from-indigo-100 to-indigo-300">
+        <div className="bg-white p-10 rounded-2xl shadow-lg max-w-3xl flex flex-col sm:flex-row items-center gap-8">
+          <img src="/car-illustration.png" alt="car" className="w-40 h-40" />
+          <div className="text-center sm:text-left">
+            <h2 className="text-2xl font-bold text-gray-800">
+              어떤 차를 사야 할지 고민되시나요?
             </h2>
-
-            <div className="mt-6">
-              <Link to="/QuestionPage">
-                <button
-                  type="button"
-                  className="py-4 px-6 bg-indigo-600 hover:bg-indigo-700 text-white text-base font-semibold rounded-3xl shadow-md transition focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  CBTI 검사 시작하기
-                </button>
-              </Link>
-            </div>
+            <p className="text-indigo-600 mt-2 mb-6">
+              CBTI 검사를 통해 <br /> 딱 맞는 자동차를 찾아보세요!
+            </p>
+            <Link to="/QuestionPage">
+              <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-full">
+                CBTI 검사 시작하기
+              </button>
+            </Link>
           </div>
         </div>
       </div>
-    </div>
   );
-} 
+}
 export default StartCBTI;
