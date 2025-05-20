@@ -22,11 +22,11 @@ const brandModels = {
     { title: "그랜져", label: "최고가 모델", color: "트랜스미션블루펄", interior: "블랙모노톤(캘리그라피)", fuelEfficiency: "12.4",displacement:"11.1",options: ["하이테크 패키지","파노라마 선루프","프리뷰 전자제어 서스펜션 II"], price: "44,090,000", image: Grandeur },
     { title: "아반떼", label: "베스트셀러", color: "미라지 그린", interior: "세이지 그린", fuelEfficiency: "12.4",displacement:"11.1",options: ["드라이브 와이즈 II", "하이패스 자동결제 시스템","파킹 어시스트 플러스"], price: "28,300,000", image: Avante },
     { title: "캐스퍼", label: "최저가 모델", color: "언블리치드 아이보리", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: ["인포테인먼트 내비 플러스I", "선루프", "17인치 알로이 휠 패키지"], price: "14,600,000", image: Casper },
-    { title: "아이오닉", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: Ioniq },
+    { title: "아이오닉6", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: Ioniq },
     { title: "팰리세이드", label: "SUV", color: "밀키 베이지", interior: "블랙",fuelEfficiency: "12.4",displacement:"11.1", options: [], price: "27,350,000", image: Palisade }
   ],
   기아: [
-    { title: "K5", label: "세단", color: "스노우 화이트 펄", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "31,200,000", image: K5 },
+    { title: "카니발", label: "세단", color: "스노우 화이트 펄", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "31,200,000", image: K5 },
     { title: "K9", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: K9 },
     { title: "레이", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: K9 },
     { title: "모닝", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: K9 },
@@ -38,7 +38,7 @@ const brandModels = {
 };
 
 const detailRoutes = {
-  "아이오닉": "/CarDetail/HyundaiIoniq",
+  "아이오닉6": "/CarDetail/HyundaiIoniq",
 
 };
 
@@ -62,12 +62,20 @@ function CarInformation() {
       <div>{Header()}</div>
       <div className="bg-white py-10 px-4 sm:px-8">
         <div className="flex justify-center items-center mb-6 space-x-6">
-          <button onClick={prevBrand} className="text-4xl font-bold">ᐊ</button>
+          <button onClick={prevBrand} className="text-4xl font-bold">
+            <svg xmlns="http://www.w3.org/2000/svg"  fill="#808080" viewBox="0 0 256 512" className="w-10 h-10 cursor-pointer hover:scale-110 transition-transform">
+              <path d="M9.4 278.6c-12.5-12.5-12.5-32.8 0-45.3l128-128c9.2-9.2 22.9-11.9 34.9-6.9s19.8 16.6 19.8 29.6l0 256c0 12.9-7.8 24.6-19.8 29.6s-25.7 2.2-34.9-6.9l-128-128z"/>
+            </svg>
+          </button>
           <div>
             <h1 className="text-3xl font-bold text-center">{currentBrand} 차량 정보</h1>
             <p className="text-center text-sm text-gray-500">브랜드 간 비교</p>
           </div>
-          <button onClick={nextBrand} className="text-4xl font-bold">ᐅ</button>
+          <button onClick={nextBrand} className="text-4xl font-bold">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="#808080" viewBox="0 0 256 512"  className="w-10 h-10 cursor-pointer hover:scale-110 transition-transform">
+              <path d="M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-9.2-9.2-22.9-11.9-34.9-6.9s-19.8 16.6-19.8 29.6l0 256c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l128-128z"/>
+            </svg>
+          </button>
         </div>
 
         <AnimatePresence mode="wait">
