@@ -111,7 +111,7 @@ const MainPage = () => {
 
             <div className="relative w-full h-[calc(100vh-125px-170px)] overflow-visible">
                 <div className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10">
-                    <svg onClick={SlideToLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:scale-110 transition-transform">
+                    <svg onClick={SlideToLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:text-yellow-200 hover:scale-110 transition-transform">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                     </svg>
                 </div>
@@ -125,14 +125,14 @@ const MainPage = () => {
                 </div>
 
                 <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10">
-                    <svg onClick={SlideToRight} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:scale-110 transition-transform">
+                    <svg onClick={SlideToRight} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:text-yellow-200 hover:scale-110 transition-transform">
                         <path strokeLinecap="round" strokeLinejoin="round" d="m3 4.5 7.5 7.5-7.5 7.5" />
                     </svg>
                 </div>
             </div>
 
-            <div className="w-full h-[125px] flex justify-between items-center px-4 mt-4 overflow-visible">
-                <svg onClick={SlideToLogoLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:scale-110 transition-transform">
+            <div className="w-full h-[125px] flex justify-between  items-center px-4 mt-4 overflow-visible">
+                <svg onClick={SlideToLogoLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 hover:text-yellow-200 cursor-pointer hover:scale-110 transition-transform">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                 </svg>
 
@@ -162,7 +162,7 @@ const MainPage = () => {
                     </motion.div>
                 </AnimatePresence>
 
-                <svg onClick={SlideToLogoRight} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:scale-110 transition-transform">
+                <svg onClick={SlideToLogoRight} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:text-yellow-200 hover:scale-110 transition-transform">
                     <path strokeLinecap="round" strokeLinejoin="round" d="m3 4.5 7.5 7.5-7.5 7.5" />
                 </svg>
             </div>
