@@ -103,7 +103,7 @@ function Header() {
                     <a href="/buy" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">차량구매</a>
                     <a href="/AccForCar" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">차량용품</a>
                     <a href="/Estimator" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">견적</a>
-                    <a href="/public#" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">차량정보</a>
+                    <a href="/CarInformation" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">차량정보</a>
                     <a href="/Support" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">고객지원</a>
                 </div>
             </nav>
