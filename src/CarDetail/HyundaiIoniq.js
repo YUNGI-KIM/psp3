@@ -1,8 +1,29 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../functions/Header";
+import ColorchipBeige from "../Image/Interior/ColorchipBeige.png";
+import ColorchipBlack from "../Image/Interior/ColorchipBlack.png";
+import ColorchipGreen from "../Image/Interior/ColorchipGreen.png";
+import InteriorBlack from "../Image/Interior/Inside/InsideBlack.png";
+import InteriorBeige from "../Image/Interior/Inside/InsideBeige.png";
+import InteriorGreen from "../Image/Interior/Inside/InsideGreen.png";
+
+const IoniqSpecs = {
+  priceAfterTax: "6,715 만원~",
+  priceBeforeTax: "7,073 만원~",
+  efficiency: "~4.3 km/kWh",
+  displacement: "5",
+};
 
 function HyundaiIoniq() {
   const navigate = useNavigate();
+  const [selectedInterior, setSelectedInterior] = useState("black");
+
+  const interiorImages = {
+    black: InteriorBlack,
+    beige: InteriorBeige,
+    green: InteriorGreen,
+  };
 
   return (
     <div>
@@ -14,37 +35,23 @@ function HyundaiIoniq() {
           <span className="text-lg bg-blue-600 text-white px-4 py-1 rounded">NEW</span>
           <h1 className="text-6xl font-bold">아이오닉 9</h1>
 
-          <a href="#" className="text-lg text-blue-700 underline">
-            자세히 보기 &gt;
-          </a>
-
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 text-lg text-gray-700 mt-8">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-40 text-xl text-gray-700 mt-20 whitespace-nowrap">
             <div>
-              <div className="font-bold text-xl">6,715 만원~</div>
-              <div className="text-sm">(세제 혜택 후 가격)</div>
+              <div className="font-bold text-4xl">{IoniqSpecs.priceAfterTax}</div>
+              <div className="text-base">(세제 혜택 후 가격)</div>
             </div>
             <div>
-              <div className="text-gray-500 text-xl">(7,073 만원~)</div>
-              <div className="text-sm">(세제 혜택 전 가격)</div>
+              <div className="text-gray-500 text-4xl">({IoniqSpecs.priceBeforeTax})</div>
+              <div className="text-base">(세제 혜택 전 가격)</div>
             </div>
             <div>
-              <div className="font-bold text-xl">~4.3 km/kWh</div>
-              <div className="text-sm">연비</div>
+              <div className="font-bold text-4xl">{IoniqSpecs.efficiency}</div>
+              <div className="text-base">연비</div>
             </div>
             <div>
-              <div className="font-bold text-xl">6/7 명</div>
-              <div className="text-sm">승차 인원</div>
+              <div className="font-bold text-4xl">{IoniqSpecs.displacement}</div>
+              <div className="text-base">배기량</div>
             </div>
-            <div>
-              <div className="font-bold text-xl">-</div>
-              <div className="text-sm">배기량</div>
-            </div>
-          </div>
-
-          <div className="mt-12 flex flex-col sm:flex-row gap-8">
-            <button className="bg-blue-900 text-white px-10 py-5 rounded text-xl">구매 상담 신청</button>
-            <button className="bg-blue-900 text-white px-10 py-5 rounded text-xl">내 차 만들기</button>
-            <button className="bg-blue-900 text-white px-10 py-5 rounded text-xl">시승 신청</button>
           </div>
         </div>
 
@@ -66,18 +73,50 @@ function HyundaiIoniq() {
             다양한 감성의 인테리어 색상을 선택해보세요.
           </p>
 
+          {/* 설명 카드 */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6 text-gray-800">
-            <div className="border p-4 rounded shadow hover:shadow-lg cursor-pointer">
-              <div className="text-xl font-bold">블랙 모노톤</div>
-              <div className="text-sm text-gray-500">고급스러운 기본 스타일</div>
+            <div
+              className={`border p-4 rounded shadow cursor-pointer transition transform hover:scale-105 ${
+                selectedInterior === "black" ? "ring-2 ring-blue-600" : "hover:shadow-lg"
+              }`}
+              onClick={() => setSelectedInterior("black")}
+            >
+              <div className="text-xl font-bold">블랙 원톤</div>
+              <div className="text-sm text-gray-500">천연가죽 시트</div>
             </div>
-            <div className="border p-4 rounded shadow hover:shadow-lg cursor-pointer">
-              <div className="text-xl font-bold">다크 그레이 투톤</div>
-              <div className="text-sm text-gray-500">스포티한 감성</div>
+            <div
+              className={`border p-4 rounded shadow cursor-pointer transition transform hover:scale-105 ${
+                selectedInterior === "beige" ? "ring-2 ring-blue-600" : "hover:shadow-lg"
+              }`}
+              onClick={() => setSelectedInterior("beige")}
+            >
+              <div className="text-xl font-bold">캐쉬미어 베이지</div>
+              <div className="text-sm text-gray-500">천연가죽 시트</div>
             </div>
-            <div className="border p-4 rounded shadow hover:shadow-lg cursor-pointer">
-              <div className="text-xl font-bold">화이트/블루</div>
-              <div className="text-sm text-gray-500">모던하고 세련된 느낌</div>
+            <div
+              className={`border p-4 rounded shadow cursor-pointer transition transform hover:scale-105 ${
+                selectedInterior === "green" ? "ring-2 ring-blue-600" : "hover:shadow-lg"
+              }`}
+              onClick={() => setSelectedInterior("green")}
+            >
+              <div className="text-xl font-bold">세이지 그린</div>
+              <div className="text-sm text-gray-500">Bio 천연가죽 시트</div>
+            </div>
+          </div>
+
+          {/* 색상 칩 이미지 */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-4 text-center">
+            <div>
+              <img src={ColorchipBlack} alt="블랙 원톤" className="w-full h-auto rounded shadow" />
+              <p className="mt-2 text-sm text-gray-600">블랙 원톤</p>
+            </div>
+            <div>
+              <img src={ColorchipBeige} alt="캐쉬미어 베이지" className="w-full h-auto rounded shadow" />
+              <p className="mt-2 text-sm text-gray-600">캐쉬미어 베이지</p>
+            </div>
+            <div>
+              <img src={ColorchipGreen} alt="세이지 그린" className="w-full h-auto rounded shadow" />
+              <p className="mt-2 text-sm text-gray-600">세이지 그린</p>
             </div>
           </div>
         </div>
@@ -85,9 +124,9 @@ function HyundaiIoniq() {
         {/* 오른쪽 내부 이미지 */}
         <div className="flex-1 mt-12 md:mt-0 mb-0 flex justify-center">
           <img
-            src='../Image/Estimate/Hyundai/Sonata/sonataInterior.png'
-            alt="아이오닉 9 실내"
-            className="max-w-[700px] w-full h-auto"
+            src={interiorImages[selectedInterior]}
+            alt="선택된 인테리어"
+            className="max-w-[700px] w-full h-auto transition duration-500 ease-in-out rounded"
           />
         </div>
       </div>
