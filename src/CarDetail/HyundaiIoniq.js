@@ -33,7 +33,7 @@ function HyundaiIoniq() {
         {/* 왼쪽 텍스트 영역 */}
         <div className="flex-1 space-y-10">
           <span className="text-lg bg-blue-600 text-white px-4 py-1 rounded">NEW</span>
-          <h1 className="text-6xl font-bold">아이오닉 9</h1>
+          <h1 className="text-6xl font-bold">아이오닉 6</h1>
 
           <div className="grid grid-cols-2 md:grid-cols-5 gap-40 text-xl text-gray-700 mt-20 whitespace-nowrap">
             <div>

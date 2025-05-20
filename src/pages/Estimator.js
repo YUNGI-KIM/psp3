@@ -2,66 +2,10 @@ import React, { useState, useEffect, useCallback } from "react";
 import { motion, useMotionValue, animate, useTransform } from "framer-motion";
 import Header from "../functions/Header";
 
-const brands = {
-    Hyundai: ["Avante", "Sonata", "Grandeur", "Santafe", "Casper", "Porter", "Ioniq6", "Palisade"],
-    Kia: ["Bongo", "BongoEv", "Carnival", "Ev3", "Ev4", "Ev6", "K5", "K8", "K9", "Morning", "Ray", "Seltos", "Sorento", "Sprotage"],
-};
-
-const basePrices = {
-    Avante: 21000000,
-    Sonata: 27000000,
-    Grandeur: 38000000,
-    Santafe: 35000000,
-    Casper: 14000000,
-    Porter: 21000000,
-    Ioniq6: 50000000,
-    Palisade: 45000000,
-    K5: 27000000,
-    Carnival: 33000000,
-    Bongo: 20000000,
-    BongoEv: 43000000,
-    Ev3: 40000000,
-    Ev4: 40400000,
-    Ev6: 46600000,
-    K8: 36800000,
-    K9: 58700000,
-    Morning: 13700000,
-    Ray: 13400000,
-    Seltos: 21600000,
-    Sorento: 35500000,
-    Sprotage: 27900000,
-};
-
-const options = [
-    { name: "Sunroof", price: 1000000 },
-    { name: "Leather Seats", price: 1500000 },
-    { name: "Navigation", price: 800000 },
-];
-
-const carImages = {
-    Avante: "/image/Estimate/Hyundai/Avante/Avante.png",
-    Sonata: "/image/Estimate/Hyundai/Sonata/Sonata.png",
-    Grandeur: "/image/Estimate/Hyundai/Grandeur/Grandeur.png",
-    Santafe: "/image/Estimate/Hyundai/Santafe/santafe2.png",
-    Casper: "/image/Estimate/Hyundai/Casper/casper2.png",
-    Porter: "/image/Estimate/Hyundai/Porter/porter2.png",
-    Ioniq6: "/image/Estimate/Hyundai/Ioniq/ioniq.png",
-    Palisade: "/image/Estimate/Hyundai/Palisade/palisade2.png",
-    K5: "/image/Estimate/Kia/K5/k5.png",
-    Carnival: "/image/Estimate/Kia/Carnival/carnival.png",
-    Bongo: "/image/Estimate/Kia/Bongo/bongo.png",
-    BongoEv:"/image/Estimate/Kia/BongoEv/bongo-ev.png",
-    Ev3:"/image/Estimate/Kia/Ev3/ev3.png",
-    Ev4:"/image/Estimate/Kia/Ev4/ev4.png",
-    Ev6:"/image/Estimate/Kia/Ev6/ev6.png",
-    K8:"/image/Estimate/Kia/K8/k8.png",
-    K9:"/image/Estimate/Kia/K9/k9.png",
-    Morning:"/image/Estimate/Kia/Morning/morning.png",
-    Ray:"/image/Estimate/Kia/Ray/ray.png",
-    Seltos:"/image/Estimate/Kia/Seltos/seltos.png",
-    Sorento:"/image/Estimate/Kia/Sorento/sorento.png",
-    Sportage:"/image/Estimate/Kia/Sportage/sportage.png",
-};
+import { brands } from "../data/brands";
+import { basePrices } from "../data/basePrices";
+import { carImages } from "../data/carImages";
+import { options } from "../data/options";
 
 export default function Estimator() {
     const [brand, setBrand] = useState("Hyundai");
