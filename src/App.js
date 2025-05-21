@@ -21,7 +21,15 @@ import AdminMainPage from './Admin/AdminMain';
 import { UserProvider } from './contexts/UserContext';
 import LoginSessionVerify from "./functions/LoginSessionVerify";
 import AnswerForQ from "./Admin/AnswerForQ"
+import HyundaiCasper from "./CarDetail/HyundaiCasper";
+import HyundaiAvante from "./CarDetail/HyundaiAvante";
+import HyundaiGrandeur from "./CarDetail/HyundaiGrandeur";
 import HyundaiIoniq from "./CarDetail/HyundaiIoniq";
+import HyundaiPalisade from "./CarDetail/HyundaiPalisade";
+import HyundaiPorter from "./CarDetail/HyundaiPorter";
+import HyundaiSantafe from "./CarDetail/HyundaiSantafe";
+import HyundaiSonata from "./CarDetail/HyundaiSonata";
+
 import Buy from "./buy/buy";
 
 function App() {
@@ -51,7 +59,14 @@ function App() {
               <Route path="/Chevo" element={<Chevo />} />
               <Route path="/Gen" element={<Gen />} />
               <Route path="/BMW" element={<BMW />} />
+              <Route path="/CarDetail/HyundaiCasper" element={<HyundaiCasper />} />
+              <Route path="/CarDetail/HyundaiAvante" element={<HyundaiAvante />} />
+              <Route path="/CarDetail/HyundaiGrandeur" element={<HyundaiGrandeur />} />
               <Route path="/CarDetail/HyundaiIoniq" element={<HyundaiIoniq />} />
+              <Route path="/CarDetail/HyundaiPalisade" element={<HyundaiPalisade />} />
+              <Route path="/CarDetail/HyundaiPorter" element={<HyundaiPorter />} />
+              <Route path="/CarDetail/HyundaiSantafe" element={<HyundaiSantafe />} />
+              <Route path="/CarDetail/HyundaiSonata" element={<HyundaiSonata />} />
 
             </Routes>
           </BrowserRouter>
