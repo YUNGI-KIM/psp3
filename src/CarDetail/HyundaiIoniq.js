@@ -35,22 +35,22 @@ function HyundaiIoniq() {
           <span className="text-lg bg-blue-600 text-white px-4 py-1 rounded">NEW</span>
           <h1 className="text-4xl md:text-6xl font-bold leading-tight break-keep">아이오닉 6</h1>
 
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-x-10 gap-y-12 text-xl text-gray-700 mt-10">
-            <div>
-              <div className="font-bold text-2xl md:text-4xl">{IoniqSpecs.priceAfterTax}</div>
-              <div className="text-base">(세제 혜택 후 가격)</div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-10 gap-x-8 text-xl text-gray-700 mt-10">
+            <div className="flex flex-col">
+              <span className="font-bold text-2xl md:text-4xl">{IoniqSpecs.priceAfterTax}</span>
+              <span className="text-base">(세제 혜택 후 가격)</span>
             </div>
-            <div>
-              <div className="text-gray-500 text-2xl md:text-4xl">({IoniqSpecs.priceBeforeTax})</div>
-              <div className="text-base">(세제 혜택 전 가격)</div>
+            <div className="flex flex-col">
+              <span className="text-gray-500 text-2xl md:text-4xl">{IoniqSpecs.priceBeforeTax}</span>
+              <span className="text-base">(세제 혜택 전 가격)</span>
             </div>
-            <div>
-              <div className="font-bold text-2xl md:text-4xl">{IoniqSpecs.efficiency}</div>
-              <div className="text-base">연비</div>
+            <div className="flex flex-col">
+              <span className="font-bold text-2xl md:text-4xl">{IoniqSpecs.efficiency}</span>
+              <span className="text-base">연비</span>
             </div>
-            <div>
-              <div className="font-bold text-2xl md:text-4xl">{IoniqSpecs.displacement}</div>
-              <div className="text-base">배기량</div>
+            <div className="flex flex-col">
+              <span className="font-bold text-2xl md:text-4xl">{IoniqSpecs.displacement}</span>
+              <span className="text-base">배기량</span>
             </div>
           </div>
         </div>
