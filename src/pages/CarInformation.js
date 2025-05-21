@@ -1,161 +1,137 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../functions/Header";
-import Avante from "../Image/Estimate/Hyundai/Avante/Avante.png";
-import Casper from "../Image/Estimate/Hyundai/Casper/casper.png";
-import Grandeur from "../Image/Estimate/Hyundai/Grandeur/Grandeur.png";
-import Ioniq from "../Image/Estimate/Hyundai/Ioniq/ioniq.png";
-import Palisade from "../Image/Estimate/Hyundai/Palisade/Palisade.png";
-import Porter from "../Image/Estimate/Hyundai/Porter/porter.png";
-import Santafe from "../Image/Estimate/Hyundai/Santafe/santafe2.png";
-import Sonata from "../Image/Estimate/Hyundai/Sonata/Sonata.png";
+import ColorchipBeige from "../Image/Interior/ColorchipBeige.png";
+import ColorchipBlack from "../Image/Interior/ColorchipBlack.png";
+import ColorchipGreen from "../Image/Interior/ColorchipGreen.png";
+import InteriorBlack from "../Image/Interior/Inside/InsideBlack.png";
+import InteriorBeige from "../Image/Interior/Inside/InsideBeige.png";
+import InteriorGreen from "../Image/Interior/Inside/InsideGreen.png";
 
-import K5 from "../Image/Estimate/Kia/K5/K5.jpg";
-import K9 from "../Image/Estimate/Kia/K9/K9.png";
-import Bongo from "../Image/Estimate/Kia/Bongo/bongo.png";
-import BongoEv from "../Image/Estimate/Kia/BongoEv/bongo-ev.png";
-import Carnival from "../Image/Estimate/Kia/Carnival/carnival.png";
-import Ev3 from "../Image/Estimate/Kia/Ev3/ev3.png";
-import Ev4 from "../Image/Estimate/Kia/Ev4/ev4.png";
-import Ev6 from "../Image/Estimate/Kia/Ev6/ev6.png";
-import K8 from "../Image/Estimate/Kia/K8/k8.png";
-import Morning from "../Image/Estimate/Kia/Morning/morning.png";
-import Ray from "../Image/Estimate/Kia/Ray/ray.png";
-import Seltos from "../Image/Estimate/Kia/Seltos/seltos.png";
-import Sorento from "../Image/Estimate/Kia/Sorento/sorento.png";
-import Sportage from "../Image/Estimate/Kia/Sportage/sportage.png";
-
-
-
-import { AnimatePresence, motion } from "framer-motion";
-
-const brandList = ["현대", "기아", "제네시스","르노","쉐보레","KGM","BMW","아우디","벤츠"];
-
-const brandModels = {
-  현대: [
-    { title: "그랜져", label: "최고가 모델", color: "트랜스미션블루펄", interior: "블랙모노톤(캘리그라피)", fuelEfficiency: "12.4",displacement:"11.1",options: ["하이테크 패키지","파노라마 선루프","프리뷰 전자제어 서스펜션 II"], price: "44,090,000", image: Grandeur },
-    { title: "아반떼", label: "베스트셀러", color: "미라지 그린", interior: "세이지 그린", fuelEfficiency: "12.4",displacement:"11.1",options: ["드라이브 와이즈 II", "하이패스 자동결제 시스템","파킹 어시스트 플러스"], price: "28,300,000", image: Avante },
-    { title: "캐스퍼", label: "최저가 모델", color: "언블리치드 아이보리", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: ["인포테인먼트 내비 플러스I", "선루프", "17인치 알로이 휠 패키지"], price: "14,600,000", image: Casper },
-    { title: "아이오닉6", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: Ioniq },
-    { title: "팰리세이드", label: "SUV", color: "밀키 베이지", interior: "블랙",fuelEfficiency: "12.4",displacement:"11.1", options: [], price: "27,350,000", image: Palisade },
-    { title: "포터", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: Porter },
-    { title: "산타페", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: Santafe },
-    { title: "소나타", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: Sonata },
-
-  ],
-  기아: [
-    { title: "K5", label: "세단", color: "스노우 화이트 펄", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "31,200,000", image: K5 },
-    { title: "K9", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: K9 },
-    { title: "Bongo", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Bongo },
-    { title: "BongoEv", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: BongoEv },
-    { title: "Carnival", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Carnival},
-    { title: "Ev3", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Ev3 },
-    { title: "Ev4", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Ev4 },
-    { title: "Ev6", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Ev6 },
-    { title: "K8", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: K8 },
-    { title: "Morning", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Morning },
-    { title: "Ray", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Ray },
-    { title: "Seltos", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Seltos },
-    { title: "Sorento", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Sorento },
-    { title: "Sportage", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Sportage },
-  
-  
-  ],
+const IoniqSpecs = {
+  priceAfterTax: "6,715 만원~",
+  priceBeforeTax: "7,073 만원~",
+  efficiency: "~4.3 km/kWh",
+  displacement: "5",
 };
 
-const detailRoutes = {
-  "아이오닉6": "/CarDetail/HyundaiIoniq",
-
-};
-
-function CarInformation() {
+function HyundaiIoniq() {
   const navigate = useNavigate();
-  const [brandIndex, setBrandIndex] = useState(0);
+  const [selectedInterior, setSelectedInterior] = useState("black");
 
-  const currentBrand = brandList[brandIndex];
-  const currentModels = brandModels[currentBrand] || [];
-
-  const nextBrand = () => {
-    setBrandIndex((prev) => (prev + 1) % brandList.length);
-  };
-
-  const prevBrand = () => {
-    setBrandIndex((prev) => (prev === 0 ? brandList.length - 1 : prev - 1));
+  const interiorImages = {
+    black: InteriorBlack,
+    beige: InteriorBeige,
+    green: InteriorGreen,
   };
 
   return (
     <div>
       <div>{Header()}</div>
-      <div className="bg-white py-10 px-4 sm:px-8">
-        <div className="flex justify-center items-center mb-6 space-x-6">
-          <button onClick={prevBrand} className="text-4xl font-bold">
-            <svg xmlns="http://www.w3.org/2000/svg"  fill="#808080" viewBox="0 0 256 512" className="w-10 h-10 cursor-pointer hover:scale-110 transition-transform">
-              <path d="M9.4 278.6c-12.5-12.5-12.5-32.8 0-45.3l128-128c9.2-9.2 22.9-11.9 34.9-6.9s19.8 16.6 19.8 29.6l0 256c0 12.9-7.8 24.6-19.8 29.6s-25.7 2.2-34.9-6.9l-128-128z"/>
-            </svg>
-          </button>
-          <div>
-            <h1 className="text-3xl font-bold text-center">{currentBrand} 차량 정보</h1>
-            <p className="text-center text-sm text-gray-500">브랜드 간 비교</p>
+
+      <div className="flex flex-col md:flex-row items-start justify-between mt-10 mb-0 bg-white px-6 md:px-12 py-6">
+        {/* 왼쪽 텍스트 영역 */}
+        <div className="flex-1 space-y-10">
+          <span className="text-lg bg-blue-600 text-white px-4 py-1 rounded">NEW</span>
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight break-keep">아이오닉 6</h1>
+
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-x-10 gap-y-12 text-xl text-gray-700 mt-10">
+            <div>
+              <div className="font-bold text-2xl md:text-4xl">{IoniqSpecs.priceAfterTax}</div>
+              <div className="text-base">(세제 혜택 후 가격)</div>
+            </div>
+            <div>
+              <div className="text-gray-500 text-2xl md:text-4xl">({IoniqSpecs.priceBeforeTax})</div>
+              <div className="text-base">(세제 혜택 전 가격)</div>
+            </div>
+            <div>
+              <div className="font-bold text-2xl md:text-4xl">{IoniqSpecs.efficiency}</div>
+              <div className="text-base">연비</div>
+            </div>
+            <div>
+              <div className="font-bold text-2xl md:text-4xl">{IoniqSpecs.displacement}</div>
+              <div className="text-base">배기량</div>
+            </div>
           </div>
-          <button onClick={nextBrand} className="text-4xl font-bold">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="#808080" viewBox="0 0 256 512"  className="w-10 h-10 cursor-pointer hover:scale-110 transition-transform">
-              <path d="M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-9.2-9.2-22.9-11.9-34.9-6.9s-19.8 16.6-19.8 29.6l0 256c0 12.9 7.8 24.6 19.8 29.6s25.7 2.2 34.9-6.9l128-128z"/>
-            </svg>
-          </button>
         </div>
 
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={brandIndex}
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 0.5 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
-          >
-            {currentModels.length > 0 ? currentModels.map((model, index) => (
-              <div key={index} className="rounded-2xl overflow-hidden shadow-lg border">
-                <img src={model.image} alt={model.title} className="w-full h-80 object-contain bg-white" />
-                <div className="bg-[#1c1d3a] text-white p-4 relative">
-                  <div className="flex justify-between items-start mb-2">
-                    <h2 className="text-lg font-bold">{model.title}</h2>
-                    {model.label && (
-                      <span className="bg-indigo-600 text-xs px-2 py-1 rounded-full">{model.label}</span>
-                    )}
-                  </div>
-                  <ul className="text-sm text-gray-300 mb-5 space-y-1">
-                    <li>• 외장 컬러: {model.color}</li>
-                    <li>• 내장 컬러: {model.interior}</li>
-                    <li>• 연비: {model.fuelEfficiency}</li>
-                    <li>• 배기량: {model.displacement}</li>
-                    {model.options.length > 0 ? model.options.map((opt, i) => (
-                      <li key={i}>• {opt}</li>
-                    )) : <li>• 옵션 없음</li>}
-                  </ul>
-                  <div className="text-lg font-bold text-center mb-3">{model.price}₩</div>
-                  <button
-                    onClick={() => {
-                      const path = detailRoutes[model.title];
-                      if (path) {
-                        navigate(path);
-                      } else {
-                        alert("이 차량에 대한 상세 페이지는 아직 없습니다.");
-                      }
-                    }}
-                    className="w-full py-2 rounded bg-indigo-500 text-white font-semibold hover:bg-indigo-600 transition"
-                  >
-                    차량 상세 정보
-                  </button>
-                </div>
-              </div>
-            )) : (
-              <p className="text-center col-span-3 text-gray-500">등록된 차량 정보가 없습니다.</p>
-            )}
-          </motion.div>
-        </AnimatePresence>
+        {/* 오른쪽 차량 이미지 */}
+        <div className="flex-1 mt-12 md:mt-0 mb-0 flex justify-center">
+          <img
+            src="../Image/Estimate/Hyundai/Ioniq/ioniq.png"
+            alt="아이오닉 6"
+            className="max-w-full w-full md:max-w-[700px] h-auto"
+          />
+        </div>
+      </div>
+
+      <div className="flex flex-col md:flex-row items-start justify-between mt-20 mb-0 bg-white px-6 md:px-12 py-6">
+        {/* 왼쪽 내부 색상 선택 영역 */}
+        <div className="flex-1 space-y-6">
+          <h3 className="text-2xl md:text-3xl font-semibold text-gray-600">차량 내부 색상</h3>
+          <p className="text-base md:text-lg text-gray-700">
+            다양한 감성의 인테리어 색상을 선택해보세요.
+          </p>
+
+          {/* 설명 카드 */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-gray-800">
+            <div
+              className={`border p-4 rounded shadow cursor-pointer transition transform hover:scale-105 ${
+                selectedInterior === "black" ? "ring-2 ring-blue-600" : "hover:shadow-lg"
+              }`}
+              onClick={() => setSelectedInterior("black")}
+            >
+              <div className="text-lg md:text-xl font-bold">블랙 원톤</div>
+              <div className="text-sm text-gray-500">천연가죽 시트</div>
+            </div>
+            <div
+              className={`border p-4 rounded shadow cursor-pointer transition transform hover:scale-105 ${
+                selectedInterior === "beige" ? "ring-2 ring-blue-600" : "hover:shadow-lg"
+              }`}
+              onClick={() => setSelectedInterior("beige")}
+            >
+              <div className="text-lg md:text-xl font-bold">캐쉬미어 베이지</div>
+              <div className="text-sm text-gray-500">천연가죽 시트</div>
+            </div>
+            <div
+              className={`border p-4 rounded shadow cursor-pointer transition transform hover:scale-105 ${
+                selectedInterior === "green" ? "ring-2 ring-blue-600" : "hover:shadow-lg"
+              }`}
+              onClick={() => setSelectedInterior("green")}
+            >
+              <div className="text-lg md:text-xl font-bold">세이지 그린</div>
+              <div className="text-sm text-gray-500">Bio 천연가죽 시트</div>
+            </div>
+          </div>
+
+          {/* 색상 칩 이미지 */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-4 text-center">
+            <div>
+              <img src={ColorchipBlack} alt="블랙 원톤" className="w-full h-auto rounded shadow" />
+              <p className="mt-2 text-sm text-gray-600">블랙 원톤</p>
+            </div>
+            <div>
+              <img src={ColorchipBeige} alt="캐쉬미어 베이지" className="w-full h-auto rounded shadow" />
+              <p className="mt-2 text-sm text-gray-600">캐쉬미어 베이지</p>
+            </div>
+            <div>
+              <img src={ColorchipGreen} alt="세이지 그린" className="w-full h-auto rounded shadow" />
+              <p className="mt-2 text-sm text-gray-600">세이지 그린</p>
+            </div>
+          </div>
+        </div>
+
+        {/* 오른쪽 내부 이미지 */}
+        <div className="flex-1 mt-12 md:mt-0 mb-0 flex justify-center">
+          <img
+            src={interiorImages[selectedInterior]}
+            alt="선택된 인테리어"
+            className="max-w-full md:max-w-[700px] w-full h-auto transition duration-500 ease-in-out rounded"
+          />
+        </div>
       </div>
     </div>
   );
 }
 
-export default CarInformation;
+export default HyundaiIoniq;
