@@ -6,12 +6,26 @@ import Casper from "../Image/Estimate/Hyundai/Casper/casper.png";
 import Grandeur from "../Image/Estimate/Hyundai/Grandeur/Grandeur.png";
 import Ioniq from "../Image/Estimate/Hyundai/Ioniq/ioniq.png";
 import Palisade from "../Image/Estimate/Hyundai/Palisade/Palisade.png";
-import K5 from "../Image/Estimate/Kia/K9/K9.png";
+import Porter from "../Image/Estimate/Hyundai/Porter/porter.png";
+import Santafe from "../Image/Estimate/Hyundai/Santafe/santafe2.png";
+import Sonata from "../Image/Estimate/Hyundai/Sonata/Sonata.png";
+
+import K5 from "../Image/Estimate/Kia/K5/K5.jpg";
 import K9 from "../Image/Estimate/Kia/K9/K9.png";
-import Ray from "../Image/Estimate/Kia/K9/K9.png";
-import Morning from "../Image/Estimate/Kia/K9/K9.png";
-import Sportage from "../Image/Estimate/Kia/K9/K9.png";
-import Sorento from "../Image/Estimate/Kia/K9/K9.png";
+import Bongo from "../Image/Estimate/Kia/Bongo/bongo.png";
+import BongoEv from "../Image/Estimate/Kia/BongoEv/bongo-ev.png";
+import Carnival from "../Image/Estimate/Kia/Carnival/carnival.png";
+import Ev3 from "../Image/Estimate/Kia/Ev3/ev3.png";
+import Ev4 from "../Image/Estimate/Kia/Ev4/ev4.png";
+import Ev6 from "../Image/Estimate/Kia/Ev6/ev6.png";
+import K8 from "../Image/Estimate/Kia/K8/k8.png";
+import Morning from "../Image/Estimate/Kia/Morning/morning.png";
+import Ray from "../Image/Estimate/Kia/Ray/ray.png";
+import Seltos from "../Image/Estimate/Kia/Seltos/seltos.png";
+import Sorento from "../Image/Estimate/Kia/Sorento/sorento.png";
+import Sportage from "../Image/Estimate/Kia/Sportage/sportage.png";
+
+
 
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -23,15 +37,27 @@ const brandModels = {
     { title: "아반떼", label: "베스트셀러", color: "미라지 그린", interior: "세이지 그린", fuelEfficiency: "12.4",displacement:"11.1",options: ["드라이브 와이즈 II", "하이패스 자동결제 시스템","파킹 어시스트 플러스"], price: "28,300,000", image: Avante },
     { title: "캐스퍼", label: "최저가 모델", color: "언블리치드 아이보리", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: ["인포테인먼트 내비 플러스I", "선루프", "17인치 알로이 휠 패키지"], price: "14,600,000", image: Casper },
     { title: "아이오닉6", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: Ioniq },
-    { title: "팰리세이드", label: "SUV", color: "밀키 베이지", interior: "블랙",fuelEfficiency: "12.4",displacement:"11.1", options: [], price: "27,350,000", image: Palisade }
+    { title: "팰리세이드", label: "SUV", color: "밀키 베이지", interior: "블랙",fuelEfficiency: "12.4",displacement:"11.1", options: [], price: "27,350,000", image: Palisade },
+    { title: "포터", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: Porter },
+    { title: "산타페", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: Santafe },
+    { title: "소나타", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: Sonata },
+
   ],
   기아: [
-    { title: "카니발", label: "세단", color: "스노우 화이트 펄", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "31,200,000", image: K5 },
+    { title: "K5", label: "세단", color: "스노우 화이트 펄", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "31,200,000", image: K5 },
     { title: "K9", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: K9 },
-    { title: "레이", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: K9 },
-    { title: "모닝", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: K9 },
-    { title: "스포티지", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: K9 },
-    { title: "소", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: K9 }
+    { title: "Bongo", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Bongo },
+    { title: "BongoEv", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: BongoEv },
+    { title: "Carnival", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Carnival},
+    { title: "Ev3", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Ev3 },
+    { title: "Ev4", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Ev4 },
+    { title: "Ev6", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Ev6 },
+    { title: "K8", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: K8 },
+    { title: "Morning", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Morning },
+    { title: "Ray", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Ray },
+    { title: "Seltos", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Seltos },
+    { title: "Sorento", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Sorento },
+    { title: "Sportage", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Sportage },
   
   
   ],
