@@ -29,7 +29,7 @@ function HyundaiIoniq() {
     <div>
       <div>{Header()}</div>
 
-      <div className="flex flex-col md:flex-row items-start justify-between mt-10 mb-0 bg-white px-12 py-6 ">
+      <div className="flex flex-col md:flex-row items-start justify-between mt-10 mb-0 bg-white px-12 py-6">
         {/* 왼쪽 텍스트 영역 */}
         <div className="flex-1 space-y-10">
           <span className="text-lg bg-blue-600 text-white px-4 py-1 rounded">NEW</span>
@@ -65,7 +65,7 @@ function HyundaiIoniq() {
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row items-start justify-between mt-20 mb-0 bg-white px-12 py-6 ">
+      <div className="flex flex-col md:flex-row items-start justify-between mt-20 mb-0 bg-white px-12 py-6">
         {/* 왼쪽 내부 색상 선택 영역 */}
         <div className="flex-1 space-y-6">
           <h3 className="text-3xl font-semibold text-gray-600">차량 내부 색상</h3>
