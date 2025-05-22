@@ -15,11 +15,13 @@ import Gen from './buy/genesis';
 import BMW from './buy/BMW';
 import Estimator from "./pages/Estimator";
 import AccForCar from "./pages/AccForCar";
+import CarInformation from "./pages/CarInformation";
 import ReceviedSupport from "./Admin/ReceivedSupport";
 import AdminMainPage from './Admin/AdminMain';
 import { UserProvider } from './contexts/UserContext';
 import LoginSessionVerify from "./functions/LoginSessionVerify";
 import AnswerForQ from "./Admin/AnswerForQ"
+import HyundaiIoniq from "./CarDetail/HyundaiIoniq";
 import Buy from "./buy/buy";
 
 function App() {
@@ -41,6 +43,7 @@ function App() {
               <Route path='/answerForQ' element={<AnswerForQ/>} />
               <Route path='/adminMain' element={<AdminMainPage/>} />
               <Route path="/accForCar" element={<AccForCar />} />
+              <Route path="/CarInformation" element={<CarInformation />} />
               <Route path="/hyundai" element={<Hyundai />} />
               <Route path="/kia" element={<Kia />} />
               <Route path="/kgm" element={<Kgm />} />
@@ -48,6 +51,7 @@ function App() {
               <Route path="/Chevo" element={<Chevo />} />
               <Route path="/Gen" element={<Gen />} />
               <Route path="/BMW" element={<BMW />} />
+              <Route path="/CarDetail/HyundaiIoniq" element={<HyundaiIoniq />} />
 
             </Routes>
           </BrowserRouter>
