@@ -10,7 +10,7 @@ import Porter from "../Image/Estimate/Hyundai/Porter/porter.png";
 import Santafe from "../Image/Estimate/Hyundai/Santafe/santafe2.png";
 import Sonata from "../Image/Estimate/Hyundai/Sonata/Sonata.png";
 
-import K5 from "../Image/Estimate/Kia/K5/K5.jpg";
+import K5 from "../Image/Estimate/Kia/K5/k5.png";
 import K9 from "../Image/Estimate/Kia/K9/K9.png";
 import Bongo from "../Image/Estimate/Kia/Bongo/bongo.png";
 import BongoEv from "../Image/Estimate/Kia/BongoEv/bongo-ev.png";
