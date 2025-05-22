@@ -98,11 +98,11 @@ export default function Estimator() {
 
     const paymentConditions = [
         { name: "기본 차량 가격", value: displayedBasePrice, motion: true },
-        { name: "옵션 추가금", value: displayedOptionsPrice, motion: true }
+        { name: "옵션 가격", value: displayedOptionsPrice, motion: true }
     ];
 
     const totals = [
-        { name: "총 차량가액", value: displayedPrice, motion: true },
+        { name: "총 차량 가격", value: displayedPrice, motion: true },
         { name: "부대 비용", value: displayedRegFee, motion: true }
     ];
 
