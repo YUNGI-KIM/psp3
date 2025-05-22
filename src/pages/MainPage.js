@@ -116,7 +116,12 @@ const MainPage = () => {
                     </svg>
                 </div>
 
-                <img src={slidSrc[index].src} onClick={() => navigate(slidSrc[index].href)} className="w-full h-full object-cover cursor-pointer" alt={`Slide ${index + 1}`} />
+                <img
+                    src={slidSrc[index].src}
+                    onClick={() => navigate(slidSrc[index].href)}
+                    className="w-full h-full object-cover cursor-pointer"
+                    alt={`Slide ${index + 1}`} 
+                    />
 
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
                     {slidSrc.map((_, i) => (
