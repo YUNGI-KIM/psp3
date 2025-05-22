@@ -30,6 +30,19 @@ import HyundaiPorter from "./CarDetail/HyundaiPorter";
 import HyundaiSantafe from "./CarDetail/HyundaiSantafe";
 import HyundaiSonata from "./CarDetail/HyundaiSonata";
 
+import KiaBongo from  "./CarDetail/CarDetailKia/KiaBongo"
+import KiaBongoEv from "./CarDetail/CarDetailKia/KiaBongoEv"
+import KiaCarnival from "./CarDetail/CarDetailKia/KiaCarnival"
+import KiaEv3 from "./CarDetail/CarDetailKia/KiaEv3"
+import KiaEv4 from "./CarDetail/CarDetailKia/KiaEv4"
+import KiaEv6 from  "./CarDetail/CarDetailKia/KiaEv6"
+import KiaK8 from "./CarDetail/CarDetailKia/KiaK8"
+import KiaK9 from "./CarDetail/CarDetailKia/KiaK9"
+import KiaMorning from "./CarDetail/CarDetailKia/KiaMorning"
+import KiaSeltos from "./CarDetail/CarDetailKia/KiaSeltos"
+import KiaSorento from  "./CarDetail/CarDetailKia/KiaSorento" 
+import KiaSportage from "./CarDetail/CarDetailKia/KiaSportage"
+
 import Buy from "./buy/buy";
 
 function App() {
@@ -67,6 +80,20 @@ function App() {
               <Route path="/CarDetail/HyundaiPorter" element={<HyundaiPorter />} />
               <Route path="/CarDetail/HyundaiSantafe" element={<HyundaiSantafe />} />
               <Route path="/CarDetail/HyundaiSonata" element={<HyundaiSonata />} />
+
+              <Route path="/CarDetail/CarDetailKia/KiaBongo" element={<KiaBongo />} />
+              <Route path="/CarDetail/CarDetailKia/KiaBongoEv" element={<KiaBongoEv />} />
+              <Route path="/CarDetail/CarDetailKia/KiaCarnival" element={<KiaCarnival />} />
+              <Route path="/CarDetail/CarDetailKia/KiaEv3" element={<KiaEv3 />} />
+              <Route path="/CarDetail/CarDetailKia/KiaEv4" element={<KiaEv4 />} />
+              <Route path="/CarDetail/CarDetailKia/KiaEv6" element={<KiaEv6 />} />
+              <Route path="/CarDetail/CarDetailKia/KiaK8" element={<KiaK8 />} />
+              <Route path="/CarDetail/CarDetailKia/KiaK9" element={<KiaK9 />} />
+              <Route path="/CarDetail/CarDetailKia/KiaMorning" element={<KiaMorning />} />
+              <Route path="/CarDetail/CarDetailKia/KiaSeltos" element={<KiaSeltos />} />
+              <Route path="/CarDetail/CarDetailKia/KiaSorento" element={<KiaSorento />} />
+              <Route path="/CarDetail/CarDetailKia/KiaSportage" element={<KiaSportage />} />
+
 
             </Routes>
           </BrowserRouter>
