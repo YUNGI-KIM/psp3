@@ -44,6 +44,13 @@ import KiaSorento from  "./CarDetail/CarDetailKia/KiaSorento"
 import KiaSportage from "./CarDetail/CarDetailKia/KiaSportage"
 
 import Buy from "./buy/buy";
+import G70 from './CarDetail/CarDetialGenesis/G70';
+import G80 from './CarDetail/CarDetialGenesis/G80';
+import G90 from './CarDetail/CarDetialGenesis/G90';
+import GV60 from './CarDetail/CarDetialGenesis/GV60';
+import GV70 from './CarDetail/CarDetialGenesis/GV70';
+import GV80 from './CarDetail/CarDetialGenesis/GV80';
+
 
 function App() {
   return (
@@ -93,6 +100,15 @@ function App() {
               <Route path="/CarDetail/CarDetailKia/KiaSeltos" element={<KiaSeltos />} />
               <Route path="/CarDetail/CarDetailKia/KiaSorento" element={<KiaSorento />} />
               <Route path="/CarDetail/CarDetailKia/KiaSportage" element={<KiaSportage />} />
+
+              <Route path="/CarDetail/CarDetailGenesis/G70" element={<G70 />} />
+              <Route path="/CarDetail/CarDetailGenesis/G80" element={<G80 />} />
+              <Route path="/CarDetail/CarDetailGenesis/G90" element={<G90  />} />
+              <Route path="/CarDetail/CarDetailGenesis/GV60" element={<GV60 />} />
+              <Route path="/CarDetail/CarDetailGenesis/GV70" element={<GV70 />} />
+              <Route path="/CarDetail/CarDetailGenesis/GV80" element={<GV80 />} />
+
+
 
 
             </Routes>

@@ -25,6 +25,15 @@ import Seltos from "../Image/Estimate/Kia/Seltos/seltos.png";
 import Sorento from "../Image/Estimate/Kia/Sorento/sorento.png";
 import Sportage from "../Image/Estimate/Kia/Sportage/sportage.png";
 
+import G70 from "../Image/Estimate/Genesis/G70/G70.png";
+import G80 from "../Image/Estimate/Genesis/G80/G80.png";
+import G90 from "../Image/Estimate/Genesis/G90/G90.png";
+import GV60 from "../Image/Estimate/Genesis/GV60/GV60.png";
+import GV70 from "../Image/Estimate/Genesis/GV70/GV70.png";
+import GV80 from "../Image/Estimate/Genesis/GV80/GV80.png";
+
+
+
 
 
 import { AnimatePresence, motion } from "framer-motion";
@@ -58,9 +67,18 @@ const brandModels = {
     { title: "Seltos", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Seltos },
     { title: "Sorento", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Sorento },
     { title: "Sportage", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Sportage },
-  
-  
   ],
+  
+  제네시스: [
+    { title: "G70", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: G70 },
+    { title: "G80", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: G80 },
+    { title: "G90", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: G90 },
+    { title: "GV60", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: GV60 },
+    { title: "GV70", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: GV70 },
+    { title: "GV80", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: GV80 },
+
+
+  ]
 };
 
 const detailRoutes = {
@@ -87,7 +105,13 @@ const detailRoutes = {
   "Seltos": "/CarDetail/CarDetailKia/KiaSeltos",
   "Sorento": "/CarDetail/CarDetailKia/KiaSorento",
   "Sportage": "/CarDetail/CarDetailKia/KiaSportage",
-
+  
+  "G70": "/CarDetail/CarDetailGenesis/G70",
+  "G80": "/CarDetail/CarDetailGenesis/G80",
+  "G90": "/CarDetail/CarDetailGenesis/G90",
+  "GV60": "/CarDetail/CarDetailGenesis/GV60",
+  "GV70": "/CarDetail/CarDetailGenesis/GV70",
+  "GV80": "/CarDetail/CarDetailGenesis/GV80",
 
 
 };
