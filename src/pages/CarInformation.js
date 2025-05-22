@@ -10,7 +10,7 @@ import Porter from "../Image/Estimate/Hyundai/Porter/porter.png";
 import Santafe from "../Image/Estimate/Hyundai/Santafe/santafe2.png";
 import Sonata from "../Image/Estimate/Hyundai/Sonata/Sonata.png";
 
-import K5 from "../Image/Estimate/Kia/K5/K5.jpg";
+import K5 from "../Image/Estimate/Kia/K5/k5.png";
 import K9 from "../Image/Estimate/Kia/K9/K9.png";
 import Bongo from "../Image/Estimate/Kia/Bongo/bongo.png";
 import BongoEv from "../Image/Estimate/Kia/BongoEv/bongo-ev.png";
@@ -72,6 +72,23 @@ const detailRoutes = {
   "Porter": "/CarDetail/HyundaiPorter",
   "Santafe": "/CarDetail/HyundaiSantafe",
   "Sonata": "/CarDetail/HyundaiSonata",
+
+  "Bongo": "/CarDetail/CarDetailKia/KiaBongo",
+  "BongoEv": "/CarDetail/CarDetailKia/KiaBongoEv",
+  "Carnival": "/CarDetail/CarDetailKia/KiaCarnival",
+  "Ev3": "/CarDetail/CarDetailKia/KiaEv3",
+  "Ev4": "/CarDetail/CarDetailKia/KiaEv4",
+  "Ev5": "/CarDetail/CarDetailKia/KiaEv5",
+  "Ev6": "/CarDetail/CarDetailKia/KiaEv6",
+  "K8": "/CarDetail/CarDetailKia/KiaK8",
+  "K9": "/CarDetail/CarDetailKia/KiaK9",
+  "Morning": "/CarDetail/CarDetailKia/KiaMorning",
+  "Ray": "/CarDetail/CarDetailKia/KiaRay",
+  "Seltos": "/CarDetail/CarDetailKia/KiaSeltos",
+  "Sorento": "/CarDetail/CarDetailKia/KiaSorento",
+  "Sportage": "/CarDetail/CarDetailKia/KiaSportage",
+
+
 
 };
 
