@@ -8,6 +8,8 @@ import {carImages} from "../data/carImages";
 import {options} from "../data/options";
 
 export default function Estimator() {
+    const [cardType, setCardType] = useState(""); // 카드 종류 선택
+    const [MonthType, setMonthType] = useState(""); // 할부 개월  선택
     const [brand, setBrand] = useState("Hyundai");
     const [model, setModel] = useState("Avante");
     const [selectedOptions, setSelectedOptions] = useState([]);
@@ -113,7 +115,12 @@ export default function Estimator() {
         }
     }, [brand]);
 
+    useEffect(() => {
+        CarBasePrice.set(basePrices[model] || 0);
+    }, [model]);
+
     return (
+
         <div className="min-h-screen bg-white text-black">
             <Header/>
             <div className="flex flex-col items-center justify-center p-4 sm:p-8">
@@ -211,7 +218,7 @@ export default function Estimator() {
                         </div>
 
 
-                        {/* 등록비 테이블 */}
+                        {/* 부대비용 테이블 */}
                         <div className="mt-6 border-t border-b border-gray-300">
                             <h2 className="text-lg font-semibold my-4">부대 비용</h2>
                             <table className="w-full text-sm">
@@ -238,33 +245,59 @@ export default function Estimator() {
 
                         {/* 결제 방법 */}
                         <div className="mt-6 border-t border-b border-gray-300">
-                            <h2 className="text-lg font-semibold my-4">결제 방법</h2>
+                            <h2 className="text-lg font-semibold my-4">결제 수단 선택 </h2>
                             <table className="w-full text-sm">
                                 <tbody>
                                 <tr className="bg-gray-100">
                                     <td className="w-1/4 p-3 font-semibold text-gray-800">결제 수단</td>
                                     <td className="p-3">
-                                        <div className="flex space-x-4">
-                                            <label className="flex items-center space-x-1">
-                                                <input
-                                                    type="radio"
-                                                    name="paymentMethod"
-                                                    value="현금"
-                                                    checked={paymentMethod === "현금"}
-                                                    onChange={(e) => setPaymentMethod(e.target.value)}
-                                                />
-                                                <span>현금</span>
-                                            </label>
-                                            <label className="flex items-center space-x-1">
-                                                <input
-                                                    type="radio"
-                                                    name="paymentMethod"
-                                                    value="카드"
-                                                    checked={paymentMethod === "카드"}
-                                                    onChange={(e) => setPaymentMethod(e.target.value)}
-                                                />
-                                                <span>신용카드</span>
-                                            </label>
+                                        <div className="flex flex-col space-y-2">
+                                            <div className="flex space-x-4">
+                                                <label className="flex items-center space-x-1">
+                                                    <input
+                                                        type="radio"
+                                                        name="paymentMethod"
+                                                        value="현금"
+                                                        checked={paymentMethod === "현금"}
+                                                        onChange={(e) => setPaymentMethod(e.target.value)}
+                                                    />
+                                                    <span>현금</span>
+                                                </label>
+                                                <label className="flex items-center space-x-1">
+                                                    <input
+                                                        type="radio"
+                                                        name="paymentMethod"
+                                                        value="카드"
+                                                        checked={paymentMethod === "카드"}
+                                                        onChange={(e) => setPaymentMethod(e.target.value)}
+                                                    />
+                                                    <span>신용카드</span>
+                                                </label>
+                                            </div>
+                                            {paymentMethod === "카드" && (
+                                                <div className="mt-2">
+                                                    <label className="block mb-1 text-sm text-gray-700">할부 개월 선택</label>
+                                                    <select
+                                                        value={MonthType} // ✅ 수정됨
+                                                        onChange={(e) => setMonthType(e.target.value)} // ✅ 수정됨
+                                                        className="border border-gray-300 rounded px-3 py-2 text-sm w-48"
+                                                    >
+                                                        <option value="">-- 할부 개월 선택 --</option>
+                                                        <option value="일시불">일시불</option>
+                                                        <option value="2개월">2개월</option>
+                                                        <option value="4개월">4개월</option>
+                                                        <option value="6개월">6개월</option>
+                                                        <option value="8개월">8개월</option>
+                                                        <option value="10개월">10개월</option>
+                                                        <option value="12개월">12개월</option>
+                                                        <option value="24개월">24개월</option>
+                                                        <option value="36개월">36개월</option>
+                                                        <option value="48개월">48개월</option>
+                                                        <option value="60개월">60개월</option>
+                                                    </select>
+                                                </div>
+                                            )}
+
                                         </div>
                                     </td>
                                 </tr>
@@ -290,9 +323,9 @@ export default function Estimator() {
                                 </tbody>
                                 <tfoot>
                                 <tr className="border-t">
-                                    <td className="p-3 font-semibold text-gray-800">출고 전 납입 총액</td>
+                                    <td className="p-3 font-semibold text-gray-800">최종 견적</td>
                                     <motion.td
-                                        className="p-3 text-right text-lg font-bold text-black">{displayedPrice}</motion.td>
+                                        className="p-3 text-right text-lg font-bold text-black">{displayedTotalPrice}</motion.td>
                                 </tr>
                                 </tfoot>
                             </table>
@@ -306,7 +339,7 @@ export default function Estimator() {
                                 animate={{scale: 1}}
                                 transition={{duration: 0.3}}
                             >
-                                최종 견적: <motion.span>{displayedTotalPrice}</motion.span>
+                                월 납입금: <motion.span>{displayedTotalPrice}</motion.span>
                             </motion.h2>
                         </div>
                     </div>
