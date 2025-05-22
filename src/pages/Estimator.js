@@ -12,16 +12,20 @@ export default function Estimator() {
     const [model, setModel] = useState("Avante");
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [imageKey, setImageKey] = useState(0);
+    const [paymentMethod, setPaymentMethod] = useState("현금");
 
     const price = useMotionValue(0);
 
     const acquisitionTax = useTransform(price, (value) => Math.floor(value * 0.07));
-    
     const registrationFee = useTransform(acquisitionTax, (acqTax) =>
         acqTax + 2600 + 25000 + 55000
     );
 
-    const totalPrice = useTransform([price, registrationFee], ([p, r]) => p + r);
+    const rawTotalPrice = useTransform([price, registrationFee], ([p, r]) => p + r);
+    
+    const totalPrice = useTransform(rawTotalPrice, (value) =>
+        paymentMethod === "카드" ? Math.floor(value * 1.02) : value
+    );
 
     const displayedPrice = useTransform(price, (value) =>
         Math.floor(value).toLocaleString("ko-KR") + "원"
@@ -186,7 +190,30 @@ export default function Estimator() {
                                 <tbody>
                                     <tr className="bg-gray-100">
                                         <td className="w-1/4 p-3 font-semibold text-gray-800">결제 수단</td>
-                                        <td className="p-3">현금/신용카드</td>
+                                        <td className="p-3">
+                                            <div className="flex space-x-4">
+                                                <label className="flex items-center space-x-1">
+                                                    <input
+                                                        type="radio"
+                                                        name="paymentMethod"
+                                                        value="현금"
+                                                        checked={paymentMethod === "현금"}
+                                                        onChange={(e) => setPaymentMethod(e.target.value)}
+                                                    />
+                                                    <span>현금</span>
+                                                </label>
+                                                <label className="flex items-center space-x-1">
+                                                    <input
+                                                        type="radio"
+                                                        name="paymentMethod"
+                                                        value="카드"
+                                                        checked={paymentMethod === "카드"}
+                                                        onChange={(e) => setPaymentMethod(e.target.value)}
+                                                    />
+                                                    <span>신용카드</span>
+                                                </label>
+                                            </div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td className="p-3 font-semibold text-gray-800">지불 조건</td>

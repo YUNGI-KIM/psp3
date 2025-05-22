@@ -73,7 +73,7 @@ function Header() {
                             <span className="text-black text-sm md:text-base font-semibold whitespace-nowrap">{user.name}님</span>
                             <button
                                 onClick={handleLogout}
-                                className="px-3 py-2 bg-gray-50 hover:bg-gray-400 text-black rounded-lg text-sm md:text-base"
+                                className="px-3 py-2 bg-gray-50 hover:bg-gray-400 hover:text-yellow-200 text-black rounded-lg text-sm md:text-base"
                             >
                                 로그아웃
                             </button>
@@ -82,13 +82,13 @@ function Header() {
                         <>
                             <button
                                 onClick={() => navigate('/login')}
-                                className="px-3 py-2 bg-gray-50 hover:bg-gray-400 text-black rounded-lg text-sm md:text-base"
+                                className="px-3 py-2 bg-gray-50 hover:bg-gray-400 hover:text-yellow-200 text-black rounded-lg text-sm md:text-base"
                             >
                                 로그인
                             </button>
                             <button
                                 onClick={() => navigate('/register')}
-                                className="px-3 py-2 bg-gray-900 hover:bg-gray-400 text-white rounded-lg text-sm md:text-base"
+                                className="px-3 py-2 bg-gray-900 hover:bg-gray-400 hover:text-yellow-200 text-white rounded-lg text-sm md:text-base"
                             >
                                 회원가입
                             </button>
@@ -103,7 +103,7 @@ function Header() {
                     <a href="/buy" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">차량구매</a>
                     <a href="/AccForCar" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">차량용품</a>
                     <a href="/Estimator" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">견적</a>
-                    <a href="/public#" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">차량정보</a>
+                    <a href="/CarInformation" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">차량정보</a>
                     <a href="/Support" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">고객지원</a>
                 </div>
             </nav>
