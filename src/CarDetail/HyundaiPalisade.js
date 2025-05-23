@@ -9,10 +9,10 @@ import InteriorBeige from "../Image/Interior/Inside/InsideBeige.png";
 import InteriorGreen from "../Image/Interior/Inside/InsideGreen.png";
 
 const IoniqSpecs = {
-  priceAfterTax: "6,715 만원~",
-  priceBeforeTax: "7,073 만원~",
-  efficiency: "~4.3 km/kWh",
-  displacement: "5",
+  priceAfterTax: "4,447 만원~",
+  priceBeforeTax: "4,706 만원~",
+  efficiency: "~11.6 km/L",
+  displacement: "~2497cc",
 };
 
 function HyundaiPalisade() {
@@ -32,7 +32,7 @@ function HyundaiPalisade() {
       <div className="flex flex-col md:flex-row items-start justify-between mt-10 mb-0 bg-white px-6 md:px-12 py-6">
         {/* 왼쪽 텍스트 영역 */}
         <div className="flex-1 space-y-10">
-          <span className="text-lg bg-blue-600 text-white px-4 py-1 rounded">NEW</span>
+          <span className="text-lg bg-blue-600 text-white px-4 py-1 rounded">SUV</span>
           <h1 className="text-4xl md:text-6xl font-bold leading-tight break-keep">Palisade</h1>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-10 gap-x-8 text-xl text-gray-700 mt-10">

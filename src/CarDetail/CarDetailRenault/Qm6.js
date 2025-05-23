@@ -1,21 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../functions/Header";
-import ColorchipBeige from "../Image/Interior/ColorchipBeige.png";
-import ColorchipBlack from "../Image/Interior/ColorchipBlack.png";
-import ColorchipGreen from "../Image/Interior/ColorchipGreen.png";
-import InteriorBlack from "../Image/Interior/Inside/InsideBlack.png";
-import InteriorBeige from "../Image/Interior/Inside/InsideBeige.png";
-import InteriorGreen from "../Image/Interior/Inside/InsideGreen.png";
+import Header from "../../functions/Header";
+import ColorchipBeige from "../../Image/Interior/ColorchipBeige.png";
+import ColorchipBlack from "../../Image/Interior/ColorchipBlack.png";
+import ColorchipGreen from "../../Image/Interior/ColorchipGreen.png";
+import InteriorBlack from "../../Image/Interior/Inside/InsideBlack.png";
+import InteriorBeige from "../../Image/Interior/Inside/InsideBeige.png";
+import InteriorGreen from "../../Image/Interior/Inside/InsideGreen.png";
 
 const IoniqSpecs = {
-  priceAfterTax: "5,260 만원~",
-  priceBeforeTax: "5,540 만원~",
-  efficiency: "~6.2 km/kWh",
-  displacement: " - ",
+  priceAfterTax: "2,470 만원~",
+  priceBeforeTax: "2,560 만원~",
+  efficiency: "~13.5 km/kWh",
+  displacement: "~1997cc",
 };
 
-function HyundaiIoniq() {
+function Qm6() {
   const navigate = useNavigate();
   const [selectedInterior, setSelectedInterior] = useState("black");
 
@@ -32,8 +32,8 @@ function HyundaiIoniq() {
       <div className="flex flex-col md:flex-row items-start justify-between mt-10 mb-0 bg-white px-6 md:px-12 py-6">
         {/* 왼쪽 텍스트 영역 */}
         <div className="flex-1 space-y-10">
-          <span className="text-lg bg-blue-600 text-white px-4 py-1 rounded">전기 세단</span>
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight break-keep">아이오닉 6</h1>
+          <span className="text-lg bg-blue-600 text-white px-4 py-1 rounded">NEW</span>
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight break-keep">Qm6</h1>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-10 gap-x-8 text-xl text-gray-700 mt-10">
             <div className="flex flex-col">
@@ -58,8 +58,8 @@ function HyundaiIoniq() {
         {/* 오른쪽 차량 이미지 */}
         <div className="flex-1 mt-12 md:mt-0 mb-0 flex justify-center">
           <img
-            src="../Image/Estimate/Hyundai/Ioniq/ioniq.png"
-            alt="아이오닉 6"
+            src="../Image/Estimate/Renault/Qm6/Qm6.jpg"
+            alt="Qm6"
             className="max-w-full w-full md:max-w-[700px] h-auto"
           />
         </div>
@@ -134,4 +134,4 @@ function HyundaiIoniq() {
   );
 }
 
-export default HyundaiIoniq;
+export default Qm6;
