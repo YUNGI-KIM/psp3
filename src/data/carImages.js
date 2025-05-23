@@ -21,4 +21,5 @@ export const carImages = {
   Seltos: "/image/Estimate/Kia/Seltos/seltos.png",
   Sorento: "/image/Estimate/Kia/Sorento/sorento.png",
   Sprotage: "/image/Estimate/Kia/Sportage/sportage.png",
+  Series_1: "/image/Estimate/Bmw/Series_1.jpg"
 };
