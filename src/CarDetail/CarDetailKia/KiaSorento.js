@@ -9,10 +9,10 @@ import InteriorBeige from "../../Image/Interior/Inside/InsideBeige.png";
 import InteriorGreen from "../../Image/Interior/Inside/InsideGreen.png";
 
 const IoniqSpecs = {
-  priceAfterTax: "6,715 만원~",
-  priceBeforeTax: "7,073 만원~",
-  efficiency: "~4.3 km/kWh",
-  displacement: "5",
+  priceAfterTax: "3,605 만원~",
+  priceBeforeTax: "3,820 만원~",
+  efficiency: "~13.0 km/L",
+  displacement: "~2497cc",
 };
 
 function KiaSorento() {
