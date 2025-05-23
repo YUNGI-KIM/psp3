@@ -28,7 +28,7 @@ export const carImages = {
   i5: "/image/Estimate/Bmw/i5/i5.jpg",
   i7: "/image/Estimate/Bmw/i7/i7.jpg",
   iX1: "/image/Estimate/Bmw/iX1/iX1.jpg",
-  iX3: "/image/Estimate/Bmw/iX3/iX3.jpg",
+  iX3: "/image/Estimate/Bmgit w/iX3/iX3.jpg",
   M4: "/image/Estimate/Bmw/M4/M4.jpg",
   X1: "/image/Estimate/Bmw/X1/X1.jpg",
   X3: "/image/Estimate/Bmw/X3/X3.jpg",
