@@ -18,6 +18,7 @@ export default function Estimator() {
     const optionsPrice = useMotionValue(0);
     const CarBasePrice = useMotionValue(basePrices[model]);
     const price = useMotionValue(0);
+    const monthlyValue = useMotionValue(0);
 
     const acquisitionTax = useTransform(price, value => Math.floor(value * 0.07));
     const registrationFee = useTransform(acquisitionTax, acqTax =>
@@ -25,6 +26,30 @@ export default function Estimator() {
     );
 
     const rawTotalPrice = useTransform([price, registrationFee], ([p, r]) => p + r);
+
+    // 월 납입금 계산
+    const monthToNumber = (monthStr) => {
+        if (monthStr === "일시불" || monthStr === "") return null;
+        const match = monthStr.match(/(\d+)/);
+        return match ? parseInt(match[1]) : null;
+    };
+
+    const monthlyPaymentRaw = useTransform(rawTotalPrice, value => {
+        const months = monthToNumber(MonthType);
+        if (!months) return value;
+        return Math.floor(value / months);
+    });
+
+    const monthlyPayment = useMotionValue(monthlyPaymentRaw.get());
+
+    useEffect(() => {
+        const unsubscribe = monthlyPaymentRaw.on("change", (v) => {
+            animate(monthlyPayment, v, { duration: 0.5, ease: "easeInOut" });
+        });
+        return unsubscribe;
+    }, [monthlyPaymentRaw]);
+
+
 
     const totalPrice = useTransform(rawTotalPrice, value =>
         Math.floor(value).toLocaleString("ko-KR") + "원"
@@ -54,21 +79,9 @@ export default function Estimator() {
         value.toLocaleString("ko-KR")
     );
 
-    // 월 납입금 계산
-    const monthToNumber = (monthStr) => {
-        if (monthStr === "일시불" || monthStr === "") return null;
-        const match = monthStr.match(/(\d+)/);
-        return match ? parseInt(match[1]) : null;
-    };
-
-    const monthlyPayment = useTransform(rawTotalPrice, value => {
-        const months = monthToNumber(MonthType);
-        if (!months) return value;
-        return Math.floor(value / months);
-    });
 
     const displayedMonthlyPayment = useTransform(monthlyPayment, value =>
-        value.toLocaleString("ko-KR") + "원"
+        Math.floor(value).toLocaleString("ko-KR") + "원"
     );
 
     const handleOptionChange = (option) => {
@@ -131,6 +144,8 @@ export default function Estimator() {
     useEffect(() => {
         CarBasePrice.set(basePrices[model] || 0);
     }, [model]);
+
+
 
     return (
         <div className="min-h-screen bg-white text-black">
@@ -340,9 +355,11 @@ export default function Estimator() {
                                 <tfoot>
                                 <tr className="border-t">
                                     <td className="p-3 font-semibold text-gray-800">월 납입금</td>
-                                    <motion.td className="p-3 text-right text-lg font-bold text-black">
-                                        {displayedMonthlyPayment}
-                                    </motion.td>
+                                    <td className="p-3 text-right text-lg font-bold text-black">
+                                        <motion.span>
+                                            {displayedMonthlyPayment}
+                                        </motion.span>
+                                    </td>
                                 </tr>
                                 </tfoot>
                             </table>
