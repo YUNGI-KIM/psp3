@@ -51,6 +51,12 @@ import GV60 from './CarDetail/CarDetialGenesis/GV60';
 import GV70 from './CarDetail/CarDetialGenesis/GV70';
 import GV80 from './CarDetail/CarDetialGenesis/GV80';
 
+import Arkana from './CarDetail/CarDetailRenault/Arkana';
+import GrandKoleos from './CarDetail/CarDetailRenault/GrandKoleos';
+import Qm6 from './CarDetail/CarDetailRenault/Qm6'; 
+import Qm6Quest from './CarDetail/CarDetailRenault/Qm6Quest';
+import Sm6 from './CarDetail/CarDetailRenault/Sm6';
+
 
 function App() {
   return (
@@ -79,6 +85,7 @@ function App() {
               <Route path="/Chevo" element={<Chevo />} />
               <Route path="/Gen" element={<Gen />} />
               <Route path="/BMW" element={<BMW />} />
+              
               <Route path="/CarDetail/HyundaiCasper" element={<HyundaiCasper />} />
               <Route path="/CarDetail/HyundaiAvante" element={<HyundaiAvante />} />
               <Route path="/CarDetail/HyundaiGrandeur" element={<HyundaiGrandeur />} />
@@ -107,6 +114,12 @@ function App() {
               <Route path="/CarDetail/CarDetailGenesis/GV60" element={<GV60 />} />
               <Route path="/CarDetail/CarDetailGenesis/GV70" element={<GV70 />} />
               <Route path="/CarDetail/CarDetailGenesis/GV80" element={<GV80 />} />
+
+              <Route path="/CarDetail/CarDetailRenault/Arkana" element={<Arkana />} />
+              <Route path="/CarDetail/CarDetailRenault/GrandKoleos" element={<GrandKoleos />} />
+              <Route path="/CarDetail/CarDetailRenault/Qm6" element={<Qm6 />} />
+              <Route path="/CarDetail/CarDetailRenault/Qm6Quest" element={<Qm6Quest />} />
+              <Route path="/CarDetail/CarDetailRenault/Sm6" element={<Sm6 />} />
 
 
 
