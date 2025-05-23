@@ -32,6 +32,12 @@ import GV60 from "../Image/Estimate/Genesis/GV60/GV60.png";
 import GV70 from "../Image/Estimate/Genesis/GV70/GV70.png";
 import GV80 from "../Image/Estimate/Genesis/GV80/GV80.png";
 
+import Arkana from "../Image/Estimate/Renault/Arkana/Arkana.png";
+import GrandKoleos from "../Image/Estimate/Renault/GrandKoleos/GrandKoleos.png";
+import Qm6 from "../Image/Estimate/Renault/Qm6/Qm6.jpg";
+import Qm6Quest from "../Image/Estimate/Renault/Qm6Quest/Qm6Quest.jpg";
+import Sm6 from "../Image/Estimate/Renault/Sm6/Sm6.jpg";
+
 
 
 
@@ -76,8 +82,15 @@ const brandModels = {
     { title: "GV60", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: GV60 },
     { title: "GV70", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: GV70 },
     { title: "GV80", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: GV80 },
+  ],
 
-
+  르노 : [
+    { title: "Arkana", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: Arkana },
+    { title: "GrandKoleos", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: GrandKoleos },
+    { title: "Qm6", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: Qm6 },
+    { title: "Qm6Quest", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: Qm6Quest },
+    { title: "Sm6", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: Sm6 }
+    
   ]
 };
 
@@ -112,6 +125,12 @@ const detailRoutes = {
   "GV60": "/CarDetail/CarDetailGenesis/GV60",
   "GV70": "/CarDetail/CarDetailGenesis/GV70",
   "GV80": "/CarDetail/CarDetailGenesis/GV80",
+
+  "Arkana":"/CarDetail/CarDetailRenault/Arkana",
+  "GrandKoleos":"/CarDetail/CarDetailRenault/GrandKoleos",
+  "Qm6":"/CarDetail/CarDetailRenault/Qm6",
+  "Qm6Quest":"/CarDetail/CarDetailRenault/Qm6Quest",
+  "Sm6":"/CarDetail/CarDetailRenault/Sm6",
 
 
 };
