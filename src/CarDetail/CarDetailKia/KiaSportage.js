@@ -9,10 +9,10 @@ import InteriorBeige from "../../Image/Interior/Inside/InsideBeige.png";
 import InteriorGreen from "../../Image/Interior/Inside/InsideGreen.png";
 
 const IoniqSpecs = {
-  priceAfterTax: "6,715 만원~",
-  priceBeforeTax: "7,073 만원~",
-  efficiency: "~4.3 km/kWh",
-  displacement: "5",
+  priceAfterTax: "2,836 만원~",
+  priceBeforeTax: "3,012 만원~",
+  efficiency: "~12.5 km/L",
+  displacement: "~1598cc",
 };
 
 function KiaSportage() {
