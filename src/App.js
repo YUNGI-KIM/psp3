@@ -6,13 +6,6 @@ import CBTIResult from "./CBTI/CBTIResult";
 import Login from "./Login/Login";
 import Register from "./Login/Register";
 import Support from "./pages/Support";
-import Hyundai from './buy/hyundai';
-import Kia from './buy/kia';
-import Kgm from './buy/kgm';
-import Reno from './buy/reno';
-import Chevo from './buy/chevo';
-import Gen from './buy/genesis';
-import BMW from './buy/BMW';
 import Estimator from "./pages/Estimator";
 import AccForCar from "./pages/AccForCar";
 import CarInformation from "./pages/CarInformation";
@@ -40,7 +33,7 @@ import KiaK8 from "./CarDetail/CarDetailKia/KiaK8"
 import KiaK9 from "./CarDetail/CarDetailKia/KiaK9"
 import KiaMorning from "./CarDetail/CarDetailKia/KiaMorning"
 import KiaSeltos from "./CarDetail/CarDetailKia/KiaSeltos"
-import KiaSorento from  "./CarDetail/CarDetailKia/KiaSorento" 
+import KiaSorento from  "./CarDetail/CarDetailKia/KiaSorento"
 import KiaSportage from "./CarDetail/CarDetailKia/KiaSportage"
 
 import Buy from "./buy/buy";
@@ -66,7 +59,8 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/support" element={<Support />} />
               <Route path="/estimator" element={<Estimator />} />
-              <Route path="/buy" element={<Buy />} />
+              <Route path="/buy/" element={<Buy />} />
+              <Route path="/buy/:brand" element={<Buy />} />
               <Route path='/receviedSupport' element={<ReceviedSupport/>} />
               <Route path='/answerForQ' element={<AnswerForQ/>} />
               <Route path='/adminMain' element={<AdminMainPage/>} />

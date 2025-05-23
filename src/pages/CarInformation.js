@@ -68,7 +68,7 @@ const brandModels = {
     { title: "Sorento", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Sorento },
     { title: "Sportage", label: "프리미엄", color: "오로라 블랙펄", interior: "베이지", fuelEfficiency: "12.4",displacement:"11.1",options: ["HUD", "BOSE 오디오"], price: "54,000,000", image: Sportage },
   ],
-  
+
   제네시스: [
     { title: "G70", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: G70 },
     { title: "G80", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: G80 },
@@ -105,7 +105,7 @@ const detailRoutes = {
   "Seltos": "/CarDetail/CarDetailKia/KiaSeltos",
   "Sorento": "/CarDetail/CarDetailKia/KiaSorento",
   "Sportage": "/CarDetail/CarDetailKia/KiaSportage",
-  
+
   "G70": "/CarDetail/CarDetailGenesis/G70",
   "G80": "/CarDetail/CarDetailGenesis/G80",
   "G90": "/CarDetail/CarDetailGenesis/G90",
