@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../functions/Header";
-import ColorchipBeige from "../Image/Interior/ColorchipBeige.png";
-import ColorchipBlack from "../Image/Interior/ColorchipBlack.png";
-import ColorchipGreen from "../Image/Interior/ColorchipGreen.png";
-import InteriorBlack from "../Image/Interior/Inside/InsideBlack.png";
-import InteriorBeige from "../Image/Interior/Inside/InsideBeige.png";
-import InteriorGreen from "../Image/Interior/Inside/InsideGreen.png";
+import Header from "../../functions/Header";
+import ColorchipBeige from "../../Image/Interior/ColorchipBeige.png";
+import ColorchipBlack from "../../Image/Interior/ColorchipBlack.png";
+import ColorchipGreen from "../../Image/Interior/ColorchipGreen.png";
+import InteriorBlack from "../../Image/Interior/Inside/InsideBlack.png";
+import InteriorBeige from "../../Image/Interior/Inside/InsideBeige.png";
+import InteriorGreen from "../../Image/Interior/Inside/InsideGreen.png";
 
 const IoniqSpecs = {
   priceAfterTax: "6,715 만원~",
@@ -15,7 +15,7 @@ const IoniqSpecs = {
   displacement: "5",
 };
 
-function HyundaiAvante() {
+function KiaK5() {
   const navigate = useNavigate();
   const [selectedInterior, setSelectedInterior] = useState("black");
 
@@ -58,8 +58,8 @@ function HyundaiAvante() {
         {/* 오른쪽 차량 이미지 */}
         <div className="flex-1 mt-12 md:mt-0 mb-0 flex justify-center">
           <img
-            src="../Image/Estimate/Hyundai/Avante/Avante.png"
-            alt="Avante"
+            src="../Image/Estimate/Kia/K5/k5.png"
+            alt="K5"
             className="max-w-full w-full md:max-w-[700px] h-auto"
           />
         </div>
@@ -134,4 +134,4 @@ function HyundaiAvante() {
   );
 }
 
-export default HyundaiAvante;
+export default KiaK5;

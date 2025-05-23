@@ -109,23 +109,26 @@ const MainPage = () => {
         <div className="flex flex-col w-full min-h-screen overflow-x-hidden">
             <Header key={user ? user.id : "guest"} />
 
-            <div className="relative w-full h-[calc(100vh-125px-170px)] overflow-visible">
+            <div className="relative w-full overflow-visible px-2 sm:px-4">
                 <div className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10">
                     <svg onClick={SlideToLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:text-yellow-200 hover:scale-110 transition-transform">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                     </svg>
                 </div>
 
-                <img
-                    src={slidSrc[index].src}
-                    onClick={() => navigate(slidSrc[index].href)}
-                    className="w-full h-full object-cover cursor-pointer"
-                    alt={`Slide ${index + 1}`} 
+                {/* 반응형 슬라이드 이미지 */}
+                <div className="w-full aspect-[16/9] max-h-[650px]   overflow-hidden">
+                    <img
+                        src={slidSrc[index].src}
+                        onClick={() => navigate(slidSrc[index].href)}
+                        className="absolute top-0 left-0 w-full h-full object-cover cursor-pointer transition-transform duration-300 "
+                        alt={`Slide ${index + 1}`}
                     />
+                </div>
 
                 <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
                     {slidSrc.map((_, i) => (
-                        <button key={i} onClick={() => handleButtonClick(i)} className="w-3 h-3 sm:w-4 sm:h-4 bg-gray-800 hover:bg-gray-400 rounded-full" />
+                        <button key={i} onClick={() => handleButtonClick(i)} className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${i === index ? 'bg-gray-500' : 'bg-gray-800'} hover:bg-gray-400`} />
                     ))}
                 </div>
 
@@ -136,7 +139,7 @@ const MainPage = () => {
                 </div>
             </div>
 
-            <div className="w-full h-[125px] flex justify-between  items-center px-4 mt-4 overflow-visible">
+            <div className="w-full h-[125px] flex justify-between items-center px-4 mt-4 overflow-visible">
                 <svg onClick={SlideToLogoLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 hover:text-yellow-200 cursor-pointer hover:scale-110 transition-transform">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                 </svg>
