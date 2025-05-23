@@ -1,6 +1,6 @@
 import Header from '../functions/Header';
 import ReceivedSupport from "./ReceivedSupport";
-import SlideImage from "../Image/sideImage"
+// import SlideImage from "../Image/sideImage"
 
 function AdminMainPage() {
 
