@@ -5,7 +5,7 @@ export const brands = {
   Renault: [],
   Kgm: [],
   Genesis: [],
-  Bmw: ["1_Series", "3_Series", "5_Series", "7_Series", "i5", "i7", "iX1", "iX3", "M4", "X1", "X3", "X5", "X7", "Z4_M40i"],
+  Bmw: ["Series_1", "Series_3", "Series_5", "Series_7", "i5", "i7", "iX1", "iX3", "M4", "X1", "X3", "X5", "X7", "Z4_M40i"],
   Audi: [],
   Benz: [],
   Tesla: [],
