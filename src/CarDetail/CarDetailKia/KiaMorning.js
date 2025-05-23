@@ -9,10 +9,10 @@ import InteriorBeige from "../../Image/Interior/Inside/InsideBeige.png";
 import InteriorGreen from "../../Image/Interior/Inside/InsideGreen.png";
 
 const IoniqSpecs = {
-  priceAfterTax: "6,715 만원~",
-  priceBeforeTax: "7,073 만원~",
-  efficiency: "~4.3 km/kWh",
-  displacement: "5",
+  priceAfterTax: "1,395 만원~",
+  priceBeforeTax: "1,495 만원~",
+  efficiency: "~14.7 km/L",
+  displacement: "~998cc",
 };
 
 function KiaMorning() {
