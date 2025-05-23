@@ -66,13 +66,6 @@ function App() {
               <Route path='/adminMain' element={<AdminMainPage/>} />
               <Route path="/accForCar" element={<AccForCar />} />
               <Route path="/CarInformation" element={<CarInformation />} />
-              <Route path="/hyundai" element={<Hyundai />} />
-              <Route path="/kia" element={<Kia />} />
-              <Route path="/kgm" element={<Kgm />} />
-              <Route path="/reno" element={<Reno />} />
-              <Route path="/Chevo" element={<Chevo />} />
-              <Route path="/Gen" element={<Gen />} />
-              <Route path="/BMW" element={<BMW />} />
               <Route path="/CarDetail/HyundaiCasper" element={<HyundaiCasper />} />
               <Route path="/CarDetail/HyundaiAvante" element={<HyundaiAvante />} />
               <Route path="/CarDetail/HyundaiGrandeur" element={<HyundaiGrandeur />} />
