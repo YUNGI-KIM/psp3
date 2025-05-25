@@ -18,7 +18,6 @@ export default function Estimator() {
     const optionsPrice = useMotionValue(0);
     const CarBasePrice = useMotionValue(basePrices[model]);
     const price = useMotionValue(0);
-    const monthlyValue = useMotionValue(0);
 
     const acquisitionTax = useTransform(price, value => Math.floor(value * 0.07));
     const registrationFee = useTransform(acquisitionTax, acqTax =>
