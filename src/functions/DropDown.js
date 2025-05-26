@@ -70,9 +70,7 @@ function DropDown() {
           className="w-full text-[10px] py-1 px-1 bg-gray-50 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-purple-500"
         >
           <option value="">선택</option>
-          <option value="gasoline">휘발유</option>
-          <option value="diesel">경유</option>
-          <option value="lpg">LPG</option>
+          <option value="gasoline">기름</option>
           <option value="electric">전기</option>
           <option value="hydrogen">수소</option>
         </select>
