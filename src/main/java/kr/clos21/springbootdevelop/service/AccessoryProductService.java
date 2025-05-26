@@ -2,6 +2,7 @@ package kr.clos21.springbootdevelop.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import kr.clos21.springbootdevelop.domain.AccessoryProduct;
+import kr.clos21.springbootdevelop.domain.VehicleProduct;
 import kr.clos21.springbootdevelop.dto.*;
 import kr.clos21.springbootdevelop.repository.AccessoryProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -32,6 +34,15 @@ public class AccessoryProductService {
     public AccessoryProduct findById(Long id) {
         return accessoryProductRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Accessory product not found: " + id));
+    }
+
+    @Cacheable(cacheNames = "vehicleProducts", key = "#category")
+    public List<AccessoryProductResponse> findByCategory(String category) {
+        List<AccessoryProduct> accessoryProducts = accessoryProductRepository.findAccessoryProductsByCategory(category);
+
+        return accessoryProducts.stream()
+                .map(AccessoryProductResponse::new)
+                .collect(Collectors.toList());
     }
 
     @CacheEvict(cacheNames = "accessoryProducts", allEntries = true)

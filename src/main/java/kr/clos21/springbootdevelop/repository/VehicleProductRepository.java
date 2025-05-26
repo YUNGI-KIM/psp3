@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface VehicleProductRepository extends JpaRepository<VehicleProduct, Long> {
-    List<VehicleProduct> findProductsByUserId(Long userId);
+    List<VehicleProduct> findVehicleProductsByCategory(String category);
 }
 

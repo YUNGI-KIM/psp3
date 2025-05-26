@@ -33,6 +33,15 @@ public class AccessoryProductApiController {
         return ResponseEntity.ok(accessoryProductService.findById(id));
     }
 
+    @GetMapping("/category/{category}")
+    public ResponseEntity<List<AccessoryProductResponse>> findByCategory(@PathVariable String category) {
+        List<AccessoryProductResponse> accessoryProductResponses = accessoryProductService.findByCategory(category)
+                .stream()
+                .toList();
+        return ResponseEntity.ok()
+                .body(accessoryProductResponses);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<AccessoryProduct> update(@PathVariable Long id,
                                                    @RequestBody UpdateAccessoryProductRequest request) {

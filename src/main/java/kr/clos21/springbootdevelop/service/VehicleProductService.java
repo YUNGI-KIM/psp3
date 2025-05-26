@@ -36,6 +36,15 @@ public class VehicleProductService {
                 .orElseThrow(() -> new EntityNotFoundException("Vehicle product not found: " + id));
     }
 
+    @Cacheable(cacheNames = "vehicleProducts", key = "#category")
+    public List<VehicleProductResponse> findByCategory(String category) {
+        List<VehicleProduct> vehicleProducts = vehicleProductRepository.findVehicleProductsByCategory(category);
+
+        return vehicleProducts.stream()
+                .map(VehicleProductResponse::new)
+                .collect(Collectors.toList());
+    }
+
     @CacheEvict(cacheNames = "vehicleProducts", allEntries = true)
     public void delete(Long id) {
         vehicleProductRepository.deleteById(id);
