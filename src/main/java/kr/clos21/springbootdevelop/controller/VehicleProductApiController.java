@@ -33,6 +33,11 @@ public class VehicleProductApiController {
         return ResponseEntity.ok(vehicleProductService.findById(id));
     }
 
+    @GetMapping("/name/{name}")
+    public ResponseEntity<VehicleProduct> findByName(@PathVariable String name) {
+        return ResponseEntity.ok(vehicleProductService.findByName(name));
+    }
+
     @GetMapping("/category/{category}")
     public ResponseEntity<List<VehicleProductResponse>> findByCategory(@PathVariable String category) {
         List<VehicleProductResponse> vehicleProductResponses = vehicleProductService.findByCategory(category)
