@@ -5,7 +5,8 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
 @NoArgsConstructor
