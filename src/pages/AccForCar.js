@@ -1,7 +1,10 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from "../functions/Header";
+
+// 이미지 리소스 불러오기
 import AccForCarFilter from '../Image/AccForCar/Filter.jpg';
 import AccForCarWiper from '../Image/AccForCar/Wiper.jpeg';
-import ProductCatalog from '../functions/PricingCard';
 import AccForCarUrea from '../Image/AccForCar/Urea.jpg';
 import AccForCarWasher from '../Image/AccForCar/Washer.jpg';
 import AccForCarFireExit from '../Image/AccForCar/FireExit.jpg';
@@ -9,6 +12,9 @@ import AccForCarSafetyBar from '../Image/AccForCar/SafetyBar.jpg';
 import AccForCarSemaphore from '../Image/AccForCar/Semaphore.jpg';
 
 function AccForCar() {
+    const navigate = useNavigate(); // 페이지 이동을 위한 React Router 훅
+
+    // 차량 악세서리 상품 데이터 정의
     const productData = [
         {
             id: 1,
@@ -17,7 +23,6 @@ function AccForCar() {
             image: AccForCarFilter,
             features: ['차량 내부로 유입되는 오염물질을 필터링', '차량 내부 공기 깔끔하게 유지, 악취 방지'],
             price: '8,000',
-            buttonText: '구매'
         },
         {
             id: 2,
@@ -26,7 +31,6 @@ function AccForCar() {
             image: AccForCarWiper,
             features: ['전면 유리창의 빗물이나 눈을 닦아냅니다', '기능2'],
             price: '7,000',
-            buttonText: '구매'
         },
         {
             id: 3,
@@ -35,7 +39,6 @@ function AccForCar() {
             image: AccForCarWasher,
             features: ['기능1', '기능2'],
             price: '2만',
-            buttonText: '구매'
         },
         {
             id: 4,
@@ -44,7 +47,6 @@ function AccForCar() {
             image: AccForCarUrea,
             features: ['기능1', '기능2'],
             price: '2만',
-            buttonText: '구매'
         },
         {
             id: 5,
@@ -53,7 +55,6 @@ function AccForCar() {
             image: AccForCarFireExit,
             features: ['기능1', '기능2'],
             price: '2만',
-            buttonText: '구매'
         },
         {
             id: 6,
@@ -62,7 +63,6 @@ function AccForCar() {
             image: AccForCarSafetyBar,
             features: ['기능1', '기능2'],
             price: '2만',
-            buttonText: '구매'
         },
         {
             id: 7,
@@ -71,15 +71,162 @@ function AccForCar() {
             image: AccForCarSemaphore,
             features: ['기능1', '기능2'],
             price: '2만',
-            buttonText: '구매'
         }
     ];
 
+    // "구매" 버튼 클릭 시 구매 페이지로 이동 (product 정보를 전달)
+    const handleBuy = (product) => {
+        navigate('/purchase', { state: { product } });
+    };
+
+    // "장바구니" 버튼 클릭 시 localStorage에 담고 장바구니 페이지로 이동
+    const handleAddToCart = (product) => {
+        const existingCart = JSON.parse(localStorage.getItem('cart')) || []; // 기존 장바구니 불러오기
+        existingCart.push(product); // 상품 추가
+        localStorage.setItem('cart', JSON.stringify(existingCart)); // 저장
+        navigate('/cart'); // 장바구니 페이지로 이동
+    };
+
     return (
         <>
+            {/* 상단 공통 헤더 */}
             <div>{Header()}</div>
-            <div>
-                <ProductCatalog pageType="차량 악세서리" showFilter={false} products={productData} />
+
+            {/* 페이지 컨텐츠 */}
+            <div style={{ padding: '40px 80px', backgroundColor: '#fff' }}>
+                {/* 제목 */}
+                <h2 style={{ fontSize: '32px', fontWeight: 'bold', textAlign: 'center', marginBottom: '40px' }}>
+                    차량 악세서리 판매
+                </h2>
+
+                {/* 상품 카드 리스트 (그리드로 3개씩 정렬) */}
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, 1fr)',
+                    gap: '32px',
+                    justifyContent: 'center'
+                }}>
+                    {productData.map(product => (
+                        <div
+                            key={product.id}
+                            style={{
+                                borderRadius: '12px',
+                                overflow: 'hidden',
+                                backgroundColor: '#fff',
+                                boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                height: '100%',
+                                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                                cursor: 'pointer'
+                            }}
+                            // 카드에 호버 효과: 커졌을 때 그림자 강조
+                            onMouseEnter={e => {
+                                e.currentTarget.style.transform = 'scale(1.02)';
+                                e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,0,0,0.15)';
+                            }}
+                            onMouseLeave={e => {
+                                e.currentTarget.style.transform = 'scale(1)';
+                                e.currentTarget.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+                            }}
+                        >
+                            {/* 상품 이미지 */}
+                            <div style={{ height: '320px', overflow: 'hidden' }}>
+                                <img
+                                    src={product.image}
+                                    alt={product.name}
+                                    style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        objectFit: 'cover'
+                                    }}
+                                />
+                            </div>
+
+                            {/* 상품 설명 및 버튼 영역 (배경 진한 남색) */}
+                            <div style={{ padding: '16px', backgroundColor: '#1e293b', color: 'white' }}>
+                                {/* 상품명과 카테고리 */}
+                                <div style={{
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                    marginBottom: '8px'
+                                }}>
+                                    <h3 style={{ fontSize: '20px', fontWeight: 'bold', margin: 0 }}>{product.name}</h3>
+                                    <span style={{
+                                        fontSize: '12px',
+                                        backgroundColor: '#6366F1',
+                                        color: 'white',
+                                        padding: '4px 10px',
+                                        borderRadius: '12px'
+                                    }}>
+                                        {product.category}
+                                    </span>
+                                </div>
+
+                                {/* 기능 리스트 */}
+                                <ul style={{
+                                    paddingLeft: '16px',
+                                    fontSize: '14px',
+                                    marginBottom: '12px',
+                                    color: 'white'
+                                }}>
+                                    {product.features.map((feature, idx) => (
+                                        <li key={idx}>{feature}</li>
+                                    ))}
+                                </ul>
+
+                                {/* 가격 + 장바구니 버튼 */}
+                                <div style={{
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
+                                    marginBottom: '12px'
+                                }}>
+                                    <span style={{ fontWeight: 'bold', fontSize: '16px', color: 'white' }}>{product.price}원</span>
+                                    <button
+                                        onClick={() => handleAddToCart(product)}
+                                        style={{
+                                            backgroundColor: '#E0E7FF',
+                                            border: 'none',
+                                            borderRadius: '8px',
+                                            padding: '10px',
+                                            cursor: 'pointer',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            width: '40px',
+                                            height: '40px'
+                                        }}
+                                    >
+                                        {/* 장바구니 아이콘 */}
+                                        <img
+                                            src="image/cart.png"
+                                            alt="장바구니"
+                                            style={{ width: '20px', height: '20px' }}
+                                        />
+                                    </button>
+                                </div>
+
+                                {/* 구매 버튼 */}
+                                <button
+                                    onClick={() => handleBuy(product)}
+                                    style={{
+                                        width: '100%',
+                                        backgroundColor: '#4F46E5',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '8px',
+                                        padding: '10px',
+                                        cursor: 'pointer'
+                                    }}
+                                >
+                                    구매
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
         </>
     );
