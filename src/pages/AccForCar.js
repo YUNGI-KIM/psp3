@@ -1,78 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Header from "../functions/Header";
-import ProductCatalog from "../functions/PricingCard";
+import {useNavigate} from "react-router-dom";
 
-// 이미지 리소스 불러오기
-import AccForCarFilter from '../Image/AccForCar/Filter.jpg';
-import AccForCarWiper from '../Image/AccForCar/Wiper.jpeg';
-import AccForCarUrea from '../Image/AccForCar/Urea.jpg';
-import AccForCarWasher from '../Image/AccForCar/Washer.jpg';
-import AccForCarFireExit from '../Image/AccForCar/FireExit.jpg';
-import AccForCarSafetyBar from '../Image/AccForCar/SafetyBar.jpg';
-import AccForCarSemaphore from '../Image/AccForCar/Semaphore.jpg';
 
 function AccForCar() {
     const navigate = useNavigate(); // 페이지 이동을 위한 React Router 훅
-
-    // 차량 악세서리 상품 데이터 정의
-    const productData = [
-        {
-            id: 1,
-            name: '에어컨 필터',
-            category: '차량 악세서리',
-            image: AccForCarFilter,
-            features: ['차량 내부로 유입되는 오염물질을 필터링', '차량 내부 공기 깔끔하게 유지, 악취 방지'],
-            price: '8,000',
-        },
-        {
-            id: 2,
-            name: '차량용 와이퍼',
-            category: '차량 악세서리',
-            image: AccForCarWiper,
-            features: ['전면 유리창의 빗물이나 눈을 닦아냅니다', '기능2'],
-            price: '7,000',
-        },
-        {
-            id: 3,
-            name: '워셔액',
-            category: '차량 악세서리',
-            image: AccForCarWasher,
-            features: ['기능1', '기능2'],
-            price: '2만',
-        },
-        {
-            id: 4,
-            name: '요소수',
-            category: '차량 악세서리',
-            image: AccForCarUrea,
-            features: ['기능1', '기능2'],
-            price: '2만',
-        },
-        {
-            id: 5,
-            name: '차량용 소화기',
-            category: '차량 악세서리',
-            image: AccForCarFireExit,
-            features: ['기능1', '기능2'],
-            price: '2만',
-        },
-        {
-            id: 6,
-            name: '안전 삼각대',
-            category: '차량 악세서리',
-            image: AccForCarSafetyBar,
-            features: ['기능1', '기능2'],
-            price: '2만',
-        },
-        {
-            id: 7,
-            name: '불꽃 안전 신호기',
-            category: '차량 악세서리',
-            image: AccForCarSemaphore,
-            features: ['기능1', '기능2'],
-            price: '2만',
-        }
-    ];
 
     // "구매" 버튼 클릭 시 구매 페이지로 이동 (product 정보를 전달)
     const handleBuy = (product) => {
