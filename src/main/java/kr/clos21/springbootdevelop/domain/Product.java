@@ -26,7 +26,7 @@ public class Product extends BaseTimeEntity {
     private Long id;
 
     @Column(nullable = false)
-    private String name; // 예: 소나타
+    private String name;
 
     @Column
     private String description;
@@ -37,23 +37,19 @@ public class Product extends BaseTimeEntity {
     private Long discountedPrice;
 
     @Column(nullable = false)
-    private String status; // 판매중, 시승가능 등
+    private String status;
 
-    // ✅ 상품 카테고리: car, electronics, etc
     @Column
     private String category;
 
-    // ✅ 이미지 URL
     @Column
     private String image;
 
-    // ✅ 자동차 기능 리스트
     @ElementCollection
     @CollectionTable(name = "product_features", joinColumns = @JoinColumn(name = "product_id"))
     @Column(name = "feature")
     private List<String> features;
 
-    // ✅ 프론트 버튼 텍스트 (예: "시승 신청")
     @Column
     private String buttonText;
 
