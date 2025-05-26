@@ -8,7 +8,7 @@ function VehicleDetail() {
   const [selectedInterior, setSelectedInterior] = useState("black");
 
   useEffect(() => {
-    fetch(`https://clos21.kr/api/vehicle-products/name/${name}`)
+    fetch(`/name/${name}`)
         .then((res) => {
           if (!res.ok) throw new Error("데이터를 불러오는 데 실패했습니다.");
           return res.json();
