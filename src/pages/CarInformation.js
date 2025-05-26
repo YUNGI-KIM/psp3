@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../functions/Header";
 import { AnimatePresence, motion } from "framer-motion";
-import axios from "axios";
 
 const brandList = ["Hyundai", "Kia", "Genesis", "Renault"];
 
@@ -19,10 +18,15 @@ function CarInformation() {
   );
 
   useEffect(() => {
-    axios
-        .get("https://clos21.kr/api/vehicle-products")
+    fetch("https://clos21.kr/api/vehicle-products")
         .then((response) => {
-          const grouped = response.data.reduce((acc, car) => {
+          if (!response.ok) {
+            throw new Error("🚨 네트워크 응답 실패");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          const grouped = data.reduce((acc, car) => {
             const brand = car.brand;
             if (!acc[brand]) acc[brand] = [];
             acc[brand].push({
