@@ -6,6 +6,7 @@ function VehicleDetail() {
   const { name } = useParams();
   const [vehicle, setVehicle] = useState(null);
   const [selectedInterior, setSelectedInterior] = useState("black");
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetch(`https://clos21.kr/api/vehicle-products/name/${name}`)
@@ -18,10 +19,12 @@ function VehicleDetail() {
         })
         .catch((err) => {
           console.error(err);
+          setError(err.message);
         });
   }, [name]);
 
-  if (!vehicle) return <div>로딩 중...</div>;
+  if (error) return <div className="text-red-500 text-center mt-20">{error}</div>;
+  if (!vehicle) return <div className="text-center mt-20 text-lg">불러오는 중...</div>;
 
   const interiorImages = vehicle.interiorOptions.reduce((map, opt) => {
     map[opt.optionKey] = opt.interiorImage;
