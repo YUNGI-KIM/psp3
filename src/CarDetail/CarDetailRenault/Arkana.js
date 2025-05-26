@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../functions/Header";
-import ColorchipBeige from "..//ImageSrc/Interior/ColorchipBeige.png";
-import ColorchipBlack from "..//ImageSrc/Interior/ColorchipBlack.png";
-import ColorchipGreen from "..//ImageSrc/Interior/ColorchipGreen.png";
-import InteriorBlack from "..//ImageSrc/Interior/Inside/InsideBlack.png";
-import InteriorBeige from "..//ImageSrc/Interior/Inside/InsideBeige.png";
-import InteriorGreen from "..//ImageSrc/Interior/Inside/InsideGreen.png";
+import ColorchipBeige from "/ImageSrc/Interior/ColorchipBeige.png";
+import ColorchipBlack from "/ImageSrc/Interior/ColorchipBlack.png";
+import ColorchipGreen from "/ImageSrc/Interior/ColorchipGreen.png";
+import InteriorBlack from "/ImageSrc/Interior/Inside/InsideBlack.png";
+import InteriorBeige from "/ImageSrc/Interior/Inside/InsideBeige.png";
+import InteriorGreen from "/ImageSrc/Interior/Inside/InsideGreen.png";
 
 const IoniqSpecs = {
   priceAfterTax: "2,948 만원~",
