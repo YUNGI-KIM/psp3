@@ -1,9 +1,9 @@
 import React from 'react';
 
-import productImage1 from '../Image/Estimate/Hyundai/Sonata/sonataInterior.png';
-import productImage2 from '../Image/Estimate/Hyundai/Sonata/sonataInterior.png';
-import carImage1 from '../Image/Estimate/Hyundai/Sonata/sonataInterior.png';
-import carImage2 from '../Image/Estimate/Hyundai/Sonata/sonataInterior.png';
+import productImage1 from '/ImageSrc/Estimate/Hyundai/Sonata/sonataInterior.png';
+import productImage2 from '/ImageSrc/Estimate/Hyundai/Sonata/sonataInterior.png';
+import carImage1 from '/ImageSrc/Estimate/Hyundai/Sonata/sonataInterior.png';
+import carImage2 from '/ImageSrc/Estimate/Hyundai/Sonata/sonataInterior.png';
 
 const defaultProductsData = [
     { id: 1, name: '스마트폰', category: '전자기기', image: productImage1, features: ['6.7인치 올레드 디스플레이', '트리플 카메라 시스템', '5G 지원', '방수 및 방진 기능', '고속 충전'], price: '120만', buttonText: '구매하기' },
@@ -71,18 +71,36 @@ function CategoryFilter({ categories, activeCategory, onCategoryChange, showFilt
 }
 
 function ProductCatalog({ pageType, showFilter = true, customTitle, products = defaultProductsData }) {
-    const [activeCategory, setActiveCategory] = React.useState(pageType === 'all' ? 'all' : pageType);
+    const [activeCategory, setActiveCategory] = React.useState('all');
+
+    pageType = pageType || 'all';
+    const pageTypes = pageType !== 'all' ? pageType.split('|') : ['all'];
 
     let availableProducts = products;
-    if (pageType !== 'all') {
-        availableProducts = products.filter(product => product.category === pageType);
+
+    if (pageTypes[0] !== 'all') {
+        availableProducts = products.filter(product => pageTypes.includes(product.category));
     }
 
     const categories = [...new Set(availableProducts.map(product => product.category))];
 
-    const filteredProducts = activeCategory === 'all' ? availableProducts : availableProducts.filter(product => product.category === activeCategory);
+    const filteredProducts = activeCategory === 'all'
+        ? availableProducts
+        : availableProducts.filter(product => product.category === activeCategory);
 
-    const pageTitle = customTitle || (pageType === 'all' ? '전체 상품' : `${pageType} 판매`);
+    let pageTitle;
+    console.log(categories);
+    if (customTitle) {
+        pageTitle = customTitle;
+    } else {
+        if (categories.includes("자동차") && categories.length === 2) {
+            const otherCategory = categories.find(c => c !== "자동차");
+            pageTitle = `${otherCategory} 판매`;
+            console.log(otherCategory);
+        } else {
+            pageTitle = pageType === 'all' ? '전체 상품' : `${pageTypes.join(', ')} 판매`;
+        }
+    }
 
     return (
         <div className="py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
