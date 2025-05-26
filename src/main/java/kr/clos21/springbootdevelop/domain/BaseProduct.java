@@ -32,7 +32,7 @@ public abstract class BaseProduct extends BaseTimeEntity {
     @Column
     private String buttonText;
 
-    public BaseProduct(String name, String category, String image, List<String> features, String buttonText) {
+    protected BaseProduct(String name, String category, String image, List<String> features, String buttonText) {
         this.name = name;
         this.category = category;
         this.image = image;
