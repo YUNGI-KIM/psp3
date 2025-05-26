@@ -8,6 +8,8 @@ import Register from "./Login/Register";
 import Support from "./pages/Support";
 import Estimator from "./pages/Estimator";
 import AccForCar from "./pages/AccForCar";
+import PurchasePage from './pages/PurchasePage';
+import CartPage from './pages/CartPage';
 import CarInformation from "./pages/CarInformation";
 import ReceviedSupport from "./Admin/ReceivedSupport";
 import AdminMainPage from './Admin/AdminMain';
@@ -71,6 +73,8 @@ function App() {
               <Route path='/answerForQ' element={<AnswerForQ/>} />
               <Route path='/adminMain' element={<AdminMainPage/>} />
               <Route path="/accForCar" element={<AccForCar />} />
+              <Route path="/purchase" element={<PurchasePage />} />
+              <Route path="/cart" element={<CartPage />} />
               <Route path="/CarInformation" element={<CarInformation />} />
               <Route path="/CarDetail/HyundaiCasper" element={<HyundaiCasper />} />
               <Route path="/CarDetail/HyundaiAvante" element={<HyundaiAvante />} />
