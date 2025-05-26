@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../functions/Header";
-import ColorchipBeige from "../Image/Interior/ColorchipBeige.png";
-import ColorchipBlack from "../Image/Interior/ColorchipBlack.png";
-import ColorchipGreen from "../Image/Interior/ColorchipGreen.png";
-import InteriorBlack from "../Image/Interior/Inside/InsideBlack.png";
-import InteriorBeige from "../Image/Interior/Inside/InsideBeige.png";
-import InteriorGreen from "../Image/Interior/Inside/InsideGreen.png";
+import ColorchipBeige from "/ImageSrc/Interior/ColorchipBeige.png";
+import ColorchipBlack from "/ImageSrc/Interior/ColorchipBlack.png";
+import ColorchipGreen from "/ImageSrc/Interior/ColorchipGreen.png";
+import InteriorBlack from "/ImageSrc/Interior/Inside/InsideBlack.png";
+import InteriorBeige from "/ImageSrc/Interior/Inside/InsideBeige.png";
+import InteriorGreen from "/ImageSrc/Interior/Inside/InsideGreen.png";
 
 const IoniqSpecs = {
   priceAfterTax: "1,530 만원~",
@@ -58,7 +58,7 @@ function HyundaiPorter() {
         {/* 오른쪽 차량 이미지 */}
         <div className="flex-1 mt-12 md:mt-0 mb-0 flex justify-center">
           <img
-            src="../Image/Estimate/Hyundai/Porter/porter.png"
+            src="/ImageSrc/Estimate/Hyundai/Porter/porter.png"
             alt="Porter"
             className="max-w-full w-full md:max-w-[600px] h-auto"
           />

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
-import Logo from '../Image/logo2.png';
+import Logo from '/ImageSrc/logo2.png';
 
 function Header() {
     const { user, setUser } = useUser();
