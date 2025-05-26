@@ -8,6 +8,8 @@ import Register from "./Login/Register";
 import Support from "./pages/Support";
 import Estimator from "./pages/Estimator";
 import AccForCar from "./pages/AccForCar";
+import PurchasePage from './pages/PurchasePage';
+import CartPage from './pages/CartPage';
 import CarInformation from "./pages/CarInformation";
 import ReceviedSupport from "./Admin/ReceivedSupport";
 import AdminMainPage from './Admin/AdminMain';
@@ -33,7 +35,7 @@ import KiaK8 from "./CarDetail/CarDetailKia/KiaK8"
 import KiaK9 from "./CarDetail/CarDetailKia/KiaK9"
 import KiaMorning from "./CarDetail/CarDetailKia/KiaMorning"
 import KiaSeltos from "./CarDetail/CarDetailKia/KiaSeltos"
-import KiaSorento from  "./CarDetail/CarDetailKia/KiaSorento" 
+import KiaSorento from  "./CarDetail/CarDetailKia/KiaSorento"
 import KiaSportage from "./CarDetail/CarDetailKia/KiaSportage"
 
 import Buy from "./buy/buy";
@@ -43,6 +45,12 @@ import G90 from './CarDetail/CarDetialGenesis/G90';
 import GV60 from './CarDetail/CarDetialGenesis/GV60';
 import GV70 from './CarDetail/CarDetialGenesis/GV70';
 import GV80 from './CarDetail/CarDetialGenesis/GV80';
+
+import Arkana from './CarDetail/CarDetailRenault/Arkana';
+import GrandKoleos from './CarDetail/CarDetailRenault/GrandKoleos';
+import Qm6 from './CarDetail/CarDetailRenault/Qm6';
+import Qm6Quest from './CarDetail/CarDetailRenault/Qm6Quest';
+import Sm6 from './CarDetail/CarDetailRenault/Sm6';
 
 
 function App() {
@@ -64,6 +72,8 @@ function App() {
               <Route path='/answerForQ' element={<AnswerForQ/>} />
               <Route path='/adminMain' element={<AdminMainPage/>} />
               <Route path="/accForCar" element={<AccForCar />} />
+              <Route path="/purchase" element={<PurchasePage />} />
+              <Route path="/cart" element={<CartPage />} />
               <Route path="/CarInformation" element={<CarInformation />} />
               <Route path="/hyundai" element={<Hyundai />} />
               <Route path="/kia" element={<Kia />} />
