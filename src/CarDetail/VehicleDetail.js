@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Header from "../functions/Header";
 
@@ -33,7 +33,7 @@ function VehicleDetail() {
 
   return (
       <div>
-        <div>{Header()}</div>
+        <Header />
 
         {/* 차량 기본 정보 */}
         <div className="flex flex-col md:flex-row items-start justify-between mt-10 px-6 md:px-12 py-6">

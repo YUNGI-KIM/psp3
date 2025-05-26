@@ -24,7 +24,7 @@ function AccForCar() {
 
     return (
         <>
-            <div>{Header()}</div>
+            <Header />
             <div>
                 <ProductCatalog pageType="차량 악세서리" showFilter={false} products={productData} />
             </div>

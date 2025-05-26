@@ -3,6 +3,7 @@ import Header from "../functions/Header";
 
 import ProductCatalog from "../functions/PricingCard";
 import {useParams} from "react-router-dom";
+import React from "react";
 
 
 function Buy() {
@@ -12,9 +13,9 @@ function Buy() {
     return (
         <div className="flex flex-col w-full">
 
-            {Header()}
+            <Header />
 
-            {DropDown()}
+            <DropDown />
 
             <div className="flex">
                 {/*<ProductCatalog pageType={pageType} showFilter={false} />*/}
