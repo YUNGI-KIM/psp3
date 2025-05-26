@@ -1,36 +1,42 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../functions/Header";
-import Avante from "../Image/Estimate/Hyundai/Avante/Avante.png";
-import Casper from "../Image/Estimate/Hyundai/Casper/casper.png";
-import Grandeur from "../Image/Estimate/Hyundai/Grandeur/Grandeur.png";
-import Ioniq from "../Image/Estimate/Hyundai/Ioniq/ioniq.png";
-import Palisade from "../Image/Estimate/Hyundai/Palisade/Palisade.png";
-import Porter from "../Image/Estimate/Hyundai/Porter/porter.png";
-import Santafe from "../Image/Estimate/Hyundai/Santafe/santafe2.png";
-import Sonata from "../Image/Estimate/Hyundai/Sonata/Sonata.png";
+import Avante from "/ImageSrc/Estimate/Hyundai/Avante/Avante.png";
+import Casper from "/ImageSrc/Estimate/Hyundai/Casper/casper.png";
+import Grandeur from "/ImageSrc/Estimate/Hyundai/Grandeur/Grandeur.png";
+import Ioniq from "/ImageSrc/Estimate/Hyundai/Ioniq/ioniq.png";
+import Palisade from "/ImageSrc/Estimate/Hyundai/Palisade/Palisade.png";
+import Porter from "/ImageSrc/Estimate/Hyundai/Porter/porter.png";
+import Santafe from "/ImageSrc/Estimate/Hyundai/Santafe/santafe2.png";
+import Sonata from "/ImageSrc/Estimate/Hyundai/Sonata/Sonata.png";
 
-import K5 from "../Image/Estimate/Kia/K5/k5.png";
-import K9 from "../Image/Estimate/Kia/K9/K9.png";
-import Bongo from "../Image/Estimate/Kia/Bongo/bongo.png";
-import BongoEv from "../Image/Estimate/Kia/BongoEv/bongo-ev.png";
-import Carnival from "../Image/Estimate/Kia/Carnival/carnival.png";
-import Ev3 from "../Image/Estimate/Kia/Ev3/ev3.png";
-import Ev4 from "../Image/Estimate/Kia/Ev4/ev4.png";
-import Ev6 from "../Image/Estimate/Kia/Ev6/ev6.png";
-import K8 from "../Image/Estimate/Kia/K8/k8.png";
-import Morning from "../Image/Estimate/Kia/Morning/morning.png";
-import Ray from "../Image/Estimate/Kia/Ray/ray.png";
-import Seltos from "../Image/Estimate/Kia/Seltos/seltos.png";
-import Sorento from "../Image/Estimate/Kia/Sorento/sorento.png";
-import Sportage from "../Image/Estimate/Kia/Sportage/sportage.png";
+import K5 from "/ImageSrc/Estimate/Kia/K5/k5.png";
+import K9 from "/ImageSrc/Estimate/Kia/K9/K9.png";
+import Bongo from "/ImageSrc/Estimate/Kia/Bongo/bongo.png";
+import BongoEv from "/ImageSrc/Estimate/Kia/BongoEv/bongo-ev.png";
+import Carnival from "/ImageSrc/Estimate/Kia/Carnival/carnival.png";
+import Ev3 from "/ImageSrc/Estimate/Kia/Ev3/ev3.png";
+import Ev4 from "/ImageSrc/Estimate/Kia/Ev4/ev4.png";
+import Ev6 from "/ImageSrc/Estimate/Kia/Ev6/ev6.png";
+import K8 from "/ImageSrc/Estimate/Kia/K8/k8.png";
+import Morning from "/ImageSrc/Estimate/Kia/Morning/morning.png";
+import Ray from "/ImageSrc/Estimate/Kia/Ray/ray.png";
+import Seltos from "/ImageSrc/Estimate/Kia/Seltos/seltos.png";
+import Sorento from "/ImageSrc/Estimate/Kia/Sorento/sorento.png";
+import Sportage from "/ImageSrc/Estimate/Kia/Sportage/sportage.png";
 
-import G70 from "../Image/Estimate/Genesis/G70/G70.png";
-import G80 from "../Image/Estimate/Genesis/G80/G80.png";
-import G90 from "../Image/Estimate/Genesis/G90/G90.png";
-import GV60 from "../Image/Estimate/Genesis/GV60/GV60.png";
-import GV70 from "../Image/Estimate/Genesis/GV70/GV70.png";
-import GV80 from "../Image/Estimate/Genesis/GV80/GV80.png";
+import G70 from "/ImageSrc/Estimate/Genesis/G70/G70.png";
+import G80 from "/ImageSrc/Estimate/Genesis/G80/G80.png";
+import G90 from "/ImageSrc/Estimate/Genesis/G90/G90.png";
+import GV60 from "/ImageSrc/Estimate/Genesis/GV60/GV60.png";
+import GV70 from "/ImageSrc/Estimate/Genesis/GV70/GV70.png";
+import GV80 from "/ImageSrc/Estimate/Genesis/GV80/GV80.png";
+
+import Arkana from "/ImageSrc/Estimate/Renault/Arkana/Arkana.png";
+import GrandKoleos from "/ImageSrc/Estimate/Renault/GrandKoleos/GrandKoleos.png";
+import Qm6 from "/ImageSrc/Estimate/Renault/Qm6/Qm6.jpg";
+import Qm6Quest from "/ImageSrc/Estimate/Renault/Qm6Quest/Qm6Quest.jpg";
+import Sm6 from "/ImageSrc/Estimate/Renault/Sm6/Sm6.jpg";
 
 
 
@@ -76,8 +82,15 @@ const brandModels = {
     { title: "GV60", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: GV60 },
     { title: "GV70", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: GV70 },
     { title: "GV80", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: GV80 },
+  ],
 
-
+  르노 : [
+    { title: "Arkana", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: Arkana },
+    { title: "GrandKoleos", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: GrandKoleos },
+    { title: "Qm6", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: Qm6 },
+    { title: "Qm6Quest", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: Qm6Quest },
+    { title: "Sm6", label: "전기차", color: "밀키 베이지", interior: "블랙", fuelEfficiency: "12.4",displacement:"11.1",options: [], price: "27,350,000", image: Sm6 }
+    
   ]
 };
 
@@ -112,6 +125,12 @@ const detailRoutes = {
   "GV60": "/CarDetail/CarDetailGenesis/GV60",
   "GV70": "/CarDetail/CarDetailGenesis/GV70",
   "GV80": "/CarDetail/CarDetailGenesis/GV80",
+
+  "Arkana":"/CarDetail/CarDetailRenault/Arkana",
+  "GrandKoleos":"/CarDetail/CarDetailRenault/GrandKoleos",
+  "Qm6":"/CarDetail/CarDetailRenault/Qm6",
+  "Qm6Quest":"/CarDetail/CarDetailRenault/Qm6Quest",
+  "Sm6":"/CarDetail/CarDetailRenault/Sm6",
 
 
 };

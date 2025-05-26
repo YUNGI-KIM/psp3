@@ -9,13 +9,13 @@ import InteriorBeige from "..//ImageSrc/Interior/Inside/InsideBeige.png";
 import InteriorGreen from "..//ImageSrc/Interior/Inside/InsideGreen.png";
 
 const IoniqSpecs = {
-  priceAfterTax: "3,995 만원~",
-  priceBeforeTax: "4,208 만원~",
-  efficiency: "~5.6 km/kWh",
-  displacement: " - ",
+  priceAfterTax: "2,470 만원~",
+  priceBeforeTax: "2,560 만원~",
+  efficiency: "~13.5 km/kWh",
+  displacement: "~1997cc",
 };
 
-function KiaEv3() {
+function Qm6() {
   const navigate = useNavigate();
   const [selectedInterior, setSelectedInterior] = useState("black");
 
@@ -33,7 +33,7 @@ function KiaEv3() {
         {/* 왼쪽 텍스트 영역 */}
         <div className="flex-1 space-y-10">
           <span className="text-lg bg-blue-600 text-white px-4 py-1 rounded">NEW</span>
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight break-keep">Ev3</h1>
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight break-keep">Qm6</h1>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-10 gap-x-8 text-xl text-gray-700 mt-10">
             <div className="flex flex-col">
@@ -58,8 +58,8 @@ function KiaEv3() {
         {/* 오른쪽 차량 이미지 */}
         <div className="flex-1 mt-12 md:mt-0 mb-0 flex justify-center">
           <img
-            src="..//ImageSrc/Estimate/Kia/Ev3/ev3.png"
-            alt="KiaEv3"
+            src="../Image/Estimate/Renault/Qm6/Qm6.jpg"
+            alt="Qm6"
             className="max-w-full w-full md:max-w-[700px] h-auto"
           />
         </div>
@@ -134,4 +134,4 @@ function KiaEv3() {
   );
 }
 
-export default KiaEv3;
+export default Qm6;

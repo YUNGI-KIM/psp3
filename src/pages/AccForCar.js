@@ -1,12 +1,12 @@
 import Header from "../functions/Header";
-import AccForCarFilter from '../Image/AccForCar/Filter.jpg';
-import AccForCarWiper from '../Image/AccForCar/Wiper.jpeg';
+import AccForCarFilter from '/ImageSrc/AccForCar/Filter.jpg';
+import AccForCarWiper from '/ImageSrc/AccForCar/Wiper.jpeg';
 import ProductCatalog from '../functions/PricingCard';
-import AccForCarUrea from '../Image/AccForCar/Urea.jpg';
-import AccForCarWasher from '../Image/AccForCar/Washer.jpg';
-import AccForCarFireExit from '../Image/AccForCar/FireExit.jpg';
-import AccForCarSafetyBar from '../Image/AccForCar/SafetyBar.jpg';
-import AccForCarSemaphore from '../Image/AccForCar/Semaphore.jpg';
+import AccForCarUrea from '/ImageSrc/AccForCar/Urea.jpg';
+import AccForCarWasher from '/ImageSrc/AccForCar/Washer.jpg';
+import AccForCarFireExit from '/ImageSrc/AccForCar/FireExit.jpg';
+import AccForCarSafetyBar from '/ImageSrc/AccForCar/SafetyBar.jpg';
+import AccForCarSemaphore from '/ImageSrc/AccForCar/Semaphore.jpg';
 
 function AccForCar() {
     const productData = [
