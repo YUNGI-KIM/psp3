@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../functions/Header";
-import ColorchipBeige from "../../Image/Interior/ColorchipBeige.png";
-import ColorchipBlack from "../../Image/Interior/ColorchipBlack.png";
-import ColorchipGreen from "../../Image/Interior/ColorchipGreen.png";
-import InteriorBlack from "../../Image/Interior/Inside/InsideBlack.png";
-import InteriorBeige from "../../Image/Interior/Inside/InsideBeige.png";
-import InteriorGreen from "../../Image/Interior/Inside/InsideGreen.png";
+import ColorchipBeige from "..//ImageSrc/Interior/ColorchipBeige.png";
+import ColorchipBlack from "..//ImageSrc/Interior/ColorchipBlack.png";
+import ColorchipGreen from "..//ImageSrc/Interior/ColorchipGreen.png";
+import InteriorBlack from "..//ImageSrc/Interior/Inside/InsideBlack.png";
+import InteriorBeige from "..//ImageSrc/Interior/Inside/InsideBeige.png";
+import InteriorGreen from "..//ImageSrc/Interior/Inside/InsideGreen.png";
 
 const IoniqSpecs = {
-  priceAfterTax: "6,715 만원~",
-  priceBeforeTax: "7,073 만원~",
-  efficiency: "~4.3 km/kWh",
-  displacement: "5",
+  priceAfterTax: "6,490 만원~",
+  priceBeforeTax: "6,990 만원~",
+  efficiency: "~5.7 km/kWh",
+  displacement: " - ",
 };
 
 function GV60() {
@@ -32,7 +32,7 @@ function GV60() {
       <div className="flex flex-col md:flex-row items-start justify-between mt-10 mb-0 bg-white px-6 md:px-12 py-6">
         {/* 왼쪽 텍스트 영역 */}
         <div className="flex-1 space-y-10">
-          <span className="text-lg bg-blue-600 text-white px-4 py-1 rounded">NEW</span>
+          <span className="text-lg bg-blue-600 text-white px-4 py-1 rounded">전기 SUV</span>
           <h1 className="text-4xl md:text-6xl font-bold leading-tight break-keep">GV60</h1>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-10 gap-x-8 text-xl text-gray-700 mt-10">
@@ -58,7 +58,7 @@ function GV60() {
         {/* 오른쪽 차량 이미지 */}
         <div className="flex-1 mt-12 md:mt-0 mb-0 flex justify-center">
           <img
-            src="../../Image/Estimate/Genesis/GV60/GV60.png"
+            src="..//ImageSrc/Estimate/Genesis/GV60/GV60.png"
             alt="GV60"
             className="max-w-full w-full md:max-w-[700px] h-auto"
           />

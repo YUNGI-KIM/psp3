@@ -33,7 +33,7 @@ import KiaK8 from "./CarDetail/CarDetailKia/KiaK8"
 import KiaK9 from "./CarDetail/CarDetailKia/KiaK9"
 import KiaMorning from "./CarDetail/CarDetailKia/KiaMorning"
 import KiaSeltos from "./CarDetail/CarDetailKia/KiaSeltos"
-import KiaSorento from  "./CarDetail/CarDetailKia/KiaSorento"
+import KiaSorento from  "./CarDetail/CarDetailKia/KiaSorento" 
 import KiaSportage from "./CarDetail/CarDetailKia/KiaSportage"
 
 import Buy from "./buy/buy";
@@ -59,13 +59,19 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/support" element={<Support />} />
               <Route path="/estimator" element={<Estimator />} />
-              <Route path="/buy/" element={<Buy />} />
-              <Route path="/buy/:brand" element={<Buy />} />
+              <Route path="/buy" element={<Buy />} />
               <Route path='/receviedSupport' element={<ReceviedSupport/>} />
               <Route path='/answerForQ' element={<AnswerForQ/>} />
               <Route path='/adminMain' element={<AdminMainPage/>} />
               <Route path="/accForCar" element={<AccForCar />} />
               <Route path="/CarInformation" element={<CarInformation />} />
+              <Route path="/hyundai" element={<Hyundai />} />
+              <Route path="/kia" element={<Kia />} />
+              <Route path="/kgm" element={<Kgm />} />
+              <Route path="/reno" element={<Reno />} />
+              <Route path="/Chevo" element={<Chevo />} />
+              <Route path="/Gen" element={<Gen />} />
+              <Route path="/BMW" element={<BMW />} />
               <Route path="/CarDetail/HyundaiCasper" element={<HyundaiCasper />} />
               <Route path="/CarDetail/HyundaiAvante" element={<HyundaiAvante />} />
               <Route path="/CarDetail/HyundaiGrandeur" element={<HyundaiGrandeur />} />
@@ -94,6 +100,12 @@ function App() {
               <Route path="/CarDetail/CarDetailGenesis/GV60" element={<GV60 />} />
               <Route path="/CarDetail/CarDetailGenesis/GV70" element={<GV70 />} />
               <Route path="/CarDetail/CarDetailGenesis/GV80" element={<GV80 />} />
+
+              <Route path="/CarDetail/CarDetailRenault/Arkana" element={<Arkana />} />
+              <Route path="/CarDetail/CarDetailRenault/GrandKoleos" element={<GrandKoleos />} />
+              <Route path="/CarDetail/CarDetailRenault/Qm6" element={<Qm6 />} />
+              <Route path="/CarDetail/CarDetailRenault/Qm6Quest" element={<Qm6Quest />} />
+              <Route path="/CarDetail/CarDetailRenault/Sm6" element={<Sm6 />} />
 
 
 

@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../functions/Header";
-import ColorchipBeige from "../../Image/Interior/ColorchipBeige.png";
-import ColorchipBlack from "../../Image/Interior/ColorchipBlack.png";
-import ColorchipGreen from "../../Image/Interior/ColorchipGreen.png";
-import InteriorBlack from "../../Image/Interior/Inside/InsideBlack.png";
-import InteriorBeige from "../../Image/Interior/Inside/InsideBeige.png";
-import InteriorGreen from "../../Image/Interior/Inside/InsideGreen.png";
+import ColorchipBeige from "..//ImageSrc/Interior/ColorchipBeige.png";
+import ColorchipBlack from "..//ImageSrc/Interior/ColorchipBlack.png";
+import ColorchipGreen from "..//ImageSrc/Interior/ColorchipGreen.png";
+import InteriorBlack from "..//ImageSrc/Interior/Inside/InsideBlack.png";
+import InteriorBeige from "..//ImageSrc/Interior/Inside/InsideBeige.png";
+import InteriorGreen from "..//ImageSrc/Interior/Inside/InsideGreen.png";
 
 const IoniqSpecs = {
-  priceAfterTax: "6,715 만원~",
-  priceBeforeTax: "7,073 만원~",
-  efficiency: "~4.3 km/kWh",
-  displacement: "5",
+  priceAfterTax: "2,766 만원~",
+  priceBeforeTax: "2,890 만원~",
+  efficiency: "~13.0 km/L",
+  displacement: "~1999cc",
 };
 
 function KiaK5() {
