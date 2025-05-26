@@ -11,7 +11,7 @@ import lombok.*;
 public class InteriorOption {
     private String key; // black, beige 등
     private String name;
-    private String desc;
+    private String description;
     private String colorchip;
     private String interiorImage;
 }
