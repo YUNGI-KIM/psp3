@@ -42,7 +42,7 @@ public class WebSecurityConfig {
         http
                 .requiresChannel(channel -> channel.anyRequest().requiresSecure())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/api/accessory-products/*", "/api/vehicle-products/*").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/accessory-products/**", "/api/vehicle-products/**", "/api/vehicle-products/name/**").permitAll()
                         .requestMatchers("/login", "/signup", "/user", "/logout", "/success", "/").permitAll()
                         .anyRequest().authenticated()
                 )
