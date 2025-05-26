@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../functions/Header";
-import ColorchipBeige from "..//ImageSrc/Interior/ColorchipBeige.png";
-import ColorchipBlack from "..//ImageSrc/Interior/ColorchipBlack.png";
-import ColorchipGreen from "..//ImageSrc/Interior/ColorchipGreen.png";
-import InteriorBlack from "..//ImageSrc/Interior/Inside/InsideBlack.png";
-import InteriorBeige from "..//ImageSrc/Interior/Inside/InsideBeige.png";
-import InteriorGreen from "..//ImageSrc/Interior/Inside/InsideGreen.png";
+import ColorchipBeige from "/ImageSrc/Interior/ColorchipBeige.png";
+import ColorchipBlack from "/ImageSrc/Interior/ColorchipBlack.png";
+import ColorchipGreen from "/ImageSrc/Interior/ColorchipGreen.png";
+import InteriorBlack from "/ImageSrc/Interior/Inside/InsideBlack.png";
+import InteriorBeige from "/ImageSrc/Interior/Inside/InsideBeige.png";
+import InteriorGreen from "/ImageSrc/Interior/Inside/InsideGreen.png";
 
 const IoniqSpecs = {
   priceAfterTax: "5,800 만원~",
@@ -58,7 +58,7 @@ function KiaEv6() {
         {/* 오른쪽 차량 이미지 */}
         <div className="flex-1 mt-12 md:mt-0 mb-0 flex justify-center">
           <img
-            src="..//ImageSrc/Estimate/Kia/Ev6/ev6.png"
+            src="/ImageSrc/Estimate/Kia/Ev6/ev6.png"
             alt="Ev6"
             className="max-w-full w-full md:max-w-[700px] h-auto"
           />
