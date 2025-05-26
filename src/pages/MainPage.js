@@ -61,16 +61,16 @@ const MainPage = () => {
     const handleButtonClick = (i) => setIndex(i);
 
     const ClickButtonSlideLogo = [
-        { alt: "HYUNDAI", src: hyundai, href: '/hyundai' },
-        { alt: "KIA", src: kia, href: '/kia' },
-        { alt: "CHEVROLET", src: chevrolet, href: '/Chevo' },
-        { alt: "RENAULT", src: Reno, href: '/Reno' },
-        { alt: "KGM", src: kgm, href: '/kgm' },
-        { alt: "GENESIS", src: gen, href: '/Gen' },
-        { alt: "BMW", src: BMW, href: '/BMW' },
-        { alt: "AUDI", src: Audi, href: '/Audi' },
-        { alt: "BENZ", src: Benz, href: '/Benz' },
-        { alt: "TESLA", src: Tesla, href: '/Tesla' },
+        { alt: "HYUNDAI", src: hyundai, href: '/buy/hyundai' },
+        { alt: "KIA", src: kia, href: '/buy/kia' },
+        { alt: "CHEVROLET", src: chevrolet, href: '/buy/Chevo' },
+        { alt: "RENAULT", src: Reno, href: '/buy/Reno' },
+        { alt: "KGM", src: kgm, href: '/buy/kgm' },
+        { alt: "GENESIS", src: gen, href: '/buy/Gen' },
+        { alt: "BMW", src: BMW, href: '/buy/BMW' },
+        { alt: "AUDI", src: Audi, href: '/buy/Audi' },
+        { alt: "BENZ", src: Benz, href: '/buy/Benz' },
+        { alt: "TESLA", src: Tesla, href: '/buy/Tesla' },
     ];
 
     const SlideToLogoLeft = () => {
