@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import Logo from "/ImageSrc/logo2.png";
+import Logo from "../ImageSrc/logo2.png";
 import { useState } from "react";
 
 function Register() {

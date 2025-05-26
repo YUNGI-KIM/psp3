@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
-import Logo from "/ImageSrc/logo2.png";
+import Logo from "../ImageSrc/logo2.png";
 
 function Login() {
     const { setUser } = useUser();
