@@ -27,6 +27,11 @@ function DropDown() {
           <option value="kgm">KGM</option>
           <option value="chevrolet">쉐보레</option>
           <option value="renault">르노</option>
+          <option value="renault">BMW</option>
+          <option value="renault">AUDI</option>
+          <option value="renault">밴츠</option>
+          <option value="renault">테슬라</option>
+
         </select>
 
         {/* 가격대 */}
