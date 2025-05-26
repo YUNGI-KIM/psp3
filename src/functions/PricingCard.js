@@ -1,54 +1,5 @@
 import React, { useEffect, useState } from 'react';
-<<<<<<< HEAD
 
-function ProductCatalog({ pageType, showFilter = true, customTitle }) {
-    const [products, setProducts] = useState([]);
-    const [activeCategory, setActiveCategory] = useState('all');
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const [vehicleRes, accessoryRes] = await Promise.all([
-                    fetch("https://clos21.kr/api/vehicle-products"),
-                    fetch("https://clos21.kr/api/accessory-products"),
-                ]);
-=======
->>>>>>> origin/feature_YUNGI-KIM
-
-                const [vehicleData, accessoryData] = await Promise.all([
-                    vehicleRes.json(),
-                    accessoryRes.json(),
-                ]);
-
-                const combined = [
-                    ...vehicleData.map((v) => ({
-                        id: v.id,
-                        name: v.name,
-                        category: "자동차",
-                        image: v.image,
-                        features: v.features || [],
-                        price: v.priceAfterTax || "가격 정보 없음",
-                        buttonText: v.buttonText || "시승 신청",
-                    })),
-                    ...accessoryData.map((a) => ({
-                        id: a.id,
-                        name: a.name,
-                        category: a.category || "차량 악세서리",
-                        image: a.image,
-                        features: a.features || [],
-                        price: a.price,
-                        buttonText: a.buttonText || "구매",
-                    })),
-                ];
-
-<<<<<<< HEAD
-                setProducts(combined);
-            } catch (error) {
-                console.error("🚨 데이터 불러오기 실패:", error);
-            }
-        };
-
-=======
 function ProductCatalog({ pageType, showFilter = true, customTitle }) {
     const [products, setProducts] = useState([]);
     const [activeCategory, setActiveCategory] = useState('all');
@@ -66,79 +17,50 @@ function ProductCatalog({ pageType, showFilter = true, customTitle }) {
                     accessoryRes.json(),
                 ]);
 
-                const combined = [
-                    ...vehicleData.map((v) => ({
-                        id: v.id,
-                        name: v.name,
-                        category: "자동차",
-                        image: v.image,
-                        features: v.features || [],
-                        price: v.priceAfterTax || "가격 정보 없음",
-                        buttonText: v.buttonText || "시승 신청",
-                    })),
-                    ...accessoryData.map((a) => ({
-                        id: a.id,
-                        name: a.name,
-                        category: a.category || "차량 악세서리",
-                        image: a.image,
-                        features: a.features || [],
-                        price: a.price,
-                        buttonText: a.buttonText || "구매",
-                    })),
-                ];
+                const vehicleMapped = vehicleData.map((v) => ({
+                    id: v.id,
+                    name: v.name,
+                    category: "자동차",
+                    image: v.image,
+                    features: v.features || [],
+                    price: v.priceAfterTax || "가격 정보 없음",
+                    buttonText: v.buttonText || "시승 신청",
+                }));
 
+                const accessoryMapped = accessoryData.map((a) => ({
+                    id: a.id,
+                    name: a.name,
+                    category: a.category || "차량 악세서리",
+                    image: a.image,
+                    features: a.features || [],
+                    price: a.price,
+                    buttonText: a.buttonText || "구매",
+                }));
+
+                const combined = [...vehicleMapped, ...accessoryMapped];
                 setProducts(combined);
             } catch (error) {
                 console.error("🚨 데이터 불러오기 실패:", error);
             }
         };
 
->>>>>>> origin/feature_YUNGI-KIM
         fetchData();
     }, []);
 
-    const pageTypes = pageType && pageType !== 'all' ? pageType.split('|') : ['all'];
-
-    let availableProducts = products;
-    if (pageTypes[0] !== 'all') {
-        availableProducts = products.filter(product => pageTypes.includes(product.category));
-    }
-
-    const categories = [...new Set(availableProducts.map(product => product.category))];
-
-    const filteredProducts = activeCategory === 'all'
-        ? availableProducts
-        : availableProducts.filter(product => product.category === activeCategory);
-
-    let pageTitle;
-    if (customTitle) {
-        pageTitle = customTitle;
-    } else {
-        if (categories.includes("자동차") && categories.length === 2) {
-            const otherCategory = categories.find(c => c !== "자동차");
-            pageTitle = `${otherCategory} 판매`;
-        } else {
-            pageTitle = pageType === 'all' ? '전체 상품' : `${pageTypes.join(', ')} 판매`;
-        }
-    }
-
     return (
-        <div className="py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold text-center mb-8">{pageTitle}</h1>
-            <CategoryFilter
-                categories={categories}
-                activeCategory={activeCategory}
-                onCategoryChange={setActiveCategory}
-                showFilter={showFilter && categories.length > 1}
-            />
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredProducts.map((product) => (
-                    <ProductCard key={product.id} product={product} />
+        <div>
+            <h1>{customTitle || "상품 카탈로그"}</h1>
+            <ul>
+                {products.map((product) => (
+                    <li key={product.id}>
+                        <img src={product.image} alt={product.name} width={100} />
+                        <h3>{product.name}</h3>
+                        <p>{product.category}</p>
+                        <p>{product.price}</p>
+                        <button>{product.buttonText}</button>
+                    </li>
                 ))}
-                {filteredProducts.length === 0 && (
-                    <p className="text-center text-gray-500">해당 카테고리에 상품이 없습니다.</p>
-                )}
-            </div>
+            </ul>
         </div>
     );
 }
