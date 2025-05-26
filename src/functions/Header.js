@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
-import Logo from '../Image/logo2.png';
+import Logo from '/ImageSrc/logo2.png';
 
 function Header() {
     const { user, setUser } = useUser();
@@ -45,7 +45,7 @@ function Header() {
                     <input
                         type="search"
                         placeholder="Search"
-                        className="border rounded-full px-4 py-2 w-full max-w-xs sm:max-w-sm md:max-w-md lg:w-80 focus:outline-none text-sm md:text-base"
+                        className="border rounded-full px-4 py-2 w-full max-w-xs sm:max-w-sm md:max-w-md lg:w-192 focus:outline-none text-sm md:text-base"
                     />
                     <button type="submit" className="relative p-2 rounded-full">
                         <svg
@@ -73,7 +73,7 @@ function Header() {
                             <span className="text-black text-sm md:text-base font-semibold whitespace-nowrap">{user.name}님</span>
                             <button
                                 onClick={handleLogout}
-                                className="px-3 py-2 bg-gray-50 hover:bg-gray-400 text-black rounded-lg text-sm md:text-base"
+                                className="px-3 py-2 bg-gray-50 hover:bg-gray-400 hover:text-yellow-200 text-black rounded-lg text-sm md:text-base"
                             >
                                 로그아웃
                             </button>
@@ -82,13 +82,13 @@ function Header() {
                         <>
                             <button
                                 onClick={() => navigate('/login')}
-                                className="px-3 py-2 bg-gray-50 hover:bg-gray-400 text-black rounded-lg text-sm md:text-base"
+                                className="px-3 py-2 bg-gray-50 hover:bg-gray-400 hover:text-yellow-200 text-black rounded-lg text-sm md:text-base"
                             >
                                 로그인
                             </button>
                             <button
                                 onClick={() => navigate('/register')}
-                                className="px-3 py-2 bg-gray-900 hover:bg-gray-400 text-white rounded-lg text-sm md:text-base"
+                                className="px-3 py-2 bg-gray-900 hover:bg-gray-400 hover:text-yellow-200 text-white rounded-lg text-sm md:text-base"
                             >
                                 회원가입
                             </button>
@@ -100,10 +100,10 @@ function Header() {
             {/* 내비게이션 메뉴 */}
             <nav className="bg-black text-gray-300 p-2 sm:p-4 text-xs sm:text-sm md:text-base">
                 <div className="flex flex-wrap justify-center gap-1 sm:gap-4 md:gap-6 max-w-screen-xl mx-auto">
-                    <a href="/public#" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">차량구매</a>
+                    <a href="/buy" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">차량구매</a>
                     <a href="/AccForCar" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">차량용품</a>
                     <a href="/Estimator" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">견적</a>
-                    <a href="/public#" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">차량정보</a>
+                    <a href="/CarInformation" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">차량정보</a>
                     <a href="/Support" className="text-gray-300 hover:text-yellow-200 px-2 py-1 sm:px-3 sm:py-2 rounded-md font-medium">고객지원</a>
                 </div>
             </nav>
