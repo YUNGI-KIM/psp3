@@ -9,6 +9,10 @@ useEffect(() => {
 }, []);
 
 return (
+  <>
+
+  <div>{Header()}</div>
+  
   <div>
     <h2>장바구니</h2>
     {cartItems.length === 0 ? (
@@ -23,4 +27,5 @@ return (
       </ul>
     )}
   </div>
+</>
 );
