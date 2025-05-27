@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // 페이지 이동을 위한 hook
 import Header from "../functions/Header";
-import { useNavigate } from 'react-router-dom';
 
 function CartPage() {
   const navigate = useNavigate();
