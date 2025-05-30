@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
-import Logo from '../Image/logo2.png';
+import Logo from '../ImageSrc/logo2.png';
 
 function Header() {
     const { user, setUser } = useUser();
@@ -73,36 +73,36 @@ function Header() {
                         </button>
                     </div>
 
-                    {/* 로그인/로그아웃 버튼 */}
-                    <div className="flex items-center flex-wrap justify-center gap-2 lg:gap-4 mt-2 lg:mt-0">
-                        {user ? (
-                            <>
-                                <span className="text-black text-sm md:text-base font-semibold whitespace-nowrap">{user.name}님</span>
-                                <button
-                                    onClick={handleLogout}
-                                    className="px-3 py-2 bg-gray-50 hover:bg-gray-400 text-black rounded-lg text-sm md:text-base"
-                                >
-                                    로그아웃
-                                </button>
-                            </>
-                        ) : (
-                            <>
-                                <button
-                                    onClick={() => navigate('/login')}
-                                    className="px-3 py-2 bg-gray-50 hover:bg-gray-400 text-black rounded-lg text-sm md:text-base"
-                                >
-                                    로그인
-                                </button>
-                                <button
-                                    onClick={() => navigate('/register')}
-                                    className="px-3 py-2 bg-gray-900 hover:bg-gray-400 text-white rounded-lg text-sm md:text-base"
-                                >
-                                    회원가입
-                                </button>
-                            </>
-                        )}
-                    </div>
+                {/* 로그인/로그아웃 버튼 */}
+                <div className="flex items-center flex-wrap justify-center gap-2 lg:gap-4 mt-2 lg:mt-0">
+                    {user ? (
+                        <>
+                            <span className="text-black text-sm md:text-base font-semibold whitespace-nowrap">{user.name}님</span>
+                            <button
+                                onClick={handleLogout}
+                                className="px-3 py-2 bg-gray-50 hover:bg-gray-400 hover:text-yellow-200 text-black rounded-lg text-sm md:text-base"
+                            >
+                                로그아웃
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <button
+                                onClick={() => navigate('/login')}
+                                className="px-3 py-2 bg-gray-50 hover:bg-gray-400 hover:text-yellow-200 text-black rounded-lg text-sm md:text-base"
+                            >
+                                로그인
+                            </button>
+                            <button
+                                onClick={() => navigate('/register')}
+                                className="px-3 py-2 bg-gray-900 hover:bg-gray-400 hover:text-yellow-200 text-white rounded-lg text-sm md:text-base"
+                            >
+                                회원가입
+                            </button>
+                        </>
+                    )}
                 </div>
+            </div>
 
                 {/* 기본 네비게이션 메뉴 */}
                 <nav className="bg-black text-gray-300 p-2 sm:p-4 text-xs sm:text-sm md:text-base">

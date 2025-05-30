@@ -12,95 +12,82 @@ function CBTIResult() {
     basic: 0,
     athletic: 0,
     sedan: 0,
-    foreign: 0
+    foreign: 0,
   };
 
   const CBTIGuide = [
-    { CBTI: 'T', Guide: '최신기술' },
-    { CBTI: 'C', Guide: '편안함' },
-    { CBTI: 'U', Guide: 'SUV' },
-    { CBTI: 'K', Guide: '국산' },
-    { CBTI: 'B', Guide: '기본' },
-    { CBTI: 'A', Guide: '스포츠성' },
-    { CBTI: 'S', Guide: '세단' },
-    { CBTI: 'F', Guide: '수입' }
+    { CBTI: "T", Guide: "최신기술" },
+    { CBTI: "C", Guide: "편안함" },
+    { CBTI: "U", Guide: "SUV" },
+    { CBTI: "K", Guide: "국산" },
+    { CBTI: "B", Guide: "기본" },
+    { CBTI: "A", Guide: "스포츠성" },
+    { CBTI: "S", Guide: "세단" },
+    { CBTI: "F", Guide: "수입" },
   ];
 
-  // CBTI 판별 로직
-  for (let j = 0; j < receivedArray.length; j++) {
+  for (let j = 0; j < receivedArray?.length; j++) {
     if (receivedArray[j] in results) {
       results[receivedArray[j]]++;
     }
   }
 
   const top4 = Object.entries(results)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 4);
-  const top4Keys = top4.map(([key]) => key.slice(0, 1).toUpperCase());
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 4);
+  const top4Keys = top4.map(([key]) => key[0].toUpperCase());
 
-  const Guide = top4Keys.map(letter => {
-    const item = CBTIGuide.find(obj => obj.CBTI === letter);
-    return item ? item.Guide : '';
+  const Guide = top4Keys.map((letter) => {
+    const item = CBTIGuide.find((obj) => obj.CBTI === letter);
+    return item ? item.Guide : "";
   });
 
   return (
-    <div className="relative">
-      {/* 배경 오버레이 */}
-      <div className="fixed inset-0 bg-gray-500 opacity-75 z-0"></div>
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 to-indigo-200 px-4 py-12 font-sans">
+        <div className="w-full max-w-2xl bg-white rounded-3xl shadow-xl px-10 py-14 text-center space-y-10">
 
-      {/* 모달 박스 */}
-      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full sm:max-w-2xl px-4 z-10">
-        <div className="rounded-3xl p-12 bg-white shadow-2xl h-[500px]">
-          <div className="flex flex-col justify-center h-full text-center space-y-8">
-            {/* 결과 헤더 */}
-            <h2 className="text-3xl font-bold text-gray-600">결과</h2>
+          {/* 제목 */}
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-700">
+            나의 자동차 CBTI 결과
+          </h2>
 
-            {/* CBTI 코드 */}
-            <div className="text-5xl font-extrabold tracking-widest text-indigo-600">
-              {top4Keys.join('')}
-            </div>
+          {/* CBTI 코드 */}
+          <div className="text-6xl sm:text-7xl font-extrabold tracking-[0.25em] text-indigo-700">
+            {top4Keys.join("")}
+          </div>
 
-            {/* 설명 문장 */}
-            <div className="text-2xl font-medium text-gray-700">
-              당신의 자동차를 4단어로 설명하면?
-            </div>
+          {/* 설명 */}
+          <p className="text-xl sm:text-2xl font-medium text-slate-600">
+            당신의 차량을 한마디로 설명하면?
+          </p>
 
-            {/* 키워드 안내 */}
-            <div className="flex justify-center flex-wrap gap-2  text-indigo-600 font-bold">
-              {Guide.map((text, index) => (
+          {/* 키워드들 */}
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-4 text-indigo-800 font-semibold">
+            {Guide.map((text, idx) => (
                 <span
-                  key={index}
-                  className="bg-indigo-100 px-4 py-2 rounded-full text-2xl"
+                    key={idx}
+                    className="bg-indigo-200 px-5 py-2 rounded-full text-xl sm:text-2xl"
                 >
                   {text}
                 </span>
-              ))}
-            </div>
+            ))}
+          </div>
 
-            {/* 버튼 영역 */}
-            <div className="flex-1 flex flex-wrap items-center justify-center gap-4 sm:gap-8">
-              <Link to="/startCBTI">
-                <button
-                  type="button"
-                  className="py-2 px-6 sm:px-9 bg-red-500 hover:bg-red-700 text-white text-base sm:text-xl font-semibold rounded-full transition"
-                >
-                  다시하기
-                </button>
-              </Link>
-
-              <Link to="/startCBTI">
-                <button
-                  type="button"
-                  className="py-2 px-6 sm:px-9 bg-green-500 hover:bg-green-700 text-white text-base sm:text-xl font-semibold rounded-full transition"
-                >
-                  내 차 보기
-                </button>
-              </Link>
-            </div>
+          {/* 버튼 영역 */}
+          <div className="flex flex-wrap justify-center gap-4 pt-4">
+            <Link to="/startCBTI">
+              <button className="px-6 py-3 bg-rose-500 hover:bg-rose-700 text-white text-lg sm:text-xl font-semibold rounded-full transition">
+                다시하기
+              </button>
+            </Link>
+            <Link to="/startCBTI">
+              <button className="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white text-lg sm:text-xl font-semibold rounded-full transition">
+                내 차 보기
+              </button>
+            </Link>
           </div>
         </div>
       </div>
-    </div>
   );
 }
 
