@@ -9,12 +9,18 @@ function StartCBTI() {
             어떤 차를 사야 할지<br className="sm:hidden" /> 고민되시나요?
           </h2>
 
+          <img
+            src="/image/sideImage/CBTI.png"
+            alt="자동차 비교 CBTI 결과 예시"
+            className="w-full max-w-md mx-auto mb-6 sm:mb-8 rounded-xl shadow-lg"
+          />          
+
           <p className="text-base sm:text-2xl text-indigo-600 font-medium">
             CBTI 검사를 통해<br />당신에게 딱 맞는 자동차를 찾아보세요!
           </p>
 
           <Link to="/QuestionPage">
-            <button className="mt-4 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white text-lg font-semibold rounded-full transition duration-200 shadow-md">
+            <button className="inline-block px-8 py-4 bg-indigo-600 text-white text-lg font-semibold rounded-full shadow-lg hover:bg-indigo-700 hover:scale-105 transition-all duration-300">
               CBTI 검사 시작하기
             </button>
           </Link>
