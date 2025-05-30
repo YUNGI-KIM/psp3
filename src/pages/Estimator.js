@@ -8,57 +8,95 @@ import { carImages } from "../data/carImages";
 import { options } from "../data/options";
 
 export default function Estimator() {
+    const [MonthType, setMonthType] = useState(""); // 할부 개월 선택
     const [brand, setBrand] = useState("Hyundai");
     const [model, setModel] = useState("Avante");
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [imageKey, setImageKey] = useState(0);
     const [paymentMethod, setPaymentMethod] = useState("현금");
 
+    const optionsPrice = useMotionValue(0);
+    const CarBasePrice = useMotionValue(basePrices[model]);
     const price = useMotionValue(0);
 
-    const acquisitionTax = useTransform(price, (value) => Math.floor(value * 0.07));
-    const registrationFee = useTransform(acquisitionTax, (acqTax) =>
+    const acquisitionTax = useTransform(price, value => Math.floor(value * 0.07));
+    const registrationFee = useTransform(acquisitionTax, acqTax =>
         acqTax + 2600 + 25000 + 55000
     );
 
     const rawTotalPrice = useTransform([price, registrationFee], ([p, r]) => p + r);
-    
-    const totalPrice = useTransform(rawTotalPrice, (value) =>
-        paymentMethod === "카드" ? Math.floor(value * 1.02) : value
-    );
 
-    const displayedPrice = useTransform(price, (value) =>
+    // 월 납입금 계산
+    const monthToNumber = (monthStr) => {
+        if (monthStr === "일시불" || monthStr === "") return null;
+        const match = monthStr.match(/(\d+)/);
+        return match ? parseInt(match[1]) : null;
+    };
+
+    const monthlyPaymentRaw = useTransform(rawTotalPrice, value => {
+        const months = monthToNumber(MonthType);
+        if (!months) return value;
+        return Math.floor(value / months);
+    });
+
+    const monthlyPayment = useMotionValue(monthlyPaymentRaw.get());
+
+    useEffect(() => {
+        const unsubscribe = monthlyPaymentRaw.on("change", (v) => {
+            animate(monthlyPayment, v, { duration: 0.5, ease: "easeInOut" });
+        });
+        return unsubscribe;
+    }, [monthlyPaymentRaw]);
+
+
+
+    const totalPrice = useTransform(rawTotalPrice, value =>
         Math.floor(value).toLocaleString("ko-KR") + "원"
     );
 
-    const displayedAcqTax = useTransform(acquisitionTax, (value) =>
+    const displayedPrice = useTransform(price, value =>
+        Math.floor(value).toLocaleString("ko-KR") + "원"
+    );
+
+    const displayedOptionsPrice = useTransform(optionsPrice, value =>
+        Math.floor(value).toLocaleString("ko-KR") + "원"
+    );
+
+    const displayedAcqTax = useTransform(acquisitionTax, value =>
         value.toLocaleString("ko-KR") + "원"
     );
 
-    const displayedRegFee = useTransform(registrationFee, (value) =>
+    const displayedRegFee = useTransform(registrationFee, value =>
         value.toLocaleString("ko-KR") + "원"
     );
 
-    const displayedTotalPrice = useTransform(totalPrice, (value) =>
+    const displayedBasePrice = useTransform(CarBasePrice, value =>
         value.toLocaleString("ko-KR") + "원"
+    );
+
+    const displayedTotalPrice = useTransform(totalPrice, value =>
+        value.toLocaleString("ko-KR")
+    );
+
+
+    const displayedMonthlyPayment = useTransform(monthlyPayment, value =>
+        Math.floor(value).toLocaleString("ko-KR") + "원"
     );
 
     const handleOptionChange = (option) => {
-        setSelectedOptions((prev) =>
-            prev.includes(option)
-                ? prev.filter((o) => o !== option)
-                : [...prev, option]
+        setSelectedOptions(prev =>
+            prev.includes(option) ? prev.filter(o => o !== option) : [...prev, option]
         );
-        setImageKey((prev) => prev + 1);
+        setImageKey(prev => prev + 1);
     };
 
     const calculatePrice = useCallback(() => {
         const basePrice = basePrices[model] || 0;
-        const optionsPrice = selectedOptions.reduce(
-            (sum, option) => sum + options.find((o) => o.name === option)?.price,
+        const optionsTotal = selectedOptions.reduce(
+            (sum, option) => sum + options.find(o => o.name === option)?.price,
             0
         );
-        return basePrice + optionsPrice;
+        return basePrice + optionsTotal;
     }, [model, selectedOptions]);
 
     const registrationDetails = [
@@ -66,13 +104,27 @@ export default function Estimator() {
         { name: "증지대", value: "2,600 원" },
         { name: "차량번호판", value: "25,000 원" },
         { name: "등록 대행 수수료", value: "55,000 원" },
+        { name: "단기의무보험료", value: "1,900 원" },
+        { name: "계약금", value: "100,000 원" },
     ];
 
     const paymentConditions = [
-        { name: "계약금", value: "100,000 원" },
-        { name: "단기의무보험료", value: "1,900 원" },
-        { name: "인도금", value: displayedPrice, motion: true },
+        { name: "기본 차량 가격", value: displayedBasePrice, motion: true },
+        { name: "옵션 가격", value: displayedOptionsPrice, motion: true }
     ];
+
+    const totals = [
+        { name: "총 차량 가격", value: displayedPrice, motion: true },
+        { name: "부대 비용", value: displayedRegFee, motion: true }
+    ];
+
+    useEffect(() => {
+        const newOptionsPrice = selectedOptions.reduce(
+            (sum, option) => sum + options.find(o => o.name === option)?.price,
+            0
+        );
+        optionsPrice.set(newOptionsPrice);
+    }, [selectedOptions, optionsPrice]);
 
     useEffect(() => {
         const controls = animate(price, calculatePrice(), {
@@ -87,6 +139,12 @@ export default function Estimator() {
             setModel(brands[brand][0]);
         }
     }, [brand]);
+
+    useEffect(() => {
+        CarBasePrice.set(basePrices[model] || 0);
+    }, [model]);
+
+
 
     return (
         <div className="min-h-screen bg-white text-black">
@@ -112,7 +170,7 @@ export default function Estimator() {
                     />
 
                     <div className="grid gap-6">
-                        {/* 브랜드와 모델 선택 */}
+                        {/* 브랜드/모델 선택 */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label className="text-sm font-semibold">브랜드 선택</label>
@@ -140,7 +198,7 @@ export default function Estimator() {
                             </div>
                         </div>
 
-                        {/* 추가 옵션 선택 */}
+                        {/* 옵션 선택 */}
                         <div>
                             <h2 className="text-lg font-semibold mb-2">추가 옵션</h2>
                             <div className="flex flex-wrap gap-2 sm:gap-4">
@@ -160,37 +218,90 @@ export default function Estimator() {
                             </div>
                         </div>
 
-                        {/* 등록비 테이블 */}
+                        {/* 차량 가격 테이블 */}
                         <div className="mt-6 border-t border-b border-gray-300">
-                            <h2 className="text-lg font-semibold my-4">등록비 내역</h2>
+                            <h2 className="text-lg font-semibold my-4">차량 가액</h2>
                             <table className="w-full text-sm">
                                 <tbody>
-                                    {registrationDetails.map((item) => (
-                                        <tr key={item.name}>
-                                            <td className="p-3 font-semibold text-gray-800">{item.name}</td>
-                                            <td className="p-3 text-right text-black">
-                                                {item.motion ? <motion.span>{item.value}</motion.span> : item.value}
-                                            </td>
-                                        </tr>
-                                    ))}
+                                {paymentConditions.map(item => (
+                                    <tr key={item.name}>
+                                        <td className="p-3 font-semibold text-gray-800">{item.name}</td>
+                                        <td className="p-3 text-right text-black">
+                                            {item.motion ? <motion.span>{item.value}</motion.span> : item.value}
+                                        </td>
+                                    </tr>
+                                ))}
                                 </tbody>
                                 <tfoot>
-                                    <tr className="border-t font-semibold">
-                                        <td className="p-3 text-gray-800">등록비용</td>
-                                        <td className="p-3 text-right text-black"><motion.span>{displayedRegFee}</motion.span></td>
+                                <tr className="border-t font-semibold">
+                                    <td className="p-3 text-gray-800">총 차량가액</td>
+                                    <td className="p-3 text-right text-black">
+                                        <motion.span>{displayedPrice}</motion.span>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        {/* 부대 비용 테이블 */}
+                        <div className="mt-6  border-b border-gray-300">
+                            <h2 className="text-lg font-semibold my-4">부대 비용</h2>
+                            <table className="w-full text-sm">
+                                <tbody>
+                                {registrationDetails.map(item => (
+                                    <tr key={item.name}>
+                                        <td className="p-3 font-semibold text-gray-800">{item.name}</td>
+                                        <td className="p-3 text-right text-black">
+                                            {item.motion ? <motion.span>{item.value}</motion.span> : item.value}
+                                        </td>
                                     </tr>
+                                ))}
+                                </tbody>
+                                <tfoot>
+                                <tr className="border-t font-semibold">
+                                    <td className="p-3 text-gray-800">부대비용</td>
+                                    <td className="p-3 text-right text-black">
+                                        <motion.span>{displayedRegFee}</motion.span>
+                                    </td>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        {/* 총 금액 테이블 */}
+                        <div className="mt-6  border-b border-gray-300">
+                            <h2 className="text-lg font-semibold my-4">총 금액</h2>
+                            <table className="w-full text-sm">
+                                <tbody>
+                                {totals.map(item => (
+                                    <tr key={item.name}>
+                                        <td className="p-3 font-semibold text-gray-800">{item.name}</td>
+                                        <td className="p-3 text-right text-black">
+                                            {item.motion ? <motion.span>{item.value}</motion.span> : item.value}
+                                        </td>
+                                    </tr>
+                                ))}
+                                </tbody>
+                                <tfoot>
+                                <tr className="border-t font-semibold">
+                                    <td className="p-3 text-gray-800">총 차량가액</td>
+                                    <td className="p-3 text-right text-black">
+                                        <motion.span>{displayedTotalPrice}</motion.span>
+                                    </td>
+                                </tr>
                                 </tfoot>
                             </table>
                         </div>
 
                         {/* 결제 방법 */}
-                        <div className="mt-6 border-t border-b border-gray-300">
-                            <h2 className="text-lg font-semibold my-4">결제 방법</h2>
+                        <div className="mt-6  border-b border-gray-300">
+                            <h2 className="text-lg font-semibold my-4">결제 수단 선택</h2>
                             <table className="w-full text-sm">
                                 <tbody>
-                                    <tr className="bg-gray-100">
-                                        <td className="w-1/4 p-3 font-semibold text-gray-800">결제 수단</td>
-                                        <td className="p-3">
+                                <tr className="bg-gray-100">
+                                    <td className="w-1/4 p-3 font-semibold text-gray-800">결제 수단</td>
+                                    <td className="p-3">
+                                        <div className="flex flex-col space-y-2">
                                             <div className="flex space-x-4">
                                                 <label className="flex items-center space-x-1">
                                                     <input
@@ -213,45 +324,44 @@ export default function Estimator() {
                                                     <span>신용카드</span>
                                                 </label>
                                             </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td className="p-3 font-semibold text-gray-800">지불 조건</td>
-                                        <td className="p-3">
-                                            <table className="w-full">
-                                                <tbody>
-                                                    {paymentConditions.map((item) => (
-                                                        <tr key={item.name} className={item.name === "인도금" ? "bg-gray-100" : ""}>
-                                                            <td className="p-2 text-gray-700">{item.name}</td>
-                                                            <td className="p-2 text-right text-black">
-                                                                {item.motion ? <motion.span>{item.value}</motion.span> : item.value}
-                                                            </td>
-                                                        </tr>
-                                                    ))}
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                    </tr>
+                                            {paymentMethod === "카드" && (
+                                                <div className="mt-2">
+                                                    <label className="block mb-1 text-sm text-gray-700">할부 개월 선택</label>
+                                                    <select
+                                                        value={MonthType}
+                                                        onChange={(e) => setMonthType(e.target.value)}
+                                                        className="border border-gray-300 rounded px-3 py-2 text-sm w-48"
+                                                    >
+                                                        <option value="">-- 할부 개월 선택 --</option>
+                                                        <option value="일시불">일시불</option>
+                                                        <option value="2개월">2개월</option>
+                                                        <option value="4개월">4개월</option>
+                                                        <option value="6개월">6개월</option>
+                                                        <option value="8개월">8개월</option>
+                                                        <option value="10개월">10개월</option>
+                                                        <option value="12개월">12개월</option>
+                                                        <option value="24개월">24개월</option>
+                                                        <option value="36개월">36개월</option>
+                                                        <option value="48개월">48개월</option>
+                                                        <option value="60개월">60개월</option>
+                                                    </select>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </td>
+                                </tr>
                                 </tbody>
                                 <tfoot>
-                                    <tr className="border-t">
-                                        <td className="p-3 font-semibold text-gray-800">출고 전 납입 총액</td>
-                                        <motion.td className="p-3 text-right text-lg font-bold text-black">{displayedPrice}</motion.td>
-                                    </tr>
+                                <tr className="border-t">
+                                    <td className="p-3 font-semibold text-gray-800">월 납입금</td>
+                                    <td className="p-3 text-right text-lg font-bold text-black">
+                                        <motion.span>
+                                            {displayedMonthlyPayment}
+                                        </motion.span>
+                                    </td>
+                                </tr>
                                 </tfoot>
                             </table>
-                        </div>
-
-                        {/* 최종 견적 금액 */}
-                        <div className="mt-6 text-center">
-                            <motion.h2
-                                className="text-xl sm:text-2xl font-bold"
-                                initial={{ scale: 0.8 }}
-                                animate={{ scale: 1 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                최종 견적: <motion.span>{displayedTotalPrice}</motion.span>
-                            </motion.h2>
                         </div>
                     </div>
                 </motion.div>

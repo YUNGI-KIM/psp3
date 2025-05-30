@@ -1,13 +1,10 @@
 import Header from '../functions/Header';
 import ReceivedSupport from "./ReceivedSupport";
 
-
 function AdminMainPage() {
 
     const unAnsweredCount = 5;
     const todayUnAnsweredCount = 2;
-
-    const Image=0;
 
     return (
         <div className="min-h-screen bg-gray-100">
@@ -24,7 +21,6 @@ function AdminMainPage() {
                         <span className="text-3xl font-bold text-indigo-600">{unAnsweredCount}</span>
                         <span className="text-gray-600"> 현재까지 미답변 문의 </span>
                     </div>
-
                     <div className="flex items-center justify-center p-12">
                         <div className="mx-auto w-full max-w-[550px] bg-white">
                             <form className="py-6 px-9">
@@ -47,7 +43,7 @@ function AdminMainPage() {
                                 </div>
                                 <button
                                     className="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
-                                Image Upload
+                                    업로드
                                 </button>
                             </form>
                         </div>
@@ -55,7 +51,6 @@ function AdminMainPage() {
 
                     <div className="bg-white rounded-lg shadow p-4 flex flex-col items-center">
                         <ReceivedSupport/>
-
                     </div>
                 </section>
 
@@ -78,14 +73,6 @@ function AdminMainPage() {
                         <div className="flex justify-between">
                             <span className="dark:text-white">기아</span>
                             <span className="text-green-400">+$23,240</span>
-                        </div>
-                        <div className="flex justify-between">
-                            <span className="dark:text-white">녹차</span>
-                            <span className="text-red-400">-$1,904</span>
-                        </div>
-                        <div className="flex justify-between">
-                            <span className="dark:text-white">말차</span>
-                            <span className="text-green-400">+$904</span>
                         </div>
                     </div>
                 </div>
