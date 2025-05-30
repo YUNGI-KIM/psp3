@@ -103,7 +103,7 @@ const MainPage = () => {
     };
 
     return (
-        <div className="flex flex-col w-full min-h-screen overflow-x-hidden bg-gradient-to-b from-[#f6fbff] via-[#eaf1ff] to-[#f8fbff]">
+        <div className="flex flex-col w-full h-screen min-h-screen overflow-hidden bg-gradient-to-b from-[#f6fbff] via-[#eaf1ff] to-[#f8fbff]">
             <Header key={user ? user.id : "guest"} />
 
             {/* 이미지 메인 슬라이드 */}
@@ -116,7 +116,7 @@ const MainPage = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
                     </svg>
                 </div>
-                <div className="w-full aspect-[16/9] max-h-[36rem] overflow-hidden">
+                <div className="w-full aspect-[16/9] max-h-[48rem] overflow-hidden">
                     <img
                         src={slidSrc[index].src}
                         onClick={() => navigate(slidSrc[index].href)}
@@ -141,7 +141,9 @@ const MainPage = () => {
 
             {/* 브랜드 카드 슬라이드 (카드 섹션) */}
             <div
-                className="w-full flex items-center justify-between px-2 sm:px-6 md:px-12 pt-2 pb-8 relative overflow-hidden">
+                className="w-full flex items-center justify-between px-2 sm:px-6 md:px-12 pt-4 pb-8 relative overflow-hidden"
+                // ↑ pt-4로 위쪽 여백 살짝만 추가 (기존 pt-2에서 pt-4로)
+            >
                 {/* 왼쪽 화살표 */}
                 <button
                     onClick={SlideToLogoLeft}
@@ -204,7 +206,7 @@ const MainPage = () => {
                                         style={{ width: '62%', minWidth: 40, maxWidth: 100, margin: '0 auto' }}
                                     />
                                     <div
-                                        className="absolute left-1/2 -translate-x-1/2 bottom-1 w-[60%] h-2 rounded-full blur-md opacity-60 group-hover:opacity-80 transition-all duration-500"
+                                        className="absolute left-1/2 -translate-x-1/2 bottom-1 w-[60%] h-2  rounded-full blur-md opacity-60 group-hover:opacity-80 transition-all duration-500"
                                         style={{
                                             background: logo.alt === "KIA" ? "#444" :
                                                 logo.alt === "HYUNDAI" ? "#1c2a47" :
