@@ -1,51 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function ProductCard({ product, onAddToCart, onBuy }) {
-    return (
-        <div
-            className="flex flex-col bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden w-full h-full transition-transform hover:scale-105"
-            style={{ boxShadow: "10px 10px 20px rgba(0, 0, 0, 0.1), 6px 6px 6px rgba(0, 0, 0, 0.1)" }}
-        >
-            <img src={product.image} alt={product.name} className="w-full h-60 object-cover" />
-            <div className="p-6 flex flex-col flex-grow">
-                <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white">{product.name}</h3>
-                    <span className="text-xs bg-indigo-500 text-white px-2 py-1 rounded-full">{product.category}</span>
-                </div>
-                <ul className="flex-1 space-y-2 mb-4">
-                    {product.features.map((feature, idx) => (
-                        <li key={idx} className="text-sm text-gray-600 dark:text-gray-300">• {feature}</li>
-                    ))}
-                </ul>
-                <div className="mt-auto text-center space-y-2">
-                    <p className="text-lg font-bold text-gray-900 dark:text-white">{product.price}₩</p>
-                    <div className="flex justify-between items-center">
-                        <button
-                            onClick={() => onAddToCart(product)}
-                            className="bg-indigo-100 text-indigo-700 px-3 py-2 rounded hover:bg-indigo-200"
-                        >
-                            장바구니
-                        </button>
-                        <button
-                            onClick={() => onBuy(product)}
-                            className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg"
-                        >
-                            {product.buttonText}
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-}
-
+// ✅ 카테고리 필터
 function CategoryFilter({ categories, activeCategory, onCategoryChange, showFilter }) {
     if (!showFilter) return null;
     return (
-        <div className="flex flex-wrap justify-center space-x-2 mb-8">
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
             <button
-                className={`px-4 py-2 mb-2 rounded-full ${activeCategory === 'all' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}
+                className={`px-4 py-2 rounded-full ${activeCategory === 'all' ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}
                 onClick={() => onCategoryChange('all')}
             >
                 전체 상품
@@ -53,7 +15,7 @@ function CategoryFilter({ categories, activeCategory, onCategoryChange, showFilt
             {categories.map(category => (
                 <button
                     key={category}
-                    className={`px-4 py-2 mb-2 rounded-full ${activeCategory === category ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}
+                    className={`px-4 py-2 rounded-full ${activeCategory === category ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-800 hover:bg-gray-300'}`}
                     onClick={() => onCategoryChange(category)}
                 >
                     {category}
@@ -63,10 +25,60 @@ function CategoryFilter({ categories, activeCategory, onCategoryChange, showFilt
     );
 }
 
+// ✅ 제품 카드 (장바구니 기능 포함)
+function ProductCard({ product }) {
+    const navigate = useNavigate();
+
+    const handleBuy = () => {
+        navigate('/purchase', { state: { product } });
+    };
+
+    const handleAddToCart = () => {
+        const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
+        existingCart.push(product);
+        localStorage.setItem('cart', JSON.stringify(existingCart));
+        navigate('/cart');
+    };
+
+    return (
+        <div
+            className="flex flex-col rounded-lg border overflow-hidden transition-transform hover:scale-105 bg-white dark:bg-gray-800 shadow"
+        >
+            <img src={product.image} alt={product.name} className="w-full h-60 object-cover" />
+            <div className="p-6 flex flex-col flex-grow bg-[#1e293b] text-white">
+                <div className="flex justify-between items-center mb-3">
+                    <h3 className="text-lg font-bold">{product.name}</h3>
+                    <span className="text-xs bg-indigo-500 px-2 py-1 rounded-full">{product.category}</span>
+                </div>
+                <ul className="list-disc pl-5 space-y-1 text-sm mb-4">
+                    {product.features.map((feature, idx) => (
+                        <li key={idx}>{feature}</li>
+                    ))}
+                </ul>
+                <div className="flex justify-between items-center mb-3">
+                    <p className="text-lg font-bold">{product.price}₩</p>
+                    <button
+                        onClick={handleAddToCart}
+                        className="bg-[#E0E7FF] w-10 h-10 rounded-full flex items-center justify-center"
+                    >
+                        <img src="image/cart.png" alt="장바구니" className="w-5 h-5" />
+                    </button>
+                </div>
+                <button
+                    onClick={handleBuy}
+                    className="bg-indigo-600 hover:bg-indigo-700 w-full py-2 rounded-lg font-semibold"
+                >
+                    {product.buttonText || '구매'}
+                </button>
+            </div>
+        </div>
+    );
+}
+
+// ✅ 전체 제품 카탈로그
 function ProductCatalog({ pageType, showFilter = true, customTitle }) {
     const [products, setProducts] = useState([]);
     const [activeCategory, setActiveCategory] = useState('all');
-    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -75,12 +87,10 @@ function ProductCatalog({ pageType, showFilter = true, customTitle }) {
                     fetch("https://clos21.kr/api/vehicle-products"),
                     fetch("https://clos21.kr/api/accessory-products"),
                 ]);
-
                 const [vehicleData, accessoryData] = await Promise.all([
                     vehicleRes.json(),
                     accessoryRes.json(),
                 ]);
-
                 const combined = [
                     ...vehicleData.map((v) => ({
                         id: v.id,
@@ -101,13 +111,11 @@ function ProductCatalog({ pageType, showFilter = true, customTitle }) {
                         buttonText: a.buttonText || "구매",
                     })),
                 ];
-
                 setProducts(combined);
             } catch (error) {
-                console.error("데이터 불러오기 실패:", error);
+                console.error("🚨 데이터 불러오기 실패:", error);
             }
         };
-
         fetchData();
     }, []);
 
@@ -118,34 +126,19 @@ function ProductCatalog({ pageType, showFilter = true, customTitle }) {
         availableProducts = products.filter(product => pageTypes.includes(product.category));
     }
 
-    const categories = [...new Set(availableProducts.map(product => product.category))];
+    const categories = [...new Set(availableProducts.map(p => p.category))];
 
     const filteredProducts = activeCategory === 'all'
         ? availableProducts
-        : availableProducts.filter(product => product.category === activeCategory);
+        : availableProducts.filter(p => p.category === activeCategory);
 
-    const handleAddToCart = (product) => {
-        const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
-        existingCart.push(product);
-        localStorage.setItem('cart', JSON.stringify(existingCart));
-        navigate('/cart');
-    };
-
-    const handleBuy = (product) => {
-        navigate('/purchase', { state: { product } });
-    };
-
-    let pageTitle;
-    if (customTitle) {
-        pageTitle = customTitle;
-    } else {
-        if (categories.includes("자동차") && categories.length === 2) {
-            const otherCategory = categories.find(c => c !== "자동차");
-            pageTitle = `${otherCategory} 판매`;
-        } else {
-            pageTitle = pageType === 'all' ? '전체 상품' : `${pageTypes.join(', ')} 판매`;
-        }
-    }
+    const pageTitle = customTitle
+        ? customTitle
+        : (categories.includes("자동차") && categories.length === 2)
+            ? `${categories.find(c => c !== "자동차")} 판매`
+            : pageType === 'all'
+                ? '전체 상품'
+                : `${pageTypes.join(', ')} 판매`;
 
     return (
         <div className="py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -157,16 +150,12 @@ function ProductCatalog({ pageType, showFilter = true, customTitle }) {
                 showFilter={showFilter && categories.length > 1}
             />
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredProducts.map((product) => (
-                    <ProductCard
-                        key={product.id}
-                        product={product}
-                        onAddToCart={handleAddToCart}
-                        onBuy={handleBuy}
-                    />
-                ))}
-                {filteredProducts.length === 0 && (
-                    <p className="text-center text-gray-500">해당 카테고리에 상품이 없습니다.</p>
+                {filteredProducts.length > 0 ? (
+                    filteredProducts.map((product) => (
+                        <ProductCard key={product.id} product={product} />
+                    ))
+                ) : (
+                    <p className="text-center text-gray-500 col-span-full">해당 카테고리에 상품이 없습니다.</p>
                 )}
             </div>
         </div>
