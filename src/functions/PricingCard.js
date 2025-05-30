@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function ProductCard({ product }) {
+function ProductCard({ product, onAddToCart, onBuy }) {
     return (
         <div
             className="flex flex-col bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden w-full h-full transition-transform hover:scale-105"
@@ -17,11 +18,22 @@ function ProductCard({ product }) {
                         <li key={idx} className="text-sm text-gray-600 dark:text-gray-300">• {feature}</li>
                     ))}
                 </ul>
-                <div className="mt-auto text-center">
+                <div className="mt-auto text-center space-y-2">
                     <p className="text-lg font-bold text-gray-900 dark:text-white">{product.price}₩</p>
-                    <button className="mt-3 w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg">
-                        {product.buttonText}
-                    </button>
+                    <div className="flex justify-between items-center">
+                        <button
+                            onClick={() => onAddToCart(product)}
+                            className="bg-indigo-100 text-indigo-700 px-3 py-2 rounded hover:bg-indigo-200"
+                        >
+                            장바구니
+                        </button>
+                        <button
+                            onClick={() => onBuy(product)}
+                            className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg"
+                        >
+                            {product.buttonText}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -54,6 +66,7 @@ function CategoryFilter({ categories, activeCategory, onCategoryChange, showFilt
 function ProductCatalog({ pageType, showFilter = true, customTitle }) {
     const [products, setProducts] = useState([]);
     const [activeCategory, setActiveCategory] = useState('all');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -91,7 +104,7 @@ function ProductCatalog({ pageType, showFilter = true, customTitle }) {
 
                 setProducts(combined);
             } catch (error) {
-                console.error("🚨 데이터 불러오기 실패:", error);
+                console.error("데이터 불러오기 실패:", error);
             }
         };
 
@@ -110,6 +123,17 @@ function ProductCatalog({ pageType, showFilter = true, customTitle }) {
     const filteredProducts = activeCategory === 'all'
         ? availableProducts
         : availableProducts.filter(product => product.category === activeCategory);
+
+    const handleAddToCart = (product) => {
+        const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
+        existingCart.push(product);
+        localStorage.setItem('cart', JSON.stringify(existingCart));
+        navigate('/cart');
+    };
+
+    const handleBuy = (product) => {
+        navigate('/purchase', { state: { product } });
+    };
 
     let pageTitle;
     if (customTitle) {
@@ -134,7 +158,12 @@ function ProductCatalog({ pageType, showFilter = true, customTitle }) {
             />
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredProducts.map((product) => (
-                    <ProductCard key={product.id} product={product} />
+                    <ProductCard
+                        key={product.id}
+                        product={product}
+                        onAddToCart={handleAddToCart}
+                        onBuy={handleBuy}
+                    />
                 ))}
                 {filteredProducts.length === 0 && (
                     <p className="text-center text-gray-500">해당 카테고리에 상품이 없습니다.</p>
