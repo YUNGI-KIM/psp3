@@ -5,7 +5,7 @@ import Avante from "../Image/Estimate/Hyundai/Avante/Avante.png";
 import Casper from "../Image/Estimate/Hyundai/Casper/casper.png";
 import Grandeur from "../Image/Estimate/Hyundai/Grandeur/Grandeur.png";
 import Ioniq from "../Image/Estimate/Hyundai/Ioniq/ioniq.png";
-import Palisade from "../Image/Estimate/Hyundai/Palisade/Palisade.png";
+import Palisade from "../Image/Estimate/Hyundai/Palisade/palisade.png";
 import K5 from "../Image/Estimate/Kia/Carnival/Carnival.webp";
 import K9 from "../Image/Estimate/Kia/K9/K9.png";
 import { AnimatePresence, motion } from "framer-motion";

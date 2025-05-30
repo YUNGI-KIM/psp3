@@ -18,8 +18,9 @@ import Benz from '../Image/companyLogo/Benz.svg';
 import Tesla from '../Image/companyLogo/Tesla.svg';
 import Header from '../functions/Header';
 import { useUser } from "../contexts/UserContext";
-
-
+import PopularModels from '../functions/PopularModels';
+import AccessorySection from "../functions/AccessorySection";
+import TrendySection from "../functions/TrendySection";
 
 const variants = {
     enter: (direction) => ({
@@ -35,8 +36,6 @@ const variants = {
         opacity: 0
     })
 };
-
-
 
 const MainPage = () => {
     const navigate = useNavigate();
@@ -92,7 +91,6 @@ const MainPage = () => {
             directionRef.current = -1;
             setPage(prevPage);
         } else {
-
             directionRef.current = -1;
             const remainder = ClickButtonSlideLogo.length % logosPerPage;
             const lastFullPageStart = ClickButtonSlideLogo.length - (remainder === 0 ? logosPerPage : remainder);
@@ -106,12 +104,10 @@ const MainPage = () => {
             directionRef.current = 1;
             setPage(nextPage);
         } else {
-
             directionRef.current = 1;
             setPage(0);
         }
     };
-
 
     const SlideToRight = () => {
         directionRef.current = 1;
@@ -138,7 +134,7 @@ const MainPage = () => {
                         strokeWidth="4"
                         stroke="currentColor"
                         className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out"
-                        style={{flexShrink: 0}} // 크기 고정 방지
+                        style={{flexShrink: 0}}
                     >
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
                     </svg>
@@ -158,7 +154,7 @@ const MainPage = () => {
                         />
                     ))}
                 </div>
-                <div className="absolute  left-995/1000 transform top-5/10 -translate-x-1/2  flex space-x-2">
+                <div className="absolute left-995/1000 transform top-5/10 -translate-x-1/2 flex space-x-2">
                     <svg
                         onClick={SlideToRight}
                         xmlns="http://www.w3.org/2000/svg"
@@ -174,14 +170,12 @@ const MainPage = () => {
                 </div>
             </div>
 
-
-
             <div className="w-full h-[125px] flex justify-between items-center px-2 mt-4"
                 style={{
-                    minWidth: '400px',    // 최소 너비 고정 (원하는 값으로 조절)
-                    maxWidth: '100%',     // 최대 너비 제한
-                    gap: '16px',          // 간격 고정 (Tailwind gap-4에 대응)
-                    }}>
+                    minWidth: '400px',
+                    maxWidth: '100%',
+                    gap: '16px',
+                }}>
                 <svg
                     onClick={SlideToLogoLeft}
                     xmlns="http://www.w3.org/2000/svg"
@@ -190,8 +184,8 @@ const MainPage = () => {
                     strokeWidth="4"
                     stroke="currentColor"
                     className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out"
-                    style={{ flexShrink: 0, position: 'relative', right: '8px'}} // 크기 고정 방지
-                    >
+                    style={{ flexShrink: 0, position: 'relative', right: '8px'}}
+                >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                 </svg>
 
@@ -204,12 +198,12 @@ const MainPage = () => {
                         animate="center"
                         exit="exit"
                         transition={{ duration: 0.5 }}
-                        className="flex justify-between items-center flex-grow gap-0 h-full px-4 overflow-hidden"
+                        className="flex justify-between items-center flex-grow gap-0 h-full px-16 overflow-hidden"
                         style={{
-                            minWidth: 'calc(100% - 88px)', // 좌우 화살표 제외한 영역 고정 (화살표 w-10 = 40px + 여백)
+                            minWidth: 'calc(100% - 88px)',
                             boxSizing: 'border-box',
-                            }}
-                        >
+                        }}
+                    >
                         {ClickButtonSlideLogo.slice(page, page + logosPerPage).map((logo, i) => (
                             <img
                                 key={i}
@@ -237,6 +231,11 @@ const MainPage = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" d="m3 4.5 7.5 7.5-7.5 7.5"/>
                 </svg>
             </div>
+
+            {/* 🔽 인기 차종 섹션 */}
+            <PopularModels />
+            <AccessorySection />
+            <TrendySection />
         </div>
     );
 };
