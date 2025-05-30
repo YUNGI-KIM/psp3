@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import FindCar from '../ImageSrc/sideImage/FindCar.png';
+import FindCar from '../ImageSrc/sideImage/CBTI.png';
 import main from '../ImageSrc/sideImage/main.jpg';
 import main2 from '../ImageSrc/sideImage/main2.jpg';
 import main3 from '../ImageSrc/sideImage/main3.jpg';
@@ -50,10 +50,10 @@ const MainPage = () => {
 
     const slidSrc = [
         { src: FindCar, href: '/startCBTI' },
-        { src: main, href: '/startCBTI' },
-        { src: main2, href: '/startCBTI' },
-        { src: main3, href: '/startCBTI' },
-        { src: main4, href: '/startCBTI' },
+        { src: main, href: '/' },
+        { src: main2, href: '/' },
+        { src: main3, href: '/' },
+        { src: main4, href: '/' },
     ];
 
     const handleButtonClick = (i) => setIndex(i);
