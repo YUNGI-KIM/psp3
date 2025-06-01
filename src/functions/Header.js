@@ -1,13 +1,16 @@
 import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
-import Logo from "../ImageSrc/logo2.png";
+import LogoW from "../ImageSrc/logo1.png";
+import LogoB from "../ImageSrc/logo2.png";
 
 function Header() {
     const { user, setUser } = useUser();
     const navigate = useNavigate();
     const { pathname } = useLocation();
     const isHome = pathname === "/";
+
+    const logoSrc = isHome ? LogoW : LogoB;
 
     useEffect(() => {
         console.log("Header user status Changed:", user);
@@ -46,7 +49,7 @@ function Header() {
                 <div className="flex flex-col lg:flex-row items-center justify-between max-w-screen-xl mx-auto px-6 py-4 gap-4">
                     {/* 로고 */}
                     <a href="/" className="hover:scale-105 transition-transform duration-300">
-                        <img src={Logo} alt="Vroom" className="w-36" />
+                        <img src={logoSrc} alt="Vroom" className="w-36" />
                     </a>
 
                     {/* 검색 */}
