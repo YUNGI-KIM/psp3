@@ -49,6 +49,15 @@ function CarInformation() {
         });
   }, []);
 
+  useEffect(() => {
+    Object.values(brandModels).flat().forEach(model => {
+      if (model.image) {
+        const img = new window.Image();
+        img.src = model.image;
+      }
+    });
+  }, [brandModels]);
+
   const nextBrand = () => {
     setBrandIndex((prev) => (prev + 1) % brandList.length);
   };
