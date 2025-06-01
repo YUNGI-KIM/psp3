@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import cartImg from "../Image/etc/cart.png";
 
-// ✅ 카테고리 필터
+// 카테고리 필터
 function CategoryFilter({ categories, activeCategory, onCategoryChange, showFilter }) {
     if (!showFilter) return null;
     return (
@@ -25,7 +26,7 @@ function CategoryFilter({ categories, activeCategory, onCategoryChange, showFilt
     );
 }
 
-// ✅ 제품 카드 (장바구니 기능 포함)
+//  제품 카드 (장바구니 기능 포함)
 function ProductCard({ product }) {
     const navigate = useNavigate();
 
@@ -61,7 +62,7 @@ function ProductCard({ product }) {
                         onClick={handleAddToCart}
                         className="bg-[#E0E7FF] w-10 h-10 rounded-full flex items-center justify-center"
                     >
-                        <img src="image/cart.png" alt="장바구니" className="w-5 h-5" />
+                        <img src={cartImg} alt="장바구니" className="w-5 h-5" />
                     </button>
                 </div>
                 <button
@@ -75,7 +76,7 @@ function ProductCard({ product }) {
     );
 }
 
-// ✅ 전체 제품 카탈로그
+//  전체 제품 카탈로그
 function ProductCatalog({ pageType, showFilter = true, customTitle }) {
     const [products, setProducts] = useState([]);
     const [activeCategory, setActiveCategory] = useState('all');

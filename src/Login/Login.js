@@ -83,7 +83,7 @@ function Login() {
                         className="rounded-lg border border-gray-300 w-full py-2 px-4 shadow-sm focus:ring-2 focus:ring-purple-600"
                     />
 
-                    {/* ✅ 오류 메시지 입력 폼 밑에 표시 */}
+                    {/*  오류 메시지 입력 폼 밑에 표시 */}
                     {errorMsg && (
                         <div className="text-red-500 text-sm text-center">{errorMsg}</div>
                     )}

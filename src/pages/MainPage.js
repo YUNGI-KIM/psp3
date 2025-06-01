@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {motion, AnimatePresence} from "framer-motion";
-import FindCar from '../ImageSrc/sideImage/CBTI.png';
+import FindCar from '../ImageSrc/sideImage/CBTI.jpg';
 import Header from '../functions/Header';
 import {useUser} from "../contexts/UserContext";
 
@@ -9,7 +9,6 @@ import {useUser} from "../contexts/UserContext";
 import main from '../ImageSrc/sideImage/main.jpg';
 import main2 from '../ImageSrc/sideImage/main2.jpg';
 import main3 from '../ImageSrc/sideImage/main3.jpg';
-import main4 from '../ImageSrc/sideImage/main4.jpg';
 
 // 브랜드 로고
 import hyundai from '../ImageSrc/companyLogo/hyundai.svg';
@@ -51,12 +50,18 @@ const MainPage = () => {
         return () => window.removeEventListener('resize', updateLogoCount);
     }, []);
 
+    useEffect(() => {
+        slidSrc.forEach(img => {
+            const preload = new window.Image();
+            preload.src = img.src;
+        });
+    }, []);
+
     const slidSrc = [
         {src: FindCar, href: '/startCBTI'},
         {src: main, href: '/'},
         {src: main2, href: '/'},
-        {src: main3, href: '/'},
-        {src: main4, href: '/'},
+        {src: main3, href: '/'}
     ];
 
     const handleButtonClick = (i) => setIndex(i);
@@ -104,52 +109,109 @@ const MainPage = () => {
 
     return (
         <div
-            className="flex flex-col w-full h-screen min-h-screen overflow-hidden bg-gradient-to-b from-[#f6fbff] via-[#eaf1ff] to-[#f8fbff]">
+            className="flex flex-col w-full min-h-screen overflow-hidden bg-gradient-to-b from-[#f6fbff] via-[#eaf1ff] to-[#f8fbff]">
             <Header key={user ? user.id : "guest"}/>
 
             {/* 이미지 메인 슬라이드 */}
-            <div
-                className="
-                    relative w-full overflow-visible px-2 sm:px-4
-                    pt-[14rem] lg:pt-0
-                    lg:mt-[0.10rem]
-                "
-            >
-                {/* 좌우 화살표 */}
-                <div className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10 pt-[14rem] lg:pt-0">
-                    <svg onClick={SlideToLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                         strokeWidth="4" stroke="currentColor"
-                         className="w-10 h-10 cursor-pointer hover:text-yellow-200 hover:scale-110 transition-transform">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
-                    </svg>
-                </div>
-                <div className="w-full aspect-[16/9] max-h-[43rem] overflow-hidden">
-                    <img
-                        src={slidSrc[index].src}
-                        onClick={() => navigate(slidSrc[index].href)}
-                        className="absolute top-0 left-0 w-full h-[92.5%] scale-100 object-cover cursor-pointer transition-transform duration-300 pt-[14rem] lg:pt-0"
-                        alt={`Slide ${index + 1}`}
-                    />
-                </div>
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 pb-[3rem]">
-                    {slidSrc.map((_, i) => (
-                        <button key={i} onClick={() => handleButtonClick(i)}
-                                className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${i === index ? 'bg-gray-500' : 'bg-gray-800'} hover:bg-gray-400`}/>
-                    ))}
-                </div>
-                <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10 pt-[14rem] lg:pt-0">
-                    <svg onClick={SlideToRight} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                         strokeWidth="4" stroke="currentColor"
-                         className="w-10 h-10 cursor-pointer hover:text-yellow-200 hover:scale-110 transition-transform">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="m3 4.5 7.5 7.5-7.5 7.5"/>
-                    </svg>
+            <div className="
+                w-full relative
+                pt-[14rem] xs:pt-[10rem] sm:pt-[14.1rem] md:pt-[14rem] lg:pt-0
+                transition-all duration-500
+            ">
+                <div className="
+                    relative w-full
+                    aspect-[16/9]
+                    max-h-[calc(100vh-18rem)]
+                    min-h-[12rem]
+                    overflow-hidden
+                ">
+                    {/* 좌우 화살표 */}
+                    <div className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10">
+                        <svg onClick={SlideToLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                             strokeWidth="4" stroke="currentColor"
+                             className="w-10 h-10 cursor-pointer hover:text-yellow-200 hover:scale-110 transition-transform">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
+                        </svg>
+                    </div>
+
+                    {/* 첫번째 슬라이드: 텍스트만 중앙, 전체 클릭 */}
+                    {index === 0 ? (
+                        <div
+                            className="w-full h-full relative cursor-pointer group"
+                            tabIndex={0}
+                            role="button"
+                            aria-label="CBTI 검사하러가기"
+                            onClick={() => navigate('/startCBTI')}
+                        >
+                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+                                <div className="
+                                    relative
+                                    flex flex-col items-center
+                                    pointer-events-auto z-10
+                                ">
+                                    <span
+                                        className="block text-white text-4xl md:text-5xl lg:text-6xl font-extrabold drop-shadow-[0_2px_18px_rgba(0,0,0,0.95)] mb-2 whitespace-pre-line"
+                                    >
+                                        차에도 MBTI가?
+                                    </span>
+                                    <span
+                                        className="block text-white text-2xl md:text-3xl lg:text-4xl font-extrabold drop-shadow-[0_2px_18px_rgba(0,0,0,1.0)] tracking-tight"
+                                    >
+                                        CBTI 검사하러가기
+                                    </span>
+                                </div>
+                            </div>
+                            {/* 이미지 */}
+                            <img
+                                src={slidSrc[0].src}
+                                className="
+                                    w-full h-full object-cover transition-transform duration-300
+                                    min-h-[12rem] max-h-[calc(100vh-18rem)]
+                                    group-hover:brightness-95
+                                "
+                                alt="CBTI 슬라이드"
+                                draggable={false}
+                                style={{userSelect: 'none', pointerEvents: 'none'}}
+                            />
+                        </div>
+                    ) : (
+                        <img
+                            src={slidSrc[index].src}
+                            onClick={() => slidSrc[index].href && navigate(slidSrc[index].href)}
+                            className="
+                                w-full h-full object-cover cursor-pointer transition-transform duration-300
+                                min-h-[12rem] max-h-[calc(100vh-18rem)]
+                            "
+                            alt={`Slide ${index + 1}`}
+                        />
+                    )}
+
+                    {/* 슬라이드 인디케이터 */}
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                        {slidSrc.map((_, i) => (
+                            <button key={i} onClick={() => handleButtonClick(i)}
+                                    className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${i === index ? 'bg-gray-500' : 'bg-gray-800'} hover:bg-gray-400`}/>
+                        ))}
+                    </div>
+                    {/* 우측 화살표 */}
+                    <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10">
+                        <svg onClick={SlideToRight} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                             strokeWidth="4" stroke="currentColor"
+                             className="w-10 h-10 cursor-pointer hover:text-yellow-200 hover:scale-110 transition-transform">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="m3 4.5 7.5 7.5-7.5 7.5"/>
+                        </svg>
+                    </div>
                 </div>
             </div>
 
             {/* 브랜드 카드 슬라이드 (카드 섹션) */}
-            <div
-                className="w-full flex items-center justify-between px-2 sm:px-6 md:px-12 pt-4 pb-8 relative overflow-hidden translate-y-[-1.2rem]"
-            >
+            <div className="
+                w-full flex items-center justify-between
+                px-2 sm:px-6 md:px-12
+                pt-4 pb-8
+                relative overflow-hidden
+                mt-12 min-h-[8rem]
+            ">
                 {/* 왼쪽 화살표 */}
                 <button
                     onClick={SlideToLogoLeft}
