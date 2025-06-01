@@ -122,15 +122,15 @@ const MainPage = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
                     </svg>
                 </div>
-                <div className="w-full aspect-[16/9] max-h-[48rem] overflow-hidden">
+                <div className="w-full aspect-[16/9] max-h-[43rem] overflow-hidden">
                     <img
                         src={slidSrc[index].src}
                         onClick={() => navigate(slidSrc[index].href)}
-                        className="absolute top-0 left-0 w-full h-full object-cover cursor-pointer transition-transform duration-300 pt-[14rem] lg:pt-0"
+                        className="absolute top-0 left-0 w-full h-[92.5%] scale-100 object-cover cursor-pointer transition-transform duration-300 pt-[14rem] lg:pt-0"
                         alt={`Slide ${index + 1}`}
                     />
                 </div>
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 pb-[3rem]">
                     {slidSrc.map((_, i) => (
                         <button key={i} onClick={() => handleButtonClick(i)}
                                 className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${i === index ? 'bg-gray-500' : 'bg-gray-800'} hover:bg-gray-400`}/>
@@ -147,7 +147,7 @@ const MainPage = () => {
 
             {/* 브랜드 카드 슬라이드 (카드 섹션) */}
             <div
-                className="w-full flex items-center justify-between px-2 sm:px-6 md:px-12 pt-4 pb-8 relative overflow-hidden"
+                className="w-full flex items-center justify-between px-2 sm:px-6 md:px-12 pt-4 pb-8 relative overflow-hidden translate-y-[-1.2rem]"
             >
                 {/* 왼쪽 화살표 */}
                 <button
