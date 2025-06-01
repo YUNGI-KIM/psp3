@@ -32,6 +32,9 @@ public class VehicleProduct extends BaseProduct {
     @Column
     private String displacement;
 
+    @Column
+    private String cbti;
+
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "interior_options", joinColumns = @JoinColumn(name = "vehicle_id"))
     private List<InteriorOption> interiorOptions;
@@ -39,7 +42,7 @@ public class VehicleProduct extends BaseProduct {
     public VehicleProduct(
             String name, String category, String image, List<String> features, String buttonText,
             String brand, String type, String priceAfterTax, String priceBeforeTax,
-            String efficiency, String displacement, List<InteriorOption> interiorOptions) {
+            String efficiency, String displacement, String cbti, List<InteriorOption> interiorOptions) {
         super(name, category, image, features, buttonText);
         this.brand = brand;
         this.type = type;
@@ -47,6 +50,7 @@ public class VehicleProduct extends BaseProduct {
         this.priceBeforeTax = priceBeforeTax;
         this.efficiency = efficiency;
         this.displacement = displacement;
+        this.cbti = cbti;
         this.interiorOptions = interiorOptions;
     }
 }

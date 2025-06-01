@@ -50,6 +50,15 @@ public class VehicleProductService {
                 .collect(Collectors.toList());
     }
 
+    @Cacheable(cacheNames = "vehicleProducts", key = "#cbti")
+    public List<VehicleProductResponse> findByCbti(String cbti) {
+        List<VehicleProduct> vehicleProducts = vehicleProductRepository.findVehicleProductsByCbti(cbti);
+
+        return vehicleProducts.stream()
+                .map(VehicleProductResponse::new)
+                .collect(Collectors.toList());
+    }
+
     @CacheEvict(cacheNames = "vehicleProducts", allEntries = true)
     public void delete(Long id) {
         vehicleProductRepository.deleteById(id);

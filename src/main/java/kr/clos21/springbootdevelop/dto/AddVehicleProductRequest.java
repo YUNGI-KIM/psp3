@@ -22,6 +22,7 @@ public class AddVehicleProductRequest extends BaseProductDTO {
     private String type;
     private String priceAfterTax;
     private String priceBeforeTax;
+    private String cbti;
     private List<InteriorOption> interiorOptions;
 
     public VehicleProduct toEntity() {
@@ -37,6 +38,7 @@ public class AddVehicleProductRequest extends BaseProductDTO {
                 .priceBeforeTax(priceBeforeTax)
                 .efficiency(efficiency)
                 .displacement(displacement)
+                .cbti(cbti)
                 .interiorOptions(interiorOptions)
                 .build();
     }

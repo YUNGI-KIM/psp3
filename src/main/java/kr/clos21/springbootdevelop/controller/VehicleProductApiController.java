@@ -46,6 +46,14 @@ public class VehicleProductApiController {
         return ResponseEntity.ok()
                 .body(vehicleProductResponses);
     }
+    @GetMapping("/cbti/{cbti}")
+    public ResponseEntity<List<VehicleProductResponse>> findByCbti(@PathVariable String cbti) {
+        List<VehicleProductResponse> vehicleProductResponses = vehicleProductService.findByCbti(cbti)
+                .stream()
+                .toList();
+        return ResponseEntity.ok()
+                .body(vehicleProductResponses);
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<VehicleProduct> update(@PathVariable Long id,

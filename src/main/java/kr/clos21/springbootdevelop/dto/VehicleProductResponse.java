@@ -23,6 +23,8 @@ public class VehicleProductResponse {
     private final String efficiency;
     private final String displacement;
 
+    private final String cbti;
+
     private final List<InteriorOption> interiorOptions;
 
     private final LocalDateTime createdAt;
@@ -42,6 +44,8 @@ public class VehicleProductResponse {
         this.priceBeforeTax = product.getPriceBeforeTax();
         this.efficiency = product.getEfficiency();
         this.displacement = product.getDisplacement();
+
+        this.cbti = product.getCbti();
 
         this.interiorOptions = product.getInteriorOptions();
 

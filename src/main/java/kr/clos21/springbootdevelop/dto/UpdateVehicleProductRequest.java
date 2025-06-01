@@ -22,5 +22,6 @@ public class UpdateVehicleProductRequest {
     private String brand;
     private String efficiency;
     private String displacement;
+    private String cbti;
     private String type;
 }
