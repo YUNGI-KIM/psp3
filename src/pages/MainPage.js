@@ -1,16 +1,10 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {useNavigate} from "react-router-dom";
-import {motion, AnimatePresence} from "framer-motion";
-import FindCar from '../ImageSrc/sideImage/CBTI.jpg';
+import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import Header from '../functions/Header';
-import {useUser} from "../contexts/UserContext";
+import { useUser } from "../contexts/UserContext";
 
-// 이미지
-import main from '../ImageSrc/sideImage/main.jpg';
-import main2 from '../ImageSrc/sideImage/main2.jpg';
-import main3 from '../ImageSrc/sideImage/main3.jpg';
-
-// 브랜드 로고
+// 브랜드 로고 import (예시 경로, 필요에 따라 수정)
 import hyundai from '../ImageSrc/companyLogo/hyundai.svg';
 import kia from '../ImageSrc/companyLogo/kia.svg';
 import chevrolet from '../ImageSrc/companyLogo/chevrolet.svg';
@@ -23,14 +17,50 @@ import Benz from '../ImageSrc/companyLogo/Benz.svg';
 import Tesla from '../ImageSrc/companyLogo/Tesla.svg';
 
 const variants = {
-    enter: (direction) => ({x: direction === 1 ? 300 : -300, opacity: 0}),
-    center: {x: 0, opacity: 1},
-    exit: (direction) => ({x: direction === 1 ? -300 : 300, opacity: 0})
+    enter: (direction) => ({ x: direction === 1 ? 300 : -300, opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit: (direction) => ({ x: direction === 1 ? -300 : 300, opacity: 0 })
 };
+
+const slidSrc = [
+    {
+        srcWebp: "/ImageSrc/sideImage/CBTI.webp",
+        src: "/ImageSrc/sideImage/CBTI.jpg",
+        href: '/startCBTI',
+    },
+    {
+        srcWebp: "/ImageSrc/sideImage/main.webp",
+        src: "/ImageSrc/sideImage/main.jpg",
+        href: '/',
+    },
+    {
+        srcWebp: "/ImageSrc/sideImage/main2.webp",
+        src: "/ImageSrc/sideImage/main2.jpg",
+        href: '/',
+    },
+    {
+        srcWebp: "/ImageSrc/sideImage/main3.webp",
+        src: "/ImageSrc/sideImage/main3.jpg",
+        href: '/',
+    }
+];
+
+const brandLogos = [
+    { alt: "HYUNDAI", src: hyundai, href: '/buy/hyundai' },
+    { alt: "KIA", src: kia, href: '/buy/kia' },
+    { alt: "CHEVROLET", src: chevrolet, href: '/buy/Chevo' },
+    { alt: "RENAULT", src: Reno, href: '/buy/Reno' },
+    { alt: "KGM", src: kgm, href: '/buy/kgm' },
+    { alt: "GENESIS", src: gen, href: '/buy/Gen' },
+    { alt: "BMW", src: BMW, href: '/buy/BMW' },
+    { alt: "AUDI", src: Audi, href: '/buy/Audi' },
+    { alt: "BENZ", src: Benz, href: '/buy/Benz' },
+    { alt: "TESLA", src: Tesla, href: '/buy/Tesla' },
+];
 
 const MainPage = () => {
     const navigate = useNavigate();
-    const {user} = useUser();
+    const { user } = useUser();
     const [index, setIndex] = useState(0);
     const [page, setPage] = useState(0);
     const [logosPerPage, setLogosPerPage] = useState(5);
@@ -50,34 +80,17 @@ const MainPage = () => {
         return () => window.removeEventListener('resize', updateLogoCount);
     }, []);
 
+    // 이미지 미리 로드 (webp, jpg 모두)
     useEffect(() => {
         slidSrc.forEach(img => {
-            const preload = new window.Image();
-            preload.src = img.src;
+            [img.src, img.srcWebp].forEach(url => {
+                const preload = new window.Image();
+                preload.src = url;
+            });
         });
     }, []);
 
-    const slidSrc = [
-        {src: FindCar, href: '/startCBTI'},
-        {src: main, href: '/'},
-        {src: main2, href: '/'},
-        {src: main3, href: '/'}
-    ];
-
     const handleButtonClick = (i) => setIndex(i);
-
-    const brandLogos = [
-        {alt: "HYUNDAI", src: hyundai, href: '/buy/hyundai'},
-        {alt: "KIA", src: kia, href: '/buy/kia'},
-        {alt: "CHEVROLET", src: chevrolet, href: '/buy/Chevo'},
-        {alt: "RENAULT", src: Reno, href: '/buy/Reno'},
-        {alt: "KGM", src: kgm, href: '/buy/kgm'},
-        {alt: "GENESIS", src: gen, href: '/buy/Gen'},
-        {alt: "BMW", src: BMW, href: '/buy/BMW'},
-        {alt: "AUDI", src: Audi, href: '/buy/Audi'},
-        {alt: "BENZ", src: Benz, href: '/buy/Benz'},
-        {alt: "TESLA", src: Tesla, href: '/buy/Tesla'},
-    ];
 
     const SlideToLogoLeft = () => {
         const prevPage = page - logosPerPage;
@@ -108,9 +121,8 @@ const MainPage = () => {
     };
 
     return (
-        <div
-            className="flex flex-col w-full min-h-screen overflow-hidden bg-gradient-to-b from-[#f6fbff] via-[#eaf1ff] to-[#f8fbff]">
-            <Header key={user ? user.id : "guest"}/>
+        <div className="flex flex-col w-full min-h-screen overflow-hidden bg-gradient-to-b from-[#f6fbff] via-[#eaf1ff] to-[#f8fbff]">
+            <Header key={user ? user.id : "guest"} />
 
             {/* 이미지 메인 슬라이드 */}
             <div className="
@@ -134,63 +146,53 @@ const MainPage = () => {
                         </svg>
                     </div>
 
-                    {/* 첫번째 슬라이드: 텍스트만 중앙, 전체 클릭 */}
-                    {index === 0 ? (
-                        <div
-                            className="w-full h-full relative cursor-pointer group"
-                            tabIndex={0}
-                            role="button"
-                            aria-label="CBTI 검사하러가기"
-                            onClick={() => navigate('/startCBTI')}
-                        >
-                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-                                <div className="
-                                    relative
-                                    flex flex-col items-center
-                                    pointer-events-auto z-10
-                                ">
-                                    <span
-                                        className="block text-white text-4xl md:text-5xl lg:text-6xl font-extrabold drop-shadow-[0_2px_18px_rgba(0,0,0,0.95)] mb-2 whitespace-pre-line"
-                                    >
-                                        차에도 MBTI가?
-                                    </span>
-                                    <span
-                                        className="block text-white text-2xl md:text-3xl lg:text-4xl font-extrabold drop-shadow-[0_2px_18px_rgba(0,0,0,1.0)] tracking-tight"
-                                    >
-                                        CBTI 검사하러가기
-                                    </span>
-                                </div>
-                            </div>
-                            {/* 이미지 */}
-                            <img
-                                src={slidSrc[0].src}
-                                className="
-                                    w-full h-full object-cover transition-transform duration-300
-                                    min-h-[12rem] max-h-[calc(100vh-18rem)]
-                                    group-hover:brightness-95
-                                "
-                                alt="CBTI 슬라이드"
-                                draggable={false}
-                                style={{userSelect: 'none', pointerEvents: 'none'}}
-                            />
-                        </div>
-                    ) : (
+                    {/* 메인 슬라이드 이미지(webp 우선, 접근성 최적화) */}
+                    <picture>
+                        <source srcSet={slidSrc[index].srcWebp} type="image/webp" />
                         <img
                             src={slidSrc[index].src}
                             onClick={() => slidSrc[index].href && navigate(slidSrc[index].href)}
+                            tabIndex={0}
+                            role="button"
+                            aria-label="슬라이드 이동"
+                            onKeyDown={e => {
+                                if (e.key === 'Enter' || e.key === ' ') slidSrc[index].href && navigate(slidSrc[index].href);
+                            }}
                             className="
                                 w-full h-full object-cover cursor-pointer transition-transform duration-300
                                 min-h-[12rem] max-h-[calc(100vh-18rem)]
                             "
                             alt={`Slide ${index + 1}`}
+                            draggable={false}
+                            style={{ userSelect: 'none' }}
                         />
+                    </picture>
+
+                    {/* 중앙 텍스트 - 첫번째 슬라이드에서만 표시 */}
+                    {index === 0 && (
+                        <div className="
+                            absolute z-20 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+                            flex flex-col items-center justify-center w-full px-4
+                            pointer-events-none select-none
+                        ">
+                            <span
+                                className="block text-white text-4xl md:text-5xl lg:text-6xl font-extrabold drop-shadow-[0_2px_18px_rgba(0,0,0,1.0)] mb-2 whitespace-pre-line text-center"
+                            >
+                                차에도 MBTI가?
+                            </span>
+                            <span
+                                className="block text-white text-2xl md:text-3xl lg:text-4xl font-extrabold drop-shadow-[0_2px_18px_rgba(0,0,0,1.0)] tracking-tight text-center"
+                            >
+                                CBTI 검사하러가기
+                            </span>
+                        </div>
                     )}
 
                     {/* 슬라이드 인디케이터 */}
                     <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
                         {slidSrc.map((_, i) => (
                             <button key={i} onClick={() => handleButtonClick(i)}
-                                    className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${i === index ? 'bg-gray-500' : 'bg-gray-800'} hover:bg-gray-400`}/>
+                                    className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${i === index ? 'bg-gray-500' : 'bg-gray-800'} hover:bg-gray-400`} />
                         ))}
                     </div>
                     {/* 우측 화살표 */}
@@ -234,9 +236,9 @@ const MainPage = () => {
                         initial="enter"
                         animate="center"
                         exit="exit"
-                        transition={{duration: 0.5}}
+                        transition={{ duration: 0.5 }}
                         className="flex flex-1 items-stretch justify-between gap-2 sm:gap-5 md:gap-8"
-                        style={{overflow: 'hidden'}}
+                        style={{ overflow: 'hidden' }}
                     >
                         {brandLogos.slice(page, page + logosPerPage).map((logo, i) => (
                             <button
@@ -274,7 +276,7 @@ const MainPage = () => {
                                             drop-shadow-[0_4px_24px_rgba(77,110,255,0.13)]
                                             ${logo.alt === 'RENAULT' ? 'h-[42px] max-h-[42px]' : 'h-[54px] max-h-[54px]'}
                                         `}
-                                        style={{width: '62%', minWidth: 40, maxWidth: 100, margin: '0 auto'}}
+                                        style={{ width: '62%', minWidth: 40, maxWidth: 100, margin: '0 auto' }}
                                     />
                                     <div
                                         className="absolute left-1/2 -translate-x-1/2 bottom-1 w-[60%] h-2  rounded-full blur-md opacity-60 group-hover:opacity-80 transition-all duration-500"
