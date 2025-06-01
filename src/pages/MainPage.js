@@ -50,6 +50,13 @@ const MainPage = () => {
         return () => window.removeEventListener('resize', updateLogoCount);
     }, []);
 
+    useEffect(() => {
+        slidSrc.forEach(img => {
+            const preload = new window.Image();
+            preload.src = img.src;
+        });
+    }, []);
+
     const slidSrc = [
         {src: FindCar, href: '/startCBTI'},
         {src: main, href: '/'},
