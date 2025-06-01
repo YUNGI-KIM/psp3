@@ -1,15 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import FindCar from '../ImageSrc/sideImage/CBTI.png';
+import React, {useEffect, useRef, useState} from 'react';
+import {useNavigate} from "react-router-dom";
+import {motion, AnimatePresence} from "framer-motion";
+import FindCar from '../ImageSrc/sideImage/CBTI.jpg';
 import Header from '../functions/Header';
-import { useUser } from "../contexts/UserContext";
+import {useUser} from "../contexts/UserContext";
 
 // 이미지
 import main from '../ImageSrc/sideImage/main.jpg';
 import main2 from '../ImageSrc/sideImage/main2.jpg';
 import main3 from '../ImageSrc/sideImage/main3.jpg';
-import main4 from '../ImageSrc/sideImage/main4.jpg';
 
 // 브랜드 로고
 import hyundai from '../ImageSrc/companyLogo/hyundai.svg';
@@ -24,14 +23,14 @@ import Benz from '../ImageSrc/companyLogo/Benz.svg';
 import Tesla from '../ImageSrc/companyLogo/Tesla.svg';
 
 const variants = {
-    enter: (direction) => ({ x: direction === 1 ? 300 : -300, opacity: 0 }),
-    center: { x: 0, opacity: 1 },
-    exit: (direction) => ({ x: direction === 1 ? -300 : 300, opacity: 0 })
+    enter: (direction) => ({x: direction === 1 ? 300 : -300, opacity: 0}),
+    center: {x: 0, opacity: 1},
+    exit: (direction) => ({x: direction === 1 ? -300 : 300, opacity: 0})
 };
 
 const MainPage = () => {
     const navigate = useNavigate();
-    const { user } = useUser();
+    const {user} = useUser();
     const [index, setIndex] = useState(0);
     const [page, setPage] = useState(0);
     const [logosPerPage, setLogosPerPage] = useState(5);
@@ -52,26 +51,25 @@ const MainPage = () => {
     }, []);
 
     const slidSrc = [
-        { src: FindCar, href: '/startCBTI' },
-        { src: main, href: '/' },
-        { src: main2, href: '/' },
-        { src: main3, href: '/' },
-        { src: main4, href: '/' },
+        {src: FindCar, href: '/startCBTI'},
+        {src: main, href: '/'},
+        {src: main2, href: '/'},
+        {src: main3, href: '/'}
     ];
 
     const handleButtonClick = (i) => setIndex(i);
 
     const brandLogos = [
-        { alt: "HYUNDAI", src: hyundai, href: '/buy/hyundai' },
-        { alt: "KIA", src: kia, href: '/buy/kia' },
-        { alt: "CHEVROLET", src: chevrolet, href: '/buy/Chevo' },
-        { alt: "RENAULT", src: Reno, href: '/buy/Reno' },
-        { alt: "KGM", src: kgm, href: '/buy/kgm' },
-        { alt: "GENESIS", src: gen, href: '/buy/Gen' },
-        { alt: "BMW", src: BMW, href: '/buy/BMW' },
-        { alt: "AUDI", src: Audi, href: '/buy/Audi' },
-        { alt: "BENZ", src: Benz, href: '/buy/Benz' },
-        { alt: "TESLA", src: Tesla, href: '/buy/Tesla' },
+        {alt: "HYUNDAI", src: hyundai, href: '/buy/hyundai'},
+        {alt: "KIA", src: kia, href: '/buy/kia'},
+        {alt: "CHEVROLET", src: chevrolet, href: '/buy/Chevo'},
+        {alt: "RENAULT", src: Reno, href: '/buy/Reno'},
+        {alt: "KGM", src: kgm, href: '/buy/kgm'},
+        {alt: "GENESIS", src: gen, href: '/buy/Gen'},
+        {alt: "BMW", src: BMW, href: '/buy/BMW'},
+        {alt: "AUDI", src: Audi, href: '/buy/Audi'},
+        {alt: "BENZ", src: Benz, href: '/buy/Benz'},
+        {alt: "TESLA", src: Tesla, href: '/buy/Tesla'},
     ];
 
     const SlideToLogoLeft = () => {
@@ -103,52 +101,110 @@ const MainPage = () => {
     };
 
     return (
-        <div className="flex flex-col w-full h-screen min-h-screen overflow-hidden bg-gradient-to-b from-[#f6fbff] via-[#eaf1ff] to-[#f8fbff]">
-            <Header key={user ? user.id : "guest"} />
+        <div
+            className="flex flex-col w-full min-h-screen overflow-hidden bg-gradient-to-b from-[#f6fbff] via-[#eaf1ff] to-[#f8fbff]">
+            <Header key={user ? user.id : "guest"}/>
 
             {/* 이미지 메인 슬라이드 */}
-            <div
-                className="
-                    relative w-full overflow-visible px-2 sm:px-4
-                    pt-[14rem] lg:pt-0
-                    lg:mt-[0.10rem]
-                "
-            >
-                {/* 좌우 화살표 */}
-                <div className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10 pt-[14rem] lg:pt-0">
-                    <svg onClick={SlideToLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                         strokeWidth="4" stroke="currentColor"
-                         className="w-10 h-10 cursor-pointer hover:text-yellow-200 hover:scale-110 transition-transform">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
-                    </svg>
-                </div>
-                <div className="w-full aspect-[16/9] max-h-[43rem] overflow-hidden">
-                    <img
-                        src={slidSrc[index].src}
-                        onClick={() => navigate(slidSrc[index].href)}
-                        className="absolute top-0 left-0 w-full h-[92.5%] scale-100 object-cover cursor-pointer transition-transform duration-300 pt-[14rem] lg:pt-0"
-                        alt={`Slide ${index + 1}`}
-                    />
-                </div>
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 pb-[3rem]">
-                    {slidSrc.map((_, i) => (
-                        <button key={i} onClick={() => handleButtonClick(i)}
-                                className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${i === index ? 'bg-gray-500' : 'bg-gray-800'} hover:bg-gray-400`}/>
-                    ))}
-                </div>
-                <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10 pt-[14rem] lg:pt-0">
-                    <svg onClick={SlideToRight} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                         strokeWidth="4" stroke="currentColor"
-                         className="w-10 h-10 cursor-pointer hover:text-yellow-200 hover:scale-110 transition-transform">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="m3 4.5 7.5 7.5-7.5 7.5"/>
-                    </svg>
+            <div className="
+                w-full relative
+                pt-[14rem] xs:pt-[10rem] sm:pt-[14.1rem] md:pt-[14rem] lg:pt-0
+                transition-all duration-500
+            ">
+                <div className="
+                    relative w-full
+                    aspect-[16/9]
+                    max-h-[calc(100vh-18rem)]
+                    min-h-[12rem]
+                    overflow-hidden
+                ">
+                    {/* 좌우 화살표 */}
+                    <div className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10">
+                        <svg onClick={SlideToLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                             strokeWidth="4" stroke="currentColor"
+                             className="w-10 h-10 cursor-pointer hover:text-yellow-200 hover:scale-110 transition-transform">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
+                        </svg>
+                    </div>
+
+                    {/* 첫번째 슬라이드: 텍스트만 중앙, 전체 클릭 */}
+                    {index === 0 ? (
+                        <div
+                            className="w-full h-full relative cursor-pointer group"
+                            tabIndex={0}
+                            role="button"
+                            aria-label="CBTI 검사하러가기"
+                            onClick={() => navigate('/startCBTI')}
+                        >
+                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+                                <div className="
+                                    relative
+                                    flex flex-col items-center
+                                    pointer-events-auto z-10
+                                ">
+                                    <span
+                                        className="block text-white text-4xl md:text-5xl lg:text-6xl font-extrabold drop-shadow-[0_2px_18px_rgba(0,0,0,0.95)] mb-2 whitespace-pre-line"
+                                    >
+                                        차에도 MBTI가?
+                                    </span>
+                                    <span
+                                        className="block text-white text-2xl md:text-3xl lg:text-4xl font-extrabold drop-shadow-[0_2px_18px_rgba(0,0,0,1.0)] tracking-tight"
+                                    >
+                                        CBTI 검사하러가기
+                                    </span>
+                                </div>
+                            </div>
+                            {/* 이미지 */}
+                            <img
+                                src={slidSrc[0].src}
+                                className="
+                                    w-full h-full object-cover transition-transform duration-300
+                                    min-h-[12rem] max-h-[calc(100vh-18rem)]
+                                    group-hover:brightness-95
+                                "
+                                alt="CBTI 슬라이드"
+                                draggable={false}
+                                style={{userSelect: 'none', pointerEvents: 'none'}}
+                            />
+                        </div>
+                    ) : (
+                        <img
+                            src={slidSrc[index].src}
+                            onClick={() => slidSrc[index].href && navigate(slidSrc[index].href)}
+                            className="
+                                w-full h-full object-cover cursor-pointer transition-transform duration-300
+                                min-h-[12rem] max-h-[calc(100vh-18rem)]
+                            "
+                            alt={`Slide ${index + 1}`}
+                        />
+                    )}
+
+                    {/* 슬라이드 인디케이터 */}
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                        {slidSrc.map((_, i) => (
+                            <button key={i} onClick={() => handleButtonClick(i)}
+                                    className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${i === index ? 'bg-gray-500' : 'bg-gray-800'} hover:bg-gray-400`}/>
+                        ))}
+                    </div>
+                    {/* 우측 화살표 */}
+                    <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10">
+                        <svg onClick={SlideToRight} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                             strokeWidth="4" stroke="currentColor"
+                             className="w-10 h-10 cursor-pointer hover:text-yellow-200 hover:scale-110 transition-transform">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="m3 4.5 7.5 7.5-7.5 7.5"/>
+                        </svg>
+                    </div>
                 </div>
             </div>
 
             {/* 브랜드 카드 슬라이드 (카드 섹션) */}
-            <div
-                className="w-full flex items-center justify-between px-2 sm:px-6 md:px-12 pt-4 pb-8 relative overflow-hidden translate-y-[-1.2rem]"
-            >
+            <div className="
+                w-full flex items-center justify-between
+                px-2 sm:px-6 md:px-12
+                pt-4 pb-8
+                relative overflow-hidden
+                mt-12 min-h-[8rem]
+            ">
                 {/* 왼쪽 화살표 */}
                 <button
                     onClick={SlideToLogoLeft}
@@ -171,9 +227,9 @@ const MainPage = () => {
                         initial="enter"
                         animate="center"
                         exit="exit"
-                        transition={{ duration: 0.5 }}
+                        transition={{duration: 0.5}}
                         className="flex flex-1 items-stretch justify-between gap-2 sm:gap-5 md:gap-8"
-                        style={{ overflow: 'hidden' }}
+                        style={{overflow: 'hidden'}}
                     >
                         {brandLogos.slice(page, page + logosPerPage).map((logo, i) => (
                             <button
@@ -195,7 +251,10 @@ const MainPage = () => {
                                     flex: 1,
                                     maxWidth: `${100 / logosPerPage}%`,
                                 }}
-                                onClick={() => { navigate(logo.href); setSelectedBrand(logo.alt); }}
+                                onClick={() => {
+                                    navigate(logo.href);
+                                    setSelectedBrand(logo.alt);
+                                }}
                                 aria-label={logo.alt + " 브랜드 바로가기"}
                             >
                                 <div className="relative flex items-center justify-center w-full h-16 sm:h-20 md:h-24">
@@ -208,7 +267,7 @@ const MainPage = () => {
                                             drop-shadow-[0_4px_24px_rgba(77,110,255,0.13)]
                                             ${logo.alt === 'RENAULT' ? 'h-[42px] max-h-[42px]' : 'h-[54px] max-h-[54px]'}
                                         `}
-                                        style={{ width: '62%', minWidth: 40, maxWidth: 100, margin: '0 auto' }}
+                                        style={{width: '62%', minWidth: 40, maxWidth: 100, margin: '0 auto'}}
                                     />
                                     <div
                                         className="absolute left-1/2 -translate-x-1/2 bottom-1 w-[60%] h-2  rounded-full blur-md opacity-60 group-hover:opacity-80 transition-all duration-500"
@@ -226,7 +285,8 @@ const MainPage = () => {
                                         }}
                                     />
                                 </div>
-                                <span className="mt-2 text-sm font-bold text-black tracking-wider drop-shadow-sm">{logo.alt}</span>
+                                <span
+                                    className="mt-2 text-sm font-bold text-black tracking-wider drop-shadow-sm">{logo.alt}</span>
                             </button>
                         ))}
                     </motion.div>
@@ -245,8 +305,10 @@ const MainPage = () => {
                 </button>
 
                 {/* 배경 블러 데코 */}
-                <div className="absolute left-[-3%] top-[50%] w-52 h-52 bg-blue-50/40 rounded-full blur-3xl opacity-50 -z-10"></div>
-                <div className="absolute right-[-3%] bottom-[5%] w-36 h-36 bg-[#c8dafe]/60 rounded-full blur-2xl opacity-40 -z-10"></div>
+                <div
+                    className="absolute left-[-3%] top-[50%] w-52 h-52 bg-blue-50/40 rounded-full blur-3xl opacity-50 -z-10"></div>
+                <div
+                    className="absolute right-[-3%] bottom-[5%] w-36 h-36 bg-[#c8dafe]/60 rounded-full blur-2xl opacity-40 -z-10"></div>
             </div>
         </div>
     );
