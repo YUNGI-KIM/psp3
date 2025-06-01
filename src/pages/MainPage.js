@@ -107,9 +107,15 @@ const MainPage = () => {
             <Header key={user ? user.id : "guest"} />
 
             {/* 이미지 메인 슬라이드 */}
-            <div className="relative w-full overflow-visible px-2 sm:px-4">
+            <div
+                className="
+                    relative w-full overflow-visible px-2 sm:px-4
+                    pt-[14rem] lg:pt-0
+                    lg:mt-[0.10rem]
+                "
+            >
                 {/* 좌우 화살표 */}
-                <div className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10">
+                <div className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10 pt-[14rem] lg:pt-0">
                     <svg onClick={SlideToLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                          strokeWidth="4" stroke="currentColor"
                          className="w-10 h-10 cursor-pointer hover:text-yellow-200 hover:scale-110 transition-transform">
@@ -120,7 +126,7 @@ const MainPage = () => {
                     <img
                         src={slidSrc[index].src}
                         onClick={() => navigate(slidSrc[index].href)}
-                        className="absolute top-0 left-0 w-full h-full object-cover cursor-pointer transition-transform duration-300"
+                        className="absolute top-0 left-0 w-full h-full object-cover cursor-pointer transition-transform duration-300 pt-[14rem] lg:pt-0"
                         alt={`Slide ${index + 1}`}
                     />
                 </div>
@@ -130,7 +136,7 @@ const MainPage = () => {
                                 className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${i === index ? 'bg-gray-500' : 'bg-gray-800'} hover:bg-gray-400`}/>
                     ))}
                 </div>
-                <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10">
+                <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10 pt-[14rem] lg:pt-0">
                     <svg onClick={SlideToRight} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                          strokeWidth="4" stroke="currentColor"
                          className="w-10 h-10 cursor-pointer hover:text-yellow-200 hover:scale-110 transition-transform">
@@ -142,7 +148,6 @@ const MainPage = () => {
             {/* 브랜드 카드 슬라이드 (카드 섹션) */}
             <div
                 className="w-full flex items-center justify-between px-2 sm:px-6 md:px-12 pt-4 pb-8 relative overflow-hidden"
-                // ↑ pt-4로 위쪽 여백 살짝만 추가 (기존 pt-2에서 pt-4로)
             >
                 {/* 왼쪽 화살표 */}
                 <button
