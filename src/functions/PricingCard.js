@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {cartImg} from "../Image/etc/cart.png";
+import cartImg from "../Image/etc/cart.png";
 
 // ✅ 카테고리 필터
 function CategoryFilter({ categories, activeCategory, onCategoryChange, showFilter }) {
