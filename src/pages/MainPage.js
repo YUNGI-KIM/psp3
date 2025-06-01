@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import React, {useEffect, useRef, useState} from 'react';
+import {useNavigate} from "react-router-dom";
+import {motion, AnimatePresence} from "framer-motion";
 import FindCar from '../ImageSrc/sideImage/CBTI.png';
 import Header from '../functions/Header';
-import { useUser } from "../contexts/UserContext";
+import {useUser} from "../contexts/UserContext";
 
 // 이미지
 import main from '../ImageSrc/sideImage/main.jpg';
@@ -24,14 +24,14 @@ import Benz from '../ImageSrc/companyLogo/Benz.svg';
 import Tesla from '../ImageSrc/companyLogo/Tesla.svg';
 
 const variants = {
-    enter: (direction) => ({ x: direction === 1 ? 300 : -300, opacity: 0 }),
-    center: { x: 0, opacity: 1 },
-    exit: (direction) => ({ x: direction === 1 ? -300 : 300, opacity: 0 })
+    enter: (direction) => ({x: direction === 1 ? 300 : -300, opacity: 0}),
+    center: {x: 0, opacity: 1},
+    exit: (direction) => ({x: direction === 1 ? -300 : 300, opacity: 0})
 };
 
 const MainPage = () => {
     const navigate = useNavigate();
-    const { user } = useUser();
+    const {user} = useUser();
     const [index, setIndex] = useState(0);
     const [page, setPage] = useState(0);
     const [logosPerPage, setLogosPerPage] = useState(5);
@@ -52,26 +52,26 @@ const MainPage = () => {
     }, []);
 
     const slidSrc = [
-        { src: FindCar, href: '/startCBTI' },
-        { src: main, href: '/' },
-        { src: main2, href: '/' },
-        { src: main3, href: '/' },
-        { src: main4, href: '/' },
+        {src: FindCar, href: '/startCBTI'},
+        {src: main, href: '/'},
+        {src: main2, href: '/'},
+        {src: main3, href: '/'},
+        {src: main4, href: '/'},
     ];
 
     const handleButtonClick = (i) => setIndex(i);
 
     const brandLogos = [
-        { alt: "HYUNDAI", src: hyundai, href: '/buy/hyundai' },
-        { alt: "KIA", src: kia, href: '/buy/kia' },
-        { alt: "CHEVROLET", src: chevrolet, href: '/buy/Chevo' },
-        { alt: "RENAULT", src: Reno, href: '/buy/Reno' },
-        { alt: "KGM", src: kgm, href: '/buy/kgm' },
-        { alt: "GENESIS", src: gen, href: '/buy/Gen' },
-        { alt: "BMW", src: BMW, href: '/buy/BMW' },
-        { alt: "AUDI", src: Audi, href: '/buy/Audi' },
-        { alt: "BENZ", src: Benz, href: '/buy/Benz' },
-        { alt: "TESLA", src: Tesla, href: '/buy/Tesla' },
+        {alt: "HYUNDAI", src: hyundai, href: '/buy/hyundai'},
+        {alt: "KIA", src: kia, href: '/buy/kia'},
+        {alt: "CHEVROLET", src: chevrolet, href: '/buy/Chevo'},
+        {alt: "RENAULT", src: Reno, href: '/buy/Reno'},
+        {alt: "KGM", src: kgm, href: '/buy/kgm'},
+        {alt: "GENESIS", src: gen, href: '/buy/Gen'},
+        {alt: "BMW", src: BMW, href: '/buy/BMW'},
+        {alt: "AUDI", src: Audi, href: '/buy/Audi'},
+        {alt: "BENZ", src: Benz, href: '/buy/Benz'},
+        {alt: "TESLA", src: Tesla, href: '/buy/Tesla'},
     ];
 
     const SlideToLogoLeft = () => {
@@ -103,8 +103,9 @@ const MainPage = () => {
     };
 
     return (
-        <div className="flex flex-col w-full h-screen min-h-screen overflow-hidden bg-gradient-to-b from-[#f6fbff] via-[#eaf1ff] to-[#f8fbff]">
-            <Header key={user ? user.id : "guest"} />
+        <div
+            className="flex flex-col w-full h-screen min-h-screen overflow-hidden bg-gradient-to-b from-[#f6fbff] via-[#eaf1ff] to-[#f8fbff]">
+            <Header key={user ? user.id : "guest"}/>
 
             {/* 이미지 메인 슬라이드 */}
             <div
@@ -171,9 +172,9 @@ const MainPage = () => {
                         initial="enter"
                         animate="center"
                         exit="exit"
-                        transition={{ duration: 0.5 }}
+                        transition={{duration: 0.5}}
                         className="flex flex-1 items-stretch justify-between gap-2 sm:gap-5 md:gap-8"
-                        style={{ overflow: 'hidden' }}
+                        style={{overflow: 'hidden'}}
                     >
                         {brandLogos.slice(page, page + logosPerPage).map((logo, i) => (
                             <button
@@ -195,7 +196,10 @@ const MainPage = () => {
                                     flex: 1,
                                     maxWidth: `${100 / logosPerPage}%`,
                                 }}
-                                onClick={() => { navigate(logo.href); setSelectedBrand(logo.alt); }}
+                                onClick={() => {
+                                    navigate(logo.href);
+                                    setSelectedBrand(logo.alt);
+                                }}
                                 aria-label={logo.alt + " 브랜드 바로가기"}
                             >
                                 <div className="relative flex items-center justify-center w-full h-16 sm:h-20 md:h-24">
@@ -208,7 +212,7 @@ const MainPage = () => {
                                             drop-shadow-[0_4px_24px_rgba(77,110,255,0.13)]
                                             ${logo.alt === 'RENAULT' ? 'h-[42px] max-h-[42px]' : 'h-[54px] max-h-[54px]'}
                                         `}
-                                        style={{ width: '62%', minWidth: 40, maxWidth: 100, margin: '0 auto' }}
+                                        style={{width: '62%', minWidth: 40, maxWidth: 100, margin: '0 auto'}}
                                     />
                                     <div
                                         className="absolute left-1/2 -translate-x-1/2 bottom-1 w-[60%] h-2  rounded-full blur-md opacity-60 group-hover:opacity-80 transition-all duration-500"
@@ -226,7 +230,8 @@ const MainPage = () => {
                                         }}
                                     />
                                 </div>
-                                <span className="mt-2 text-sm font-bold text-black tracking-wider drop-shadow-sm">{logo.alt}</span>
+                                <span
+                                    className="mt-2 text-sm font-bold text-black tracking-wider drop-shadow-sm">{logo.alt}</span>
                             </button>
                         ))}
                     </motion.div>
@@ -245,8 +250,10 @@ const MainPage = () => {
                 </button>
 
                 {/* 배경 블러 데코 */}
-                <div className="absolute left-[-3%] top-[50%] w-52 h-52 bg-blue-50/40 rounded-full blur-3xl opacity-50 -z-10"></div>
-                <div className="absolute right-[-3%] bottom-[5%] w-36 h-36 bg-[#c8dafe]/60 rounded-full blur-2xl opacity-40 -z-10"></div>
+                <div
+                    className="absolute left-[-3%] top-[50%] w-52 h-52 bg-blue-50/40 rounded-full blur-3xl opacity-50 -z-10"></div>
+                <div
+                    className="absolute right-[-3%] bottom-[5%] w-36 h-36 bg-[#c8dafe]/60 rounded-full blur-2xl opacity-40 -z-10"></div>
             </div>
         </div>
     );
