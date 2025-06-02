@@ -98,7 +98,7 @@ public class WebSecurityConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("https://psp.clos21.kr") // React 앱 도메인
+                        .allowedOrigins("https://psp.clos21.kr", "https://test.clos21.kr") // React 앱 도메인
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
