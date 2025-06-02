@@ -19,7 +19,7 @@ function Buy() {
 
             <div className="flex">
                 {/*<ProductCatalog pageType={pageType} showFilter={false} />*/}
-                <ProductCatalog pageType={"자동차"} showFilter={false} />
+                <ProductCatalog pageType={"자동차"} brandInput={brand} showFilter={false} />
             </div>
 
 
