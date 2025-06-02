@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Header from "../functions/Header";
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from "framer-motion";
+
+
+
 
 function CartPage() {
     const [cartItems, setCartItems] = useState([]);
@@ -15,8 +19,14 @@ function CartPage() {
         setCartItems(newCart);
         localStorage.setItem('cart', JSON.stringify(newCart));
     }
+    const navigate = useNavigate();
+    const handleToBuy = () => {
+        navigate('/purchase', { state: { cart: cartItems } });
+
+    };
 
     return (
+
         <div className="min-h-screen">
             <Header />
             <div className="max-w-6xl mx-auto py-10 px-4">
@@ -64,7 +74,8 @@ function CartPage() {
                                 ))}
                             </AnimatePresence>
                         </ul>
-                        <button className="bg-indigo-600 hover:bg-indigo-700 w-full py-2 rounded-lg font-semibold text-white text-base shadow">
+                        <button onClick={()=>{handleToBuy()}}
+                            className="bg-indigo-600 hover:bg-indigo-700 w-full py-2 rounded-lg font-semibold text-white text-base shadow">
                             전체 상품 구매하기
                         </button>
                     </>
