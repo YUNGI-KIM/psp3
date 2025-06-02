@@ -195,23 +195,18 @@ function ProductCatalog({ pageType, brandInput = "", showFilter = true, customTi
         }
     };
 
-    let pageTitle;
-    // 1. /buy(전체), /buy/:keyword(검색) → 항상 "전체 상품"
-    if (location.pathname === '/buy' || /^\/buy\/[^/]+$/.test(location.pathname)) {
-        pageTitle = "전체 상품";
-    }
-    // 2. 커스텀 타이틀 우선
-    else if (customTitle) {
-        pageTitle = customTitle;
-    }
-    // 3. 나머지는 기존처럼 분기
-    else if (categories.includes("자동차") && categories.length === 2) {
-        pageTitle = `${categories.find(c => c !== "자동차")} 판매`;
-    } else if (pageType === 'all') {
-        pageTitle = "전체 상품";
-    } else {
-        pageTitle = `${pageTypes.join(', ')} 판매`;
-    }
+    const pageTitle =
+        customTitle
+            ? customTitle
+            : pageType === 'all'
+                ? '전체 상품'
+                : (categories.includes("자동차") && categories.length === 2)
+                    ? `${categories.find(c => c !== "자동차")} 판매`
+                    : pageType === '자동차'
+                        ? '자동차 판매'
+                        : pageType === '차량 악세서리'
+                            ? '차량 악세서리 판매'
+                            : `${pageTypes.join(', ')} 판매`;
 
     return (
         <div className="py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
