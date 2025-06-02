@@ -46,8 +46,8 @@ const slidSrc = [
 ];
 
 const brandLogos = [
-    { alt: "HYUNDAI", src: hyundai, href: '/buy/hyundai' },
-    { alt: "KIA", src: kia, href: '/buy/kia' },
+    { alt: "HYUNDAI", src: hyundai, href: '/buy/Hyundai' },
+    { alt: "KIA", src: kia, href: '/buy/Kia' },
     { alt: "CHEVROLET", src: chevrolet, href: '/buy/Chevo' },
     { alt: "RENAULT", src: Reno, href: '/buy/Reno' },
     { alt: "KGM", src: kgm, href: '/buy/kgm' },

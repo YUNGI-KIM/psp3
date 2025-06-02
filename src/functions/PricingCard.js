@@ -91,27 +91,33 @@ function ProductCatalog({ pageType, showFilter = true, customTitle }) {
         const fetchData = async () => {
             setIsLoading(true);
             try {
+                // 브랜드 있으면 brand별, 없으면 전체 가져오기
                 const vehicleRes = await fetch(
                     brand
                         ? `https://clos21.kr/api/vehicle-products/brand/${brand}`
                         : "https://clos21.kr/api/vehicle-products"
                 );
                 const accessoryRes = await fetch("https://clos21.kr/api/accessory-products");
+
                 const [vehicleData, accessoryData] = await Promise.all([
                     vehicleRes.json(),
                     accessoryRes.json(),
                 ]);
-                // 프론트단 필터 (부분매칭 추가로 필요하면 여기에)
+
+                // **프론트엔드에서 이름/브랜드 부분매칭 필터링**
+                const lowerBrand = brand ? brand.toLowerCase() : "";
+
                 const filteredVehicleData = brand
                     ? vehicleData.filter(v =>
-                        (v.brand && v.brand.toLowerCase().includes(brand.toLowerCase()))
-                        || (v.name && v.name.toLowerCase().includes(brand.toLowerCase()))
+                        (v.brand && v.brand.toLowerCase().includes(lowerBrand)) ||
+                        (v.name && v.name.toLowerCase().includes(lowerBrand))
                     )
                     : vehicleData;
+
                 const filteredAccessoryData = brand
                     ? accessoryData.filter(a =>
-                        (a.brand && a.brand.toLowerCase().includes(brand.toLowerCase()))
-                        || (a.name && a.name.toLowerCase().includes(brand.toLowerCase()))
+                        (a.brand && a.brand.toLowerCase().includes(lowerBrand)) ||
+                        (a.name && a.name.toLowerCase().includes(lowerBrand))
                     )
                     : accessoryData;
 
@@ -180,14 +186,14 @@ function ProductCatalog({ pageType, showFilter = true, customTitle }) {
     };
 
     return (
-        <div className="py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="py-10 ma[x-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-bold text-center mb-8">{pageTitle}</h1>
             <form onSubmit={handleSearch} className="flex justify-center mb-8">
                 <input
                     type="text"
                     value={searchInput}
                     onChange={handleBrandInputChange}
-                    placeholder="브랜드명으로 검색 (예: 현대, 기아, 제네시스...)"
+                    placeholder="브랜드명 또는 제품명으로 검색 (예: 현대, 와이퍼, 기아...)"
                     className="border rounded-lg px-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
                 <button type="submit" className="ml-2 px-4 py-2 bg-indigo-600 text-white rounded-lg">검색</button>
