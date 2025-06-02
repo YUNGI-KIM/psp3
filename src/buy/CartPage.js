@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from "../functions/Header";
 import { motion, AnimatePresence } from "framer-motion";
-import cartImg from '../assets/cart.png'; // 장바구니 아이콘 경로에 맞게 수정
+import cartImg from '../Image/etc/cart.png';
 
 function CartPage() {
     const [cartItems, setCartItems] = useState([]);
