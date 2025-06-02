@@ -46,9 +46,9 @@ const PurchasePage = () => {
     return (
         <>
             <Header />
-            <div className="min-h-screen bg-gray-900 py-8">
+            <div className="min-h-screen py-8">
                 <h2 className="text-2xl font-extrabold text-center text-white mb-10">구매하기</h2>
-                <div className="max-w-3xl mx-auto flex flex-col lg:flex-row gap-8 bg-transparent px-2">
+                <div className="max-w-3xl mx-auto flex flex-col lg:flex-row bg-transparent px-2">
                     {/* 왼쪽: 여러 개 상품 리스트 */}
                     <div className="bg-gray-800 rounded-2xl shadow-xl flex flex-col items-center w-full lg:w-2/5 p-6 gap-4">
                         {products.map((item, idx) => (
