@@ -16,11 +16,6 @@ function CartPage() {
         localStorage.setItem('cart', JSON.stringify(newCart));
     }
 
-    function handleBuy(item) {
-        alert(`${item.name} 구매페이지로 이동!`);
-        // 구매페이지로 이동 코드 추가
-    }
-
 
     return (
         <div className="min-h-screen">
@@ -55,25 +50,24 @@ function CartPage() {
                                         <path d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"/>
                                     </svg>
                                     {/* 이미지 줄(하얀 배경) */}
-                                    <img src={product.image} alt={product.name} className="w-full h-60 object-cover bg-white" />
+                                    <div className="w-full h-60 bg-white flex items-center justify-center">
+                                        <img src={product.image} alt={product.name} className="max-w-full max-h-full object-contain" />
+                                    </div>
                                     {/* 내용 라인(어두운 바탕) */}
-                                    <div className="p-6 flex flex-col flex-grow bg-[#1e293b] text-white h-full">
-                                        <div className="flex justify-between items-center mb-3">
-                                            <h3 className="text-lg font-bold">{product.name}</h3>
+                                    <div className="p-6 flex flex-col h-full bg-[#1e293b] text-white">
+                                        <div className="flex-1 flex flex-col justify-between">
+                                            <div className="flex justify-between items-center mb-3">
+                                                <h3 className="text-lg font-bold">{product.name}</h3>
+                                                <h3 className="text-lg font-bold">{product.price}</h3>
+                                            </div>
                                         </div>
-
-                                        <button
-                                            onClick={() => handleBuy(product)}
-                                            className="bg-indigo-600 hover:bg-indigo-700 w-full py-2 rounded-lg font-semibold"
-                                        >
-                                            {product.buttonText || '구매'}
-                                        </button>
                                     </div>
                                 </motion.li>
                             ))}
                         </AnimatePresence>
                     </ul>
                 )}
+                <button className="bg-indigo-600 hover:bg-indigo-700 w-full py-2 rounded-lg font-semibold mt-4">구매</button>
             </div>
         </div>
     );
