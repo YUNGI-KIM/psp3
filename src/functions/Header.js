@@ -1,25 +1,19 @@
-<<<<<<< HEAD
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-=======
-import { useEffect } from "react";
+import { useState,useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
->>>>>>> origin/feature_YUNGI-KIM
 import { useUser } from "../contexts/UserContext";
 import LogoW from "../ImageSrc/logo1.png";
 import LogoB from "../ImageSrc/logo2.png";
+import React from 'react';
+
 
 function Header() {
     const { user, setUser } = useUser();
     const navigate = useNavigate();
-<<<<<<< HEAD
-    const [showFloatingNav, setShowFloatingNav] = useState(false);
-=======
     const { pathname } = useLocation();
     const isHome = pathname === "/";
+    const [showFloatingNav, setShowFloatingNav] = useState(false);
 
     const logoSrc = isHome ? LogoW : LogoB;
->>>>>>> origin/feature_YUNGI-KIM
 
     useEffect(() => {
         const handleScroll = () => {
@@ -57,40 +51,6 @@ function Header() {
     const textColor = isHome ? "text-white" : "text-gray-800";
 
     return (
-<<<<<<< HEAD
-        <>
-            <div className="w-full bg-white shadow-md z-40 relative">
-                {/* 상단 헤더 */}
-                <div className="flex flex-col lg:flex-row items-center justify-between p-4 gap-3 lg:gap-0 max-w-screen-xl mx-auto w-full px-4">
-                    <a href="/">
-                        <img className="w-32 sm:w-36 md:w-40" src={Logo} alt="Logo" />
-                    </a>
-
-                    {/* 검색창 */}
-                    <div className="w-full lg:w-auto flex justify-center lg:justify-center">
-                        <input
-                            type="search"
-                            placeholder="Search"
-                            className="border rounded-full px-4 py-2 w-full max-w-xs sm:max-w-sm md:max-w-md lg:w-192 focus:outline-none text-sm md:text-base"
-                        />
-                        <button type="submit" className="relative p-2 rounded-full">
-                            <svg
-                                width="30px"
-                                height="30px"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
-                                    stroke="#999"
-                                    strokeWidth="2"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                />
-                            </svg>
-                        </button>
-=======
         <header className={`${wrapperPos} w-full z-50 transition-colors duration-300 ${textColor}`}>
             {/* 헤더 상단 */}
             <div className={`${topBg} transition-colors duration-300`}>
@@ -114,7 +74,6 @@ function Header() {
                             <circle cx="11" cy="11" r="8" />
                             <line x1="21" y1="21" x2="16.65" y2="16.65" />
                         </svg>
->>>>>>> origin/feature_YUNGI-KIM
                     </div>
 
                     {/* 로그인 / 회원가입 */}
@@ -158,33 +117,6 @@ function Header() {
                 </div>
             </div>
 
-<<<<<<< HEAD
-                {/* 기본 네비게이션 메뉴 */}
-                <nav className="bg-black text-gray-300 p-2 sm:p-4 text-xs sm:text-sm md:text-base">
-                    <div className="flex flex-wrap justify-center gap-1 sm:gap-4 md:gap-6 max-w-screen-xl mx-auto">
-                        <a href="/buy" className="text-gray-300 hover:text-yellow-200 px-2 py-1">차량구매</a>
-                        <a href="/AccForCar" className="text-gray-300 hover:text-yellow-200 px-2 py-1">차량용품</a>
-                        <a href="/Estimator" className="text-gray-300 hover:text-yellow-200 px-2 py-1">견적</a>
-                        <a href="/CarInformation" className="text-gray-300 hover:text-yellow-200 px-2 py-1">차량정보</a>
-                        <a href="/Support" className="text-gray-300 hover:text-yellow-200 px-2 py-1">고객지원</a>
-                    </div>
-                </nav>
-            </div>
-
-            {/* 스크롤 시 따라오는 내비게이션 메뉴 */}
-            {showFloatingNav && (
-                <nav className="fixed top-0 left-0 right-0 bg-black text-gray-300 p-4 sm:p-6 z-50 shadow-md transition-all duration-300">
-                    <div className="flex justify-center gap-3 sm:gap-6 text-xs sm:text-sm md:text-base">
-                        <a href="/buy" className="hover:text-yellow-200">차량구매</a>
-                        <a href="/AccForCar" className="hover:text-yellow-200">차량용품</a>
-                        <a href="/Estimator" className="hover:text-yellow-200">견적</a>
-                        <a href="/CarInformation" className="hover:text-yellow-200">차량정보</a>
-                        <a href="/Support" className="hover:text-yellow-200">고객지원</a>
-                    </div>
-                </nav>
-            )}
-        </>
-=======
             {/* 내비게이션 메뉴 */}
             <nav className={`${navBg} transition-colors duration-300`}>
                 <div className="flex justify-center gap-6 py-3 text-sm font-semibold">
@@ -207,7 +139,6 @@ function Header() {
                 </div>
             </nav>
         </header>
->>>>>>> origin/feature_YUNGI-KIM
     );
 }
 

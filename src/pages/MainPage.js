@@ -15,13 +15,6 @@ import BMW from '../ImageSrc/companyLogo/Bmw.svg';
 import Audi from '../ImageSrc/companyLogo/Audi.svg';
 import Benz from '../ImageSrc/companyLogo/Benz.svg';
 import Tesla from '../ImageSrc/companyLogo/Tesla.svg';
-<<<<<<< HEAD
-import Header from '../functions/Header';
-import { useUser } from "../contexts/UserContext";
-import PopularModels from '../functions/PopularModels';
-import AccessorySection from "../functions/AccessorySection";
-=======
->>>>>>> origin/feature_YUNGI-KIM
 
 const variants = {
     enter: (direction) => ({
@@ -98,43 +91,6 @@ const MainPage = () => {
 
     // 이미지 미리 로드 (webp, jpg 모두)
     useEffect(() => {
-<<<<<<< HEAD
-        console.log("MainPage 감지: user 상태 변화", user);
-    }, [user]);
-
-    const slidSrc = [
-        { src: FindCar, href: '/startCBTI' },
-        { src: main, href: '/startCBTI'},
-        { src: main2, href: '/startCBTI'},
-        { src: main3, href: '/startCBTI'},
-        { src: main4, href: '/startCBTI'},
-    ];
-
-    const handleButtonClick = (i) => setIndex(i);
-
-    const ClickButtonSlideLogo = [
-        { alt: "HYUNDAI", src: hyundai, href: '/hyundai' },
-        { alt: "KIA", src: kia, href: '/kia' },
-        { alt: "CHEVROLET", src: chevrolet, href: '/Chevo' },
-        { alt: "RENAULT", src: Reno, href: '/Reno' },
-        { alt: "KGM", src: kgm, href: '/kgm' },
-        { alt: "GENESIS", src: gen, href: '/Gen' },
-        { alt: "BMW", src: BMW, href: '/BMW' },
-        { alt: "AUDI", src: Audi, href: '/Audi' },
-        { alt: "BENZ", src: Benz, href: '/Benz' },
-        { alt: "TESLA", src: Tesla, href: '/Tesla' },
-    ];
-
-    const SlideToLogoLeft = () => {
-        const prevPage = page - logosPerPage;
-        if (prevPage >= 0) {
-            directionRef.current = -1;
-            setPage(prevPage);
-        } else {
-            directionRef.current = -1;
-            const remainder = ClickButtonSlideLogo.length % logosPerPage;
-            const lastFullPageStart = ClickButtonSlideLogo.length - (remainder === 0 ? logosPerPage : remainder);
-=======
         slidSrc.forEach(img => {
             [img.src, img.srcWebp].forEach(url => {
                 const preload = new window.Image();
@@ -152,26 +108,15 @@ const MainPage = () => {
         else {
             const remainder = brandLogos.length % logosPerPage;
             const lastFullPageStart = brandLogos.length - (remainder === 0 ? logosPerPage : remainder);
->>>>>>> origin/feature_YUNGI-KIM
             setPage(lastFullPageStart);
         }
     };
 
     const SlideToLogoRight = () => {
         const nextPage = page + logosPerPage;
-<<<<<<< HEAD
-        if (nextPage < ClickButtonSlideLogo.length) {
-            directionRef.current = 1;
-            setPage(nextPage);
-        } else {
-            directionRef.current = 1;
-            setPage(0);
-        }
-=======
         directionRef.current = 1;
         if (nextPage < brandLogos.length) setPage(nextPage);
         else setPage(0);
->>>>>>> origin/feature_YUNGI-KIM
     };
 
     const SlideToRight = () => {
@@ -181,80 +126,6 @@ const MainPage = () => {
 
     const SlideToLeft = () => {
         directionRef.current = -1;
-<<<<<<< HEAD
-        setIndex((prevIndex) =>
-            prevIndex === 0 ? slidSrc.length - 1 : prevIndex - 1
-        );
-    };
-
-    return (
-        <div className="flex flex-col w-full min-h-screen overflow-hidden">
-            <Header key={user ? user.id : "guest"}/>
-            <div className="relative w-full h-[calc(100vh-125px-170px)]">
-                <div className="absolute left-1/100 top-5/10 transform -translate-x-1/2 flex space-x-2">
-                    <svg
-                        onClick={SlideToLeft}
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="4"
-                        stroke="currentColor"
-                        className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out"
-                        style={{flexShrink: 0}}
-                    >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
-                    </svg>
-                </div>
-                <img
-                    src={slidSrc[index].src}
-                    onClick={() => navigate(slidSrc[index].href)}
-                    className="w-full h-full object-cover cursor-pointer"
-                    alt={`Slide ${index + 1}`}
-                />
-                <div className="absolute bottom-4 left-1/2 transform  -translate-x-1/2 flex space-x-2">
-                    {slidSrc.map((_, i) => (
-                        <button
-                            key={i}
-                            onClick={() => handleButtonClick(i)}
-                            className="w-3 h-3 sm:w-4 sm:h-4 bg-gray-800 hover:bg-gray-400 rounded-full"
-                        />
-                    ))}
-                </div>
-                <div className="absolute left-995/1000 transform top-5/10 -translate-x-1/2 flex space-x-2">
-                    <svg
-                        onClick={SlideToRight}
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="4"
-                        stroke="currentColor"
-                        className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out"
-                        style={{flexShrink: 0}}
-                    >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="m3 4.5 7.5 7.5-7.5 7.5"/>
-                    </svg>
-                </div>
-            </div>
-
-            <div className="w-full h-[125px] flex justify-between items-center px-2 mt-4"
-                style={{
-                    minWidth: '400px',
-                    maxWidth: '100%',
-                    gap: '16px',
-                }}>
-                <svg
-                    onClick={SlideToLogoLeft}
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="4"
-                    stroke="currentColor"
-                    className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out"
-                    style={{ flexShrink: 0, position: 'relative', right: '8px'}}
-                >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-                </svg>
-=======
         setIndex((prev) => (prev === 0 ? slidSrc.length - 1 : prev - 1));
     };
 
@@ -364,7 +235,6 @@ const MainPage = () => {
                               d="M15 19l-7-7 7-7"/>
                     </svg>
                 </button>
->>>>>>> origin/feature_YUNGI-KIM
 
                 {/* 슬라이드 카드들 */}
                 <AnimatePresence mode="wait" custom={directionRef.current}>
@@ -376,30 +246,13 @@ const MainPage = () => {
                         animate="center"
                         exit="exit"
                         transition={{ duration: 0.5 }}
-<<<<<<< HEAD
-                        className="flex justify-between items-center flex-grow gap-0 h-full px-16 overflow-hidden"
-                        style={{
-                            minWidth: 'calc(100% - 88px)',
-                            boxSizing: 'border-box',
-                        }}
-=======
                         className="flex flex-1 items-stretch justify-between gap-2 sm:gap-5 md:gap-8"
                         style={{ overflow: 'hidden' }}
->>>>>>> origin/feature_YUNGI-KIM
                     >
                         {brandLogos.slice(page, page + logosPerPage).map((logo, i) => (
                             <button
                                 type="button"
                                 key={i}
-<<<<<<< HEAD
-                                alt={logo.alt}
-                                src={logo.src}
-                                onClick={() => navigate(logo.href)}
-                                title={logo.alt}
-                                className="h-full w-auto object-contain cursor-pointer transform transition-transform duration-300 hover:scale-105 ease-in-out"
-                                style={{maxWidth: `${100 / logosPerPage - 2}%`}}
-                            />
-=======
                                 className={`
                                     group relative flex flex-col items-center justify-center
                                     bg-gradient-to-br from-white/60 via-white/40 to-blue-100/30
@@ -453,25 +306,10 @@ const MainPage = () => {
                                 <span
                                     className="mt-2 text-sm font-bold text-black tracking-wider drop-shadow-sm">{logo.alt}</span>
                             </button>
->>>>>>> origin/feature_YUNGI-KIM
                         ))}
                     </motion.div>
                 </AnimatePresence>
 
-<<<<<<< HEAD
-                <svg
-                    onClick={SlideToLogoRight}
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="4"
-                    stroke="currentColor"
-                    className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out"
-                    style={{flexShrink: 0, position: 'relative', right: '8px'}}
-                >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="m3 4.5 7.5 7.5-7.5 7.5"/>
-                </svg>
-=======
                 {/* 오른쪽 화살표 */}
                 <button
                     onClick={SlideToLogoRight}
@@ -489,12 +327,9 @@ const MainPage = () => {
                     className="absolute left-[-3%] top-[50%] w-52 h-52 bg-blue-50/40 rounded-full blur-3xl opacity-50 -z-10"></div>
                 <div
                     className="absolute right-[-3%] bottom-[5%] w-36 h-36 bg-[#c8dafe]/60 rounded-full blur-2xl opacity-40 -z-10"></div>
->>>>>>> origin/feature_YUNGI-KIM
             </div>
 
-            {/* 🔽 인기 차종 섹션 */}
-            <PopularModels />
-            <AccessorySection />
+          
         </div>
     );
 };
