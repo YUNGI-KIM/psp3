@@ -48,14 +48,14 @@ const PurchasePage = () => {
 
             <div className="relative max-w-3xl px-4 mx-auto sm:px-6 lg:px-8 min-h-screen flex flex-col lg:flex-row justify-center items-stretch pt-20">
                 {/* 왼쪽: 상품 정보만 */}
-                <div className="bg-white/90 rounded-l-2xl shadow-xl flex flex-col items-center justify-center w-full lg:w-2/5 py-16 px-6">
+                <div className=":bg-gray-800 rounded-l-2xl shadow-xl flex flex-col items-center justify-center w-full lg:w-2/5 py-16 px-6">
                     <img
                         src={product.image}
                         alt={product.name}
                         className="w-40 h-40 object-cover rounded-xl mb-6 border border-gray-200"
                     />
-                    <span className="font-bold text-xl text-gray-800 mb-2">{product.name}</span>
-                    <span className="text-indigo-600 font-extrabold text-2xl">{product.price}</span>
+                    <span className="font-bold text-xl text-white mb-2">{product.name}</span>
+                    <span className="text-white font-extrabold text-2xl">{product.price}</span>
                 </div>
                 {/* 오른쪽: 배송지/결제수단/버튼 */}
                 <div className="bg-indigo-900 rounded-r-2xl flex-1 flex flex-col justify-center px-10 py-16 min-w-[320px]">
