@@ -17,8 +17,12 @@ import AnswerForQ from "./Admin/AnswerForQ"
 import VehicleDetail from "./CarDetail/VehicleDetail";
 
 import Buy from "./buy/buy";
+import {useEffect} from "react";
 
 function App() {
+  useEffect(() => {
+    document.title = "Vroom";
+  }, []);
   return (
         <UserProvider>
           <BrowserRouter>
