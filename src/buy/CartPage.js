@@ -17,7 +17,7 @@ function CartPage() {
     }
 
     return (
-        <div className="min-h-screen bg-gray-900">
+        <div className="min-h-screen">
             <Header />
             <div className="max-w-6xl mx-auto py-10 px-4">
                 <h2 className="text-2xl font-extrabold mb-8 text-center text-white">장바구니</h2>
@@ -29,7 +29,7 @@ function CartPage() {
                             {cartItems.map((product, idx) => (
                                 <motion.li
                                     key={product.name}
-                                    className="flex flex-col rounded-lg border overflow-hidden transition-transform hover:scale-105 bg-white shadow relative"
+                                    className="flex flex-col border-black rounded-lg border overflow-hidden transition-transform hover:scale-105 bg-white shadow relative"
                                     initial={{ opacity: 0, scale: 0.9, y: 20 }}
                                     animate={{ opacity: 1, scale: 1, y: 0 }}
                                     exit={{ opacity: 0, scale: 0.8, x: 50 }}
