@@ -48,7 +48,12 @@ function QuestionPage() {
   }
 
   return (
-      <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-white to-indigo-200 flex items-center justify-center p-6">
+      <div className="
+        flex items-center justify-center 
+        min-h-screen 
+        bg-[url('/ImageSrc/CBTIImage/CBTIBackground.jpg')] bg-cover bg-center
+        font-sans px-4
+      ">
         <div className="w-full max-w-2xl bg-white rounded-3xl shadow-xl px-10 py-12 flex flex-col justify-between min-h-[520px]">
 
           {/* 질문 번호 */}

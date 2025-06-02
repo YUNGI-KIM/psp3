@@ -11,6 +11,15 @@ function Support() {
         phone: "",
         content: "",
     });
+    const [type1, setType1] = useState("");
+    const [type2, setType2] = useState("");
+
+    const options = {
+        "": ["문의 유형을 선택해 주세요."],
+        "차량구입": ["계약/영업점", "견적문의", "혜택문의"],
+        "정비/서비스": ["정비예약", "A/S문의", "기타"],
+        "기타": ["기타문의"],
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -52,6 +61,34 @@ function Support() {
                     <p className="text-center text-gray-600">1:1 상담 신청하기</p>
 
                     <div className="space-y-4">
+                        <div className="grid grid-cols-2 gap-4">
+                            <div>
+                                <label className="block mb-1 text-gray-700">문의유형</label>
+                                <select
+                                    value={type1}
+                                    onChange={(e) => { setType1(e.target.value); setType2(""); }}
+                                    className="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-black"
+                                >
+                                    <option value="">문의 유형을 선택해 주세요.</option>
+                                    <option value="차량구입">차량구입</option>
+                                    <option value="정비/서비스">정비/서비스</option>
+                                    <option value="기타">기타</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className="block mb-1 text-gray-700">세부유형</label>
+                                <select
+                                    value={type2}
+                                    onChange={(e) => setType2(e.target.value)}
+                                    disabled={!type1}
+                                    className="w-full border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-black disabled:bg-gray-100"
+                                >
+                                    {options[type1].map((opt) => (
+                                        <option key={opt} value={opt}>{opt}</option>
+                                    ))}
+                                </select>
+                            </div>
+                        </div>
                         <div>
                             <label className="block mb-1 text-gray-700">이름</label>
                             <input

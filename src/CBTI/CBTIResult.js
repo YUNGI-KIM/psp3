@@ -43,7 +43,12 @@ function CBTIResult() {
   });
 
   return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 to-indigo-200 px-4 py-12 font-sans">
+      <div className="
+        flex items-center justify-center 
+        min-h-screen 
+        bg-[url('/ImageSrc/CBTIImage/CBTIBackground.jpg')] bg-cover bg-center
+        font-sans px-4
+      ">
         <div className="w-full max-w-2xl bg-white rounded-3xl shadow-xl px-10 py-14 text-center space-y-10">
 
           {/* 제목 */}
