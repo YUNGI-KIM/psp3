@@ -37,6 +37,8 @@ function CBTIResult() {
       .slice(0, 4);
   const top4Keys = top4.map(([key]) => key[0].toUpperCase());
 
+  const cbti = top4Keys.join("");
+
   const Guide = top4Keys.map((letter) => {
     const item = CBTIGuide.find((obj) => obj.CBTI === letter);
     return item ? item.Guide : "";
@@ -53,7 +55,7 @@ function CBTIResult() {
 
           {/* CBTI 코드 */}
           <div className="text-6xl sm:text-7xl font-extrabold tracking-[0.25em] text-indigo-700">
-            {top4Keys.join("")}
+            {cbti}
           </div>
 
           {/* 설명 */}

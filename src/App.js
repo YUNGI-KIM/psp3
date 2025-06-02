@@ -44,6 +44,7 @@ function App() {
               <Route path="/buy/acc" element={<Buy pageType="차량 악세서리" />} />
               {/* 특정 이름의 악세서리 검색 */}
               <Route path="/buy/acc/:name" element={<Buy pageType="차량 악세서리" />} />
+              <Route path="/buy/cbti/:cbti" element={<Buy pageType="나에게 맞는 차량" />} />
               {/* 통합 검색 (자동차+악세서리) */}
               <Route path="/buy" element={<Buy pageType="all" />} />
               <Route path="/buy/:keyword" element={<Buy pageType="all" />} />
