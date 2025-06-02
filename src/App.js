@@ -14,9 +14,10 @@ import { UserProvider } from './contexts/UserContext';
 import LoginSessionVerify from "./functions/LoginSessionVerify";
 import AnswerForQ from "./Admin/AnswerForQ"
 import VehicleDetail from "./CarDetail/VehicleDetail";
-
 import Buy from "./buy/buy";
 import {useEffect} from "react";
+import PurchasePage from "./buy/PurchasePage";
+import Cart from  "./buy/CartPage"
 
 function App() {
   useEffect(() => {
@@ -46,6 +47,8 @@ function App() {
               {/* 통합 검색 (자동차+악세서리) */}
               <Route path="/buy" element={<Buy pageType="all" />} />
               <Route path="/buy/:keyword" element={<Buy pageType="all" />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/purchase/" element={<PurchasePage />} />
               <Route path='/receviedSupport' element={<ReceviedSupport/>} />
               <Route path='/answerForQ' element={<AnswerForQ/>} />
               <Route path='/adminMain' element={<AdminMainPage/>} />

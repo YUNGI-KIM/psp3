@@ -59,7 +59,7 @@ function ProductCard({ product }) {
                         onClick={handleAddToCart}
                         className="bg-[#E0E7FF] w-10 h-10 rounded-full flex items-center justify-center"
                     >
-                        <img src={cartImg} alt="장바구니" className="w-5 h-5" />
+                        <img src={cartImg} alt="장바구니" className="w-5 h-5"/>
                     </button>
                 </div>
                 <button
