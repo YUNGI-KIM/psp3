@@ -21,7 +21,7 @@ function CartPage() {
     }
     const navigate = useNavigate();
     const handleToBuy = () => {
-        navigate('/purchase', { state: { cart: cartItems } });
+        navigate('/purchase', { state: { product: cartItems } });
 
     };
 
