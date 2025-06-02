@@ -26,6 +26,7 @@ const PurchasePage = () => {
       return;
     }
     alert(`결제 완료! (${form.paymentMethod})`);
+    // 결제 완료 후 처리 (예: 페이지 이동, 결제내역 저장 등)
   };
 
   if (!product) {
@@ -45,59 +46,52 @@ const PurchasePage = () => {
   return (
       <>
         {/* 헤더 */}
-        <div>{Header()}</div>
+        <Header />
 
-        {/* 전체 레이아웃 */}
-        <div className="min-h-screen bg-white py-10 px-4 sm:px-8">
-          <h2 className="text-3xl font-bold text-center mb-10">구매 페이지</h2>
+        <div className="relative max-w-screen-xl px-4 mx-auto sm:px-6 lg:px-8">
+          <div className="max-w-lg mx-auto overflow-hidden rounded-lg shadow-lg pricing-box lg:max-w-none lg:flex">
+            <div className="px-6 py-8 bg-white dark:bg-gray-800 lg:flex-shrink-1 lg:p-12">
+              <h3 className="text-2xl font-extrabold leading-8 text-gray-900 sm:text-3xl sm:leading-9 dark:text-white">
+                구매 페이지
+              </h3>
+              <p className="mt-6 text-base leading-6 text-gray-500 dark:text-gray-200">
+                구매해줘서 넘 고맙고~
+              </p>
 
-          {/* 상품 + 폼 */}
-          <div className="flex flex-col md:flex-row gap-10 bg-slate-800 rounded-2xl p-8 text-white shadow-lg max-w-5xl mx-auto">
-            {/* 상품 이미지 */}
-            <img
-                src={product.image}
-                alt={product.name}
-                className="w-full md:w-[400px] h-auto object-contain rounded-xl bg-white p-2"
-            />
-
-            {/* 상세 + 폼 */}
-            <div className="flex-1">
-              {/* 상품명 + 카테고리 */}
-              <div className="flex justify-between items-center">
-                <h3 className="text-2xl font-bold">{product.name}</h3>
-                <span className="text-xs bg-indigo-500 text-white px-3 py-1 rounded-full">
-                {product.category}
-              </span>
-              </div>
-              {/* 기능 리스트 */}
-              <ul className="mt-6 pl-5 list-disc text-base">
-                {product.features.map((feature, i) => (
-                    <li key={i}>{feature}</li>
-                ))}
-              </ul>
-              {/* 가격 */}
-              <div className="mt-6 text-lg font-bold">
-                총 가격: {product.price}원
+              {/* 상품 정보 표시 (예시) */}
+              <div className="mt-8 mb-8 flex flex-col items-center">
+                <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-36 h-36 object-cover rounded-lg mb-2"
+                />
+                <span className="font-semibold text-lg">{product.name}</span>
+                <span className="text-indigo-600 font-bold">{product.price}</span>
               </div>
 
-              {/* 폼 */}
-              <div className="bg-white text-black rounded-xl p-6 mt-10 shadow">
-                <h4 className="mb-2 font-bold">배송지 정보</h4>
+              <div className="flex items-center mt-8 mb-2">
+                <h4 className="flex-shrink-0 pr-4 text-sm font-semibold leading-5 tracking-wider text-indigo-600 uppercase bg-white dark:bg-gray-800">
+                  배송지 주소
+                </h4>
+                <div className="flex-1 border-t-2 border-gray-200"></div>
+              </div>
+              {/* 배송지 정보 입력 폼 */}
+              <div className="mt-6 space-y-4">
                 <input
                     type="text"
                     name="name"
                     placeholder="이름"
                     value={form.name}
                     onChange={handleChange}
-                    className="w-full p-2 rounded-md border border-gray-300 mb-3 text-base"
+                    className="w-full p-2 border rounded"
                 />
                 <input
-                    type="text"
+                    type="tel"
                     name="phone"
                     placeholder="연락처"
                     value={form.phone}
                     onChange={handleChange}
-                    className="w-full p-2 rounded-md border border-gray-300 mb-3 text-base"
+                    className="w-full p-2 border rounded"
                 />
                 <input
                     type="text"
@@ -105,27 +99,48 @@ const PurchasePage = () => {
                     placeholder="주소"
                     value={form.address}
                     onChange={handleChange}
-                    className="w-full p-2 rounded-md border border-gray-300 mb-3 text-base"
+                    className="w-full p-2 border rounded"
                 />
+              </div>
 
-                <h4 className="mt-6 mb-2 font-bold">결제 수단</h4>
+              {/* 결제수단 선택 */}
+              <div className="flex items-center mt-10 mb-2">
+                <h4 className="flex-shrink-0 pr-4 text-sm font-semibold leading-5 tracking-wider text-indigo-600 uppercase bg-white dark:bg-gray-800">
+                  결제수단
+                </h4>
+                <div className="flex-1 border-t-2 border-gray-200"></div>
+              </div>
+              <div className="mt-2">
                 <select
                     name="paymentMethod"
                     value={form.paymentMethod}
                     onChange={handleChange}
-                    className="w-full p-2 rounded-md border border-gray-300 mb-3 text-base"
+                    className="w-full p-2 rounded-md border border-gray-300 text-base"
                 >
                   <option value="카드결제">카드결제</option>
                   <option value="카카오페이">카카오페이</option>
                   <option value="네이버페이">네이버페이</option>
                 </select>
+              </div>
+            </div>
 
-                <button
-                    onClick={handleSubmit}
-                    className="mt-6 w-full py-3 bg-indigo-600 text-white rounded-lg text-lg font-bold hover:bg-indigo-700 transition"
-                >
-                  결제하기
-                </button>
+            {/* 결제 버튼 및 가격 */}
+            <div className="px-6 py-8 text-center bg-gray-50 dark:bg-gray-700 lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-center lg:p-12">
+              <div className="flex items-center justify-center mt-4 text-5xl font-extrabold leading-none text-gray-900 dark:text-white">
+              <span>
+                {product.price}
+              </span>
+              </div>
+              <div className="mt-6">
+                <div className="rounded-md shadow">
+                  <button
+                      type="button"
+                      onClick={handleSubmit}
+                      className="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+                  >
+                    결제하기
+                  </button>
+                </div>
               </div>
             </div>
           </div>
