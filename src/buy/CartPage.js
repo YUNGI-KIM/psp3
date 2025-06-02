@@ -37,6 +37,7 @@ function CartPage() {
                                     layout
                                 >
                                     <span className="font-medium">{item.name}</span>
+                                    <span className="font-medium">{item.image}</span>
                                     <span className="text-indigo-600 font-bold">{item.price}</span>
                                     <svg onClick={() => remove(item)} className="cursor-pointer hover:text-red-700 hover:scale-110 "
                                          xmlns="http://www.w3.org/2000/svg" fill="black" width="13" viewBox="0 0 384 512">
