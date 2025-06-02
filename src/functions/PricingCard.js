@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {useLocation, useNavigate} from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import cartImg from "../Image/etc/cart.png";
 
 // 카테고리 필터
@@ -26,7 +26,6 @@ function CategoryFilter({ categories, activeCategory, onCategoryChange, showFilt
     );
 }
 
-// 제품 카드 (장바구니/구매)
 function ProductCard({ product }) {
     const navigate = useNavigate();
 
@@ -74,7 +73,6 @@ function ProductCard({ product }) {
     );
 }
 
-// 전체 제품 카탈로그
 function ProductCatalog({ pageType, brandInput = "", showFilter = true, customTitle }) {
     const navigate = useNavigate();
 
@@ -83,9 +81,7 @@ function ProductCatalog({ pageType, brandInput = "", showFilter = true, customTi
     const [isLoading, setIsLoading] = useState(false);
     const [searchInput, setSearchInput] = useState(brandInput);
 
-    const location = useLocation();
-
-    // brandInput이 바뀌면 input도 동기화
+    // 동기화
     useEffect(() => {
         setSearchInput(brandInput);
     }, [brandInput]);
@@ -105,16 +101,16 @@ function ProductCatalog({ pageType, brandInput = "", showFilter = true, customTi
                 // 검색어(brandInput)가 있으면 이름/브랜드 모두 부분매칭
                 const lowerKeyword = brandInput ? brandInput.toLowerCase() : "";
 
-                // pageType에 따라 분기
                 let filteredVehicleData = vehicleData;
                 let filteredAccessoryData = accessoryData;
 
+                // *** pageType에 따라 데이터 완전히 분리 ***
                 if (pageType === "자동차") {
                     filteredAccessoryData = [];
                 } else if (pageType === "차량 악세서리") {
                     filteredVehicleData = [];
                 }
-
+                // 검색어 필터
                 if (lowerKeyword) {
                     filteredVehicleData = filteredVehicleData.filter(
                         v =>
@@ -127,7 +123,6 @@ function ProductCatalog({ pageType, brandInput = "", showFilter = true, customTi
                             (a.name && a.name.toLowerCase().includes(lowerKeyword))
                     );
                 }
-
                 const combined = [
                     ...filteredVehicleData.map((v) => ({
                         id: v.id,
@@ -159,7 +154,22 @@ function ProductCatalog({ pageType, brandInput = "", showFilter = true, customTi
         fetchData();
     }, [brandInput, pageType]);
 
-    // 여러 카테고리(자동차/악세서리) 자동 분류
+    // pageType에 따른 title 완전 고정
+    let pageTitle;
+    if (customTitle) {
+        pageTitle = customTitle;
+    } else if (pageType === "자동차") {
+        pageTitle = "자동차 판매";
+    } else if (pageType === "차량 악세서리") {
+        pageTitle = "차량 악세서리 판매";
+    } else if (pageType === "all") {
+        pageTitle = "전체 상품";
+    } else {
+        // fallback (복수 pageType 등)
+        pageTitle = `${pageType} 판매`;
+    }
+
+    // 카테고리, 필터 적용
     const pageTypes = pageType && pageType !== 'all' ? pageType.split('|') : ['all'];
     let availableProducts = products;
     if (pageTypes[0] !== 'all') {
@@ -181,7 +191,6 @@ function ProductCatalog({ pageType, brandInput = "", showFilter = true, customTi
             } else if (pageType === "자동차") {
                 navigate(`/buy/car/${searchInput.trim()}`);
             } else {
-                // all일 경우 자동차/악세서리 모두에서 검색
                 navigate(`/buy/${searchInput.trim()}`);
             }
         } else {
@@ -194,19 +203,6 @@ function ProductCatalog({ pageType, brandInput = "", showFilter = true, customTi
             }
         }
     };
-
-    const pageTitle =
-        customTitle
-            ? customTitle
-            : pageType === 'all'
-                ? '전체 상품'
-                : (categories.includes("자동차") && categories.length === 2)
-                    ? `${categories.find(c => c !== "자동차")} 판매`
-                    : pageType === '자동차'
-                        ? '자동차 판매'
-                        : pageType === '차량 악세서리'
-                            ? '차량 악세서리 판매'
-                            : `${pageTypes.join(', ')} 판매`;
 
     return (
         <div className="py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
