@@ -37,6 +37,7 @@ function App() {
               <Route path="/support" element={<Support />} />
               <Route path="/estimator" element={<Estimator />} />
               <Route path="/buy" element={<Buy />} />
+              <Route path="/buy/:brand" element={<Buy />} />   // 해당 brand는 브랜드 or 제품명 모두 허용
               <Route path="/buy/car/:brand" element={<Buy />} />
               <Route path="/buy/acc/:name" element={<Buy />} />
               <Route path='/receviedSupport' element={<ReceviedSupport/>} />
