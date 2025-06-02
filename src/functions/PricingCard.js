@@ -177,7 +177,9 @@ function ProductCatalog({ pageType, brandInput = "", showFilter = true, customTi
                 ? '차량 악세서리 판매'
                 : pageType === '자동차'
                     ? '자동차 판매'
-                    : '전체 상품';
+                    : pageType === '나에게 맞는 차량'
+                        ? '나에게 맞는 차량'
+                        : '전체 상품';
 
     // 카테고리, 필터 적용
     const pageTypes = pageType && pageType !== 'all' ? pageType.split('|') : ['all'];
