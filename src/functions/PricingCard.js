@@ -72,7 +72,7 @@ function ProductCard({ product }) {
     );
 }
 
-function ProductCatalog({ pageType, brandInput = "", showFilter = true, customTitle }) {
+function ProductCatalog({ pageType, brandInput = "", showFilter = true, customTitle, cbti }) {
     const navigate = useNavigate();
 
     const [products, setProducts] = useState([]);
@@ -89,31 +89,36 @@ function ProductCatalog({ pageType, brandInput = "", showFilter = true, customTi
         const fetchData = async () => {
             setIsLoading(true);
             try {
-                const [vehicleRes, accessoryRes] = await Promise.all([
-                    fetch("https://clos21.kr/api/vehicle-products"),
-                    fetch("https://clos21.kr/api/accessory-products"),
-                ]);
-                const [vehicleData, accessoryData] = await Promise.all([
-                    vehicleRes.json(),
-                    accessoryRes.json(),
-                ]);
+                let vehicleData = [];
+                let accessoryData = [];
+                if (cbti) {
+                    const res = await fetch(`https://clos21.kr/api/vehicle-products/cbti/${encodeURIComponent(cbti)}`);
+                    vehicleData = await res.json();
+                    accessoryData = [];
+                } else {
+                    const [vehicleRes, accessoryRes] = await Promise.all([
+                        fetch("https://clos21.kr/api/vehicle-products"),
+                        fetch("https://clos21.kr/api/accessory-products"),
+                    ]);
+                    [vehicleData, accessoryData] = await Promise.all([
+                        vehicleRes.json(),
+                        accessoryRes.json(),
+                    ]);
+                }
                 const BRAND_KR_EN_MAP = {
                     "현대": "HYUNDAI", "기아": "KIA", "쉐보레": "CHEVROLET", "르노": "RENAULT", "쌍용": "KGM",
                     "제네시스": "GENESIS", "비엠더블유": "BMW", "BMW": "BMW", "아우디": "AUDI", "벤츠": "BENZ", "테슬라": "TESLA"
                 };
-                // 검색어(brandInput)가 있으면 이름/브랜드 모두 부분매칭
                 const lowerKeyword = brandInput ? brandInput.toLowerCase() : "";
 
                 let filteredVehicleData = vehicleData;
                 let filteredAccessoryData = accessoryData;
 
-                // *** pageType에 따라 데이터 완전히 분리 ***
                 if (pageType === "자동차") {
                     filteredAccessoryData = [];
                 } else if (pageType === "차량 악세서리") {
                     filteredVehicleData = [];
                 }
-                // 검색어 필터
                 if (lowerKeyword) {
                     const mappedKeyword = BRAND_KR_EN_MAP[lowerKeyword] || lowerKeyword;
                     filteredVehicleData = filteredVehicleData.filter(
@@ -162,7 +167,7 @@ function ProductCatalog({ pageType, brandInput = "", showFilter = true, customTi
             }
         };
         fetchData();
-    }, [brandInput, pageType]);
+    }, [brandInput, pageType, cbti]);
 
     const pageTitle =
         customTitle
@@ -171,12 +176,14 @@ function ProductCatalog({ pageType, brandInput = "", showFilter = true, customTi
                 ? '차량 악세서리 판매'
                 : pageType === '자동차'
                     ? '자동차 판매'
-                    : '전체 상품';
+                    : pageType === '나에게 맞는 차량'
+                        ? '나에게 맞는 차량'
+                        : '전체 상품';
 
     // 카테고리, 필터 적용
     const pageTypes = pageType && pageType !== 'all' ? pageType.split('|') : ['all'];
     let availableProducts = products;
-    if (pageTypes[0] !== 'all') {
+    if (!cbti && pageTypes[0] !== 'all') {
         availableProducts = products.filter(product => pageTypes.includes(product.category));
     }
     const categories = [...new Set(availableProducts.map(p => p.category))];

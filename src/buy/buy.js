@@ -1,4 +1,3 @@
-// Buy.js (상위 컴포넌트)
 import React from "react";
 import { useParams, useLocation } from "react-router-dom";
 import DropDown from "../functions/DropDown";
@@ -6,7 +5,7 @@ import Header from "../functions/Header";
 import ProductCatalog from "../functions/PricingCard";
 
 function Buy({ pageType: defaultPageType }) {
-    const { brand, name, keyword } = useParams();
+    const { brand, name, keyword , cbti} = useParams();
     const location = useLocation();
 
     let pageType = defaultPageType || "all";
@@ -18,6 +17,8 @@ function Buy({ pageType: defaultPageType }) {
     } else if (location.pathname.startsWith("/buy/acc")) {
         pageType = "차량 악세서리";
         searchInput = name || "";
+    } else if (location.pathname.startsWith("/buy/cbti")) {
+        pageType = "나에게 맞는 차량";
     } else if (location.pathname === "/buy" || location.pathname.startsWith("/buy/")) {
         pageType = "all";
         searchInput = keyword || "";
@@ -34,6 +35,7 @@ function Buy({ pageType: defaultPageType }) {
                     pageType={pageType}
                     brandInput={searchInput}
                     showFilter={true}
+                    {...(location.pathname.startsWith("/buy/cbti") && cbti ? { cbti } : {})}
                 />
             </div>
         </div>

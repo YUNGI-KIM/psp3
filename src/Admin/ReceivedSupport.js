@@ -1,3 +1,4 @@
+import React from 'react';
 import AdminSupportFn from "../functions/AdminSupportFn";
 import { useEffect, useState } from "react";
 
