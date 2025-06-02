@@ -4,9 +4,8 @@ import Header from "../functions/Header";
 
 const PurchasePage = () => {
     const location = useLocation();
-    // 여러 개의 상품이 배열로 들어옴
-    const products = location.state?.product || [];
-    const navigate = useNavigate();
+    let products = location.state?.product || [];
+    if (!Array.isArray(products)) products = [products];
 
     const [form, setForm] = useState({
         name: '',
