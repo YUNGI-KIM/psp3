@@ -6,7 +6,7 @@ import Header from "../functions/Header";
 import ProductCatalog from "../functions/PricingCard";
 
 function Buy() {
-    const { brand, name } = useParams();
+    const { brand, name , keyword} = useParams();
     const location = useLocation();
 
     // 라우트에 따라 분기
@@ -19,10 +19,10 @@ function Buy() {
     } else if (location.pathname.startsWith("/buy/acc/")) {
         pageType = "차량 악세서리";
         brandInput = name || "";
-    } else if (brand) {
-        // /buy/:brand (자동차+악세서리 모두에서 검색)
+    } else if (keyword) {
+        // /buy/:keyword (자동차+악세서리 모두에서 검색)
         pageType = "all";
-        brandInput = brand;
+        brandInput = keyword;
     } else {
         // 모두 조회 조건에서 검색 아닐 때
         pageType = "all";
