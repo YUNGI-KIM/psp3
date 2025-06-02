@@ -34,7 +34,7 @@ function Header() {
         navigate("/login", { replace: true });
     };
 
-    const handleHeaderSearch = (e) => {
+    const handleSearchSubmit = (e) => {
         e.preventDefault();
         if (searchValue.trim()) {
             // 항상 전체 상품에서 검색 결과를 보여주도록 이동
