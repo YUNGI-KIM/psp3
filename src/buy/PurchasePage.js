@@ -47,7 +47,7 @@ const PurchasePage = () => {
       <>
         <Header />
 
-        <div className="relative max-w-screen-xl px-4 mx-auto sm:px-6 lg:px-8 bg-gray-900 min-h-screen pb-20">
+        <div className="relative max-w-screen-xl px-4 mx-auto sm:px-6 lg:px-8 min-h-screen pb-20">
           <div className="max-w-lg mx-auto overflow-hidden rounded-2xl shadow-xl lg:max-w-none lg:flex bg-white/90 backdrop-blur-lg mt-16">
             <div className="px-6 py-8 bg-white/90 rounded-2xl lg:flex-shrink-1 lg:p-12">
               <h3 className="text-2xl font-extrabold leading-8 text-indigo-900 sm:text-3xl sm:leading-9">
@@ -67,7 +67,7 @@ const PurchasePage = () => {
                 <span className="font-semibold text-lg text-gray-800">{product.name}</span>
                 <span className="text-indigo-600 font-bold">{product.price}</span>
               </div>
-
+              <div className="px-6 py-8 text-center bg-indigo-900 rounded-2xl flex flex-col justify-center lg:w-60">
               <div className="flex items-center mt-8 mb-2">
                 <h4 className="flex-shrink-0 pr-4 text-sm font-semibold leading-5 tracking-wider text-indigo-700 uppercase">
                   배송지 주소
@@ -124,7 +124,7 @@ const PurchasePage = () => {
             </div>
 
             {/* 결제 버튼 및 가격 */}
-            <div className="px-6 py-8 text-center bg-indigo-900 rounded-2xl flex flex-col justify-center lg:w-60">
+
               <div className="flex items-center justify-center mt-4 text-4xl font-extrabold leading-none text-white">
               <span>
                 {product.price}
