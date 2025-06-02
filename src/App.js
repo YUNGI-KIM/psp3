@@ -17,6 +17,7 @@ import AnswerForQ from "./Admin/AnswerForQ"
 import VehicleDetail from "./CarDetail/VehicleDetail";
 import Buy from "./buy/buy";
 import PurchasePage from "./buy/PurchasePage";
+import Cart from  "./buy/CartPage"
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
               <Route path="/estimator" element={<Estimator />} />
               <Route path="/buy/:brand" element={<Buy />} />
               <Route path="/buy/" element={<Buy />} />
+              <Route path="/cart/" element={<Cart />} />
               <Route path="/purchase/" element={<PurchasePage />} />
               <Route path='/receviedSupport' element={<ReceviedSupport/>} />
               <Route path='/answerForQ' element={<AnswerForQ/>} />

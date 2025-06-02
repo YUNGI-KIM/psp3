@@ -18,7 +18,7 @@ function Buy() {
             <DropDown />
 
             <div className="flex">
-                {/*<ProductCatalog pageType={pageType} showFilter={false} />*/}
+
                 <ProductCatalog pageType={"자동차"} showFilter={false} />
             </div>
 

@@ -9,7 +9,9 @@ function CartPage() {
         setCartItems(savedCart);
     }, []);
 
-    return (
+    return(
+<>
+        {Header}
         <div style={{ padding: '20px' }}>
             <h2>장바구니</h2>
             {cartItems.length === 0 ? (
@@ -24,6 +26,7 @@ function CartPage() {
                 </ul>
             )}
         </div>
+</>
     );
 }
 
