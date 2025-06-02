@@ -98,6 +98,10 @@ function ProductCatalog({ pageType, brandInput = "", showFilter = true, customTi
                     vehicleRes.json(),
                     accessoryRes.json(),
                 ]);
+                const BRAND_KR_EN_MAP = {
+                    "현대": "HYUNDAI", "기아": "KIA", "쉐보레": "CHEVROLET", "르노": "RENAULT", "쌍용": "KGM",
+                    "제네시스": "GENESIS", "비엠더블유": "BMW", "BMW": "BMW", "아우디": "AUDI", "벤츠": "BENZ", "테슬라": "TESLA"
+                };
                 // 검색어(brandInput)가 있으면 이름/브랜드 모두 부분매칭
                 const lowerKeyword = brandInput ? brandInput.toLowerCase() : "";
 
@@ -112,14 +116,21 @@ function ProductCatalog({ pageType, brandInput = "", showFilter = true, customTi
                 }
                 // 검색어 필터
                 if (lowerKeyword) {
+                    const mappedKeyword = BRAND_KR_EN_MAP[lowerKeyword] || lowerKeyword;
                     filteredVehicleData = filteredVehicleData.filter(
                         v =>
-                            (v.brand && v.brand.toLowerCase().includes(lowerKeyword)) ||
+                            (v.brand && (
+                                v.brand.toLowerCase().includes(lowerKeyword) ||
+                                v.brand.toLowerCase().includes(mappedKeyword.toLowerCase())
+                            )) ||
                             (v.name && v.name.toLowerCase().includes(lowerKeyword))
                     );
                     filteredAccessoryData = filteredAccessoryData.filter(
                         a =>
-                            (a.brand && a.brand.toLowerCase().includes(lowerKeyword)) ||
+                            (a.brand && (
+                                a.brand.toLowerCase().includes(lowerKeyword) ||
+                                a.brand.toLowerCase().includes(mappedKeyword.toLowerCase())
+                            )) ||
                             (a.name && a.name.toLowerCase().includes(lowerKeyword))
                     );
                 }
