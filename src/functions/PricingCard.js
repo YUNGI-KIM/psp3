@@ -173,9 +173,9 @@ function ProductCatalog({ pageType, showFilter = true, customTitle }) {
     const handleSearch = e => {
         e.preventDefault();
         if (searchInput.trim()) {
-            navigate(`/catalog/${searchInput.trim()}`);
+            navigate(`/buy/${searchInput.trim()}`);
         } else {
-            navigate(`/catalog`);
+            navigate(`/buy`);
         }
     };
 
