@@ -7,7 +7,8 @@ import React from "react";
 
 
 function Buy() {
-    const { brand = "" } = useParams() || "";
+    const { brand} = useParams();
+    console.log(brand);
 
     // const pageType = brand === "" ? "자동차" : brand + "|자동차";
     return (
@@ -19,7 +20,7 @@ function Buy() {
 
             <div className="flex">
                 {/*<ProductCatalog pageType={pageType} showFilter={false} />*/}
-                <ProductCatalog pageType={"자동차"} showFilter={false} />
+                <ProductCatalog pageType={"자동차"} brandInput={brand} showFilter={false} />
             </div>
 
 

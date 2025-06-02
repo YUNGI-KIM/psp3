@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import cartImg from "../Image/etc/cart.png";
 
-// ✅ 카테고리 필터
+// 카테고리 필터
 function CategoryFilter({ categories, activeCategory, onCategoryChange, showFilter }) {
     if (!showFilter) return null;
     return (
@@ -25,7 +26,7 @@ function CategoryFilter({ categories, activeCategory, onCategoryChange, showFilt
     );
 }
 
-// ✅ 제품 카드 (장바구니 기능 포함)
+// 제품 카드 (장바구니 기능 포함)
 function ProductCard({ product }) {
     const navigate = useNavigate();
 
@@ -61,7 +62,7 @@ function ProductCard({ product }) {
                         onClick={handleAddToCart}
                         className="bg-[#E0E7FF] w-10 h-10 rounded-full flex items-center justify-center"
                     >
-                        <img src="image/cart.png" alt="장바구니" className="w-5 h-5" />
+                        <img src={cartImg} alt="장바구니" className="w-5 h-5" />
                     </button>
                 </div>
                 <button
@@ -75,24 +76,47 @@ function ProductCard({ product }) {
     );
 }
 
-// ✅ 전체 제품 카탈로그
+// 전체 제품 카탈로그
 function ProductCatalog({ pageType, showFilter = true, customTitle }) {
+    const { brand } = useParams();
+    const navigate = useNavigate();
+
     const [products, setProducts] = useState([]);
     const [activeCategory, setActiveCategory] = useState('all');
+    const [isLoading, setIsLoading] = useState(false);
+    const [searchInput, setSearchInput] = useState(brand || '');
 
     useEffect(() => {
+        setSearchInput(brand || '');
         const fetchData = async () => {
+            setIsLoading(true);
             try {
-                const [vehicleRes, accessoryRes] = await Promise.all([
-                    fetch("https://clos21.kr/api/vehicle-products"),
-                    fetch("https://clos21.kr/api/accessory-products"),
-                ]);
+                const vehicleRes = await fetch(
+                    brand
+                        ? `https://clos21.kr/api/vehicle-products/brand/${brand}`
+                        : "https://clos21.kr/api/vehicle-products"
+                );
+                const accessoryRes = await fetch("https://clos21.kr/api/accessory-products");
                 const [vehicleData, accessoryData] = await Promise.all([
                     vehicleRes.json(),
                     accessoryRes.json(),
                 ]);
+                // 프론트단 필터 (부분매칭 추가로 필요하면 여기에)
+                const filteredVehicleData = brand
+                    ? vehicleData.filter(v =>
+                        (v.brand && v.brand.toLowerCase().includes(brand.toLowerCase()))
+                        || (v.name && v.name.toLowerCase().includes(brand.toLowerCase()))
+                    )
+                    : vehicleData;
+                const filteredAccessoryData = brand
+                    ? accessoryData.filter(a =>
+                        (a.brand && a.brand.toLowerCase().includes(brand.toLowerCase()))
+                        || (a.name && a.name.toLowerCase().includes(brand.toLowerCase()))
+                    )
+                    : accessoryData;
+
                 const combined = [
-                    ...vehicleData.map((v) => ({
+                    ...filteredVehicleData.map((v) => ({
                         id: v.id,
                         name: v.name,
                         category: "자동차",
@@ -101,7 +125,7 @@ function ProductCatalog({ pageType, showFilter = true, customTitle }) {
                         price: v.priceAfterTax || "가격 정보 없음",
                         buttonText: v.buttonText || "시승 신청",
                     })),
-                    ...accessoryData.map((a) => ({
+                    ...filteredAccessoryData.map((a) => ({
                         id: a.id,
                         name: a.name,
                         category: a.category || "차량 악세서리",
@@ -114,10 +138,13 @@ function ProductCatalog({ pageType, showFilter = true, customTitle }) {
                 setProducts(combined);
             } catch (error) {
                 console.error("🚨 데이터 불러오기 실패:", error);
+                setProducts([]);
+            } finally {
+                setIsLoading(false);
             }
         };
         fetchData();
-    }, []);
+    }, [brand, pageType]);
 
     const pageTypes = pageType && pageType !== 'all' ? pageType.split('|') : ['all'];
 
@@ -140,24 +167,50 @@ function ProductCatalog({ pageType, showFilter = true, customTitle }) {
                 ? '전체 상품'
                 : `${pageTypes.join(', ')} 판매`;
 
+    // 검색 input
+    const handleBrandInputChange = e => setSearchInput(e.target.value);
+
+    const handleSearch = e => {
+        e.preventDefault();
+        if (searchInput.trim()) {
+            navigate(`/buy/${searchInput.trim()}`);
+        } else {
+            navigate(`/buy`);
+        }
+    };
+
     return (
         <div className="py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-bold text-center mb-8">{pageTitle}</h1>
+            <form onSubmit={handleSearch} className="flex justify-center mb-8">
+                <input
+                    type="text"
+                    value={searchInput}
+                    onChange={handleBrandInputChange}
+                    placeholder="브랜드명으로 검색 (예: 현대, 기아, 제네시스...)"
+                    className="border rounded-lg px-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+                <button type="submit" className="ml-2 px-4 py-2 bg-indigo-600 text-white rounded-lg">검색</button>
+            </form>
             <CategoryFilter
                 categories={categories}
                 activeCategory={activeCategory}
                 onCategoryChange={setActiveCategory}
                 showFilter={showFilter && categories.length > 1}
             />
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredProducts.length > 0 ? (
-                    filteredProducts.map((product) => (
-                        <ProductCard key={product.id} product={product} />
-                    ))
-                ) : (
-                    <p className="text-center text-gray-500 col-span-full">해당 카테고리에 상품이 없습니다.</p>
-                )}
-            </div>
+            {isLoading ? (
+                <div className="text-center py-10 text-indigo-500 font-semibold text-lg">불러오는 중...</div>
+            ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filteredProducts.length > 0 ? (
+                        filteredProducts.map((product) => (
+                            <ProductCard key={product.id} product={product} />
+                        ))
+                    ) : (
+                        <p className="text-center text-gray-500 col-span-full">해당 카테고리에 상품이 없습니다.</p>
+                    )}
+                </div>
+            )}
         </div>
     );
 }
