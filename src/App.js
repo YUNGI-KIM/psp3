@@ -36,10 +36,17 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/support" element={<Support />} />
               <Route path="/estimator" element={<Estimator />} />
-              <Route path="/buy" element={<Buy />} />
-              <Route path="/buy/:brand" element={<Buy />} />   // 해당 brand는 브랜드 or 제품명 모두 허용
-              <Route path="/buy/car/:brand" element={<Buy />} />
-              <Route path="/buy/acc/:name" element={<Buy />} />
+              {/* 자동차 전체 보기 */}
+              <Route path="/buy/car" element={<Buy pageType="자동차" />} />
+              {/* 특정 브랜드 자동차 검색 */}
+              <Route path="/buy/car/:brand" element={<Buy pageType="자동차" />} />
+              {/* 악세서리 전체 보기 */}
+              <Route path="/buy/acc" element={<Buy pageType="차량 악세서리" />} />
+              {/* 특정 이름의 악세서리 검색 */}
+              <Route path="/buy/acc/:name" element={<Buy pageType="차량 악세서리" />} />
+              {/* 통합 검색 (자동차+악세서리) */}
+              <Route path="/buy" element={<Buy pageType="all" />} />
+              <Route path="/buy/:keyword" element={<Buy pageType="all" />} />
               <Route path='/receviedSupport' element={<ReceviedSupport/>} />
               <Route path='/answerForQ' element={<AnswerForQ/>} />
               <Route path='/adminMain' element={<AdminMainPage/>} />
