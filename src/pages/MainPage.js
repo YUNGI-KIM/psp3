@@ -18,11 +18,22 @@ import Benz from '../ImageSrc/companyLogo/Benz.svg';
 import Tesla from '../ImageSrc/companyLogo/Tesla.svg';
 import Header from '../functions/Header';
 import { useUser } from "../contexts/UserContext";
+import PopularModels from '../functions/PopularModels';
+import AccessorySection from "../functions/AccessorySection";
 
 const variants = {
-    enter: (direction) => ({ x: direction === 1 ? 300 : -300, opacity: 0 }),
-    center: { x: 0, opacity: 1 },
-    exit: (direction) => ({ x: direction === 1 ? -300 : 300, opacity: 0 })
+    enter: (direction) => ({
+        x: direction === 1 ? 300 : -300,
+        opacity: 0
+    }),
+    center: {
+        x: 0,
+        opacity: 1
+    },
+    exit: (direction) => ({
+        x: direction === 1 ? -300 : 300,
+        opacity: 0
+    })
 };
 
 const MainPage = () => {
@@ -52,33 +63,34 @@ const MainPage = () => {
 
     const slidSrc = [
         { src: FindCar, href: '/startCBTI' },
-        { src: main, href: '/startCBTI' },
-        { src: main2, href: '/startCBTI' },
-        { src: main3, href: '/startCBTI' },
-        { src: main4, href: '/startCBTI' },
+        { src: main, href: '/startCBTI'},
+        { src: main2, href: '/startCBTI'},
+        { src: main3, href: '/startCBTI'},
+        { src: main4, href: '/startCBTI'},
     ];
 
     const handleButtonClick = (i) => setIndex(i);
 
     const ClickButtonSlideLogo = [
-        { alt: "HYUNDAI", src: hyundai, href: '/buy/hyundai' },
-        { alt: "KIA", src: kia, href: '/buy/kia' },
-        { alt: "CHEVROLET", src: chevrolet, href: '/buy/Chevo' },
-        { alt: "RENAULT", src: Reno, href: '/buy/Reno' },
-        { alt: "KGM", src: kgm, href: '/buy/kgm' },
-        { alt: "GENESIS", src: gen, href: '/buy/Gen' },
-        { alt: "BMW", src: BMW, href: '/buy/BMW' },
-        { alt: "AUDI", src: Audi, href: '/buy/Audi' },
-        { alt: "BENZ", src: Benz, href: '/buy/Benz' },
-        { alt: "TESLA", src: Tesla, href: '/buy/Tesla' },
+        { alt: "HYUNDAI", src: hyundai, href: '/hyundai' },
+        { alt: "KIA", src: kia, href: '/kia' },
+        { alt: "CHEVROLET", src: chevrolet, href: '/Chevo' },
+        { alt: "RENAULT", src: Reno, href: '/Reno' },
+        { alt: "KGM", src: kgm, href: '/kgm' },
+        { alt: "GENESIS", src: gen, href: '/Gen' },
+        { alt: "BMW", src: BMW, href: '/BMW' },
+        { alt: "AUDI", src: Audi, href: '/Audi' },
+        { alt: "BENZ", src: Benz, href: '/Benz' },
+        { alt: "TESLA", src: Tesla, href: '/Tesla' },
     ];
 
     const SlideToLogoLeft = () => {
         const prevPage = page - logosPerPage;
-        directionRef.current = -1;
         if (prevPage >= 0) {
+            directionRef.current = -1;
             setPage(prevPage);
         } else {
+            directionRef.current = -1;
             const remainder = ClickButtonSlideLogo.length % logosPerPage;
             const lastFullPageStart = ClickButtonSlideLogo.length - (remainder === 0 ? logosPerPage : remainder);
             setPage(lastFullPageStart);
@@ -87,10 +99,11 @@ const MainPage = () => {
 
     const SlideToLogoRight = () => {
         const nextPage = page + logosPerPage;
-        directionRef.current = 1;
         if (nextPage < ClickButtonSlideLogo.length) {
+            directionRef.current = 1;
             setPage(nextPage);
         } else {
+            directionRef.current = 1;
             setPage(0);
         }
     };
@@ -102,45 +115,76 @@ const MainPage = () => {
 
     const SlideToLeft = () => {
         directionRef.current = -1;
-        setIndex((prevIndex) => (prevIndex === 0 ? slidSrc.length - 1 : prevIndex - 1));
+        setIndex((prevIndex) =>
+            prevIndex === 0 ? slidSrc.length - 1 : prevIndex - 1
+        );
     };
 
     return (
-        <div className="flex flex-col w-full min-h-screen overflow-x-hidden">
-            <Header key={user ? user.id : "guest"} />
-
-            <div className="relative w-full overflow-visible px-2 sm:px-4">
-                <div className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10">
-                    <svg onClick={SlideToLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:text-yellow-200 hover:scale-110 transition-transform">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+        <div className="flex flex-col w-full min-h-screen overflow-hidden">
+            <Header key={user ? user.id : "guest"}/>
+            <div className="relative w-full h-[calc(100vh-125px-170px)]">
+                <div className="absolute left-1/100 top-5/10 transform -translate-x-1/2 flex space-x-2">
+                    <svg
+                        onClick={SlideToLeft}
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="4"
+                        stroke="currentColor"
+                        className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out"
+                        style={{flexShrink: 0}}
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/>
                     </svg>
                 </div>
-
-                {/* 반응형 슬라이드 이미지 */}
-                <div className="w-full aspect-[16/9] max-h-[650px]   overflow-hidden">
-                    <img
-                        src={slidSrc[index].src}
-                        onClick={() => navigate(slidSrc[index].href)}
-                        className="absolute top-0 left-0 w-full h-full object-cover cursor-pointer transition-transform duration-300 "
-                        alt={`Slide ${index + 1}`}
-                    />
-                </div>
-
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                <img
+                    src={slidSrc[index].src}
+                    onClick={() => navigate(slidSrc[index].href)}
+                    className="w-full h-full object-cover cursor-pointer"
+                    alt={`Slide ${index + 1}`}
+                />
+                <div className="absolute bottom-4 left-1/2 transform  -translate-x-1/2 flex space-x-2">
                     {slidSrc.map((_, i) => (
-                        <button key={i} onClick={() => handleButtonClick(i)} className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${i === index ? 'bg-gray-500' : 'bg-gray-800'} hover:bg-gray-400`} />
+                        <button
+                            key={i}
+                            onClick={() => handleButtonClick(i)}
+                            className="w-3 h-3 sm:w-4 sm:h-4 bg-gray-800 hover:bg-gray-400 rounded-full"
+                        />
                     ))}
                 </div>
-
-                <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10">
-                    <svg onClick={SlideToRight} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:text-yellow-200 hover:scale-110 transition-transform">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="m3 4.5 7.5 7.5-7.5 7.5" />
+                <div className="absolute left-995/1000 transform top-5/10 -translate-x-1/2 flex space-x-2">
+                    <svg
+                        onClick={SlideToRight}
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth="4"
+                        stroke="currentColor"
+                        className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out"
+                        style={{flexShrink: 0}}
+                    >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="m3 4.5 7.5 7.5-7.5 7.5"/>
                     </svg>
                 </div>
             </div>
 
-            <div className="w-full h-[125px] flex justify-between items-center px-4 mt-4 overflow-visible">
-                <svg onClick={SlideToLogoLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 hover:text-yellow-200 cursor-pointer hover:scale-110 transition-transform">
+            <div className="w-full h-[125px] flex justify-between items-center px-2 mt-4"
+                style={{
+                    minWidth: '400px',
+                    maxWidth: '100%',
+                    gap: '16px',
+                }}>
+                <svg
+                    onClick={SlideToLogoLeft}
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="4"
+                    stroke="currentColor"
+                    className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out"
+                    style={{ flexShrink: 0, position: 'relative', right: '8px'}}
+                >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                 </svg>
 
@@ -153,8 +197,11 @@ const MainPage = () => {
                         animate="center"
                         exit="exit"
                         transition={{ duration: 0.5 }}
-                        className="flex justify-between items-center flex-grow gap-0 h-full px-4 overflow-hidden"
-                        style={{ minWidth: 'calc(100% - 88px)' }}
+                        className="flex justify-between items-center flex-grow gap-0 h-full px-16 overflow-hidden"
+                        style={{
+                            minWidth: 'calc(100% - 88px)',
+                            boxSizing: 'border-box',
+                        }}
                     >
                         {ClickButtonSlideLogo.slice(page, page + logosPerPage).map((logo, i) => (
                             <img
@@ -163,22 +210,30 @@ const MainPage = () => {
                                 src={logo.src}
                                 onClick={() => navigate(logo.href)}
                                 title={logo.alt}
-                                className="h-full w-auto object-contain cursor-pointer transform transition-transform duration-300 hover:scale-105"
-                                style={{ maxWidth: `${100 / logosPerPage - 2}%` }}
+                                className="h-full w-auto object-contain cursor-pointer transform transition-transform duration-300 hover:scale-105 ease-in-out"
+                                style={{maxWidth: `${100 / logosPerPage - 2}%`}}
                             />
                         ))}
                     </motion.div>
                 </AnimatePresence>
 
-                <svg onClick={SlideToLogoRight} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:text-yellow-200 hover:scale-110 transition-transform">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="m3 4.5 7.5 7.5-7.5 7.5" />
+                <svg
+                    onClick={SlideToLogoRight}
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="4"
+                    stroke="currentColor"
+                    className="w-10 h-10 cursor-pointer hover:scale-110 ease-in-out"
+                    style={{flexShrink: 0, position: 'relative', right: '8px'}}
+                >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="m3 4.5 7.5 7.5-7.5 7.5"/>
                 </svg>
             </div>
 
             {/* 🔽 인기 차종 섹션 */}
             <PopularModels />
             <AccessorySection />
-            <TrendySection />
         </div>
     );
 };

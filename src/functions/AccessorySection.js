@@ -1,10 +1,7 @@
 // functions/AccessorySection.js
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import AccForCarFilter from '../Image/AccForCar/Filter.jpg';
-import AccForCarWiper from '../Image/AccForCar/Wiper.jpeg';
-import AccForCarWasher from '../Image/AccForCar/Washer.jpg';
-import AccForCarUrea from '../Image/AccForCar/Urea.jpg';
+
 
 const products = [
     {
@@ -12,28 +9,28 @@ const products = [
         name: "[H Genuine Acc] 에어컨 필터",
         desc: "차량 내부 유입 공기 정화",
         price: "8,000원",
-        image: AccForCarFilter
+        image: "ImageSrc/AccForCar/Filter.jpg"
     },
     {
         id: 2,
         name: "[H Genuine Acc] 차량용 와이퍼",
         desc: "시야 확보에 필수",
         price: "7,000원",
-        image: AccForCarWiper
+        image: "ImageSrc/AccForCar/Wiper.jpg"
     },
     {
         id: 3,
         name: "[불스원] 워셔액",
         desc: "시원한 세정력",
         price: "2만원",
-        image: AccForCarWasher
+        image: "ImageSrc/AccForCar/Washer.jpg"
     },
     {
         id: 4,
         name: "[유록스] 요소수",
         desc: "디젤차 필수 아이템",
         price: "2만원",
-        image: AccForCarUrea
+        image: "ImageSrc/AccForCar/Urea.jpg"
     },
 ];
 
