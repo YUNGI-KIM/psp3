@@ -71,12 +71,12 @@ function CarInformation() {
         <Header />
         <div className="bg-white py-10 px-4 sm:px-8">
           <div className="flex justify-center items-center mb-6 space-x-6">
-            <button onClick={prevBrand} className="text-4xl cursor-pointer hover:scale-110 hover:text-black font-bold">〈</button>
+            <button onClick={prevBrand} className="text-4xl cursor-pointer hover:scale-110 hover:text-gray-400 font-bold">〈</button>
             <div>
               <h1 className="text-3xl font-bold text-center">{currentBrand} 차량 정보</h1>
               <p className="text-center text-sm text-gray-500">브랜드 간 비교</p>
             </div>
-            <button onClick={nextBrand} className="text-4xl cursor-pointer hover:scale-110 hover:text-black font-bold">〉</button>
+            <button onClick={nextBrand} className="text-4xl cursor-pointer hover:scale-110 hover:text-gray-400 font-bold">〉</button>
           </div>
 
           <AnimatePresence mode="wait">
