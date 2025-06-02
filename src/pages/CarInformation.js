@@ -49,6 +49,15 @@ function CarInformation() {
         });
   }, []);
 
+  useEffect(() => {
+    Object.values(brandModels).flat().forEach(model => {
+      if (model.image) {
+        const img = new window.Image();
+        img.src = model.image;
+      }
+    });
+  }, [brandModels]);
+
   const nextBrand = () => {
     setBrandIndex((prev) => (prev + 1) % brandList.length);
   };
@@ -59,7 +68,7 @@ function CarInformation() {
 
   return (
       <div>
-        <div>{Header()}</div>
+        <Header />
         <div className="bg-white py-10 px-4 sm:px-8">
           <div className="flex justify-center items-center mb-6 space-x-6">
             <button onClick={prevBrand} className="text-4xl font-bold">〈</button>
