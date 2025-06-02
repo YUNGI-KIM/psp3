@@ -37,8 +37,8 @@ function App() {
               <Route path="/support" element={<Support />} />
               <Route path="/estimator" element={<Estimator />} />
               <Route path="/buy" element={<Buy />} />
-              <Route path="/buy/car/:brand" element={<Buy pageType="자동차" />} />
-              <Route path="/buy/acc/:name" element={<Buy pageType="차량 악세서리" />} />
+              <Route path="/buy/car/:brand" element={<Buy />} />
+              <Route path="/buy/acc/:name" element={<Buy />} />
               <Route path='/receviedSupport' element={<ReceviedSupport/>} />
               <Route path='/answerForQ' element={<AnswerForQ/>} />
               <Route path='/adminMain' element={<AdminMainPage/>} />

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import cartImg from "../Image/etc/cart.png";
 
 // 카테고리 필터
@@ -26,7 +26,7 @@ function CategoryFilter({ categories, activeCategory, onCategoryChange, showFilt
     );
 }
 
-// 제품 카드 (장바구니 기능 포함)
+// 제품 카드 (장바구니/구매)
 function ProductCard({ product }) {
     const navigate = useNavigate();
 
@@ -42,9 +42,7 @@ function ProductCard({ product }) {
     };
 
     return (
-        <div
-            className="flex flex-col rounded-lg border overflow-hidden transition-transform hover:scale-105 bg-white dark:bg-gray-800 shadow"
-        >
+        <div className="flex flex-col rounded-lg border overflow-hidden transition-transform hover:scale-105 bg-white dark:bg-gray-800 shadow">
             <img src={product.image} alt={product.name} className="w-full h-60 object-cover" />
             <div className="p-6 flex flex-col flex-grow bg-[#1e293b] text-white">
                 <div className="flex justify-between items-center mb-3">
@@ -77,45 +75,56 @@ function ProductCard({ product }) {
 }
 
 // 전체 제품 카탈로그
-function ProductCatalog({ pageType, showFilter = true, customTitle }) {
-    const { brand } = useParams();
+function ProductCatalog({ pageType, brandInput = "", showFilter = true, customTitle }) {
     const navigate = useNavigate();
 
     const [products, setProducts] = useState([]);
     const [activeCategory, setActiveCategory] = useState('all');
     const [isLoading, setIsLoading] = useState(false);
-    const [searchInput, setSearchInput] = useState(brand || '');
+    const [searchInput, setSearchInput] = useState(brandInput);
+
+    // brandInput이 바뀌면 input도 동기화
+    useEffect(() => {
+        setSearchInput(brandInput);
+    }, [brandInput]);
 
     useEffect(() => {
-        setSearchInput(brand || '');
         const fetchData = async () => {
             setIsLoading(true);
             try {
-                const vehicleRes = await fetch("https://clos21.kr/api/vehicle-products");
-                const accessoryRes = await fetch("https://clos21.kr/api/accessory-products");
+                const [vehicleRes, accessoryRes] = await Promise.all([
+                    fetch("https://clos21.kr/api/vehicle-products"),
+                    fetch("https://clos21.kr/api/accessory-products"),
+                ]);
                 const [vehicleData, accessoryData] = await Promise.all([
                     vehicleRes.json(),
                     accessoryRes.json(),
                 ]);
+                // 검색어(brandInput)가 있으면 이름/브랜드 모두 부분매칭
+                const lowerKeyword = brandInput ? brandInput.toLowerCase() : "";
 
-                // 검색어가 있으면 모든 이름/브랜드에서 부분매칭
-                const lowerKeyword = brand ? brand.toLowerCase() : "";
+                // pageType에 따라 분기
+                let filteredVehicleData = vehicleData;
+                let filteredAccessoryData = accessoryData;
 
-                const filteredVehicleData = !brand
-                    ? vehicleData
-                    : vehicleData.filter(
+                if (pageType === "자동차") {
+                    filteredAccessoryData = [];
+                } else if (pageType === "차량 악세서리") {
+                    filteredVehicleData = [];
+                }
+
+                if (lowerKeyword) {
+                    filteredVehicleData = filteredVehicleData.filter(
                         v =>
                             (v.brand && v.brand.toLowerCase().includes(lowerKeyword)) ||
                             (v.name && v.name.toLowerCase().includes(lowerKeyword))
                     );
-
-                const filteredAccessoryData = !brand
-                    ? accessoryData
-                    : accessoryData.filter(
+                    filteredAccessoryData = filteredAccessoryData.filter(
                         a =>
                             (a.brand && a.brand.toLowerCase().includes(lowerKeyword)) ||
                             (a.name && a.name.toLowerCase().includes(lowerKeyword))
                     );
+                }
 
                 const combined = [
                     ...filteredVehicleData.map((v) => ({
@@ -146,20 +155,43 @@ function ProductCatalog({ pageType, showFilter = true, customTitle }) {
             }
         };
         fetchData();
-    }, [brand, pageType]);
+    }, [brandInput, pageType]);
 
+    // 여러 카테고리(자동차/악세서리) 자동 분류
     const pageTypes = pageType && pageType !== 'all' ? pageType.split('|') : ['all'];
-
     let availableProducts = products;
     if (pageTypes[0] !== 'all') {
         availableProducts = products.filter(product => pageTypes.includes(product.category));
     }
-
     const categories = [...new Set(availableProducts.map(p => p.category))];
-
     const filteredProducts = activeCategory === 'all'
         ? availableProducts
         : availableProducts.filter(p => p.category === activeCategory);
+
+    // 검색 input 핸들링
+    const handleBrandInputChange = e => setSearchInput(e.target.value);
+    const handleSearch = e => {
+        e.preventDefault();
+        // 분기: 자동차 or 악세서리 or 전체
+        if (searchInput.trim()) {
+            if (pageType === "차량 악세서리") {
+                navigate(`/buy/acc/${searchInput.trim()}`);
+            } else if (pageType === "자동차") {
+                navigate(`/buy/car/${searchInput.trim()}`);
+            } else {
+                // all일 경우 자동차/악세서리 모두에서 검색
+                navigate(`/buy/${searchInput.trim()}`);
+            }
+        } else {
+            if (pageType === "차량 악세서리") {
+                navigate(`/buy/acc`);
+            } else if (pageType === "자동차") {
+                navigate(`/buy/car`);
+            } else {
+                navigate(`/buy`);
+            }
+        }
+    };
 
     const pageTitle = customTitle
         ? customTitle
@@ -169,20 +201,8 @@ function ProductCatalog({ pageType, showFilter = true, customTitle }) {
                 ? '전체 상품'
                 : `${pageTypes.join(', ')} 판매`;
 
-    // 검색 input
-    const handleBrandInputChange = e => setSearchInput(e.target.value);
-
-    const handleSearch = e => {
-        e.preventDefault();
-        if (searchInput.trim()) {
-            navigate(`/buy/${searchInput.trim()}`);
-        } else {
-            navigate(`/buy`);
-        }
-    };
-
     return (
-        <div className="py-10 ma[x-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-bold text-center mb-8">{pageTitle}</h1>
             <form onSubmit={handleSearch} className="flex justify-center mb-8">
                 <input
