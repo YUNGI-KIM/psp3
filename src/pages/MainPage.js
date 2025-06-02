@@ -1,11 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import Header from '../functions/Header';
+import { useUser } from "../contexts/UserContext";
+
+// 이미지
 import FindCar from '../ImageSrc/sideImage/FindCar.png';
 import main from '../ImageSrc/sideImage/main.jpg';
 import main2 from '../ImageSrc/sideImage/main2.jpg';
 import main3 from '../ImageSrc/sideImage/main3.jpg';
 import main4 from '../ImageSrc/sideImage/main4.jpg';
+
+// 브랜드 로고
 import hyundai from '../ImageSrc/companyLogo/hyundai.svg';
 import kia from '../ImageSrc/companyLogo/kia.svg';
 import chevrolet from '../ImageSrc/companyLogo/chevrolet.svg';
@@ -16,10 +22,7 @@ import BMW from '../ImageSrc/companyLogo/Bmw.svg';
 import Audi from '../ImageSrc/companyLogo/Audi.svg';
 import Benz from '../ImageSrc/companyLogo/Benz.svg';
 import Tesla from '../ImageSrc/companyLogo/Tesla.svg';
-import Header from '../functions/Header';
-import { useUser } from "../contexts/UserContext";
 
-// 슬라이드 애니메이션
 const variants = {
     enter: (direction) => ({ x: direction === 1 ? 300 : -300, opacity: 0 }),
     center: { x: 0, opacity: 1 },
@@ -100,28 +103,23 @@ const MainPage = () => {
     };
 
     return (
-        <div className="flex flex-col w-full min-h-screen overflow-x-hidden bg-gradient-to-b from-[#f6fbff] via-[#eaf1ff] to-[#f8fbff]">
+        <div className="flex flex-col w-full min-h-screen overflow-x-hidden">
             <Header key={user ? user.id : "guest"} />
 
-            {/* 이미지 메인 슬라이드 */}
-            <div className="relative w-full overflow-visible px-2 sm:px-4">
+            {/* 메인 슬라이드 */}
+            <div className="relative w-screen h-[90vh] overflow-hidden">
+                <img
+                    src={slidSrc[index].src}
+                    onClick={() => navigate(slidSrc[index].href)}
+                    className="w-full h-full object-cover cursor-pointer"
+                    alt={`Slide ${index + 1}`}
+                />
+
+                {/* 좌우 화살표 */}
                 <div className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10">
                     <svg onClick={SlideToLeft} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:text-yellow-200 hover:scale-110 transition-transform">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                     </svg>
-                </div>
-                <div className="w-full aspect-[16/9] max-h-[36rem] overflow-hidden">
-                    <img
-                        src={slidSrc[index].src}
-                        onClick={() => navigate(slidSrc[index].href)}
-                        className="absolute top-0 left-0 w-full h-full object-cover cursor-pointer transition-transform duration-300"
-                        alt={`Slide ${index + 1}`}
-                    />
-                </div>
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                    {slidSrc.map((_, i) => (
-                        <button key={i} onClick={() => handleButtonClick(i)} className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${i === index ? 'bg-gray-500' : 'bg-gray-800'} hover:bg-gray-400`} />
-                    ))}
                 </div>
                 <div className="absolute top-1/2 right-4 transform -translate-y-1/2 z-10">
                     <svg onClick={SlideToRight} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="4" stroke="currentColor" className="w-10 h-10 cursor-pointer hover:text-yellow-200 hover:scale-110 transition-transform">
