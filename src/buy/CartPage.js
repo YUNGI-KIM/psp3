@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from "../functions/Header";
 import { motion, AnimatePresence } from "framer-motion";
+import cartImg from '../assets/cart.png'; // 장바구니 아이콘 경로에 맞게 수정
 
 function CartPage() {
     const [cartItems, setCartItems] = useState([]);
@@ -16,8 +17,18 @@ function CartPage() {
         localStorage.setItem('cart', JSON.stringify(newCart));
     }
 
+    function handleBuy(item) {
+        alert(`${item.name} 구매페이지로 이동!`);
+        // 구매페이지로 이동 코드 추가
+    }
+
+    function handleAddToCart(item) {
+        alert(`${item.name} 수량 추가/기능 예시`);
+        // 장바구니에서 수량 추가 등 실제 로직 넣을 수 있음
+    }
+
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen bg-gray-900">
             <Header />
             <div className="max-w-6xl mx-auto py-10 px-4">
                 <h2 className="text-3xl font-extrabold mb-10 text-center text-white">장바구니</h2>
@@ -26,38 +37,61 @@ function CartPage() {
                 ) : (
                     <ul className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <AnimatePresence>
-                            {cartItems.map((item, index) => (
+                            {cartItems.map((product, idx) => (
                                 <motion.li
-                                    key={item.name}
-                                    className="flex bg-gray-800 flex-col items-center rounded-2xl shadow-xl p-8 min-h-[480px] relative"
+                                    key={product.name}
+                                    className="flex flex-col rounded-lg border overflow-hidden transition-transform hover:scale-105 bg-white dark:bg-gray-800 shadow relative"
                                     initial={{ opacity: 0, scale: 0.9, y: 20 }}
                                     animate={{ opacity: 1, scale: 1, y: 0 }}
                                     exit={{ opacity: 0, scale: 0.8, x: 50 }}
                                     transition={{ duration: 0.3 }}
                                     layout
                                 >
-                                    {/* 삭제 버튼 */}
+                                    {/* 삭제 버튼 우상단 */}
                                     <svg
-                                        onClick={() => remove(item)}
-                                        className="cursor-pointer hover:text-red-700 hover:scale-110 absolute top-5 right-5"
+                                        onClick={() => remove(product)}
+                                        className="cursor-pointer hover:text-red-700 hover:scale-110 absolute top-4 right-4 z-10"
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="black"
-                                        width="24"
-                                        height="24"
+                                        width="18"
+                                        height="18"
                                         viewBox="0 0 384 512"
                                     >
                                         <path d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"/>
                                     </svg>
-                                    {/* 이미지 */}
-                                    <img
-                                        src={item.image}
-                                        alt={item.name}
-                                        className="w-full h-60 object-cover rounded-xl mb-6 shadow"
-                                    />
-                                    {/* 상품명 */}
-                                    <span className="font-bold text-white text-2xl text-center mt-2">{item.name}</span>
-                                    {/* 가격 */}
-                                    <span className="text-indigo-700 font-extrabold text-2xl text-center mt-4">{item.price}</span>
+                                    {/* 이미지 줄(하얀 배경) */}
+                                    <img src={product.image} alt={product.name} className="w-full h-60 object-cover bg-white" />
+                                    {/* 내용 라인(어두운 바탕) */}
+                                    <div className="p-6 flex flex-col flex-grow bg-[#1e293b] text-white h-full">
+                                        <div className="flex justify-between items-center mb-3">
+                                            <h3 className="text-lg font-bold">{product.name}</h3>
+                                            {product.category &&
+                                                <span className="text-xs bg-indigo-500 px-2 py-1 rounded-full">{product.category}</span>
+                                            }
+                                        </div>
+                                        {product.features && (
+                                            <ul className="list-disc pl-5 space-y-1 text-sm mb-4">
+                                                {product.features.map((feature, fIdx) => (
+                                                    <li key={fIdx}>{feature}</li>
+                                                ))}
+                                            </ul>
+                                        )}
+                                        <div className="flex justify-between items-center mb-3 mt-auto">
+                                            <p className="text-lg font-bold">{product.price}₩</p>
+                                            <button
+                                                onClick={() => handleAddToCart(product)}
+                                                className="bg-[#E0E7FF] w-10 h-10 rounded-full flex items-center justify-center"
+                                            >
+                                                <img src={cartImg} alt="장바구니" className="w-5 h-5" />
+                                            </button>
+                                        </div>
+                                        <button
+                                            onClick={() => handleBuy(product)}
+                                            className="bg-indigo-600 hover:bg-indigo-700 w-full py-2 rounded-lg font-semibold"
+                                        >
+                                            {product.buttonText || '구매'}
+                                        </button>
+                                    </div>
                                 </motion.li>
                             ))}
                         </AnimatePresence>
