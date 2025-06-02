@@ -17,7 +17,7 @@ function CartPage() {
     }
 
     return (
-        <div className="min-h-screen bg-gray-900">
+        <div className="min-h-screen">
             <Header />
             <div className="max-w-6xl mx-auto py-10 px-4">
                 <h2 className="text-3xl font-extrabold mb-10 text-center text-white">장바구니</h2>
@@ -29,7 +29,7 @@ function CartPage() {
                             {cartItems.map((item, index) => (
                                 <motion.li
                                     key={item.name}
-                                    className="flex flex-col items-center bg-white rounded-2xl shadow-xl p-8 min-h-[480px] relative"
+                                    className="flex bg-gray-800 flex-col items-center rounded-2xl shadow-xl p-8 min-h-[480px] relative"
                                     initial={{ opacity: 0, scale: 0.9, y: 20 }}
                                     animate={{ opacity: 1, scale: 1, y: 0 }}
                                     exit={{ opacity: 0, scale: 0.8, x: 50 }}
@@ -52,7 +52,7 @@ function CartPage() {
                                     <img
                                         src={item.image}
                                         alt={item.name}
-                                        className="w-60 h-60 object-cover rounded-xl mb-6 shadow"
+                                        className="w-60 h-60 bg-gray-800 object-cover rounded-xl mb-6 shadow"
                                     />
                                     {/* 상품명 */}
                                     <span className="font-bold text-2xl text-center mt-2">{item.name}</span>
