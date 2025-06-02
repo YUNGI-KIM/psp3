@@ -4,8 +4,9 @@ import Header from "../functions/Header";
 
 const PurchasePage = () => {
     const location = useLocation();
+    // 여러 개의 상품이 배열로 들어옴
+    const products = location.state?.product || [];
     const navigate = useNavigate();
-    const product = location.state?.product;
 
     const [form, setForm] = useState({
         name: '',
@@ -28,7 +29,7 @@ const PurchasePage = () => {
         alert(`결제 완료! (${form.paymentMethod})`);
     };
 
-    if (!product) {
+    if (!products.length) {
         return (
             <div className="p-10 text-center bg-gray-900 min-h-screen">
                 <h2 className="text-2xl font-bold mb-4 text-white">상품 정보를 불러올 수 없습니다.</h2>
@@ -45,18 +46,22 @@ const PurchasePage = () => {
     return (
         <>
             <Header />
-            <div className="min-h-screen py-8">
-                <h2 className="text-2xl font-extrabold text-center text-black mb-10">구매하기</h2>
-                <div className="max-w-3xl mx-auto flex flex-col lg:flex-row bg-transparent px-2">
-                    {/* 왼쪽: 상품 정보 */}
-                    <div className="bg-gray-800 rounded-2xl shadow-xl flex flex-col items-center justify-center w-full lg:w-2/5 p-8">
-                        <img
-                            src={product.image}
-                            alt={product.name}
-                            className="w-80 h-50 object-cover rounded-xl mb-4 border border-gray-200 bg-white"
-                        />
-                        <span className="font-bold text-lg text-white mb-2 text-center">{product.name}</span>
-                        <span className="text-indigo-700 font-extrabold text-2xl text-center">{product.price}원</span>
+            <div className="min-h-screen bg-gray-900 py-8">
+                <h2 className="text-2xl font-extrabold text-center text-white mb-10">구매하기</h2>
+                <div className="max-w-3xl mx-auto flex flex-col lg:flex-row gap-8 bg-transparent px-2">
+                    {/* 왼쪽: 여러 개 상품 리스트 */}
+                    <div className="bg-gray-800 rounded-2xl shadow-xl flex flex-col items-center w-full lg:w-2/5 p-6 gap-4">
+                        {products.map((item, idx) => (
+                            <div key={item.name + idx} className="flex flex-col items-center w-full border-b border-gray-700 pb-4 last:border-b-0">
+                                <img
+                                    src={item.image}
+                                    alt={item.name}
+                                    className="w-24 h-24 object-cover rounded-xl mb-2 border border-gray-200 bg-white"
+                                />
+                                <span className="font-bold text-base text-white">{item.name}</span>
+                                <span className="text-indigo-300 font-extrabold text-lg">{item.price}원</span>
+                            </div>
+                        ))}
                     </div>
                     {/* 오른쪽: 배송지/결제 */}
                     <div className="bg-indigo-900 rounded-2xl flex-1 flex flex-col justify-center p-8 min-w-[280px]">

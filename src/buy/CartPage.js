@@ -1,120 +1,88 @@
-import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import Header from "../functions/Header";
+import { useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from "framer-motion";
 
-const PurchasePage = () => {
-    const location = useLocation();
-    // 여러 개의 상품이 배열로 들어옴
-    const products = location.state?.product || [];
-    const navigate = useNavigate();
 
-    const [form, setForm] = useState({
-        name: '',
-        phone: '',
-        address: '',
-        paymentMethod: '카드결제',
-    });
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setForm(prev => ({ ...prev, [name]: value }));
-    };
 
-    const handleSubmit = () => {
-        const { name, phone, address } = form;
-        if (!name || !phone || !address) {
-            alert('배송지 정보를 모두 입력해주세요.');
-            return;
-        }
-        alert(`결제 완료! (${form.paymentMethod})`);
-    };
+function CartPage() {
+    const [cartItems, setCartItems] = useState([]);
 
-    if (!products.length) {
-        return (
-            <div className="p-10 text-center bg-gray-900 min-h-screen">
-                <h2 className="text-2xl font-bold mb-4 text-white">상품 정보를 불러올 수 없습니다.</h2>
-                <button
-                    onClick={() => navigate(-1)}
-                    className="mt-2 px-5 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-700"
-                >
-                    돌아가기
-                </button>
-            </div>
-        );
+    useEffect(() => {
+        const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
+        setCartItems(savedCart);
+    }, []);
+
+    function remove(item) {
+        const newCart = cartItems.filter(i => i.name !== item.name);
+        setCartItems(newCart);
+        localStorage.setItem('cart', JSON.stringify(newCart));
     }
+    const navigate = useNavigate();
+    const handleToBuy = () => {
+        navigate('/purchase', { state: { product: cartItems } });
+
+    };
 
     return (
-        <>
-            <Header />
-            <div className="min-h-screen bg-gray-900 py-8">
-                <h2 className="text-2xl font-extrabold text-center text-white mb-10">구매하기</h2>
-                <div className="max-w-3xl mx-auto flex flex-col lg:flex-row gap-8 bg-transparent px-2">
-                    {/* 왼쪽: 여러 개 상품 리스트 */}
-                    <div className="bg-gray-800 rounded-2xl shadow-xl flex flex-col items-center w-full lg:w-2/5 p-6 gap-4">
-                        {products.map((item, idx) => (
-                            <div key={item.name + idx} className="flex flex-col items-center w-full border-b border-gray-700 pb-4 last:border-b-0">
-                                <img
-                                    src={item.image}
-                                    alt={item.name}
-                                    className="w-24 h-24 object-cover rounded-xl mb-2 border border-gray-200 bg-white"
-                                />
-                                <span className="font-bold text-base text-white">{item.name}</span>
-                                <span className="text-indigo-300 font-extrabold text-lg">{item.price}원</span>
-                            </div>
-                        ))}
-                    </div>
-                    {/* 오른쪽: 배송지/결제 */}
-                    <div className="bg-indigo-900 rounded-2xl flex-1 flex flex-col justify-center p-8 min-w-[280px]">
-                        <h4 className="text-lg font-bold text-white mb-5">배송지 정보</h4>
-                        <div className="space-y-3 mb-8">
-                            <input
-                                type="text"
-                                name="name"
-                                placeholder="이름"
-                                value={form.name}
-                                onChange={handleChange}
-                                className="w-full p-2 border border-indigo-200 rounded focus:border-indigo-500 focus:outline-none text-gray-900 bg-gray-50"
-                            />
-                            <input
-                                type="tel"
-                                name="phone"
-                                placeholder="연락처"
-                                value={form.phone}
-                                onChange={handleChange}
-                                className="w-full p-2 border border-indigo-200 rounded focus:border-indigo-500 focus:outline-none text-gray-900 bg-gray-50"
-                            />
-                            <input
-                                type="text"
-                                name="address"
-                                placeholder="주소"
-                                value={form.address}
-                                onChange={handleChange}
-                                className="w-full p-2 border border-indigo-200 rounded focus:border-indigo-500 focus:outline-none text-gray-900 bg-gray-50"
-                            />
-                        </div>
-                        <h4 className="text-lg font-bold text-white mb-2">결제수단</h4>
-                        <select
-                            name="paymentMethod"
-                            value={form.paymentMethod}
-                            onChange={handleChange}
-                            className="w-full p-2 rounded-md border border-indigo-200 text-base bg-gray-50 text-gray-900 mb-8"
-                        >
-                            <option value="카드결제">카드결제</option>
-                            <option value="카카오페이">카카오페이</option>
-                            <option value="네이버페이">네이버페이</option>
-                        </select>
-                        <button
-                            type="button"
-                            onClick={handleSubmit}
-                            className="py-3 px-6 bg-indigo-500 hover:bg-indigo-700 text-white w-full rounded-lg text-lg font-bold shadow-md transition"
-                        >
-                            결제하기
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </>
-    );
-};
 
-export default PurchasePage;
+        <div className="min-h-screen">
+            <Header />
+            <div className="max-w-6xl mx-auto py-10 px-4">
+                <h2 className="text-2xl font-extrabold mb-8 text-center text-black">장바구니</h2>
+                {cartItems.length === 0 ? (
+                    <p className="text-gray-400 text-center text-base">장바구니가 비어 있습니다.</p>
+                ) : (
+                    <>
+                        <ul className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                            <AnimatePresence>
+                                {cartItems.map((product) => (
+                                    <motion.li
+                                        key={product.name}
+                                        className="flex flex-col border-black rounded-lg border overflow-hidden transition-transform hover:scale-105 bg-white shadow relative"
+                                        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                                        exit={{ opacity: 0, scale: 0.8, x: 50 }}
+                                        transition={{ duration: 0.3 }}
+                                        layout
+                                    >
+                                        {/* 삭제 버튼 우상단 */}
+                                        <svg
+                                            onClick={() => remove(product)}
+                                            className="cursor-pointer hover:text-red-700 hover:scale-110 absolute top-3 right-3 z-10"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="black"
+                                            width="16"
+                                            height="16"
+                                            viewBox="0 0 384 512"
+                                        >
+                                            <path d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"/>
+                                        </svg>
+                                        {/* 이미지 줄(하얀 배경) */}
+                                        <div className="w-full h-40 bg-white flex items-center justify-center">
+                                            <img src={product.image} alt={product.name} className="max-w-full max-h-full object-contain" />
+                                        </div>
+                                        {/* 내용 라인(어두운 바탕) */}
+                                        <div className="p-4 flex flex-col flex-1 bg-[#1e293b] text-white min-h-[90px]">
+                                            <div className="flex justify-between items-center mb-2">
+                                                <h3 className="text-base font-bold">{product.name}</h3>
+                                                <h3 className="text-base font-bold">{product.price}</h3>
+                                            </div>
+                                        </div>
+                                    </motion.li>
+                                ))}
+                            </AnimatePresence>
+                        </ul>
+                        <button onClick={()=>{handleToBuy()}}
+                            className="bg-indigo-600 hover:bg-indigo-700 w-full py-2 rounded-lg font-semibold text-white text-base shadow">
+                            전체 상품 구매하기
+                        </button>
+                    </>
+                )}
+            </div>
+        </div>
+    );
+}
+
+export default CartPage;
