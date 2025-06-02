@@ -11,7 +11,7 @@ const PurchasePage = () => {
         name: '',
         phone: '',
         address: '',
-        paymentMethod: '카드결제',
+        paymentMethod: '카드결제' ,
     });
 
     const handleChange = (e) => {
@@ -46,7 +46,7 @@ const PurchasePage = () => {
         <>
             <Header />
 
-            <div className="relative max-w-3xl px-4 mx-auto sm:px-6 lg:px-8 min-h-screen flex flex-col lg:flex-row justify-center items-stretch bg-gray-900 pt-20">
+            <div className="relative max-w-3xl px-4 mx-auto sm:px-6 lg:px-8 min-h-screen flex flex-col lg:flex-row justify-center items-stretch pt-20">
                 {/* 왼쪽: 상품 정보만 */}
                 <div className="bg-white/90 rounded-l-2xl shadow-xl flex flex-col items-center justify-center w-full lg:w-2/5 py-16 px-6">
                     <img
