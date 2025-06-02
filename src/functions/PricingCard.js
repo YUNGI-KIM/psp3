@@ -182,7 +182,7 @@ function ProductCatalog({ pageType, brandInput = "", showFilter = true, customTi
     // 카테고리, 필터 적용
     const pageTypes = pageType && pageType !== 'all' ? pageType.split('|') : ['all'];
     let availableProducts = products;
-    if (pageTypes[0] !== 'all') {
+    if (!cbti && pageTypes[0] !== 'all') {
         availableProducts = products.filter(product => pageTypes.includes(product.category));
     }
     const categories = [...new Set(availableProducts.map(p => p.category))];
