@@ -52,10 +52,10 @@ function CartPage() {
                                     <img
                                         src={item.image}
                                         alt={item.name}
-                                        className="w-60 h-60 bg-gray-800 object-cover rounded-xl mb-6 shadow"
+                                        className="w-full h-60 object-cover rounded-xl mb-6 shadow"
                                     />
                                     {/* 상품명 */}
-                                    <span className="font-bold text-2xl text-center mt-2">{item.name}</span>
+                                    <span className="font-bold text-white text-2xl text-center mt-2">{item.name}</span>
                                     {/* 가격 */}
                                     <span className="text-indigo-700 font-extrabold text-2xl text-center mt-4">{item.price}</span>
                                 </motion.li>
