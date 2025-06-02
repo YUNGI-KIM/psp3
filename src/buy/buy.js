@@ -7,7 +7,8 @@ import React from "react";
 
 
 function Buy() {
-    const { brand = "" } = useParams() || "";
+    const { brand} = useParams();
+    console.log(brand);
 
     // const pageType = brand === "" ? "자동차" : brand + "|자동차";
     return (
