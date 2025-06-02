@@ -43,15 +43,6 @@ function AccForCar() {
         <>
             <Header />
             <div className="py-8 max-w-6xl mx-auto">
-                <div className="mb-6 flex justify-center">
-                    <input
-                        type="text"
-                        value={searchInput}
-                        onChange={e => setSearchInput(e.target.value)}
-                        placeholder="제품명 또는 브랜드명으로 검색"
-                        className="border rounded-lg px-4 py-2 w-72 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                    />
-                </div>
                 <ProductCatalog
                     pageType="차량 악세서리"
                     showFilter={false}

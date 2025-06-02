@@ -91,35 +91,31 @@ function ProductCatalog({ pageType, showFilter = true, customTitle }) {
         const fetchData = async () => {
             setIsLoading(true);
             try {
-                // 브랜드 있으면 brand별, 없으면 전체 가져오기
-                const vehicleRes = await fetch(
-                    brand
-                        ? `https://clos21.kr/api/vehicle-products/brand/${brand}`
-                        : "https://clos21.kr/api/vehicle-products"
-                );
+                const vehicleRes = await fetch("https://clos21.kr/api/vehicle-products");
                 const accessoryRes = await fetch("https://clos21.kr/api/accessory-products");
-
                 const [vehicleData, accessoryData] = await Promise.all([
                     vehicleRes.json(),
                     accessoryRes.json(),
                 ]);
 
-                // **프론트엔드에서 이름/브랜드 부분매칭 필터링**
-                const lowerBrand = brand ? brand.toLowerCase() : "";
+                // 검색어가 있으면 모든 이름/브랜드에서 부분매칭
+                const lowerKeyword = brand ? brand.toLowerCase() : "";
 
-                const filteredVehicleData = brand
-                    ? vehicleData.filter(v =>
-                        (v.brand && v.brand.toLowerCase().includes(lowerBrand)) ||
-                        (v.name && v.name.toLowerCase().includes(lowerBrand))
-                    )
-                    : vehicleData;
+                const filteredVehicleData = !brand
+                    ? vehicleData
+                    : vehicleData.filter(
+                        v =>
+                            (v.brand && v.brand.toLowerCase().includes(lowerKeyword)) ||
+                            (v.name && v.name.toLowerCase().includes(lowerKeyword))
+                    );
 
-                const filteredAccessoryData = brand
-                    ? accessoryData.filter(a =>
-                        (a.brand && a.brand.toLowerCase().includes(lowerBrand)) ||
-                        (a.name && a.name.toLowerCase().includes(lowerBrand))
-                    )
-                    : accessoryData;
+                const filteredAccessoryData = !brand
+                    ? accessoryData
+                    : accessoryData.filter(
+                        a =>
+                            (a.brand && a.brand.toLowerCase().includes(lowerKeyword)) ||
+                            (a.name && a.name.toLowerCase().includes(lowerKeyword))
+                    );
 
                 const combined = [
                     ...filteredVehicleData.map((v) => ({
