@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import cartImg from "../Image/etc/cart.png";
 
 // 카테고리 필터
@@ -26,7 +26,7 @@ function CategoryFilter({ categories, activeCategory, onCategoryChange, showFilt
     );
 }
 
-//  제품 카드 (장바구니 기능 포함)
+// 제품 카드 (장바구니 기능 포함)
 function ProductCard({ product }) {
     const navigate = useNavigate();
 
@@ -76,24 +76,24 @@ function ProductCard({ product }) {
     );
 }
 
-//  전체 제품 카탈로그
-function ProductCatalog({ pageType, brand, showFilter = true, customTitle }) {
+// 전체 제품 카탈로그
+function ProductCatalog({ pageType, showFilter = true, customTitle }) {
+    const { brand } = useParams();
+    const navigate = useNavigate();
+
     const [products, setProducts] = useState([]);
     const [activeCategory, setActiveCategory] = useState('all');
-    const [brandInput, setBrandInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [searchInput, setSearchInput] = useState(brand || '');
 
-    setBrandInput(brand);
-
-    // 브랜드명 검색 후 데이터 받아오기
     useEffect(() => {
+        setSearchInput(brand || '');
         const fetchData = async () => {
             setIsLoading(true);
             try {
-                // 브랜드명 필터 API 요청. 없으면 전체 호출
                 const vehicleRes = await fetch(
-                    brandInput.trim()
-                        ? `https://clos21.kr/api/vehicle-products/brand/${brandInput.trim()}`
+                    brand
+                        ? `https://clos21.kr/api/vehicle-products/brand/${brand}`
                         : "https://clos21.kr/api/vehicle-products"
                 );
                 const accessoryRes = await fetch("https://clos21.kr/api/accessory-products");
@@ -101,18 +101,17 @@ function ProductCatalog({ pageType, brand, showFilter = true, customTitle }) {
                     vehicleRes.json(),
                     accessoryRes.json(),
                 ]);
-                // 차량 브랜드명이 있을 경우 프론트에서도 브랜드명으로 한번 더 필터(백엔드가 부분매칭 지원안하면)
-                const filteredVehicleData = brandInput.trim()
+                // 프론트단 필터 (부분매칭 추가로 필요하면 여기에)
+                const filteredVehicleData = brand
                     ? vehicleData.filter(v =>
-                        (v.brand && v.brand.toLowerCase().includes(brandInput.trim().toLowerCase()))
-                        || (v.name && v.name.toLowerCase().includes(brandInput.trim().toLowerCase()))
+                        (v.brand && v.brand.toLowerCase().includes(brand.toLowerCase()))
+                        || (v.name && v.name.toLowerCase().includes(brand.toLowerCase()))
                     )
                     : vehicleData;
-                // 악세서리 상품도 이름에 브랜드명 포함시 필터
-                const filteredAccessoryData = brandInput.trim()
+                const filteredAccessoryData = brand
                     ? accessoryData.filter(a =>
-                        (a.brand && a.brand.toLowerCase().includes(brandInput.trim().toLowerCase()))
-                        || (a.name && a.name.toLowerCase().includes(brandInput.trim().toLowerCase()))
+                        (a.brand && a.brand.toLowerCase().includes(brand.toLowerCase()))
+                        || (a.name && a.name.toLowerCase().includes(brand.toLowerCase()))
                     )
                     : accessoryData;
 
@@ -145,7 +144,7 @@ function ProductCatalog({ pageType, brand, showFilter = true, customTitle }) {
             }
         };
         fetchData();
-    }, [brandInput]);
+    }, [brand, pageType]);
 
     const pageTypes = pageType && pageType !== 'all' ? pageType.split('|') : ['all'];
 
@@ -168,21 +167,31 @@ function ProductCatalog({ pageType, brand, showFilter = true, customTitle }) {
                 ? '전체 상품'
                 : `${pageTypes.join(', ')} 판매`;
 
-    // 브랜드명 검색 인풋
-    const handleBrandInputChange = e => setBrandInput(e.target.value);
+    // 검색 input
+    const handleBrandInputChange = e => setSearchInput(e.target.value);
+
+    const handleSearch = e => {
+        e.preventDefault();
+        if (searchInput.trim()) {
+            navigate(`/catalog/${searchInput.trim()}`);
+        } else {
+            navigate(`/catalog`);
+        }
+    };
 
     return (
         <div className="py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-bold text-center mb-8">{pageTitle}</h1>
-            <div className="flex justify-center mb-8">
+            <form onSubmit={handleSearch} className="flex justify-center mb-8">
                 <input
                     type="text"
-                    value={brandInput}
+                    value={searchInput}
                     onChange={handleBrandInputChange}
                     placeholder="브랜드명으로 검색 (예: 현대, 기아, 제네시스...)"
                     className="border rounded-lg px-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
-            </div>
+                <button type="submit" className="ml-2 px-4 py-2 bg-indigo-600 text-white rounded-lg">검색</button>
+            </form>
             <CategoryFilter
                 categories={categories}
                 activeCategory={activeCategory}
