@@ -45,18 +45,18 @@ const PurchasePage = () => {
     return (
         <>
             <Header />
-            <div className="min-h-screen bg-gray-900 py-8">
+            <div className="min-h-screen py-8">
                 <h2 className="text-2xl font-extrabold text-center text-white mb-10">구매하기</h2>
-                <div className="max-w-3xl mx-auto flex flex-col lg:flex-row gap-8 bg-transparent px-2">
+                <div className="max-w-3xl mx-auto flex flex-col lg:flex-row bg-transparent px-2">
                     {/* 왼쪽: 상품 정보 */}
                     <div className="bg-gray-800 rounded-2xl shadow-xl flex flex-col items-center justify-center w-full lg:w-2/5 p-8">
                         <img
                             src={product.image}
                             alt={product.name}
-                            className="w-32 h-32 object-cover rounded-xl mb-4 border border-gray-200 bg-white"
+                            className="w-80 h-50 object-cover rounded-xl mb-4 border border-gray-200 bg-white"
                         />
                         <span className="font-bold text-lg text-white mb-2 text-center">{product.name}</span>
-                        <span className="text-indigo-300 font-extrabold text-2xl text-center">{product.price}원</span>
+                        <span className="text-indigo-700 font-extrabold text-2xl text-center">{product.price}원</span>
                     </div>
                     {/* 오른쪽: 배송지/결제 */}
                     <div className="bg-indigo-900 rounded-2xl flex-1 flex flex-col justify-center p-8 min-w-[280px]">
