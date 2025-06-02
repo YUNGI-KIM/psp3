@@ -5,7 +5,11 @@ import Header from "../functions/Header";
 const PurchasePage = () => {
     const location = useLocation();
     let products = location.state?.product || [];
-    if (!Array.isArray(products)) products = [products];
+    // 객체로 올 때도 배열로 변환 (1개만 결제시)
+    if (!Array.isArray(products)) {
+        products = [products];
+    }
+    const navigate = useNavigate();
 
     const [form, setForm] = useState({
         name: '',
@@ -45,7 +49,7 @@ const PurchasePage = () => {
     return (
         <>
             <Header />
-            <div className="min-h-screen py-8">
+            <div className="min-h-screen py-8 ">
                 <h2 className="text-2xl font-extrabold text-center text-black mb-5">구매하기</h2>
                 <div className="max-w-3xl mx-auto flex flex-col lg:flex-row bg-transparent px-2">
                     {/* 왼쪽: 여러 개 상품 리스트 */}
