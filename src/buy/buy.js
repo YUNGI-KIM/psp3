@@ -5,28 +5,24 @@ import DropDown from "../functions/DropDown";
 import Header from "../functions/Header";
 import ProductCatalog from "../functions/PricingCard";
 
-function Buy() {
-    const { brand, name , keyword} = useParams();
+function Buy({ pageType: defaultPageType }) {
+    const { brand, name, keyword } = useParams();
     const location = useLocation();
 
-    // 라우트에 따라 분기
-    let pageType = "all";
-    let brandInput = "";
+    let pageType = defaultPageType || "all";
+    let searchInput = "";
 
-    if (location.pathname.startsWith("/buy/car/")) {
+    if (location.pathname.startsWith("/buy/car")) {
         pageType = "자동차";
-        brandInput = brand || "";
-    } else if (location.pathname.startsWith("/buy/acc/")) {
+        searchInput = brand || "";
+    } else if (location.pathname.startsWith("/buy/acc")) {
         pageType = "차량 악세서리";
-        brandInput = name || "";
-    } else if (keyword) {
-        // /buy/:keyword (자동차+악세서리 모두에서 검색)
+        searchInput = name || "";
+    } else if (location.pathname === "/buy" || location.pathname.startsWith("/buy/")) {
         pageType = "all";
-        brandInput = keyword;
+        searchInput = keyword || "";
     } else {
-        // 모두 조회 조건에서 검색 아닐 때
-        pageType = "all";
-        brandInput = "";
+        pageType = defaultPageType || "all";
     }
 
     return (
@@ -36,7 +32,7 @@ function Buy() {
             <div className="flex w-full">
                 <ProductCatalog
                     pageType={pageType}
-                    brandInput={brandInput}
+                    brandInput={searchInput}
                     showFilter={true}
                 />
             </div>

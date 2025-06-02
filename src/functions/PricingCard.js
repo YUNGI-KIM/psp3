@@ -154,20 +154,14 @@ function ProductCatalog({ pageType, brandInput = "", showFilter = true, customTi
         fetchData();
     }, [brandInput, pageType]);
 
-    // pageType에 따른 title 완전 고정
-    let pageTitle;
-    if (customTitle) {
-        pageTitle = customTitle;
-    } else if (pageType === "자동차") {
-        pageTitle = "자동차 판매";
-    } else if (pageType === "차량 악세서리") {
-        pageTitle = "차량 악세서리 판매";
-    } else if (pageType === "all") {
-        pageTitle = "전체 상품";
-    } else {
-        // fallback (복수 pageType 등)
-        pageTitle = `${pageType} 판매`;
-    }
+    const pageTitle =
+        customTitle
+            ? customTitle
+            : pageType === '차량 악세서리'
+                ? '차량 악세서리 판매'
+                : pageType === '자동차'
+                    ? '자동차 판매'
+                    : '전체 상품';
 
     // 카테고리, 필터 적용
     const pageTypes = pageType && pageType !== 'all' ? pageType.split('|') : ['all'];
