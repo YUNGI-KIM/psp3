@@ -77,11 +77,13 @@ function ProductCard({ product }) {
 }
 
 //  전체 제품 카탈로그
-function ProductCatalog({ pageType, brandInput, showFilter = true, customTitle }) {
+function ProductCatalog({ pageType, brand, showFilter = true, customTitle }) {
     const [products, setProducts] = useState([]);
     const [activeCategory, setActiveCategory] = useState('all');
-    // const [brandInput, setBrandInput] = useState('');
+    const [brandInput, setBrandInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+
+    setBrandInput(brand);
 
     // 브랜드명 검색 후 데이터 받아오기
     useEffect(() => {
