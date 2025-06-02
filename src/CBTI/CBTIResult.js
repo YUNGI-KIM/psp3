@@ -82,7 +82,7 @@ function CBTIResult() {
                 다시하기
               </button>
             </Link>
-            <Link to="/startCBTI">
+            <Link to={`/buy/cbti/${cbti}`}>
               <button className="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white text-lg sm:text-xl font-semibold rounded-full transition">
                 내 차 보기
               </button>
