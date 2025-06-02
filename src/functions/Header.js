@@ -12,6 +12,8 @@ function Header() {
 
     const logoSrc = isHome ? LogoW : LogoB;
 
+    const [searchValue, setSearchValue] = useState("");
+
     useEffect(() => {
         console.log("Header user status Changed:", user);
     }, [user]);
@@ -30,6 +32,14 @@ function Header() {
         localStorage.removeItem("user");
         setUser(null);
         navigate("/login", { replace: true });
+    };
+
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        if (searchValue.trim()) {
+            navigate(`/buy/${encodeURIComponent(searchValue.trim())}`);
+            setSearchValue("");
+        }
     };
 
     // 메인 vs 서브 분기
@@ -53,20 +63,26 @@ function Header() {
                     </a>
 
                     {/* 검색 */}
-                    <div className={`flex items-center rounded-full px-4 py-2 w-full lg:max-w-md shadow-inner
-                           ${isHome ? "bg-white/10 border border-white/20" : "bg-gray-100 border border-gray-300"}`}>
+                    <form
+                        onSubmit={handleSearchSubmit}
+                        className={`flex items-center rounded-full px-4 py-2 w-full lg:max-w-md shadow-inner
+                                ${isHome ? "bg-white/10 border border-white/20" : "bg-gray-100 border border-gray-300"}`}>
                         <input
                             type="text"
-                            placeholder="모델명, 브랜드도 검색..."
+                            value={searchValue}
+                            onChange={e => setSearchValue(e.target.value)}
+                            placeholder="모델명, 브랜드로 검색..."
                             className={`flex-1 bg-transparent outline-none placeholder-gray-500 text-sm
-                         ${isHome ? "text-white" : "text-gray-800"}`}
+                            ${isHome ? "text-white" : "text-gray-800"}`}
                         />
-                        <svg className={`w-5 h-5 ml-2 ${isHome ? "text-white" : "text-gray-500"}`}
-                             fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                            <circle cx="11" cy="11" r="8" />
-                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                        </svg>
-                    </div>
+                        <button type="submit" className="ml-1" aria-label="검색">
+                            <svg className={`w-5 h-5 ${isHome ? "text-white" : "text-gray-500"}`}
+                                 fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8" />
+                                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            </svg>
+                        </button>
+                    </form>
 
                     {/* 로그인 / 회원가입 */}
                     <div className="flex gap-2">
@@ -114,8 +130,8 @@ function Header() {
                 <div className="flex justify-center gap-6 py-3 text-sm font-semibold">
                     {["차량구매", "차량용품", "견적", "차량정보", "고객지원"].map((label, idx) => {
                         const to =
-                            label === "차량구매"    ? "/buy" :
-                                label === "차량용품"    ? "/AccForCar" :
+                            label === "차량구매"    ? "/buy/car" :
+                                label === "차량용품"    ? "/buy/acc" :
                                     label === "견적"        ? "/Estimator" :
                                         label === "차량정보"    ? "/CarInformation" :
                                             "/Support";
