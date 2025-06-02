@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from "../functions/Header";
 import { motion, AnimatePresence } from "framer-motion";
-import cartImg from '../Image/etc/cart.png';
 
 function CartPage() {
     const [cartItems, setCartItems] = useState([]);
@@ -22,13 +21,9 @@ function CartPage() {
         // 구매페이지로 이동 코드 추가
     }
 
-    function handleAddToCart(item) {
-        alert(`${item.name} 수량 추가/기능 예시`);
-        // 장바구니에서 수량 추가 등 실제 로직 넣을 수 있음
-    }
 
     return (
-        <div className="min-h-screen bg-gray-900">
+        <div className="min-h-screen">
             <Header />
             <div className="max-w-6xl mx-auto py-10 px-4">
                 <h2 className="text-3xl font-extrabold mb-10 text-center text-white">장바구니</h2>
@@ -65,26 +60,8 @@ function CartPage() {
                                     <div className="p-6 flex flex-col flex-grow bg-[#1e293b] text-white h-full">
                                         <div className="flex justify-between items-center mb-3">
                                             <h3 className="text-lg font-bold">{product.name}</h3>
-                                            {product.category &&
-                                                <span className="text-xs bg-indigo-500 px-2 py-1 rounded-full">{product.category}</span>
-                                            }
                                         </div>
-                                        {product.features && (
-                                            <ul className="list-disc pl-5 space-y-1 text-sm mb-4">
-                                                {product.features.map((feature, fIdx) => (
-                                                    <li key={fIdx}>{feature}</li>
-                                                ))}
-                                            </ul>
-                                        )}
-                                        <div className="flex justify-between items-center mb-3 mt-auto">
-                                            <p className="text-lg font-bold">{product.price}₩</p>
-                                            <button
-                                                onClick={() => handleAddToCart(product)}
-                                                className="bg-[#E0E7FF] w-10 h-10 rounded-full flex items-center justify-center"
-                                            >
-                                                <img src={cartImg} alt="장바구니" className="w-5 h-5" />
-                                            </button>
-                                        </div>
+
                                         <button
                                             onClick={() => handleBuy(product)}
                                             className="bg-indigo-600 hover:bg-indigo-700 w-full py-2 rounded-lg font-semibold"
