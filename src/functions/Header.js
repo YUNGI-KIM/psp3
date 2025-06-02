@@ -34,11 +34,13 @@ function Header() {
         navigate("/login", { replace: true });
     };
 
-    const handleSearchSubmit = (e) => {
+    const handleHeaderSearch = (e) => {
         e.preventDefault();
         if (searchValue.trim()) {
-            navigate(`/buy/${encodeURIComponent(searchValue.trim())}`);
-            setSearchValue("");
+            // 항상 전체 상품에서 검색 결과를 보여주도록 이동
+            navigate(`/buy/${searchValue.trim()}`);
+        } else {
+            navigate('/buy');
         }
     };
 

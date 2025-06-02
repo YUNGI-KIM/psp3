@@ -195,11 +195,9 @@ function ProductCatalog({ pageType, brandInput = "", showFilter = true, customTi
 
     const pageTitle = customTitle
         ? customTitle
-        : (categories.includes("자동차") && categories.length === 2)
-            ? `${categories.find(c => c !== "자동차")} 판매`
-            : pageType === 'all'
-                ? '전체 상품'
-                : `${pageTypes.join(', ')} 판매`;
+        : (categories.length === 1)
+            ? `${categories[0]} 판매`
+            : '전체 상품';
 
     return (
         <div className="py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
