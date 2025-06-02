@@ -24,7 +24,7 @@ function CartPage() {
                 {cartItems.length === 0 ? (
                     <p className="text-gray-500 text-center">장바구니가 비어 있습니다.</p>
                 ) : (
-                    <ul className="space-y-4">
+                    <ul className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <AnimatePresence>
                             {cartItems.map((item, index) => (
                                 <motion.li
