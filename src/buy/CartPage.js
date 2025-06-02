@@ -20,7 +20,7 @@ function CartPage() {
         <div className="min-h-screen">
             <Header />
             <div className="max-w-6xl mx-auto py-10 px-4">
-                <h2 className="text-2xl font-extrabold mb-8 text-center text-white">장바구니</h2>
+                <h2 className="text-2xl font-extrabold mb-8 text-center text-black">장바구니</h2>
                 {cartItems.length === 0 ? (
                     <p className="text-gray-400 text-center text-base">장바구니가 비어 있습니다.</p>
                 ) : (
