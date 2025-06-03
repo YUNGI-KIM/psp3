@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 function AnswerForQ() {
   const location = useLocation();
   const key = location.state?.key;
+  console.log(key);
 
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
