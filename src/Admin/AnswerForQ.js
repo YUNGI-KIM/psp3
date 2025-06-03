@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Header from "../functions/Header";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 
 function AnswerForQ() {
   const { key } = useParams();
+  const navigate = useNavigate();
 
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -23,21 +24,34 @@ function AnswerForQ() {
     }
   }, [key]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const comment = `${answerTitle}\n${answerContent}`;
-    fetch(`https://clos21.kr/api/articles/${key}/comments`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ comment }),
-      credentials: "include",
-    })
-    .then(res => {
+    try {
+      const res = await fetch(`https://clos21.kr/api/articles/${key}/comments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ comment }),
+        credentials: "include",
+      });
       if (res.ok) {
         setAnswerTitle('');
         setAnswerContent('');
+        await fetch(`/api/articles/${key}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({
+            title: article.title,
+            content: article.content,
+            status: 1
+          }),
+        });
+        navigate('/adminMain');
       }
-    });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   if (loading) {
