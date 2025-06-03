@@ -57,6 +57,9 @@ function App() {
               <Route path='/answerForQ' element={
                 <RequireAdmin><AnswerForQ/></RequireAdmin>
               } />
+              <Route path='/answerForQ/:key' element={
+                <RequireAdmin><AnswerForQ/></RequireAdmin>
+              } />
               <Route path='/adminMain' element={
                 <RequireAdmin><AdminMainPage/></RequireAdmin>
               } />

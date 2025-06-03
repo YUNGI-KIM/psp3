@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Header from "../functions/Header";
-import { useLocation } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
 function AnswerForQ() {
-  const location = useLocation();
-  const key = location.state?.key;
-  console.log(key);
+  const { key } = useParams();
 
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
