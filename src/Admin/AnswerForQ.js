@@ -31,7 +31,10 @@ function AnswerForQ() {
       const res = await fetch(`https://clos21.kr/api/articles/${key}/comments`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ comment }),
+        body: JSON.stringify({
+          title: answerTitle,
+          comment: answerContent
+        }),
         credentials: "include",
       });
       if (res.ok) {
