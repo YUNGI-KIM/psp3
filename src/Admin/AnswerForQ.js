@@ -94,7 +94,7 @@ function AnswerForQ() {
               <span className="font-medium">Title:</span> {article.title}
             </p>
             <p className="text-gray-600">
-              <span className="font-medium">User Name:</span> {userName}
+              <span className="font-medium">User Name:</span> {article.name}
             </p>
             <p className="text-gray-600">
               <span className="font-medium">Detail:</span> {article.content}
