@@ -14,7 +14,7 @@ function AnswerView() {
             setLoading(true);
             setNotFound(false);
             try {
-                const commentRes = await fetch(`https://clos21.kr/api/comments/${id}`, { credentials: "include" });
+                const commentRes = await fetch(`https://clos21.kr/api/articles/comments/${id}`, { credentials: "include" });
                 if (!commentRes.ok) {
                     setNotFound(true);
                     setLoading(false);
