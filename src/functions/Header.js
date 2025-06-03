@@ -20,6 +20,7 @@ function Header() {
         console.log("Header user status Changed:", user);
     }, [user]);
 
+
     const handleLogout = async () => {
         try {
             const response = await fetch("https://clos21.kr/logout", {
@@ -89,7 +90,7 @@ function Header() {
                     </form>
 
                     {/* 로그인 / 회원가입 */}
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 items-center">
                         {user ? (
                             <>
                                 <span className="text-sm font-semibold">{user.name}님</span>
@@ -148,6 +149,14 @@ function Header() {
                             </a>
                         );
                     })}
+                    {user && user.perm === 1 && (
+                        <a href="/adminMain"
+                           className={`relative group transition-colors duration-200
+                                ${isHome ? "text-white hover:text-yellow-300" : "text-gray-800 hover:text-yellow-500"}`}>
+                            <span>Admin</span>
+                            <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-yellow-300 group-hover:w-full transition-all duration-300" />
+                        </a>
+                    )}
                 </div>
             </nav>
         </header>

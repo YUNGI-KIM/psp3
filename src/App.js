@@ -18,8 +18,8 @@ import Buy from "./buy/buy";
 import {useEffect} from "react";
 import PurchasePage from "./buy/PurchasePage";
 import Cart from  "./buy/CartPage"
+import RequireAdmin from "./functions/RequireAdmin";
 import AnswerView from "./pages/AnswerView";
-import React from "react";
 
 function App() {
   useEffect(() => {
@@ -53,9 +53,18 @@ function App() {
               <Route path="/buy/:keyword" element={<Buy pageType="all" />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/purchase/" element={<PurchasePage />} />
-              <Route path='/receviedSupport' element={<ReceviedSupport/>} />
-              <Route path='/answerForQ' element={<AnswerForQ/>} />
-              <Route path='/adminMain' element={<AdminMainPage/>} />
+              <Route path='/receviedSupport' element={
+                <RequireAdmin><ReceviedSupport/></RequireAdmin>
+              } />
+              <Route path='/answerForQ' element={
+                <RequireAdmin><AnswerForQ/></RequireAdmin>
+              } />
+              <Route path='/answerForQ/:key' element={
+                <RequireAdmin><AnswerForQ/></RequireAdmin>
+              } />
+              <Route path='/adminMain' element={
+                <RequireAdmin><AdminMainPage/></RequireAdmin>
+              } />
               <Route path="/CarInformation" element={<CarInformation />} />
               <Route path="/CarDetail/:name" element={<VehicleDetail />} />
             </Routes>

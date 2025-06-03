@@ -1,24 +1,80 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from "../functions/Header";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 
 function AnswerForQ() {
-  const questions = [
-    {
-      name: "user",
-      requestDate: "2025/04/12",
-      title: "테스트 제목입니다",
-      detail:
-        "지금 이 문장은 자동으로 엔터가 쳐지는지 테스트를 하기 위해 있는 문장이니 수정을 엄금합니다.",
-      status: 1
-    },
-    { name: "aaaa", requestDate: "2025/05/02", title: "receivec", status: 0 },
-    { name: "bbbb", requestDate: "2025/04/30", title: "asdf", status: 0 },
-    { name: "cccc", requestDate: "2025/05/01", title: "집에 보내주세요", status: 1 }
-  ];
+  const { key } = useParams();
+  const navigate = useNavigate();
 
+  const [article, setArticle] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [answerTitle, setAnswerTitle] = useState('');
+  const [answerContent, setAnswerContent] = useState('');
+  const [userName, setUserName] = useState('');
 
-  const question = questions[1];
-  const detail = questions[0].detail;
+  useEffect(() => {
+    if (key) {
+      fetch(`https://clos21.kr/api/articles/${key}`, { credentials: "include" })
+        .then(res => res.json())
+        .then(data => {
+          setArticle(data);
+          setLoading(false);
+        })
+        .catch(() => setLoading(false));
+    }
+  }, [key]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const comment = `${answerTitle}\n${answerContent}`;
+    try {
+      const res = await fetch(`https://clos21.kr/api/articles/${key}/comments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ comment }),
+        credentials: "include",
+      });
+      if (res.ok) {
+        setAnswerTitle('');
+        setAnswerContent('');
+        await fetch(`https://clos21.kr/api/articles/${key}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({
+            title: article.title,
+            content: article.content,
+            status: 1
+          }),
+        });
+        navigate('/adminMain');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (loading) {
+    return (
+      <>
+        <Header />
+        <div className="container mx-auto px-4 sm:px-8 py-10">
+          <p>Loading...</p>
+        </div>
+      </>
+    );
+  }
+
+  if (!article) {
+    return (
+      <>
+        <Header />
+        <div className="container mx-auto px-4 sm:px-8 py-10">
+          <p>Article not found.</p>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
@@ -27,39 +83,39 @@ function AnswerForQ() {
         <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
           <h1 className="text-2xl font-semibold text-gray-800 mb-6">Answer Page</h1>
 
-
           <div className="space-y-2 mb-8">
             <p className="text-gray-600">
-              <span className="font-medium">Request Date:</span> {question.requestDate}
+              <span className="font-medium">Request Date:</span> {article.createdAt}
             </p>
             <p className="text-gray-600">
-              <span className="font-medium">Title:</span> {question.title}
+              <span className="font-medium">Title:</span> {article.title}
             </p>
             <p className="text-gray-600">
-              <span className="font-medium">User Name:</span> {question.name}
+              <span className="font-medium">User Name:</span> {userName}
             </p>
             <p className="text-gray-600">
-              <span className="font-medium">Detail:</span> {detail}
+              <span className="font-medium">Detail:</span> {article.content}
             </p>
           </div>
 
-
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="answerTitle" className="block text-gray-700 font-medium mb-2">
-              제목
+                제목
               </label>
               <input
                 type="text"
                 id="answerTitle"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
                 placeholder="답변 제목을 입력하세요"
+                value={answerTitle}
+                onChange={(e) => setAnswerTitle(e.target.value)}
               />
             </div>
 
             <div>
               <label htmlFor="comment" className="block text-gray-700 font-medium mb-2">
-              내용
+                내용
               </label>
               <textarea
                 id="comment"
@@ -67,6 +123,8 @@ function AnswerForQ() {
                 rows="5"
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
                 placeholder="답변 내용을 입력하세요"
+                value={answerContent}
+                onChange={(e) => setAnswerContent(e.target.value)}
               ></textarea>
             </div>
 

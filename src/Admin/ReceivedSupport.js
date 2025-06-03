@@ -70,7 +70,7 @@ function ReceviedSupport() {
                                 </thead>
                                 <tbody>
                                     {articles.map((article, index) => (
-                                        <AdminSupportFn key={index} data={article} />
+                                        <AdminSupportFn key={index} data={article}/>
                                     ))}
                                 </tbody>
                             </table>
