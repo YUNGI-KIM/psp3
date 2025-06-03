@@ -7,10 +7,12 @@ import {
     FileText,
 } from "lucide-react";
 import { useUser } from "../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 function AnswerList() {
     const { user } = useUser();
     const [answers, setAnswers] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (user?.id) {
@@ -31,10 +33,11 @@ function AnswerList() {
                     {answers.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map((answer, index) => (
                         <motion.div
                             key={answer.id}
-                            className="bg-white rounded-xl shadow-md p-6 space-y-4 border border-gray-200"
+                            className="bg-white rounded-xl shadow-md p-6 space-y-4 border border-gray-200 cursor-pointer hover:shadow-lg transition"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.4, delay: index * 0.1 }}
+                            onClick={() => navigate(`/AnswerView/${answer.id}`)}
                         >
                             <div className="flex justify-between items-center text-sm text-gray-600">
                                 <div className="flex items-center gap-2">
