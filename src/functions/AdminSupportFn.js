@@ -68,7 +68,7 @@ function AdminSupportFn({ data }) {
             <td className="py-2 px-2.5 text-xs text-right sm:px-4 sm:py-3 sm:text-sm md:px-5 md:py-5 md:text-base bg-white border-b border-gray-200">
                 <button
                     type="button"
-                    onClick={() => navigate(data.status === 1 ? `/AnswerView/${data.id}` : `/answerForQ/${data.id}`)}
+                    onClick={() => navigate(data.status === 1 ? `/AnswerView/${data.comments[0].id}` : `/answerForQ/${data.id}`)}
                     className="text-indigo-600 hover:text-indigo-900"
                 >
                     {data.status === 1 ? "View" : "Send"}
