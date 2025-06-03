@@ -2,7 +2,14 @@ import React, { useEffect, useState } from "react";
 import Header from "../functions/Header";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Mail, User, Calendar, Tag, MessageSquare } from "lucide-react";
+import {
+    UserRound,
+    UserCheck,
+    CalendarClock,
+    MailOpen,
+    FileText,
+    MessageSquareQuote,
+} from "lucide-react";
 
 function AnswerView() {
     const { id } = useParams();
@@ -44,7 +51,7 @@ function AnswerView() {
 
     if (loading) {
         return (
-            <div className="bg-gray-100 min-h-screen font-sans">
+            <div className="bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen font-sans">
                 <Header />
                 <div className="px-4 py-20 text-center text-gray-600">Loading...</div>
             </div>
@@ -53,7 +60,7 @@ function AnswerView() {
 
     if (notFound || !comment || !article) {
         return (
-            <div className="bg-gray-100 min-h-screen font-sans">
+            <div className="bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen font-sans">
                 <Header />
                 <div className="px-4 py-20 text-center text-red-600">Content not found.</div>
             </div>
@@ -61,70 +68,89 @@ function AnswerView() {
     }
 
     return (
-        <div className="bg-gray-100 min-h-screen font-sans">
+        <div className="bg-gradient-to-b from-gray-50 to-gray-100 min-h-screen font-sans">
             <Header />
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="px-6 py-16 max-w-4xl mx-auto"
-            >
+            <div className="px-4 py-20">
                 <motion.div
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3, duration: 0.4 }}
-                    className="bg-white rounded-lg shadow-lg p-8 space-y-10"
+                    className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-10 space-y-10 border border-gray-200"
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
                 >
-                    {/* Email Header */}
-                    <div className="border-b border-gray-200 pb-6 flex flex-col space-y-3 text-gray-700">
-                        <div className="flex items-center space-x-2">
-                            <User className="w-5 h-5 text-indigo-600" />
-                            <span className="font-semibold">From:</span>
-                            <span>{article.name} &lt;{article.email}&gt;</span>
+                    {/* 메일 헤더 */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2 text-sm text-gray-600 border-b pb-6">
+                        <div className="flex items-center gap-2">
+                            <UserRound className="w-4 h-4 text-blue-500" />
+                            <span>
+                                <strong>From:</strong> {comment.name} &lt;{comment.email}&gt;
+                            </span>
                         </div>
-                        <div className="flex items-center space-x-2">
-                            <User className="w-5 h-5 text-green-600" />
-                            <span className="font-semibold">To:</span>
-                            <span>{comment.name} &lt;{comment.email}&gt;</span>
+                        <div className="flex items-center gap-2">
+                            <UserCheck className="w-4 h-4 text-green-600" />
+                            <span>
+                                <strong>To:</strong> {article.name} &lt;{article.email}&gt;
+                            </span>
                         </div>
-                        <div className="flex items-center space-x-2">
-                            <Calendar className="w-5 h-5 text-gray-500" />
-                            <span className="font-semibold">Date:</span>
-                            <span>{new Date(comment.createdAt).toLocaleDateString()}</span>
+                        <div className="flex items-center gap-2 col-span-full">
+                            <CalendarClock className="w-4 h-4 text-yellow-600" />
+                            <span>
+                                <strong>Date:</strong>{" "}
+                                {comment.createdAt ? new Date(comment.createdAt).toLocaleDateString() : ""}
+                            </span>
                         </div>
-                        <div className="flex items-center space-x-2">
-                            <Tag className="w-5 h-5 text-purple-600" />
-                            <span className="font-semibold">Subject:</span>
-                            <span>RE: {article.title}</span>
+                        <div className="flex items-center gap-2 col-span-full">
+                            <MailOpen className="w-4 h-4 text-purple-600" />
+                            <strong>Subject:</strong>
+                            <span className="text-blue-700 ml-1">RE: {article.title}</span>
                         </div>
                     </div>
 
-                    {/* Answer Body */}
-                    <div className="text-gray-800 leading-relaxed space-y-4">
-                        <p>Hello,</p>
-                        <p>Thank you for your question. Here is my response:</p>
+                    {/* 답변 본문 */}
+                    <motion.div
+                        className="text-gray-800 leading-relaxed text-base space-y-6"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                    >
+                        <div className="flex items-center gap-2 text-blue-700 font-semibold text-sm">
+                            <FileText className="w-4 h-4" />
+                            <span>Reply Message</span>
+                        </div>
+
+                        <p>Hi there,</p>
+                        <p>
+                            Thank you for reaching out. Here's the detailed answer to your question:
+                        </p>
                         <p className="whitespace-pre-wrap">{comment.comment}</p>
                         <p>Best regards,<br />{comment.name}</p>
-                    </div>
+                    </motion.div>
 
-                    {/* Quoted Question Section */}
+                    {/* 질문 인용 */}
                     <motion.div
-                        initial={{ opacity: 0, x: 30 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.6, duration: 0.4 }}
-                        className="border-l-4 border-gray-300 pl-5 py-4 bg-gray-50 text-gray-600 italic text-sm"
+                        className="bg-gray-50 border-l-4 border-blue-300 pl-6 pr-4 py-4 text-gray-600 text-sm italic rounded-md shadow-inner space-y-2"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.5, delay: 0.5 }}
                     >
-                        <p className="flex items-center space-x-2 font-semibold mb-2">
-                            <MessageSquare className="w-4 h-4" />
-                            <span>
-                                On {new Date(comment.createdAt).toLocaleDateString()}, {comment.name} wrote:
-                            </span>
+                        <div className="flex items-center gap-2 mb-2 text-blue-500 font-semibold">
+                            <MessageSquareQuote className="w-4 h-4" />
+                            <span>Quoted Question</span>
+                        </div>
+                        <p>
+                            <strong>
+                                On {comment.createdAt ? new Date(comment.createdAt).toLocaleDateString() : ""}, {article.name} wrote:
+                            </strong>
                         </p>
-                        <p className="font-semibold">{article.title}:</p>
+                        <p className="font-medium text-gray-700">QUESTION TITLE: {article.title}</p>
                         <p className="whitespace-pre-wrap">{article.content}</p>
                     </motion.div>
+
+                    {/* Footer with Reply Icon */}
+                    <div className="flex items-center justify-end text-sm text-gray-500 pt-4 border-t mt-6">
+                        <span>Replied via AnswerView System</span>
+                    </div>
                 </motion.div>
-            </motion.div>
+            </div>
         </div>
     );
 }
