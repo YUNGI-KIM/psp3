@@ -20,6 +20,7 @@ import PurchasePage from "./buy/PurchasePage";
 import Cart from  "./buy/CartPage"
 import RequireAdmin from "./functions/RequireAdmin";
 import AnswerView from "./pages/AnswerView";
+import AnswerList from "./pages/AnswerList";
 
 function App() {
   useEffect(() => {
@@ -38,7 +39,10 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/support" element={<Support />} />
               <Route path="/estimator" element={<Estimator />} />
+
+              {/* Answer 관련 */}
               <Route path="/AnswerView" element={<AnswerView />} />
+              <Route path="/AnswerList" element={<AnswerList />} />
               {/* 자동차 전체 보기 */}
               <Route path="/buy/car" element={<Buy pageType="자동차" />} />
               {/* 특정 브랜드 자동차 검색 */}
