@@ -88,7 +88,7 @@ function Header() {
                     </form>
 
                     {/* 로그인 / 회원가입 */}
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 items-center">
                         {user ? (
                             <>
                                 <span className="text-sm font-semibold">{user.name}님</span>
