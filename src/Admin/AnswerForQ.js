@@ -37,7 +37,7 @@ function AnswerForQ() {
       if (res.ok) {
         setAnswerTitle('');
         setAnswerContent('');
-        await fetch(`/api/articles/${key}`, {
+        await fetch(`https://clos21.kr/api/articles/${key}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',
