@@ -28,7 +28,7 @@ function AnswerList() {
                 <h2 className="text-3xl font-bold text-gray-800 mb-10">All Answers</h2>
 
                 <div className="space-y-6">
-                    {answers.map((answer, index) => (
+                    {answers.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map((answer, index) => (
                         <motion.div
                             key={answer.id}
                             className="bg-white rounded-xl shadow-md p-6 space-y-4 border border-gray-200"
