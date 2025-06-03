@@ -16,7 +16,9 @@ function Header() {
 
     useEffect(() => {
         console.log("Header user status Changed:", user);
+        console.log("User Permission: ", user.perm);
     }, [user]);
+
 
     const handleLogout = async () => {
         try {
@@ -146,6 +148,14 @@ function Header() {
                             </a>
                         );
                     })}
+                    {user && user.perm === 1 && (
+                        <a href="/adminMain"
+                           className={`relative group transition-colors duration-200
+                                ${isHome ? "text-white hover:text-yellow-300" : "text-gray-800 hover:text-yellow-500"}`}>
+                            <span>Admin</span>
+                            <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-yellow-300 group-hover:w-full transition-all duration-300" />
+                        </a>
+                    )}
                 </div>
             </nav>
         </header>

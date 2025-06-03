@@ -1,10 +1,12 @@
 import React from 'react';
 import Header from '../functions/Header';
 import ReceivedSupport from "./ReceivedSupport";
+import {useUser} from "../contexts/UserContext";
+
 
 
 function AdminMainPage() {
-
+    const { user } = useUser();
     const unAnsweredCount = 5;
     const todayUnAnsweredCount = 2;
 
