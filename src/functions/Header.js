@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useUser } from "../contexts/UserContext";
 import LogoW from "../ImageSrc/logo1.png";
 import LogoB from "../ImageSrc/logo2.png";
+import React from "react";
+
 
 function Header() {
     const { user, setUser } = useUser();

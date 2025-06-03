@@ -18,6 +18,8 @@ import Buy from "./buy/buy";
 import {useEffect} from "react";
 import PurchasePage from "./buy/PurchasePage";
 import Cart from  "./buy/CartPage"
+import AnswerView from "./pages/AnswerView";
+import React from "react";
 
 function App() {
   useEffect(() => {
@@ -36,6 +38,7 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/support" element={<Support />} />
               <Route path="/estimator" element={<Estimator />} />
+              <Route path="/AnswerView" element={<AnswerView />} />
               {/* 자동차 전체 보기 */}
               <Route path="/buy/car" element={<Buy pageType="자동차" />} />
               {/* 특정 브랜드 자동차 검색 */}

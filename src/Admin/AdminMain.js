@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import Header from '../functions/Header';
 import ReceivedSupport from "./ReceivedSupport";
 
