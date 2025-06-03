@@ -16,7 +16,6 @@ function Header() {
 
     useEffect(() => {
         console.log("Header user status Changed:", user);
-        console.log("User Permission: ", user.perm);
     }, [user]);
 
 

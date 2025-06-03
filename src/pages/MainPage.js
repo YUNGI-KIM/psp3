@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Header from '../functions/Header';
-import { useUser } from "../contexts/UserContext";
 
 // 브랜드 로고 import (예시 경로, 필요에 따라 수정)
 import hyundai from '../ImageSrc/companyLogo/hyundai.svg';
@@ -60,7 +59,7 @@ const brandLogos = [
 
 const MainPage = () => {
     const navigate = useNavigate();
-    const { user } = useUser();
+
     const [index, setIndex] = useState(0);
     const [page, setPage] = useState(0);
     const [logosPerPage, setLogosPerPage] = useState(5);
