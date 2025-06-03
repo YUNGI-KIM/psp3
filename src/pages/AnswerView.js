@@ -1,8 +1,63 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../functions/Header";
-import { motion } from "framer-motion";
+import { useParams } from "react-router-dom";
 
 function AnswerView() {
+    const { id } = useParams();
+    const [comment, setComment] = useState(null);
+    const [article, setArticle] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [notFound, setNotFound] = useState(false);
+
+    useEffect(() => {
+        async function fetchData() {
+            setLoading(true);
+            setNotFound(false);
+            try {
+                const commentRes = await fetch(`https://clos21.kr/api/comments/${id}`, { credentials: "include" });
+                if (!commentRes.ok) {
+                    setNotFound(true);
+                    setLoading(false);
+                    return;
+                }
+                const commentData = await commentRes.json();
+                setComment(commentData);
+
+                const articleRes = await fetch(`https://clos21.kr/api/articles/${commentData.articleId}`, { credentials: "include" });
+                if (!articleRes.ok) {
+                    setNotFound(true);
+                    setLoading(false);
+                    return;
+                }
+                const articleData = await articleRes.json();
+                setArticle(articleData);
+                setLoading(false);
+            } catch (error) {
+                setNotFound(true);
+                setLoading(false);
+            }
+        }
+        fetchData();
+    }, [id]);
+
+    if (loading) {
+        return (
+            <div className="bg-gray-100 min-h-screen font-sans">
+                <Header />
+                <div className="px-4 py-20 text-center text-gray-600">Loading...</div>
+            </div>
+        );
+    }
+
+    if (notFound || !comment || !article) {
+        return (
+            <div className="bg-gray-100 min-h-screen font-sans">
+                <Header />
+                <div className="px-4 py-20 text-center text-red-600">Content not found.</div>
+            </div>
+        );
+    }
+
     return (
         <div className="bg-gray-100 min-h-screen font-sans">
             <Header />
@@ -11,10 +66,10 @@ function AnswerView() {
 
                     {/* Email Header */}
                     <div className="border-b pb-4 text-sm text-gray-600">
-                        <p><strong>From:</strong> John Doe &lt;john@example.com&gt;</p>
-                        <p><strong>To:</strong> You &lt;you@example.com&gt;</p>
-                        <p><strong>Date:</strong> June 4, 2025</p>
-                        <p><strong>Subject:</strong> RE: QUESTION TITLE</p>
+                        <p><strong>From:</strong> {article.name} &lt;{article.email}&gt;</p>
+                        <p><strong>To:</strong> {comment.name} &lt;{comment.email}&gt;</p>
+                        <p><strong>Date:</strong> {new Date(comment.createdAt).toLocaleDateString()}</p>
+                        <p><strong>Subject:</strong> RE: {comment.title}</p>
                     </div>
 
                     {/* Answer Body (as if it's your reply) */}
@@ -25,20 +80,18 @@ function AnswerView() {
                         </p>
 
                         <p className="mt-4">
-                            This is where the <strong>answer content</strong> goes. You can elaborate on the
-                            explanation or provide detailed information that addresses the original question.
+                            {comment.comment}
                         </p>
 
-                        <p className="mt-6">Best regards,<br />John</p>
+                        <p className="mt-6">Best regards,<br />{article.name}</p>
                     </div>
 
                     {/* Quoted Question Section */}
                     <div className="border-l-4 border-gray-300 pl-4 mt-8 text-gray-600 text-sm italic bg-gray-50 py-4">
-                        <p><strong>On June 4, 2025, You wrote:</strong></p>
+                        <p><strong>On {new Date(comment.createdAt).toLocaleDateString()}, {comment.name} wrote:</strong></p>
                         <p className="mt-2">
-                            QUESTION TITLE: <br />
-                            This is where the question content goes. You can describe the
-                            question clearly for the user to understand.
+                            {article.title}: <br />
+                            {article.content}
                         </p>
                     </div>
                 </div>
