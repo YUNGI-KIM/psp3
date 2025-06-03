@@ -29,7 +29,7 @@ function AnswerForQ() {
     fetch(`https://clos21.kr/api/articles/${key}/comments`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(comment),
+      body: JSON.stringify({ comment }),
       credentials: "include",
     })
     .then(res => {
