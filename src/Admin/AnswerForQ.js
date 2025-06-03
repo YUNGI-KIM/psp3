@@ -9,10 +9,11 @@ function AnswerForQ() {
   const [loading, setLoading] = useState(true);
   const [answerTitle, setAnswerTitle] = useState('');
   const [answerContent, setAnswerContent] = useState('');
+  const [userName, setUserName] = useState('');
 
   useEffect(() => {
     if (key) {
-      fetch(`https://clos21.kr/api/articles/${key}`)
+      fetch(`https://clos21.kr/api/articles/${key}`, { credentials: "include" })
         .then(res => res.json())
         .then(data => {
           setArticle(data);
@@ -29,6 +30,7 @@ function AnswerForQ() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(comment),
+      credentials: "include",
     })
     .then(res => {
       if (res.ok) {
@@ -75,7 +77,7 @@ function AnswerForQ() {
               <span className="font-medium">Title:</span> {article.title}
             </p>
             <p className="text-gray-600">
-              <span className="font-medium">User Name:</span> {article.name}
+              <span className="font-medium">User Name:</span> {userName}
             </p>
             <p className="text-gray-600">
               <span className="font-medium">Detail:</span> {article.content}
