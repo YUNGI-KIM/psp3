@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Header from "../functions/Header";
+
 import { motion } from "framer-motion";
 import {
     UserRound,
@@ -25,7 +25,7 @@ function AnswerList() {
 
     return (
         <div className="bg-gray-50 min-h-screen">
-            <Header />
+
             <div className="max-w-4xl mx-auto px-4 py-16">
                 <h2 className="text-3xl font-bold text-gray-800 mb-10">All Answers</h2>
 

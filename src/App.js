@@ -21,6 +21,7 @@ import Cart from  "./buy/CartPage"
 import RequireAdmin from "./functions/RequireAdmin";
 import AnswerView from "./pages/AnswerView";
 import AnswerList from "./pages/AnswerList";
+import Question from "./pages/Question";
 
 function App() {
   useEffect(() => {
@@ -38,6 +39,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/support" element={<Support />} />
+              <Route path="/Question" element={<Question />} />
               <Route path="/estimator" element={<Estimator />} />
               <Route path="/AnswerView/:id" element={<AnswerView />} />
               <Route path="/AnswerList" element={<AnswerList />} />
