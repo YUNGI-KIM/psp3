@@ -92,16 +92,11 @@ function VehicleDetail() {
               ))}
             </div>
 
-            <div className="grid grid-cols-3 gap-6 mt-4 place-items-center text-center
-                sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-4 text-center">
               {vehicle.interiorOptions.map((opt) => (
-                  <div key={opt.optionKey} className="flex flex-col items-center w-full max-w-[84px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[140px]">
-                    <img
-                        src={opt.colorchip}
-                        alt={opt.name}
-                        className="w-full aspect-square object-contain rounded shadow"
-                    />
-                    <p className="mt-2 text-xs sm:text-sm text-gray-600">{opt.name}</p>
+                  <div key={opt.optionKey}>
+                    <img src={opt.colorchip} alt={opt.name} className="w-full rounded shadow" />
+                    <p className="mt-2 text-sm text-gray-600">{opt.name}</p>
                   </div>
               ))}
             </div>
