@@ -8,19 +8,7 @@ import {
 } from "lucide-react";
 
 const dummyAnswers = [
-    {
-        id: 1,
-        author: "Jane Doe",
-        date: "June 4, 2025",
-        content: "This is the first answer. It provides helpful information.",
-    },
-    {
-        id: 2,
-        author: "Alex Smith",
-        date: "June 5, 2025",
-        content: "Here's another perspective on the question with more detail.",
-    },
-];
+
 
 function AnswerList() {
     return (

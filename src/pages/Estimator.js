@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { motion, useMotionValue, animate, useTransform } from "framer-motion";
-import { CreditCard, Receipt, BadgeCheck } from "lucide-react";
+import React, {useState, useEffect, useCallback} from "react";
+import {motion, useMotionValue, animate, useTransform} from "framer-motion";
+import {CreditCard, Receipt, BadgeCheck} from "lucide-react";
 import Header from "../functions/Header";
-import { brands } from "../data/brands";
-import { basePrices } from "../data/basePrices";
-import { carImages } from "../data/carImages";
-import { options } from "../data/options";
+import {brands} from "../data/brands";
+import {basePrices} from "../data/basePrices";
+import {carImages} from "../data/carImages";
+import {options} from "../data/options";
 
 export default function Estimator() {
     // 상태 관리
@@ -40,7 +40,7 @@ export default function Estimator() {
 
     useEffect(() => {
         const unsub = monthlyPaymentRaw.on("change", v => {
-            animate(monthlyPayment, v, { duration: 0.5, ease: "easeInOut" });
+            animate(monthlyPayment, v, {duration: 0.5, ease: "easeInOut"});
         });
         return unsub;
     }, [monthlyPaymentRaw]);
@@ -85,7 +85,7 @@ export default function Estimator() {
     }, [selectedOptions, optionsPrice]);
 
     useEffect(() => {
-        const controls = animate(price, calculatePrice(), { duration: 1, ease: "easeInOut" });
+        const controls = animate(price, calculatePrice(), {duration: 1, ease: "easeInOut"});
         return controls.stop;
     }, [model, selectedOptions, price, calculatePrice]);
 
@@ -100,17 +100,19 @@ export default function Estimator() {
     // 반응형 컴포넌트 구조 (영수증 스타일)
     return (
         <>
-            <Header />
-            <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex items-center justify-center py-10">
-                <div className="w-full max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl bg-white rounded-3xl shadow-2xl border border-blue-100 px-4 sm:px-8 py-6 sm:py-7">
+            <Header/>
+            <div
+                className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex items-center justify-center py-10">
+                <div
+                    className="w-full max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl bg-white rounded-3xl shadow-2xl border border-blue-100 px-4 sm:px-8 py-6 sm:py-7">
                     {/* 영수증 헤더 */}
                     <div className="flex items-center justify-between mb-5">
                         <div className="flex items-center gap-2">
-                            <Receipt className="text-blue-500 w-8 h-8" />
+                            <Receipt className="text-blue-500 w-8 h-8"/>
                             <span className="text-2xl sm:text-3xl font-bold tracking-tight text-blue-900">견적서</span>
                         </div>
                         <span className="text-sm text-gray-400 font-mono">
-                        NO.{Math.floor(Math.random()*1000000).toString().padStart(6,'0')}
+                        NO.{Math.floor(Math.random() * 1000000).toString().padStart(6, '0')}
                     </span>
                     </div>
 
@@ -121,9 +123,9 @@ export default function Estimator() {
                             alt={model}
                             key={model + imageKey}
                             className="w-full max-w-xs  sm:max-w-md md:max-w-lg lg:max-w-xl h-44 sm:h-56 md:h-80 object-contain border rounded-lg bg-blue-50 shadow"
-                            initial={{ opacity: 0.7, scale: 1 }}
-                            animate={{ opacity: 1, scale: 1.05 }}
-                            transition={{ duration: 0.5 }}
+                            initial={{opacity: 0.7, scale: 1}}
+                            animate={{opacity: 1, scale: 1.05}}
+                            transition={{duration: 0.5}}
                         />
                     </div>
 
@@ -157,21 +159,22 @@ export default function Estimator() {
 
                     {/* 차량 정보 요약 */}
                     <div className="mb-2">
-                        <InfoRow label="브랜드" value={brand} />
-                        <InfoRow label="모델" value={model} />
-                        <InfoRow label="추가 옵션" value={selectedOptions.length ? selectedOptions.join(", ") : <span className="text-gray-400">없음</span>} />
+                        <InfoRow label="브랜드" value={brand}/>
+                        <InfoRow label="모델" value={model}/>
+                        <InfoRow label="추가 옵션" value={selectedOptions.length ? selectedOptions.join(", ") :
+                            <span className="text-gray-400">없음</span>}/>
                     </div>
 
                     {/* 결제 방법 */}
                     <div className="mb-3">
                         <label className="text-sm font-semibold text-blue-700 mb-1">결제 방법</label>
                         <div className="flex gap-5 flex-wrap items-center">
-                            <Radio name="pay" value="현금" checked={paymentMethod === "현금"} onChange={setPaymentMethod} />
-                            <Radio name="pay" value="카드" checked={paymentMethod === "카드"} onChange={setPaymentMethod} />
+                            <Radio name="pay" value="현금" checked={paymentMethod === "현금"} onChange={setPaymentMethod}/>
+                            <Radio name="pay" value="카드" checked={paymentMethod === "카드"} onChange={setPaymentMethod}/>
                             {paymentMethod === "카드" && (
                                 <select value={MonthType} onChange={e => setMonthType(e.target.value)}
                                         className="border border-blue-200 rounded-md px-3 py-2 text-sm font-medium mt-2 sm:mt-0">
-                                    {["일시불","2개월","4개월","6개월","8개월","10개월","12개월","24개월","36개월","48개월","60개월"].map(month => (
+                                    {["일시불", "2개월", "4개월", "6개월", "8개월", "10개월", "12개월", "24개월", "36개월", "48개월", "60개월"].map(month => (
                                         <option key={month} value={month}>{month}</option>
                                     ))}
                                 </select>
@@ -183,7 +186,8 @@ export default function Estimator() {
                     <div className="bg-blue-50 rounded-xl px-4 py-3 mb-6">
                         <div className="flex justify-between text-sm mb-1">
                             <span className="font-semibold">결제수단</span>
-                            <span className="font-semibold">{paymentMethod}{paymentMethod === "카드" && MonthType && ` (${MonthType})`}</span>
+                            <span
+                                className="font-semibold">{paymentMethod}{paymentMethod === "카드" && MonthType && ` (${MonthType})`}</span>
                         </div>
                     </div>
 
@@ -192,25 +196,25 @@ export default function Estimator() {
                         <PriceCard
                             title="가격 상세"
                             list={[
-                                { k: "기본 차량가", v: displayed.basePrice },
-                                { k: "옵션 합계", v: displayed.optionsPrice },
-                                { k: "차량가 합계", v: displayed.price, bold: true, border: true }
+                                {k: "기본 차량가", v: displayed.basePrice},
+                                {k: "옵션 합계", v: displayed.optionsPrice},
+                                {k: "차량가 합계", v: displayed.price, bold: true, border: true}
                             ]}
                         />
                         <PriceCard
-                            title={<><CreditCard className="w-5 h-5" />납부정보</>}
+                            title={<><CreditCard className="w-5 h-5"/>납부정보</>}
                             list={[
-                                { k: "취득세", v: displayed.acqTax },
-                                { k: "등록비", v: displayed.regFee },
-                                { k: "총 결제금액", v: displayed.total, bold: true, blue: true },
-                                paymentMethod === "카드" && { k: "월 납입금", v: displayed.monthly, blue: true }
+                                {k: "취득세", v: displayed.acqTax},
+                                {k: "등록비", v: displayed.regFee},
+                                {k: "총 결제금액", v: displayed.total, bold: true, blue: true},
+                                paymentMethod === "카드" && {k: "월 납입금", v: displayed.monthly, blue: true}
                             ].filter(Boolean)}
                         />
                     </div>
 
                     {/* 안내문구 */}
                     <div className="flex items-center justify-center mt-6">
-                        <BadgeCheck className="text-blue-400 w-6 h-6 mr-2" />
+                        <BadgeCheck className="text-blue-400 w-6 h-6 mr-2"/>
                         <span className="text-sm text-gray-400">본 견적서는 실제 결제와 다를 수 있습니다</span>
                     </div>
                 </div>
@@ -221,7 +225,7 @@ export default function Estimator() {
 
 // 서브 컴포넌트들
 
-function InfoRow({ label, value }) {
+function InfoRow({label, value}) {
     return (
         <div className="flex justify-between text-base mb-1">
             <span className="text-gray-500">{label}</span>
@@ -230,7 +234,7 @@ function InfoRow({ label, value }) {
     );
 }
 
-function Radio({ name, value, checked, onChange }) {
+function Radio({name, value, checked, onChange}) {
     return (
         <label className="flex items-center gap-2 text-sm font-medium">
             <input
@@ -244,11 +248,11 @@ function Radio({ name, value, checked, onChange }) {
     );
 }
 
-function PriceCard({ title, list }) {
+function PriceCard({title, list}) {
     return (
         <div className="bg-blue-50 rounded-xl p-5">
             <div className="text-base font-semibold text-gray-700 mb-2 flex gap-2 items-center">{title}</div>
-            {list.map(({ k, v, bold, blue, border }, idx) => (
+            {list.map(({k, v, bold, blue, border}, idx) => (
                 <div
                     key={k}
                     className={
