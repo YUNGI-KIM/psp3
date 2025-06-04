@@ -72,32 +72,24 @@ function VehicleDetail() {
         </div>
 
         {/* 인테리어 옵션 */}
-        <div className="flex flex-col md:flex-row items-start justify-between mt-20 px-6 md:px-12 py-2">
+        <div className="flex flex-col md:flex-row items-center justify-between mt-20 px-6 md:px-12 py-2 min-h-[320px] md:min-h-[380px]">
           <div className="flex-1 space-y-6">
             <h3 className="text-2xl font-semibold text-gray-600">차량 내부 색상</h3>
             <p className="text-base text-gray-700">다양한 감성의 인테리어 색상을 선택해보세요.</p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-3 gap-4 mt-4 place-items-center text-center sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7">
               {vehicle.interiorOptions.map((opt) => (
-                  <div
-                      key={opt.optionKey}
-                      className={`border p-4 rounded shadow cursor-pointer transition transform hover:scale-105 ${
-                          selectedInterior === opt.optionKey ? "ring-2 ring-blue-600" : ""
-                      }`}
-                      onClick={() => setSelectedInterior(opt.optionKey)}
-                  >
-                    <div className="text-lg font-bold">{opt.name}</div>
-                    <div className="text-sm text-gray-500">{opt.description ?? "천연가죽 시트"}</div>
-                  </div>
-              ))}
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-4 text-center">
-              {vehicle.interiorOptions.map((opt) => (
-                  <div key={opt.optionKey}>
-                    <img src={opt.colorchip} alt={opt.name} className="w-full rounded shadow" />
-                    <p className="mt-2 text-sm text-gray-600">{opt.name}</p>
-                  </div>
+                <div
+                  key={opt.optionKey}
+                  className="flex flex-col items-center w-full max-w-[84px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[140px]"
+                >
+                  <img
+                    src={opt.colorchip}
+                    alt={opt.name}
+                    className="w-full aspect-square object-contain rounded shadow"
+                  />
+                  <p className="mt-2 text-xs sm:text-sm text-gray-600">{opt.name}</p>
+                </div>
               ))}
             </div>
           </div>
