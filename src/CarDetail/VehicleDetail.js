@@ -103,20 +103,22 @@ function VehicleDetail() {
           </div>
 
           {/* 인테리어 이미지 */}
-          <div className="flex-1 mt-12 md:mt-0 flex justify-center">
-            <img
-                src={interiorImages[selectedInterior]}
-                alt="선택된 인테리어"
-                className="w-full
-                    max-w-xs
-                    sm:max-w-md
-                    md:max-w-lg
-                    lg:max-w-xl
-                    xl:max-w-2xl
-                    h-auto
-                    rounded
-                    shadow"
-            />
+          <div className="flex-1 mt-12 md:mt-0 flex justify-center px-2 sm:px-6 lg:px-12">
+              <img
+                  src={interiorImages[selectedInterior]}
+                  alt="선택된 인테리어"
+                  className="
+                      w-full
+                      max-w-xs
+                      sm:max-w-md
+                      md:max-w-lg
+                      lg:max-w-xl
+                      xl:max-w-2xl
+                      h-auto
+                      rounded
+                      shadow
+                  "
+              />
           </div>
         </div>
       </div>
