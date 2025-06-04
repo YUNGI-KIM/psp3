@@ -107,7 +107,15 @@ function VehicleDetail() {
             <img
                 src={interiorImages[selectedInterior]}
                 alt="선택된 인테리어"
-                className="max-w-full md:max-w-[700px] w-full h-auto rounded"
+                className="w-full
+                    max-w-xs
+                    sm:max-w-md
+                    md:max-w-lg
+                    lg:max-w-xl
+                    xl:max-w-2xl
+                    h-auto
+                    rounded
+                    shadow"
             />
           </div>
         </div>
