@@ -16,6 +16,14 @@ export default function Estimator() {
     const [imageKey, setImageKey] = useState(0);
     const [paymentMethod, setPaymentMethod] = useState("현금");
 
+    // carImages preload
+    useEffect(() => {
+        Object.values(carImages).forEach(src => {
+            const img = new window.Image();
+            img.src = src;
+        });
+    }, []);
+
     // 가격 관련 MotionValue 및 계산
     const optionsPrice = useMotionValue(0);
     const CarBasePrice = useMotionValue(basePrices[model]);
