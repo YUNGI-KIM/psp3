@@ -39,9 +39,7 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/support" element={<Support />} />
               <Route path="/estimator" element={<Estimator />} />
-
-              {/* Answer 관련 */}
-              <Route path="/AnswerView" element={<AnswerView />} />
+              <Route path="/AnswerView/:id" element={<AnswerView />} />
               <Route path="/AnswerList" element={<AnswerList />} />
               {/* 자동차 전체 보기 */}
               <Route path="/buy/car" element={<Buy pageType="자동차" />} />

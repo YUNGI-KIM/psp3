@@ -68,7 +68,10 @@ function Login() {
                     </div>
                 </div>
 
-                <div className="mt-3 w-full space-y-6">
+                <form
+                    className="mt-3 w-full space-y-6"
+                    onSubmit={e => { e.preventDefault(); handleLogin(); }}
+                >
                     <input
                         type="text"
                         placeholder="Your ID"
@@ -90,7 +93,7 @@ function Login() {
                     )}
 
                     <button
-                        onClick={handleLogin}
+                        type="submit"
                         className="py-2 px-4 bg-black hover:bg-indigo-700 text-white w-full font-semibold rounded-3xl"
                     >
                         Login!
@@ -102,7 +105,7 @@ function Login() {
                     >
                         Register
                     </button>
-                </div>
+                </form>
             </div>
 
             <div className="px-4 py-4 border-t-2 border-gray-200 bg-gray-50 sm:px-10">

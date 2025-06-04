@@ -31,7 +31,10 @@ function AnswerForQ() {
       const res = await fetch(`https://clos21.kr/api/articles/${key}/comments`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ comment }),
+        body: JSON.stringify({
+          title: answerTitle,
+          comment: answerContent
+        }),
         credentials: "include",
       });
       if (res.ok) {
@@ -91,7 +94,7 @@ function AnswerForQ() {
               <span className="font-medium">Title:</span> {article.title}
             </p>
             <p className="text-gray-600">
-              <span className="font-medium">User Name:</span> {userName}
+              <span className="font-medium">User Name:</span> {article.name}
             </p>
             <p className="text-gray-600">
               <span className="font-medium">Detail:</span> {article.content}

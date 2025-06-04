@@ -36,7 +36,7 @@ function VehicleDetail() {
         <Header />
 
         {/* 차량 기본 정보 */}
-        <div className="flex flex-col md:flex-row items-start justify-between mt-10 px-6 md:px-12 py-6">
+        <div className="flex flex-col md:flex-row items-start justify-between mt-10 px-6 md:px-12 py-2">
           <div className="flex-1 space-y-10">
             <span className="text-lg bg-blue-600 text-white px-4 py-1 rounded">{vehicle.category}</span>
             <h1 className="text-4xl md:text-6xl font-bold">{vehicle.name}</h1>
@@ -72,7 +72,7 @@ function VehicleDetail() {
         </div>
 
         {/* 인테리어 옵션 */}
-        <div className="flex flex-col md:flex-row items-start justify-between mt-20 px-6 md:px-12 py-6">
+        <div className="flex flex-col md:flex-row items-start justify-between mt-20 px-6 md:px-12 py-2">
           <div className="flex-1 space-y-6">
             <h3 className="text-2xl font-semibold text-gray-600">차량 내부 색상</h3>
             <p className="text-base text-gray-700">다양한 감성의 인테리어 색상을 선택해보세요.</p>
@@ -103,12 +103,22 @@ function VehicleDetail() {
           </div>
 
           {/* 인테리어 이미지 */}
-          <div className="flex-1 mt-12 md:mt-0 flex justify-center">
-            <img
-                src={interiorImages[selectedInterior]}
-                alt="선택된 인테리어"
-                className="max-w-full md:max-w-[700px] w-full h-auto rounded"
-            />
+          <div className="flex-1 mt-12 md:mt-0 flex justify-center items-center px-2 sm:px-6 lg:px-12">
+              <img
+                  src={interiorImages[selectedInterior]}
+                  alt="선택된 인테리어"
+                  className="
+                      w-full
+                      max-w-xs
+                      sm:max-w-md
+                      md:max-w-lg
+                      lg:max-w-xl
+                      xl:max-w-2xl
+                      h-auto
+                      rounded
+                      shadow
+                  "
+              />
           </div>
         </div>
       </div>
