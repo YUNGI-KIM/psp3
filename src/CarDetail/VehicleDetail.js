@@ -36,7 +36,7 @@ function VehicleDetail() {
         <Header />
 
         {/* 차량 기본 정보 */}
-        <div className="flex flex-col md:flex-row items-start justify-between mt-10 px-6 md:px-12 py-6">
+        <div className="flex flex-col md:flex-row items-start justify-between mt-10 px-6 md:px-12 py-2">
           <div className="flex-1 space-y-10">
             <span className="text-lg bg-blue-600 text-white px-4 py-1 rounded">{vehicle.category}</span>
             <h1 className="text-4xl md:text-6xl font-bold">{vehicle.name}</h1>
@@ -72,7 +72,7 @@ function VehicleDetail() {
         </div>
 
         {/* 인테리어 옵션 */}
-        <div className="flex flex-col md:flex-row items-start justify-between mt-20 px-6 md:px-12 py-6">
+        <div className="flex flex-col md:flex-row items-start justify-between mt-20 px-6 md:px-12 py-2">
           <div className="flex-1 space-y-6">
             <h3 className="text-2xl font-semibold text-gray-600">차량 내부 색상</h3>
             <p className="text-base text-gray-700">다양한 감성의 인테리어 색상을 선택해보세요.</p>
