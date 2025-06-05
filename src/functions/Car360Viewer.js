@@ -61,7 +61,7 @@ function Car360Viewer({ carCode, colorCode = "PM2", colorOptions, onChangeColor 
     }, [playing]);
 
     const location = useLocation();
-    const isCarDetail = location.pathname.startsWith("/CarDetail/");
+    const isCarDetail = /^\/CarDetail\/[^/]+$/i.test(location.pathname);
 
     return (
         <div className="select-none w-full max-w-xl mx-auto">

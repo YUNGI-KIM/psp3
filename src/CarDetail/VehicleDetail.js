@@ -177,19 +177,6 @@ function VehicleDetail() {
                                 setIndex={setViewerIndex}
                                 key={`${carCode}-${selectedColor}`}
                             />
-                            <div className="flex flex-row items-center justify-center w-full max-w-xl mt-2 gap-3">
-                              <button
-                                className={`px-4 py-2 rounded text-white font-semibold transition
-                                  ${playing ? "bg-blue-600 hover:bg-blue-700" : "bg-gray-400 hover:bg-blue-600"}`}
-                                onClick={() => setPlaying(p => !p)}
-                                style={{ minWidth: 80, maxWidth: 120 }}
-                              >
-                                {playing ? "Pause" : "Play"}
-                              </button>
-                              <span className="text-gray-500 text-xs sm:text-sm ml-2 whitespace-nowrap">
-                                드래그해서 회전
-                              </span>
-                            </div>
                         </>
                     ) : (
                         <img
