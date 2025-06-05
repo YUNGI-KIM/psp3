@@ -6,7 +6,7 @@ import Car360Viewer from "../functions/Car360Viewer";
 const modelToCarCode = {
   HyundaiAvante: "CN22",
   HyundaiGrandeur: "GN08",
-  HyundaiIoniq: "CE06",
+  HyundaiIoniq: "CE02",
   HyundaiPalisade: "FX01",
   HyundaiPorter: "M575",
   HyundaiSantafe: "MX05",
