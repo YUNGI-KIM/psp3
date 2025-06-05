@@ -44,7 +44,7 @@ export default function Estimator() {
         if (has360View) {
             return <Car360Viewer carCode={currentCarCode} colorCode={currentColorCode} key={`${model}-${imageKey}`}/>;
         } else {
-            return <img src={carImages[model]} alt={model} className="w-full h-auto rounded-xl" />;
+            return <img src={carImages[model]} alt={model} className="w-full sm:w-[500px] h-48 sm:h-[300px] object-contain rounded-lg mx-auto mb-6" />;
         }
     };
 
