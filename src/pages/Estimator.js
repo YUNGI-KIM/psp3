@@ -21,7 +21,6 @@ export default function Estimator() {
         Grandeur: "GN08",
         Ioniq6: "CE02",
         Palisade: "FX01",
-        Porter: "M575",
         Santafe: "MX05",
         Sonata: "DN20",
     };
@@ -31,7 +30,6 @@ export default function Estimator() {
         Grandeur: ["A2B", "A2B-K", "A2B-R", "NGM", "NY9", "T2G", "T4A", "T9M", "VAM", "W6H", "W6H-K", "W6H-R", "XB9"],
         Ioniq6: ["A2B", "A2B-4NB", "NY9", "R2P", "T2G", "T9M", "W3T", "W6H", "W6H-4NB", "XB9"],
         Palisade: ["A/A2B", "A/CBP", "A/CRP", "A/GMP", "A/PE2", "A/R2T", "A/WC9", "B/A2B", "B/CBP", "B/CRP", "B/GMP", "B/PE2", "B/R2T", "B/WC9", "C/A2B", "C/CBP", "C/CRP", "C/GMP", "C/PE2", "C/R2T", "C/R8N", "C/WC9"],
-        Porter: ["RVB", "YAW", "ZV"],
         Santafe: ["A2B", "A2B-4NB", "PB2", "PE2", "RN2", "RS2", "WW2", "WW2-4NB", "WWM-4NB", "YBM", "ZGE"],
         Sonata: ["A2B", "NY9", "R2P", "T2G", "T4M", "T9M", "W6H", "XB9"]
     };
