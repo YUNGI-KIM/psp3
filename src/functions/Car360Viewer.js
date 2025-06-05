@@ -1,8 +1,9 @@
 import React, { useRef, useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const IMG_COUNT = 60;
 
-function Car360Viewer({ carCode, colorCode = "PM2" }) {
+function Car360Viewer({ carCode, colorCode = "PM2", colorOptions, onChangeColor }) {
     const [index, setIndex] = useState(0);
     const isDragging = useRef(false);
     const prevX = useRef(0);
@@ -59,6 +60,9 @@ function Car360Viewer({ carCode, colorCode = "PM2" }) {
         return () => clearInterval(timer);
     }, [playing]);
 
+    const location = useLocation();
+    const isCarDetail = location.pathname.startsWith("/CarDetail/");
+
     return (
         <div className="select-none w-full max-w-xl mx-auto">
             <div
@@ -78,15 +82,40 @@ function Car360Viewer({ carCode, colorCode = "PM2" }) {
                     draggable={false}
                 />
             </div>
-            <div className="flex justify-center mt-3 gap-3">
-                <button
-                    className="px-4 py-1 bg-blue-600 text-white rounded"
-                    onClick={() => setPlaying(p => !p)}
-                >
-                    {playing ? "Pause" : "Play"}
-                </button>
-                <span className="text-gray-500 text-xs">드래그해서 회전</span>
-            </div>
+            {isCarDetail ? (
+                <div className="flex flex-row items-center justify-center gap-3 mt-3">
+                    {colorOptions && onChangeColor && (
+                        <select
+                            className="border rounded px-2 py-1"
+                            value={colorCode}
+                            onChange={e => onChangeColor(e.target.value)}
+                        >
+                            {colorOptions.map(opt => (
+                                <option key={opt} value={opt}>
+                                    {opt}
+                                </option>
+                            ))}
+                        </select>
+                    )}
+                    <button
+                        className="px-4 py-1 bg-blue-600 text-white rounded"
+                        onClick={() => setPlaying(p => !p)}
+                    >
+                        {playing ? "Pause" : "Play"}
+                    </button>
+                    <span className="text-gray-500 text-xs">드래그해서 회전</span>
+                </div>
+            ) : (
+                <div className="flex flex-col justify-center items-center mt-3 gap-3">
+                    <button
+                        className="px-4 py-1 bg-blue-600 text-white rounded"
+                        onClick={() => setPlaying(p => !p)}
+                    >
+                        {playing ? "Pause" : "Play"}
+                    </button>
+                    <span className="text-gray-500 text-xs">드래그해서 회전</span>
+                </div>
+            )}
         </div>
     );
 }
