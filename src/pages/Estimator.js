@@ -16,12 +16,13 @@ export default function Estimator() {
     const [imageKey, setImageKey] = useState(0);
     const [paymentMethod, setPaymentMethod] = useState("현금");
 
+    const [selectedColor, setSelectedColor] = useState("A2B");
+
     const modelToCarCode = {
         Avante: "CN22",
         Grandeur: "GN08",
-        Ioniq: "NE06",
+        Ioniq6: "CE02",
         Palisade: "FX01",
-        Porter: "M575",
         Santafe: "MX05",
         Sonata: "DN20",
     };
@@ -29,20 +30,87 @@ export default function Estimator() {
     const modelToColorCode = {
         Avante: ["A2B", "A5G", "C5G", "M6T", "PE2", "PM2", "R2P", "RRR", "SAW"],
         Grandeur: ["A2B", "A2B-K", "A2B-R", "NGM", "NY9", "T2G", "T4A", "T9M", "VAM", "W6H", "W6H-K", "W6H-R", "XB9"],
-        Ioniq: ["A2B", "C5G", "M9U", "PE2", "RTE", "SAW", "U3P", "W3T", "Y2T"],
+        Ioniq6: ["A2B", "A2B-4NB", "NY9", "R2P", "T2G", "T9M", "W3T", "W6H", "W6H-4NB", "XB9"],
         Palisade: ["A/A2B", "A/CBP", "A/CRP", "A/GMP", "A/PE2", "A/R2T", "A/WC9", "B/A2B", "B/CBP", "B/CRP", "B/GMP", "B/PE2", "B/R2T", "B/WC9", "C/A2B", "C/CBP", "C/CRP", "C/GMP", "C/PE2", "C/R2T", "C/R8N", "C/WC9"],
-        Porter: ["RVB", "YAW", "ZV"],
         Santafe: ["A2B", "A2B-4NB", "PB2", "PE2", "RN2", "RS2", "WW2", "WW2-4NB", "WWM-4NB", "YBM", "ZGE"],
         Sonata: ["A2B", "NY9", "R2P", "T2G", "T4M", "T9M", "W6H", "XB9"]
     };
 
+    const hyundaiColorNames = {
+        // 주요 공통 색상
+        "A2B": "어비스 블랙 펄",
+        "A2B-K": "어비스 블랙 펄 (투톤K)",
+        "A2B-R": "어비스 블랙 펄 (투톤R)",
+        "A5G": "아마존 그레이 메탈릭",
+        "C5G": "쉬머링 실버 메탈릭",
+        "M6T": "메타 블루 펄",
+        "PE2": "플루이드 그레이 메탈릭",
+        "PM2": "플루이드 메탈",
+        "R2P": "얼티메이트 레드 메탈릭",
+        "RRR": "인텐스 블루",
+        "SAW": "세이지 그린",
+        "NGM": "녹턴 그레이 메탈릭",
+        "NY9": "화이트 크림",
+        "T2G": "트위스터 블루 펄",
+        "T4A": "카본 메탈",
+        "T4M": "에어로 실버 매트",
+        "T9M": "트랜스포머 그레이",
+        "VAM": "바이올렛 메탈릭",
+        "W6H": "그래비티 골드 매트",
+        "W6H-K": "그래비티 골드 매트 (투톤K)",
+        "W6H-R": "그래비티 골드 매트 (투톤R)",
+        "XB9": "오션 블루",
+        "M9U": "미스티 그레이 펄",
+        "RTE": "슈팅 스타 그레이 매트",
+        "U3P": "블루 핀 마이크로",
+        "W3T": "비비드 베이지",
+        "Y2T": "아틀라스 화이트",
+        // 팰리세이드 특수 조합 (A/xxx, B/xxx 등)
+        "A/A2B": "어비스 블랙 펄 (A 루프)",
+        "A/CBP": "문라이트 블루 펄 (A 루프)",
+        "A/CRP": "가이아 브라운 펄 (A 루프)",
+        "A/GMP": "쉬머링 실버 메탈릭 (A 루프)",
+        "A/PE2": "플루이드 그레이 메탈릭 (A 루프)",
+        "A/R2T": "오로라 그레이 펄 (A 루프)",
+        "A/WC9": "크림 화이트 펄 (A 루프)",
+        "B/A2B": "어비스 블랙 펄 (B 루프)",
+        "B/CBP": "문라이트 블루 펄 (B 루프)",
+        "B/CRP": "가이아 브라운 펄 (B 루프)",
+        "B/GMP": "쉬머링 실버 메탈릭 (B 루프)",
+        "B/PE2": "플루이드 그레이 메탈릭 (B 루프)",
+        "B/R2T": "오로라 그레이 펄 (B 루프)",
+        "B/WC9": "크림 화이트 펄 (B 루프)",
+        "C/A2B": "어비스 블랙 펄 (C 루프)",
+        "C/CBP": "문라이트 블루 펄 (C 루프)",
+        "C/CRP": "가이아 브라운 펄 (C 루프)",
+        "C/GMP": "쉬머링 실버 메탈릭 (C 루프)",
+        "C/PE2": "플루이드 그레이 메탈릭 (C 루프)",
+        "C/R2T": "오로라 그레이 펄 (C 루프)",
+        "C/R8N": "타이가 브라운 펄 (C 루프)",
+        "C/WC9": "크림 화이트 펄 (C 루프)",
+        // 포터
+        "RVB": "클리어 화이트",
+        "YAW": "블루",
+        "ZV": "에코 그린",
+        // 싼타페
+        "A2B-4NB": "어비스 블랙 펄(블랙 루프)",
+        "PB2": "스톰 블루 펄",
+        "RN2": "익스플로러 카키 매트",
+        "RS2": "카퍼 브라운 메탈릭",
+        "WW2": "티타늄 그레이 매트",
+        "WW2-4NB": "티타늄 그레이 매트(블랙 루프)",
+        "WWM-4NB": "마룬 브라운 펄(블랙 루프)",
+        "YBM": "글레이셔 화이트",
+        "ZGE": "사파이어 블루 펄"
+    };
+
     const currentCarCode = modelToCarCode[model];
-    const currentColorCode = modelToColorCode[model]?.[0] || null;
-    const has360View = currentCarCode && currentColorCode;
+    const colorCodes = modelToColorCode[model] || [];
+    const has360View = currentCarCode && colorCodes.length > 0;
 
     const getImageComponent = () => {
         if (has360View) {
-            return <Car360Viewer carCode={currentCarCode} colorCode={currentColorCode} key={`${model}-${imageKey}`}/>;
+            return <Car360Viewer carCode={currentCarCode} colorCode={selectedColor} key={`${model}-${selectedColor}-${imageKey}`}/>;
         } else {
             return <img src={carImages[model]} alt={model} className="w-full sm:w-[500px] h-48 sm:h-[300px] object-contain rounded-lg mx-auto mb-6" />;
         }
@@ -86,6 +154,18 @@ export default function Estimator() {
         return unsub;
     }, [monthlyPaymentRaw]);
 
+    useEffect(() => {
+        setImageKey(k => k + 1);
+    }, [model]);
+
+    // 모델 변경 시 색상 초기화
+    useEffect(() => {
+        if (colorCodes.length > 0) {
+            setSelectedColor(colorCodes[0]);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [model]);
+
     // 표시용 값
     const toKR = v => Math.floor(v).toLocaleString("ko-KR") + "원";
     const displayed = {
@@ -103,7 +183,6 @@ export default function Estimator() {
         setSelectedOptions(prev =>
             prev.includes(option) ? prev.filter(o => o !== option) : [...prev, option]
         );
-        setImageKey(k => k + 1);
     };
 
     // 가격 계산
@@ -170,6 +249,20 @@ export default function Estimator() {
                                     className="border border-blue-200 rounded-md px-3 py-2 text-sm font-medium min-w-[110px]">
                                 {brands[brand].map(m => <option key={m} value={m}>{m}</option>)}
                             </select>
+                            {/* 색상 select*/}
+                            {colorCodes.length > 0 && (
+                                <select
+                                    value={selectedColor}
+                                    onChange={e => setSelectedColor(e.target.value)}
+                                    className="border border-blue-200 rounded-md px-3 py-2 text-sm font-medium min-w-[110px]"
+                                >
+                                    {colorCodes.map(code => (
+                                        <option key={code} value={code}>
+                                            {hyundaiColorNames[code] || code}
+                                        </option>
+                                    ))}
+                                </select>
+                            )}
                         </div>
                         <div className="flex flex-wrap gap-2 mt-2">
                             {options.map((option) => (
