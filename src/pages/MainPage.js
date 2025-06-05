@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {useNavigate} from "react-router-dom";
-import {motion, AnimatePresence} from "framer-motion";
 import Header from '../functions/Header';
 import {useUser} from "../contexts/UserContext";
 
@@ -16,11 +15,6 @@ import Audi from '../ImageSrc/companyLogo/Audi.svg';
 import Benz from '../ImageSrc/companyLogo/Benz.svg';
 import Tesla from '../ImageSrc/companyLogo/Tesla.svg';
 
-const variants = {
-    enter: (direction) => ({x: direction === 1 ? 300 : -300, opacity: 0}),
-    center: {x: 0, opacity: 1},
-    exit: (direction) => ({x: direction === 1 ? -300 : 300, opacity: 0})
-};
 
 const slidSrc = [{
     srcWebp: "/ImageSrc/sideImage/CBTI.webp", src: "/ImageSrc/sideImage/CBTI.jpg", href: '/startCBTI',
@@ -92,7 +86,6 @@ const MainPage = () => {
         }
         return idxs;
     };
-    const sizeMap = ['scale-75 opacity-20 blur-[2px]', 'scale-90 opacity-50 blur-[1px]', 'scale-100', 'scale-90 opacity-50 blur-[1px]', 'scale-75 opacity-20 blur-[2px]'];
 
     return (<div
         className="flex flex-col w-full min-h-screen overflow-hidden bg-gradient-to-b from-[#f6fbff] via-[#eaf1ff] to-[#f8fbff]">
