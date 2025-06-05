@@ -28,7 +28,6 @@ function Buy({ pageType: defaultPageType }) {
     return (
         <div className="flex flex-col w-full">
             <Header />
-            <DropDown />
             <div className="flex w-full">
                 <ProductCatalog
                     pageType={pageType}
