@@ -9,13 +9,13 @@ import {options} from "../data/options";
 import Car360Viewer from "../functions/Car360Viewer";
 
 export default function Estimator() {
-    // 상태 관리
     const [MonthType, setMonthType] = useState("");
     const [brand, setBrand] = useState("Hyundai");
     const [model, setModel] = useState("Avante");
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [imageKey, setImageKey] = useState(0);
     const [paymentMethod, setPaymentMethod] = useState("현금");
+
     const modelToCarCode = {
         Avante: "CN22",
         Grandeur: "GN08",
@@ -34,6 +34,18 @@ export default function Estimator() {
         Porter: ["RVB", "YAW", "ZV"],
         Santafe: ["A2B", "A2B-4NB", "PB2", "PE2", "RN2", "RS2", "WW2", "WW2-4NB", "WWM-4NB", "YBM", "ZGE"],
         Sonata: ["A2B", "NY9", "R2P", "T2G", "T4M", "T9M", "W6H", "XB9"]
+    };
+
+    const currentCarCode = modelToCarCode[model];
+    const currentColorCode = modelToColorCode[model]?.[0] || null;
+    const has360View = currentCarCode && currentColorCode;
+
+    const getImageComponent = () => {
+        if (has360View) {
+            return <Car360Viewer carCode={currentCarCode} colorCode={currentColorCode} key={`${model}-${imageKey}`}/>;
+        } else {
+            return <img src={carImages[model]} alt={model} className="w-full h-auto rounded-xl" />;
+        }
     };
 
 
@@ -129,28 +141,22 @@ export default function Estimator() {
     // 반응형 컴포넌트 구조 (영수증 스타일)
     return (
         <>
-            <Header/>
-            <div
-                className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex items-center justify-center py-10">
-                <div
-                    className="w-full max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl bg-white rounded-3xl shadow-2xl border border-blue-100 px-4 sm:px-8 py-6 sm:py-7">
-                    {/* 영수증 헤더 */}
+            <Header />
+            <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex items-center justify-center py-10">
+                <div className="w-full max-w-3xl bg-white rounded-3xl shadow-2xl border border-blue-100 px-4 sm:px-8 py-6 sm:py-7">
                     <div className="flex items-center justify-between mb-5">
                         <div className="flex items-center gap-2">
-                            <Receipt className="text-blue-500 w-8 h-8"/>
+                            <Receipt className="text-blue-500 w-8 h-8" />
                             <span className="text-2xl sm:text-3xl font-bold tracking-tight text-blue-900">견적서</span>
                         </div>
                         <span className="text-sm text-gray-400 font-mono">
-                        NO.{Math.floor(Math.random() * 1000000).toString().padStart(6, '0')}
-                    </span>
+                            NO.{Math.floor(Math.random() * 1000000).toString().padStart(6, '0')}
+                        </span>
                     </div>
 
-                    {/* 차량 이미지 */}
                     <div className="flex justify-center mb-4">
-                        <Car360Viewer
-                            carCode={modelToCarCode[model]}
-                            colorCode={modelToColorCode[model]?.[0] || "PM2"}  // 첫 번째 색상 또는 fallback
-                        /></div>
+                        {getImageComponent()}
+                    </div>
 
                     {/* 브랜드/모델/옵션 변경 */}
                     <div className="flex flex-col gap-2 mb-4">
