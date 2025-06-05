@@ -83,6 +83,10 @@ export default function Estimator() {
         });
         return unsub;
     }, [monthlyPaymentRaw]);
+    
+    useEffect(() => {
+        setImageKey(k => k + 1);
+    }, [model]);
 
     // 표시용 값
     const toKR = v => Math.floor(v).toLocaleString("ko-KR") + "원";
@@ -101,7 +105,6 @@ export default function Estimator() {
         setSelectedOptions(prev =>
             prev.includes(option) ? prev.filter(o => o !== option) : [...prev, option]
         );
-        setImageKey(k => k + 1);
     };
 
     // 가격 계산

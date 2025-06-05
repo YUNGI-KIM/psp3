@@ -7,10 +7,21 @@ function Car360Viewer({ carCode, colorCode = "PM2" }) {
     const isDragging = useRef(false);
     const prevX = useRef(0);
 
+    const prevCarCode = useRef(carCode);
+    // 초기화 효과 (carCode가 바뀔 때만 index를 0으로)
+    useEffect(() => {
+        if (prevCarCode.current !== carCode) {
+            setIndex(0);
+            prevCarCode.current = carCode;
+        }
+        // colorCode가 바뀌어도 index는 그대로 유지
+    }, [carCode]);
+
     const getImgSrc = idx => {
         return `https://www.hyundai.com/contents/vr360/${carCode}/exterior/${colorCode}/${String(idx + 1).padStart(3, "0")}.png`;
     };
 
+    // 이미지 프리로드 (옵션이 바뀌어도 새로 프리로드)
     useEffect(() => {
         const imgs = [];
         for (let i = 0; i < IMG_COUNT; i++) {
