@@ -6,6 +6,7 @@ import {brands} from "../data/brands";
 import {basePrices} from "../data/basePrices";
 import {carImages} from "../data/carImages";
 import {options} from "../data/options";
+import Car360Viewer from "../functions/Car360Viewer";
 
 export default function Estimator() {
     // 상태 관리
@@ -126,15 +127,7 @@ export default function Estimator() {
 
                     {/* 차량 이미지 */}
                     <div className="flex justify-center mb-4">
-                        <motion.img
-                            src={carImages[model]}
-                            alt={model}
-                            key={model + imageKey}
-                            className="w-full max-w-xs  sm:max-w-md md:max-w-lg lg:max-w-xl h-44 sm:h-56 md:h-80 object-contain border rounded-lg bg-blue-50 shadow"
-                            initial={{opacity: 0.7, scale: 1}}
-                            animate={{opacity: 1, scale: 1.05}}
-                            transition={{duration: 0.5}}
-                        />
+                        <Car360Viewer carCode="CN22" colorCode="PM2" />
                     </div>
 
                     {/* 브랜드/모델/옵션 변경 */}
