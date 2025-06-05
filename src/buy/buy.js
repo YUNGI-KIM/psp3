@@ -1,6 +1,5 @@
 import React from "react";
 import { useParams, useLocation } from "react-router-dom";
-import DropDown from "../functions/DropDown";
 import Header from "../functions/Header";
 import ProductCatalog from "../functions/PricingCard";
 
