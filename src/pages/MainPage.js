@@ -26,15 +26,17 @@ const slidSrc = [{
     srcWebp: "/ImageSrc/sideImage/main3.webp", src: "/ImageSrc/sideImage/main3.jpg", href: '/',
 }];
 
-const brandLogos = [ {alt: "BENZ", src: Benz, href: '/buy/car/Benz'}, {
-    alt: "TESLA", src: Tesla, href: '/buy/car/Tesla'
-}, {alt: "HYUNDAI", src: hyundai, href: '/buy/car/Hyundai'}, {
-    alt: "KIA", src: kia, href: '/buy/car/Kia'
-}, {alt: "CHEVROLET", src: chevrolet, href: '/buy/car/Chevrolet'}, {
-    alt: "RENAULT", src: Reno, href: '/buy/car/Renault'
-}, {alt: "KGM", src: kgm, href: '/buy/car/KGM'}, {alt: "GENESIS", src: gen, href: '/buy/car/Genesis'}, {
-    alt: "BMW", src: BMW, href: '/buy/car/BMW'
-}, {alt: "AUDI", src: Audi, href: '/buy/car/Audi'},];
+const brandLogos = [ {alt: "BENZ", src: Benz, href: '/buy/car/Benz'},
+    {alt: "TESLA", src: Tesla, href: '/buy/car/Tesla'},
+    {alt: "HYUNDAI", src: hyundai, href: '/buy/car/Hyundai'},
+    {alt: "KIA", src: kia, href: '/buy/car/Kia'},
+    {alt: "CHEVROLET", src: chevrolet, href: '/buy/car/Chevrolet'},
+    {alt: "RENAULT", src: Reno, href: '/buy/car/Renault'},
+    {alt: "KGM", src: kgm, href: '/buy/car/KGM'},
+    {alt: "GENESIS", src: gen, href: '/buy/car/Genesis'},
+    {alt: "BMW", src: BMW, href: '/buy/car/BMW'},
+    {alt: "AUDI", src: Audi, href: '/buy/car/Audi'},
+];
 
 const MainPage = () => {
     const navigate = useNavigate();
