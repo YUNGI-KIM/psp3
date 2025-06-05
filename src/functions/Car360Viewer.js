@@ -132,7 +132,7 @@ function Car360Viewer({ carCode, colorCode = "PM2", colorOptions, onChangeColor 
     const isCarDetail = /^\/CarDetail\/[^/]+$/i.test(location.pathname);
 
     return (
-        <div className="select-none w-full max-w-xl mx-auto">
+        <div className="select-none w-full max-w-2xl mx-auto">
             <div
                 style={{ width: "100%", aspectRatio: "16/9", overflow: "hidden" }}
                 onMouseDown={handleDragStart}

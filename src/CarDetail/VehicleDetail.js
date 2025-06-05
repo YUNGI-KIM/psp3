@@ -99,7 +99,7 @@ function VehicleDetail() {
                 </div>
 
                 {/* 차량 이미지 및 360뷰 */}
-                <div className="flex-1 mt-12 md:mt-0 flex flex-col items-center w-full md:max-w-[700px]">
+                <div className="flex-1 mt-12 md:mt-0 flex flex-col items-center w-full md:max-w-[1100px]">
                     {has360 ? (
                         <>
                             <Car360Viewer
