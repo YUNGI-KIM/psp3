@@ -171,6 +171,7 @@ function VehicleDetail() {
                             <Car360Viewer
                                 carCode={carCode}
                                 colorCode={selectedColor}
+                                colorOptions={colorCodes}
                                 playing={playing}
                                 setPlaying={setPlaying}
                                 index={viewerIndex}
