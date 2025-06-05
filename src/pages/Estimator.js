@@ -1,29 +1,60 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { motion, useMotionValue, animate, useTransform } from "framer-motion";
-import { CreditCard, Receipt, BadgeCheck } from "lucide-react";
+import React, {useState, useEffect, useCallback} from "react";
+import {motion, useMotionValue, animate, useTransform} from "framer-motion";
+import {CreditCard, Receipt, BadgeCheck} from "lucide-react";
 import Header from "../functions/Header";
-import { brands } from "../data/brands";
-import { basePrices } from "../data/basePrices";
-import { carImages } from "../data/carImages";
-import { options } from "../data/options";
+import {brands} from "../data/brands";
+import {basePrices} from "../data/basePrices";
+import {carImages} from "../data/carImages";
+import {options} from "../data/options";
 import Car360Viewer from "../functions/Car360Viewer";
-import { ImgSrcVr360 } from "../functions/ImgSrcVr360";
 
 export default function Estimator() {
+    // 상태 관리
     const [MonthType, setMonthType] = useState("");
     const [brand, setBrand] = useState("Hyundai");
     const [model, setModel] = useState("Avante");
     const [selectedOptions, setSelectedOptions] = useState([]);
+    const [imageKey, setImageKey] = useState(0);
     const [paymentMethod, setPaymentMethod] = useState("현금");
+    const modelToCarCode = {
+        Avante: "CN22",
+        Grandeur: "GN08",
+        Ioniq: "NE06",
+        Palisade: "FX01",
+        Porter: "M575",
+        Santafe: "MX05",
+        Sonata: "DN20",
+    };
 
+    const modelToColorCode = {
+        Avante: ["A2B", "A5G", "C5G", "M6T", "PE2", "PM2", "R2P", "RRR", "SAW"],
+        Grandeur: ["A2B", "A2B-K", "A2B-R", "NGM", "NY9", "T2G", "T4A", "T9M", "VAM", "W6H", "W6H-K", "W6H-R", "XB9"],
+        Ioniq: ["A2B", "C5G", "M9U", "PE2", "RTE", "SAW", "U3P", "W3T", "Y2T"],
+        Palisade: ["A/A2B", "A/CBP", "A/CRP", "A/GMP", "A/PE2", "A/R2T", "A/WC9", "B/A2B", "B/CBP", "B/CRP", "B/GMP", "B/PE2", "B/R2T", "B/WC9", "C/A2B", "C/CBP", "C/CRP", "C/GMP", "C/PE2", "C/R2T", "C/R8N", "C/WC9"],
+        Porter: ["RVB", "YAW", "ZV"],
+        Santafe: ["A2B", "A2B-4NB", "PB2", "PE2", "RN2", "RS2", "WW2", "WW2-4NB", "WWM-4NB", "YBM", "ZGE"],
+        Sonata: ["A2B", "NY9", "R2P", "T2G", "T4M", "T9M", "W6H", "XB9"]
+    };
+
+
+    // carImages preload
+    useEffect(() => {
+        Object.values(carImages).forEach(src => {
+            const img = new window.Image();
+            img.src = src;
+        });
+    }, []);
+
+    // 가격 관련 MotionValue 및 계산
     const optionsPrice = useMotionValue(0);
     const CarBasePrice = useMotionValue(basePrices[model]);
     const price = useMotionValue(0);
 
     const acquisitionTax = useTransform(price, v => Math.floor(v * 0.07));
-    const registrationFee = useTransform(acquisitionTax, t => t + 82600);
+    const registrationFee = useTransform(acquisitionTax, t => t + 82600); // 2600+25000+55000
     const rawTotalPrice = useTransform([price, registrationFee], ([p, r]) => p + r);
 
+    // 할부 개월수 계산
     const monthToNumber = (str) => {
         if (!str || str === "일시불") return null;
         const match = str.match(/(\d+)/);
@@ -38,11 +69,12 @@ export default function Estimator() {
 
     useEffect(() => {
         const unsub = monthlyPaymentRaw.on("change", v => {
-            animate(monthlyPayment, v, { duration: 0.5, ease: "easeInOut" });
+            animate(monthlyPayment, v, {duration: 0.5, ease: "easeInOut"});
         });
         return unsub;
     }, [monthlyPaymentRaw]);
 
+    // 표시용 값
     const toKR = v => Math.floor(v).toLocaleString("ko-KR") + "원";
     const displayed = {
         basePrice: useTransform(CarBasePrice, toKR),
@@ -54,12 +86,15 @@ export default function Estimator() {
         monthly: useTransform(monthlyPayment, toKR),
     };
 
+    // 옵션 체크
     const handleOptionChange = (option) => {
         setSelectedOptions(prev =>
             prev.includes(option) ? prev.filter(o => o !== option) : [...prev, option]
         );
+        setImageKey(k => k + 1);
     };
 
+    // 가격 계산
     const calculatePrice = useCallback(() => {
         const base = basePrices[model] || 0;
         const optionSum = selectedOptions.reduce(
@@ -79,7 +114,7 @@ export default function Estimator() {
     }, [selectedOptions, optionsPrice]);
 
     useEffect(() => {
-        const controls = animate(price, calculatePrice(), { duration: 1, ease: "easeInOut" });
+        const controls = animate(price, calculatePrice(), {duration: 1, ease: "easeInOut"});
         return controls.stop;
     }, [model, selectedOptions, price, calculatePrice]);
 
@@ -91,80 +126,119 @@ export default function Estimator() {
         CarBasePrice.set(basePrices[model] || 0);
     }, [model]);
 
-    const car360Info = ImgSrcVr360[brand + model] || {};
-    const carCode = car360Info.carCode || "CN22";
-    const colorCode = car360Info.colorCodes?.[0] || "PM2";
-
+    // 반응형 컴포넌트 구조 (영수증 스타일)
     return (
         <>
-            <Header />
-            <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex items-center justify-center py-10">
-                <div className="w-full max-w-4xl bg-white rounded-3xl shadow-2xl border border-blue-100 px-6 py-8">
-                    <div className="flex justify-between items-center mb-6">
+            <Header/>
+            <div
+                className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex items-center justify-center py-10">
+                <div
+                    className="w-full max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl bg-white rounded-3xl shadow-2xl border border-blue-100 px-4 sm:px-8 py-6 sm:py-7">
+                    {/* 영수증 헤더 */}
+                    <div className="flex items-center justify-between mb-5">
                         <div className="flex items-center gap-2">
-                            <Receipt className="text-blue-500 w-7 h-7" />
-                            <h1 className="text-2xl font-bold text-blue-900">견적서</h1>
+                            <Receipt className="text-blue-500 w-8 h-8"/>
+                            <span className="text-2xl sm:text-3xl font-bold tracking-tight text-blue-900">견적서</span>
                         </div>
-                        <span className="text-gray-400 font-mono text-sm">
-                            NO.{Math.floor(Math.random() * 1000000).toString().padStart(6, '0')}
-                        </span>
+                        <span className="text-sm text-gray-400 font-mono">
+                        NO.{Math.floor(Math.random() * 1000000).toString().padStart(6, '0')}
+                    </span>
                     </div>
 
-                    <div className="flex justify-center mb-6">
-                        <Car360Viewer carCode={carCode} colorCode={colorCode} />
-                    </div>
+                    {/* 차량 이미지 */}
+                    <div className="flex justify-center mb-4">
+                        <Car360Viewer
+                            carCode={modelToCarCode[model]}
+                            colorCode={modelToColorCode[model]?.[0] || "PM2"}  // 첫 번째 색상 또는 fallback
+                        /></div>
 
-                    <div className="mb-4">
-                        <label className="block text-blue-700 font-semibold mb-1">브랜드 / 모델</label>
-                        <div className="flex gap-3 mb-2">
-                            <select value={brand} onChange={e => setBrand(e.target.value)} className="border px-3 py-2 rounded">
+                    {/* 브랜드/모델/옵션 변경 */}
+                    <div className="flex flex-col gap-2 mb-4">
+                        <label className="text-sm font-semibold text-blue-700">브랜드/모델/옵션 변경</label>
+                        <div className="flex gap-3 flex-wrap">
+                            <select value={brand} onChange={e => setBrand(e.target.value)}
+                                    className="border border-blue-200 rounded-md px-3 py-2 text-sm font-medium focus:ring-2 focus:ring-blue-400 min-w-[110px]">
                                 {Object.keys(brands).map(b => <option key={b} value={b}>{b}</option>)}
                             </select>
-                            <select value={model} onChange={e => setModel(e.target.value)} className="border px-3 py-2 rounded">
-                                {brands[brand]?.map(m => <option key={m} value={m}>{m}</option>)}
+                            <select value={model} onChange={e => setModel(e.target.value)}
+                                    className="border border-blue-200 rounded-md px-3 py-2 text-sm font-medium min-w-[110px]">
+                                {brands[brand].map(m => <option key={m} value={m}>{m}</option>)}
                             </select>
                         </div>
-                        <div className="flex flex-wrap gap-2">
-                            {options.map((opt) => (
-                                <label key={opt.name} className="flex items-center gap-1 text-sm">
-                                    <input type="checkbox" checked={selectedOptions.includes(opt.name)} onChange={() => handleOptionChange(opt.name)} />
-                                    {opt.name} (+{opt.price.toLocaleString()}원)
+                        <div className="flex flex-wrap gap-2 mt-2">
+                            {options.map((option) => (
+                                <label key={option.name}
+                                       className="flex items-center gap-2 text-sm font-medium border rounded px-3 py-2 bg-white border-blue-100">
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedOptions.includes(option.name)}
+                                        onChange={() => handleOptionChange(option.name)}
+                                    />
+                                    {option.name} (+{option.price.toLocaleString("ko-KR")}원)
                                 </label>
                             ))}
                         </div>
                     </div>
 
-                    <div className="mb-4">
-                        <label className="block text-blue-700 font-semibold mb-1">결제 방법</label>
-                        <div className="flex gap-4">
-                            <Radio name="pay" value="현금" checked={paymentMethod === "현금"} onChange={setPaymentMethod} />
-                            <Radio name="pay" value="카드" checked={paymentMethod === "카드"} onChange={setPaymentMethod} />
+                    {/* 차량 정보 요약 */}
+                    <div className="mb-2">
+                        <InfoRow label="브랜드" value={brand}/>
+                        <InfoRow label="모델" value={model}/>
+                        <InfoRow label="추가 옵션" value={selectedOptions.length ? selectedOptions.join(", ") :
+                            <span className="text-gray-400">없음</span>}/>
+                    </div>
+
+                    {/* 결제 방법 */}
+                    <div className="mb-3">
+                        <label className="text-sm font-semibold text-blue-700 mb-1">결제 방법</label>
+                        <div className="flex gap-5 flex-wrap items-center">
+                            <Radio name="pay" value="현금" checked={paymentMethod === "현금"} onChange={setPaymentMethod}/>
+                            <Radio name="pay" value="카드" checked={paymentMethod === "카드"} onChange={setPaymentMethod}/>
                             {paymentMethod === "카드" && (
-                                <select value={MonthType} onChange={e => setMonthType(e.target.value)} className="border px-3 py-1 rounded">
-                                    {["일시불", "6개월", "12개월", "24개월", "36개월", "60개월"].map(m => <option key={m}>{m}</option>)}
+                                <select value={MonthType} onChange={e => setMonthType(e.target.value)}
+                                        className="border border-blue-200 rounded-md px-3 py-2 text-sm font-medium mt-2 sm:mt-0">
+                                    {["일시불", "2개월", "4개월", "6개월", "8개월", "10개월", "12개월", "24개월", "36개월", "48개월", "60개월"].map(month => (
+                                        <option key={month} value={month}>{month}</option>
+                                    ))}
                                 </select>
                             )}
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <PriceCard title="가격 상세" list={[
-                            { k: "기본 차량가", v: displayed.basePrice },
-                            { k: "옵션 합계", v: displayed.optionsPrice },
-                            { k: "차량가 합계", v: displayed.price, bold: true, border: true },
-                        ]} />
-
-                        <PriceCard title={<><CreditCard className="w-5 h-5" /> 납부 정보</>} list={[
-                            { k: "취득세", v: displayed.acqTax },
-                            { k: "등록비", v: displayed.regFee },
-                            { k: "총 결제금액", v: displayed.total, bold: true, blue: true },
-                            paymentMethod === "카드" && { k: "월 납입금", v: displayed.monthly, blue: true },
-                        ].filter(Boolean)} />
+                    {/* 결제수단 요약 */}
+                    <div className="bg-blue-50 rounded-xl px-4 py-3 mb-6">
+                        <div className="flex justify-between text-sm mb-1">
+                            <span className="font-semibold">결제수단</span>
+                            <span
+                                className="font-semibold">{paymentMethod}{paymentMethod === "카드" && MonthType && ` (${MonthType})`}</span>
+                        </div>
                     </div>
 
-                    <div className="flex justify-center mt-6 text-gray-500 text-sm">
-                        <BadgeCheck className="w-5 h-5 text-blue-400 mr-2" />
-                        본 견적서는 실제 결제와 다를 수 있습니다.
+                    {/* 가격 및 납부 정보 */}
+                    <div className="mb-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <PriceCard
+                            title="가격 상세"
+                            list={[
+                                {k: "기본 차량가", v: displayed.basePrice},
+                                {k: "옵션 합계", v: displayed.optionsPrice},
+                                {k: "차량가 합계", v: displayed.price, bold: true, border: true}
+                            ]}
+                        />
+                        <PriceCard
+                            title={<><CreditCard className="w-5 h-5"/>납부정보</>}
+                            list={[
+                                {k: "취득세", v: displayed.acqTax},
+                                {k: "등록비", v: displayed.regFee},
+                                {k: "총 결제금액", v: displayed.total, bold: true, blue: true},
+                                paymentMethod === "카드" && {k: "월 납입금", v: displayed.monthly, blue: true}
+                            ].filter(Boolean)}
+                        />
+                    </div>
+
+                    {/* 안내문구 */}
+                    <div className="flex items-center justify-center mt-6">
+                        <BadgeCheck className="text-blue-400 w-6 h-6 mr-2"/>
+                        <span className="text-sm text-gray-400">본 견적서는 실제 결제와 다를 수 있습니다</span>
                     </div>
                 </div>
             </div>
@@ -172,19 +246,36 @@ export default function Estimator() {
     );
 }
 
-function Radio({ name, value, checked, onChange }) {
+// 서브 컴포넌트들
+
+function InfoRow({label, value}) {
     return (
-        <label className="flex items-center gap-2">
-            <input type="radio" name={name} value={value} checked={checked} onChange={() => onChange(value)} /> {value}
+        <div className="flex justify-between text-base mb-1">
+            <span className="text-gray-500">{label}</span>
+            <span className="font-semibold">{value}</span>
+        </div>
+    );
+}
+
+function Radio({name, value, checked, onChange}) {
+    return (
+        <label className="flex items-center gap-2 text-sm font-medium">
+            <input
+                type="radio"
+                name={name}
+                value={value}
+                checked={checked}
+                onChange={() => onChange(value)}
+            /> {value}
         </label>
     );
 }
 
-function PriceCard({ title, list }) {
+function PriceCard({title, list}) {
     return (
         <div className="bg-blue-50 rounded-xl p-5">
             <div className="text-base font-semibold text-gray-700 mb-2 flex gap-2 items-center">{title}</div>
-            {list.map(({ k, v, bold, blue, border }) => (
+            {list.map(({k, v, bold, blue, border}, idx) => (
                 <div
                     key={k}
                     className={
