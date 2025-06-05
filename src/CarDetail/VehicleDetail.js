@@ -162,26 +162,45 @@ function VehicleDetail() {
           {/* 차량 이미지 및 360뷰 */}
           <div className="flex-1 mt-12 md:mt-0 flex justify-center">
             {has360 ? (
-              <div className="flex flex-col items-center w-full md:max-w-[700px]">
-                <select
-                    value={selectedColor}
-                    onChange={e => setSelectedColor(e.target.value)}
-                    className="border mb-2 rounded px-2 py-1 text-sm"
-                >
-                  {colorCodes.map(code => (
-                    <option key={code} value={code}>
-                      {hyundaiColorNames[code] || code}
-                    </option>
-                  ))}
-                </select>
-                <Car360Viewer carCode={carCode} colorCode={selectedColor} />
-              </div>
+                <div className="flex flex-col items-center w-full md:max-w-[700px]">
+                  <Car360Viewer
+                      carCode={carCode}
+                      colorCode={selectedColor}
+                      renderControls={({playing, setPlaying}) => (
+                          <div className="flex items-center w-full max-w-xl mt-2 gap-2">
+                            {/* 색상 선택 박스 - Play 왼쪽, 크기/반응형 조정 */}
+                            <select
+                                value={selectedColor}
+                                onChange={e => setSelectedColor(e.target.value)}
+                                className="border rounded px-4 py-2 text-base sm:text-lg md:text-xl flex-shrink-0 max-w-[200px] min-w-[120px]"
+                                style={{minWidth: 100}}
+                            >
+                              {colorCodes.map(code => (
+                                  <option key={code} value={code}>
+                                    {hyundaiColorNames[code] || code}
+                                  </option>
+                              ))}
+                            </select>
+                            <button
+                                className="px-4 py-2 bg-blue-600 text-white rounded text-base font-semibold"
+                                onClick={() => setPlaying((p) => !p)}
+                                style={{minWidth: 80}}
+                            >
+                              {playing ? "Pause" : "Play"}
+                            </button>
+                            <span className="text-gray-500 text-xs sm:text-sm ml-2 whitespace-nowrap hidden sm:inline">
+                              드래그해서 회전
+                            </span>
+                          </div>
+                      )}
+                  />
+                </div>
             ) : (
-              <img
-                  src={vehicle.image}
-                  alt={vehicle.name}
-                  className="max-w-full w-full md:max-w-[700px] h-auto"
-              />
+                <img
+                    src={vehicle.image}
+                    alt={vehicle.name}
+                    className="max-w-full w-full md:max-w-[700px] h-auto"
+                />
             )}
           </div>
         </div>
