@@ -98,7 +98,7 @@ function CarInformation() {
                             <span className="bg-indigo-600 text-xs px-2 py-1 rounded-full">{model.label}</span>
                         )}
                       </div>
-                      <ul className="text-sm text-gray-300 mb-5 space-y-1">
+                      <ul className="text-sm text-gray-300 mb-5 ml-5 space-y-1">
                         <li>• 내장 컬러: {model.interior}</li>
                         <li>• 연비: {model.fuelEfficiency}</li>
                         <li>• 배기량: {model.displacement}</li>
