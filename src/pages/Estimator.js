@@ -4,7 +4,6 @@ import { CreditCard, Receipt, BadgeCheck } from "lucide-react";
 import Header from "../functions/Header";
 import { brands } from "../data/brands";
 import { basePrices } from "../data/basePrices";
-import { carImages } from "../data/carImages";
 import { options } from "../data/options";
 import { ImgSrcVr360 } from "../functions/ImgSrcVr360";
 import Car360Viewer from "../functions/Car360Viewer";
