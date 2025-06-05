@@ -16,6 +16,16 @@ export default function Estimator() {
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [imageKey, setImageKey] = useState(0);
     const [paymentMethod, setPaymentMethod] = useState("현금");
+    const modelToCarCode = {
+        Avante: "CN22",
+        Grandeur: "GN08",
+        Ioniq: "NE06",
+        Palisade: "FX01",
+        Porter: "M575",
+        Santafe: "MX05",
+        Sonata: "DN20",
+    };
+
 
     // carImages preload
     useEffect(() => {
@@ -127,8 +137,7 @@ export default function Estimator() {
 
                     {/* 차량 이미지 */}
                     <div className="flex justify-center mb-4">
-                        <Car360Viewer carCode="CN22" colorCode="PM2" />
-                    </div>
+                        <Car360Viewer carCode={modelToCarCode[model]} colorCode="PM2" />                    </div>
 
                     {/* 브랜드/모델/옵션 변경 */}
                     <div className="flex flex-col gap-2 mb-4">
