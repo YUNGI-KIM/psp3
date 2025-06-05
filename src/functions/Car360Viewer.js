@@ -10,6 +10,15 @@ function Car360Viewer({ carCode, colorCode = "PM2" }) {
     const getImgSrc = idx => {
         return `https://www.hyundai.com/contents/vr360/${carCode}/exterior/${colorCode}/${String(idx + 1).padStart(3, "0")}.png`;
     };
+        
+    useEffect(() => {
+        const imgs = [];
+        for (let i = 0; i < IMG_COUNT; i++) {
+            const img = new window.Image();
+            img.src = getImgSrc(i);
+            imgs.push(img);
+        }
+    }, [carCode, colorCode]);
 
     const handleDragStart = e => {
         isDragging.current = true;
@@ -35,7 +44,7 @@ function Car360Viewer({ carCode, colorCode = "PM2" }) {
         if (!playing) return;
         const timer = setInterval(() => {
             setIndex(i => (i + 1) % IMG_COUNT);
-        }, 40);
+        }, 60);
         return () => clearInterval(timer);
     }, [playing]);
 
