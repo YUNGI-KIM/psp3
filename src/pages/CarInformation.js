@@ -125,7 +125,7 @@ export default function CarInformation() {
 
 function CarCard({ model, detailRoutes, navigate }) {
   return (
-      <div className="rounded-2xl border-black overflow-hidden shadow-xl border border-gray-200 hover:shadow-2xl transition-shadow duration-300 bg-white flex flex-col">
+      <div className="rounded-2xl  overflow-hidden shadow-xl border border-gray-300 hover:shadow-2xl transition-shadow duration-300 bg-white flex flex-col">
         <img
             src={model.image}
             alt={model.name}
