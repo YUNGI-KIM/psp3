@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import React, {useEffect, useRef, useState} from 'react';
+import {useNavigate} from "react-router-dom";
+import {motion, AnimatePresence} from "framer-motion";
 import Header from '../functions/Header';
-import { useUser } from "../contexts/UserContext";
+import {useUser} from "../contexts/UserContext";
 
 // 브랜드 로고 import (예시 경로, 필요에 따라 수정)
 import hyundai from '../ImageSrc/companyLogo/hyundai.svg';
@@ -17,9 +17,9 @@ import Benz from '../ImageSrc/companyLogo/Benz.svg';
 import Tesla from '../ImageSrc/companyLogo/Tesla.svg';
 
 const variants = {
-    enter: (direction) => ({ x: direction === 1 ? 300 : -300, opacity: 0 }),
-    center: { x: 0, opacity: 1 },
-    exit: (direction) => ({ x: direction === 1 ? -300 : 300, opacity: 0 })
+    enter: (direction) => ({x: direction === 1 ? 300 : -300, opacity: 0}),
+    center: {x: 0, opacity: 1},
+    exit: (direction) => ({x: direction === 1 ? -300 : 300, opacity: 0})
 };
 
 const slidSrc = [
@@ -46,21 +46,21 @@ const slidSrc = [
 ];
 
 const brandLogos = [
-    { alt: "HYUNDAI", src: hyundai, href: '/buy/car/Hyundai' },
-    { alt: "KIA", src: kia, href: '/buy/car/Kia' },
-    { alt: "CHEVROLET", src: chevrolet, href: '/buy/car/Chevrolet' },
-    { alt: "RENAULT", src: Reno, href: '/buy/car/Renault' },
-    { alt: "KGM", src: kgm, href: '/buy/car/KGM' },
-    { alt: "GENESIS", src: gen, href: '/buy/car/Genesis' },
-    { alt: "BMW", src: BMW, href: '/buy/car/BMW' },
-    { alt: "AUDI", src: Audi, href: '/buy/car/Audi' },
-    { alt: "BENZ", src: Benz, href: '/buy/car/Benz' },
-    { alt: "TESLA", src: Tesla, href: '/buy/car/Tesla' },
+    {alt: "HYUNDAI", src: hyundai, href: '/buy/car/Hyundai'},
+    {alt: "KIA", src: kia, href: '/buy/car/Kia'},
+    {alt: "CHEVROLET", src: chevrolet, href: '/buy/car/Chevrolet'},
+    {alt: "RENAULT", src: Reno, href: '/buy/car/Renault'},
+    {alt: "KGM", src: kgm, href: '/buy/car/KGM'},
+    {alt: "GENESIS", src: gen, href: '/buy/car/Genesis'},
+    {alt: "BMW", src: BMW, href: '/buy/car/BMW'},
+    {alt: "AUDI", src: Audi, href: '/buy/car/Audi'},
+    {alt: "BENZ", src: Benz, href: '/buy/car/Benz'},
+    {alt: "TESLA", src: Tesla, href: '/buy/car/Tesla'},
 ];
 
 const MainPage = () => {
     const navigate = useNavigate();
-    const { user } = useUser();
+    const {user} = useUser();
     const [index, setIndex] = useState(0);
     const [page, setPage] = useState(0);
     const [logosPerPage, setLogosPerPage] = useState(5);
@@ -121,8 +121,9 @@ const MainPage = () => {
     };
 
     return (
-        <div className="flex flex-col w-full min-h-screen overflow-hidden bg-gradient-to-b from-[#f6fbff] via-[#eaf1ff] to-[#f8fbff]">
-            <Header key={user ? user.id : "guest"} />
+        <div
+            className="flex flex-col w-full min-h-screen overflow-hidden bg-gradient-to-b from-[#f6fbff] via-[#eaf1ff] to-[#f8fbff]">
+            <Header key={user ? user.id : "guest"}/>
 
             {/* 이미지 메인 슬라이드 */}
             <div className="
@@ -148,7 +149,7 @@ const MainPage = () => {
 
                     {/* 메인 슬라이드 이미지(webp 우선, 접근성 최적화) */}
                     <picture>
-                        <source srcSet={slidSrc[index].srcWebp} type="image/webp" />
+                        <source srcSet={slidSrc[index].srcWebp} type="image/webp"/>
                         <img
                             src={slidSrc[index].src}
                             onClick={() => slidSrc[index].href && navigate(slidSrc[index].href)}
@@ -164,7 +165,7 @@ const MainPage = () => {
                             "
                             alt={`Slide ${index + 1}`}
                             draggable={false}
-                            style={{ userSelect: 'none' }}
+                            style={{userSelect: 'none'}}
                         />
                     </picture>
 
@@ -192,7 +193,7 @@ const MainPage = () => {
                     <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
                         {slidSrc.map((_, i) => (
                             <button key={i} onClick={() => handleButtonClick(i)}
-                                    className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${i === index ? 'bg-gray-500' : 'bg-gray-800'} hover:bg-gray-400`} />
+                                    className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${i === index ? 'bg-gray-500' : 'bg-gray-800'} hover:bg-gray-400`}/>
                         ))}
                     </div>
                     {/* 우측 화살표 */}
@@ -228,7 +229,7 @@ const MainPage = () => {
                 </button>
 
                 {/* 슬라이드 카드들 */}
-                <AnimatePresence mode="wait" custom={directionRef.current}>
+                <div className="w-full px-4 sm:px-8 md:px-16 bg-transparent backdrop-blur-md">
                     <motion.div
                         key={page}
                         custom={directionRef.current}
@@ -236,70 +237,41 @@ const MainPage = () => {
                         initial="enter"
                         animate="center"
                         exit="exit"
-                        transition={{ duration: 0.5 }}
-                        className="flex flex-1 items-stretch justify-between gap-2 sm:gap-5 md:gap-8"
-                        style={{ overflow: 'hidden' }}
+                        transition={{duration: 0.4}}
+                        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4"
                     >
                         {brandLogos.slice(page, page + logosPerPage).map((logo, i) => (
                             <button
-                                type="button"
                                 key={i}
-                                className={`
-                                    group relative flex flex-col items-center justify-center
-                                    bg-gradient-to-br from-white/60 via-white/40 to-blue-100/30
-                                    backdrop-blur-xl border-2
-                                    ${selectedBrand === logo.alt ? 'border-blue-400 ring-2 ring-blue-200 scale-105' : 'border-blue-100/50'}
-                                    shadow-[0_8px_32px_0_rgba(120,150,255,0.10)]
-                                    rounded-2xl transition-all duration-500 px-2 sm:px-4 py-4
-                                    hover:scale-105 hover:shadow-2xl hover:border-blue-300 hover:ring-2 hover:ring-blue-200
-                                    flex-1 min-w-0
-                                    focus:outline-none focus:ring-4 focus:ring-blue-100
-                                `}
-                                style={{
-                                    minWidth: 0,
-                                    flex: 1,
-                                    maxWidth: `${100 / logosPerPage}%`,
-                                }}
                                 onClick={() => {
                                     navigate(logo.href);
                                     setSelectedBrand(logo.alt);
                                 }}
-                                aria-label={logo.alt + " 브랜드 바로가기"}
+                                className={`
+    relative flex flex-col items-center justify-center
+    p-4 sm:p-5 md:p-6
+    rounded-2xl shadow-md
+    bg-white/30 backdrop-blur border border-white/40
+    transition-all duration-300
+    hover:shadow-lg hover:ring-2 hover:ring-indigo-200
+    ${selectedBrand === logo.alt ? 'ring-2 ring-indigo-400 scale-105' : ''}
+    flex-1 min-w-0
+    overflow-hidden
+  `}
+                                style={{ minHeight: '180px' }}
                             >
-                                <div className="relative flex items-center justify-center w-full h-16 sm:h-20 md:h-24">
-                                    <img
-                                        alt={logo.alt}
-                                        src={logo.src}
-                                        title={logo.alt}
-                                        className={`
-                                            object-contain transition-transform duration-500 group-hover:scale-110
-                                            drop-shadow-[0_4px_24px_rgba(77,110,255,0.13)]
-                                            ${logo.alt === 'RENAULT' ? 'h-[42px] max-h-[42px]' : 'h-[54px] max-h-[54px]'}
-                                        `}
-                                        style={{ width: '62%', minWidth: 40, maxWidth: 100, margin: '0 auto' }}
-                                    />
-                                    <div
-                                        className="absolute left-1/2 -translate-x-1/2 bottom-1 w-[60%] h-2  rounded-full blur-md opacity-60 group-hover:opacity-80 transition-all duration-500"
-                                        style={{
-                                            background: logo.alt === "KIA" ? "#444" :
-                                                logo.alt === "HYUNDAI" ? "#1c2a47" :
-                                                    logo.alt === "CHEVROLET" ? "#cfbb6b" :
-                                                        logo.alt === "KGM" ? "#252a3a" :
-                                                            logo.alt === "RENAULT" ? "#f5c100" :
-                                                                logo.alt === "BMW" ? "#8cc4ec" :
-                                                                    logo.alt === "AUDI" ? "#bbb" :
-                                                                        logo.alt === "BENZ" ? "#3d4957" :
-                                                                            logo.alt === "TESLA" ? "#e6222b" :
-                                                                                "#90a0b8",
-                                        }}
-                                    />
-                                </div>
-                                <span
-                                    className="mt-2 text-sm font-bold text-black tracking-wider drop-shadow-sm">{logo.alt}</span>
+                                <img
+                                    src={logo.src}
+                                    alt={logo.alt}
+                                    className="w-full max-w-full h-auto max-h-20 object-contain mb-4 drop-shadow"
+                                />
+                                <span className="text-sm font-semibold text-gray-800 tracking-wide mt-2">
+    {logo.alt}
+  </span>
                             </button>
                         ))}
                     </motion.div>
-                </AnimatePresence>
+                </div>
 
                 {/* 오른쪽 화살표 */}
                 <button
