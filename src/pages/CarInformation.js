@@ -93,7 +93,7 @@ function CarInformation() {
                     <img src={model.image} alt={model.name} className="w-full h-80 object-contain bg-white" />
                     <div className="bg-[#1c1d3a] text-white p-4 relative">
                       <div className="flex justify-between items-start mb-2">
-                        <h2 className="text-lg font-bold">{model.name}</h2>
+                        <h2 className="text-lg ml-5 font-bold">{model.name}</h2>
                         {model.label && (
                             <span className="bg-indigo-600 text-xs px-2 py-1 rounded-full">{model.label}</span>
                         )}
