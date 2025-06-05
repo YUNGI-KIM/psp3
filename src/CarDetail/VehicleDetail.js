@@ -95,6 +95,8 @@ function VehicleDetail() {
     const [vehicle, setVehicle] = useState(null);
     const [selectedInterior, setSelectedInterior] = useState("black");
     const [selectedColor, setSelectedColor] = useState("A2B");
+    const [playing, setPlaying] = useState(false);
+    const [viewerIndex, setViewerIndex] = useState(0);
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -117,6 +119,11 @@ function VehicleDetail() {
         if (codes.length > 0) setSelectedColor(codes[0]);
     }, [vehicle?.name]);
 
+    const carCode = modelToCarCode[vehicle?.name];
+    const colorCodes = modelToColorCodes[vehicle?.name] || [];
+
+    useEffect(() => { setPlaying(false); }, [carCode, selectedColor]);
+
     if (error) return <div className="text-red-500 text-center mt-20">{error}</div>;
     if (!vehicle) return <div className="text-center mt-20 text-lg">불러오는 중...</div>;
 
@@ -125,8 +132,6 @@ function VehicleDetail() {
         return map;
     }, {});
 
-    const carCode = modelToCarCode[vehicle?.name];
-    const colorCodes = modelToColorCodes[vehicle?.name] || [];
     const has360 = carCode && colorCodes.length > 0;
 
     return (
@@ -166,23 +171,36 @@ function VehicleDetail() {
                             <Car360Viewer
                                 carCode={carCode}
                                 colorCode={selectedColor}
+                                playing={playing}
+                                setPlaying={setPlaying}
+                                index={viewerIndex}
+                                setIndex={setViewerIndex}
                                 key={`${carCode}-${selectedColor}`}
                             />
                             <div className="flex items-center w-full max-w-xl mt-2 gap-2 justify-center">
-                                <select
-                                    value={selectedColor}
-                                    onChange={e => setSelectedColor(e.target.value)}
-                                    className="border rounded px-4 py-2 text-base sm:text-lg md:text-xl flex-shrink-0 max-w-[200px] min-w-[120px]"
-                                    style={{minWidth: 100}}
-                                >
-                                    {colorCodes.map(code => (
-                                        <option key={code} value={code}>
-                                            {hyundaiColorNames[code] || code}
-                                        </option>
-                                    ))}
-                                </select>
-                                <span
-                                    className="text-gray-500 text-xs sm:text-sm ml-2 whitespace-nowrap hidden sm:inline">
+                                <div className="flex items-center gap-2 w-auto">
+                                    <select
+                                        value={selectedColor}
+                                        onChange={e => setSelectedColor(e.target.value)}
+                                        className="border rounded px-4 py-2 text-base sm:text-lg md:text-xl flex-shrink-0 min-w-[100px] max-w-[200px]"
+                                        style={{ minWidth: 100, maxWidth: 220 }}
+                                    >
+                                        {colorCodes.map(code => (
+                                            <option key={code} value={code}>
+                                                {hyundaiColorNames[code] || code}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <button
+                                        className={`px-4 py-2 rounded text-white font-semibold transition
+                                          ${playing ? "bg-blue-600 hover:bg-blue-700" : "bg-gray-400 hover:bg-blue-600"}`}
+                                        onClick={() => setPlaying(p => !p)}
+                                        style={{ minWidth: 80, maxWidth: 120 }}
+                                    >
+                                        {playing ? "Pause" : "Play"}
+                                    </button>
+                                </div>
+                                <span className="text-gray-500 text-xs sm:text-sm ml-2 whitespace-nowrap hidden sm:inline">
                                   드래그해서 회전
                                 </span>
                             </div>
