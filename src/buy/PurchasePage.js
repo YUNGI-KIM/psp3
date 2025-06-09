@@ -29,6 +29,17 @@ const PurchasePage = () => {
         alert(`결제 완료! (${form.paymentMethod})`);
     };
 
+    function parsePrice(str) {
+        if (typeof str === "number") return str;
+        if (!str) return 0;
+        // 콤마, 공백, '원' 제거
+        str = str.toString().replace(/[\s,원]/g, '');
+        if (str.endsWith('만')) {
+            return parseFloat(str.replace('만', '')) * 10000;
+        }
+        return parseFloat(str) || 0;
+    }
+
     if (!products.length) {
         return (
             <div className="p-10 text-center bg-gray-50 min-h-screen flex flex-col items-center justify-center">
@@ -42,7 +53,7 @@ const PurchasePage = () => {
             </div>
         );
     }
-    const total = products.reduce((sum, p) => sum + Number(p.price || 0), 0);
+    const total = products.reduce((sum, p) => sum + parsePrice(p.price), 0);
 
     return (
         <>
