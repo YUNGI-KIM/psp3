@@ -5,10 +5,7 @@ import Header from "../functions/Header";
 const PurchasePage = () => {
     const location = useLocation();
     let products = location.state?.product || [];
-    // 객체로 올 때도 배열로 변환 (1개만 결제시)
-    if (!Array.isArray(products)) {
-        products = [products];
-    }
+    if (!Array.isArray(products)) products = [products];
     const navigate = useNavigate();
 
     const [form, setForm] = useState({
@@ -34,11 +31,11 @@ const PurchasePage = () => {
 
     if (!products.length) {
         return (
-            <div className="p-10 text-center bg-gray-900 min-h-screen">
-                <h2 className="text-2xl font-bold mb-4 text-white">상품 정보를 불러올 수 없습니다.</h2>
+            <div className="p-10 text-center bg-gray-50 min-h-screen flex flex-col items-center justify-center">
+                <h2 className="text-2xl font-bold mb-4 text-gray-700">상품 정보를 불러올 수 없습니다.</h2>
                 <button
                     onClick={() => navigate(-1)}
-                    className="mt-2 px-5 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-700"
+                    className="mt-2 px-5 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition"
                 >
                     돌아가기
                 </button>
@@ -49,67 +46,78 @@ const PurchasePage = () => {
     return (
         <>
             <Header />
-            <div className="min-h-screen py-8 ">
-                <h2 className="text-2xl font-extrabold text-center text-black mb-5">구매하기</h2>
-                <div className="max-w-3xl mx-auto flex flex-col lg:flex-row bg-transparent px-2">
-                    {/* 왼쪽: 여러 개 상품 리스트 */}
-                    <div className="bg-gray-800 rounded-2xl shadow-xl flex flex-col items-center w-full lg:w-2/5 p-6 gap-4">
-                        {products.map((item, idx) => (
-                            <div key={item.name + idx} className="flex flex-col items-center w-full border-b border-gray-700 pb-4 last:border-b-0">
-                                <img
-                                    src={item.image}
-                                    alt={item.name}
-                                    className="w-24 h-24 object-cover rounded-xl mb-2 border border-gray-200 bg-white"
-                                />
-                                <span className="font-bold text-base text-white">{item.name}</span>
-                                <span className="text-indigo-300 font-extrabold text-lg">{item.price}원</span>
-                            </div>
-                        ))}
-                    </div>
-                    {/* 오른쪽: 배송지/결제 */}
-                    <div className="bg-indigo-900 rounded-2xl flex-1 flex flex-col justify-center p-8 min-w-[280px]">
-                        <h4 className="text-lg font-bold text-white mb-5">배송지 정보</h4>
-                        <div className="space-y-3 mb-8">
-                            <input
-                                type="text"
-                                name="name"
-                                placeholder="이름"
-                                value={form.name}
-                                onChange={handleChange}
-                                className="w-full p-2 border border-indigo-200 rounded focus:border-indigo-500 focus:outline-none text-gray-900 bg-gray-50"
-                            />
-                            <input
-                                type="tel"
-                                name="phone"
-                                placeholder="연락처"
-                                value={form.phone}
-                                onChange={handleChange}
-                                className="w-full p-2 border border-indigo-200 rounded focus:border-indigo-500 focus:outline-none text-gray-900 bg-gray-50"
-                            />
-                            <input
-                                type="text"
-                                name="address"
-                                placeholder="주소"
-                                value={form.address}
-                                onChange={handleChange}
-                                className="w-full p-2 border border-indigo-200 rounded focus:border-indigo-500 focus:outline-none text-gray-900 bg-gray-50"
-                            />
+            <div className="min-h-screen py-10 bg-gradient-to-br from-gray-100 via-white to-gray-50">
+                <div className="max-w-3xl mx-auto shadow-2xl rounded-3xl bg-white/90 px-6 py-10 flex flex-col lg:flex-row gap-12 border border-gray-100">
+                    {/* 상품 리스트 */}
+                    <div className="w-full lg:w-2/5 flex flex-col items-center gap-6">
+                        <h2 className="text-2xl font-bold mb-2 text-gray-900">주문상품</h2>
+                        <div className="w-full flex flex-col gap-5">
+                            {products.map((item, idx) => (
+                                <div key={item.name + idx} className="flex items-center gap-4 px-4 py-3 bg-gray-50/80 rounded-2xl border border-gray-200 shadow-sm">
+                                    <img
+                                        src={item.image}
+                                        alt={item.name}
+                                        className="w-20 h-20 object-cover rounded-xl border border-gray-100 bg-white"
+                                    />
+                                    <div className="flex flex-col flex-1 min-w-0">
+                                        <span className="font-semibold text-lg text-gray-800 truncate">{item.name}</span>
+                                        <span className="text-gray-500 text-sm mt-1">수량: 1개</span>
+                                        <span className="text-blue-600 font-bold text-lg mt-1">{item.price}원</span>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                        <h4 className="text-lg font-bold text-white mb-2">결제수단</h4>
-                        <select
-                            name="paymentMethod"
-                            value={form.paymentMethod}
-                            onChange={handleChange}
-                            className="w-full p-2 rounded-md border border-indigo-200 text-base bg-gray-50 text-gray-900 mb-8"
-                        >
-                            <option value="카드결제">카드결제</option>
-                            <option value="카카오페이">카카오페이</option>
-                            <option value="네이버페이">네이버페이</option>
-                        </select>
+                    </div>
+
+                    {/* 결제/배송 폼 */}
+                    <div className="flex-1 flex flex-col justify-center gap-8">
+                        <div>
+                            <h3 className="text-xl font-semibold text-gray-900 mb-4">배송지 정보</h3>
+                            <div className="flex flex-col gap-4">
+                                <input
+                                    type="text"
+                                    name="name"
+                                    placeholder="이름"
+                                    value={form.name}
+                                    onChange={handleChange}
+                                    className="w-full p-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-300 focus:outline-none text-gray-900 bg-white shadow"
+                                />
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    placeholder="연락처"
+                                    value={form.phone}
+                                    onChange={handleChange}
+                                    className="w-full p-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-300 focus:outline-none text-gray-900 bg-white shadow"
+                                />
+                                <input
+                                    type="text"
+                                    name="address"
+                                    placeholder="주소"
+                                    value={form.address}
+                                    onChange={handleChange}
+                                    className="w-full p-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-300 focus:outline-none text-gray-900 bg-white shadow"
+                                />
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 className="text-xl font-semibold text-gray-900 mb-4">결제수단</h3>
+                            <select
+                                name="paymentMethod"
+                                value={form.paymentMethod}
+                                onChange={handleChange}
+                                className="w-full p-3 rounded-xl border border-gray-200 bg-white text-gray-900 focus:ring-2 focus:ring-blue-300 shadow"
+                            >
+                                <option value="카드결제">카드결제</option>
+                                <option value="카카오페이">카카오페이</option>
+                                <option value="네이버페이">네이버페이</option>
+                            </select>
+                        </div>
                         <button
                             type="button"
                             onClick={handleSubmit}
-                            className="py-3 px-6 bg-indigo-500 hover:bg-indigo-700 text-white w-full rounded-lg text-lg font-bold shadow-md transition"
+                            className="w-full py-4 rounded-2xl bg-black text-white text-lg font-bold shadow-lg hover:bg-gray-800 transition"
                         >
                             결제하기
                         </button>
