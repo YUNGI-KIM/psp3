@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, {useState} from 'react';
+import {useLocation, useNavigate} from 'react-router-dom';
 import Header from "../functions/Header";
 
 const PurchasePage = () => {
@@ -16,12 +16,12 @@ const PurchasePage = () => {
     });
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setForm(prev => ({ ...prev, [name]: value }));
+        const {name, value} = e.target;
+        setForm(prev => ({...prev, [name]: value}));
     };
 
     const handleSubmit = () => {
-        const { name, phone, address } = form;
+        const {name, phone, address} = form;
         if (!name || !phone || !address) {
             alert('배송지 정보를 모두 입력해주세요.');
             return;
@@ -42,25 +42,44 @@ const PurchasePage = () => {
             </div>
         );
     }
+    const total = products.reduce((sum, p) => sum + Number(p.price || 0), 0);
 
     return (
         <>
-            <Header />
-            <div className="min-h-screen py-10 bg-gradient-to-br from-gray-100 via-white to-gray-50">
-                <div className="max-w-3xl mx-auto shadow-2xl rounded-3xl bg-white/90 px-6 py-10 flex flex-col lg:flex-row gap-12 border border-gray-100">
+            <Header/>
+            <div
+                className="relative min-h-screen py-10 bg-gradient-to-br from-gray-100 via-white to-gray-50 flex flex-col">
+                {/* Soft Background Deco */}
+                <div
+                    className="absolute -z-10 top-[-60px] right-[-80px] w-64 h-64 bg-blue-100 rounded-full blur-3xl opacity-35"/>
+                <div
+                    className="absolute -z-10 bottom-[-50px] left-[-70px] w-52 h-52 bg-indigo-100 rounded-full blur-2xl opacity-25"/>
+
+                {/* 주문 요약/안내 */}
+                <div className="max-w-3xl mx-auto mb-10 flex items-center justify-between px-2">
+                    <span className="bg-blue-50 text-blue-900 text-sm rounded-full px-4 py-1 font-semibold shadow">
+                        🛒 총 {products.length}개 상품 · 합계 {total.toLocaleString()}원
+                    </span>
+                    <span className="text-xs text-gray-400">무료배송 · 오늘 주문시 내일 도착</span>
+                </div>
+
+                <div
+                    className="max-w-3xl mx-auto shadow-2xl rounded-3xl bg-white/90 px-6 py-10 flex flex-col lg:flex-row gap-12 border border-gray-100">
                     {/* 상품 리스트 */}
                     <div className="w-full lg:w-2/5 flex flex-col items-center gap-6">
                         <h2 className="text-2xl font-bold mb-2 text-gray-900">주문상품</h2>
                         <div className="w-full flex flex-col gap-5">
                             {products.map((item, idx) => (
-                                <div key={item.name + idx} className="flex items-center gap-4 px-4 py-3 bg-gray-50/80 rounded-2xl border border-gray-200 shadow-sm">
+                                <div key={item.name + idx}
+                                     className="flex items-center gap-4 px-4 py-3 bg-gray-50/80 rounded-2xl border border-gray-200 shadow-sm">
                                     <img
                                         src={item.image}
                                         alt={item.name}
                                         className="w-20 h-20 object-cover rounded-xl border border-gray-100 bg-white"
                                     />
                                     <div className="flex flex-col flex-1 min-w-0">
-                                        <span className="font-semibold text-lg text-gray-800 truncate">{item.name}</span>
+                                        <span
+                                            className="font-semibold text-lg text-gray-800 truncate">{item.name}</span>
                                         <span className="text-gray-500 text-sm mt-1">수량: 1개</span>
                                         <span className="text-blue-600 font-bold text-lg mt-1">{item.price}원</span>
                                     </div>
@@ -122,6 +141,10 @@ const PurchasePage = () => {
                             결제하기
                         </button>
                     </div>
+                </div>
+                {/* 하단 안내 */}
+                <div className="mt-16 text-center text-xs text-gray-400">
+                    (C) 2025 Vroom. 고객센터 admin@clos21.kr
                 </div>
             </div>
         </>
