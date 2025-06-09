@@ -71,7 +71,7 @@ const PurchasePage = () => {
                     <span className="bg-blue-50 text-blue-900 text-sm rounded-full px-4 py-1 font-semibold shadow">
                         🛒 총 {products.length}개 상품 · 합계 {total.toLocaleString()}원
                     </span>
-                    <span className="text-xs text-gray-400">무료배송 · 오늘 주문시 내일 도착</span>
+                    <span className="text-xs text-gray-400 pl-4">무료배송 · 오늘 주문시 내일 도착</span>
                 </div>
 
                 <div
