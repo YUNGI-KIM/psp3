@@ -95,13 +95,13 @@ const PurchasePage = () => {
 
                 <div
                     className="
-                    w-full max-w-[1200px] mx-auto
+                    w-full max-w-screen-md md:max-w-[900px] mx-auto
                     shadow-2xl rounded-3xl bg-white/90
-                    px-2 sm:px-4 md:px-6 py-6 sm:py-8 md:py-10
-                    flex flex-col md:flex-row gap-7 md:gap-14 border border-gray-100 min-h-[540px] transition-all
+                    px-1 sm:px-2 md:px-6 py-5 sm:py-7 md:py-10
+                    flex flex-col md:flex-row gap-7 md:gap-10 lg:gap-14 border border-gray-100 min-h-[540px] transition-all
                 ">
                     {/* 상품 리스트 */}
-                    <div className="w-full md:w-1/2 flex flex-col">
+                    <div className="basis-0 flex-1 min-w-0 flex flex-col">
                         <div className="w-full flex justify-between items-center mb-6 px-1">
                             <span className="text-[18px] font-bold text-blue-900">🛒 주문상품</span>
                             <span
@@ -135,7 +135,7 @@ const PurchasePage = () => {
                     </div>
 
                     {/* 결제/배송 폼 */}
-                    <div className="w-full md:w-1/2 flex flex-col justify-center gap-6 sm:gap-8">
+                    <div className="basis-0 flex-1 min-w-0 flex flex-col justify-center gap-6 sm:gap-8">
                         <div
                             className="flex flex-col gap-6 sm:gap-8 px-2 sm:px-8 py-6 sm:py-8 bg-white/95 rounded-2xl shadow-xl border border-gray-100">
                             <div>
