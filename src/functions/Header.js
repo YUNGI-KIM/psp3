@@ -77,8 +77,7 @@ function Header() {
                             value={searchValue}
                             onChange={e => setSearchValue(e.target.value)}
                             placeholder="모델명, 브랜드로 검색..."
-                            className={`flex-1 bg-transparent outline-none placeholder-gray-500 text-sm
-                            ${isHome ? "text-white" : "text-gray-800"}`}
+                            className={`flex-1 bg-transparent outline-none text-sm ${isHome ? "text-white placeholder-white" : "text-gray-800 placeholder-gray-500"}`}
                         />
                         <button type="submit" className="ml-1" aria-label="검색">
                             <svg className={`w-5 h-5 ${isHome ? "text-white" : "text-gray-500"}`}

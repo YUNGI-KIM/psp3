@@ -97,7 +97,7 @@ const MainPage = () => {
     const sizeMap = ['scale-75 opacity-20 blur-[2px]', 'scale-90 opacity-50 blur-[1px]', 'scale-100', 'scale-90 opacity-50 blur-[1px]', 'scale-75 opacity-20 blur-[2px]'];
 
     return (<div
-        className="flex flex-col w-full min-h-screen overflow-hidden bg-gradient-to-b from-[#f6fbff] via-[#eaf1ff] to-[#f8fbff]">
+        className="flex flex-col w-full min-h-screen overflow-hidden bg-gradient-to-br from-gray-100/80 via-white/60 to-blue-200/60">
         <Header key={user ? user.id : "guest"}/>
 
         {/* 이미지 메인 슬라이드 */}
@@ -180,14 +180,13 @@ const MainPage = () => {
 
         {/* 브랜드 카드 슬라이드 (카드 섹션) */}
         <div className="
-                w-full flex items-center justify-between
-                px-2 sm:px-6 md:px-12
-                pt-6 pb-5
-                relative overflow-hidden
-                min-h-[8rem]
-                bg-gradient-to-br from-gray-100/80 via-white/60 to-blue-200/60
-backdrop-blur-2xl
-            ">
+            w-full h-flex items-center justify-between
+            px-2 sm:px-6 md:px-12
+            pt-6 pb-5
+            relative overflow-hidden
+            min-h-[8rem]
+            backdrop-blur-2xl
+        ">
 
             <section className="w-full flex flex-col items-center py-4 md:py-6 bg-transparent relative select-none">
                 <div
