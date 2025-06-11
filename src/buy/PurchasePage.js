@@ -118,7 +118,7 @@ const PurchasePage = () => {
                                                 className="font-semibold text-base sm:text-lg text-gray-800 truncate">{item.name}</span>
                                             <span className="text-gray-500 text-xs sm:text-sm mt-1">수량: 1개</span>
                                             <span
-                                                className="text-blue-600 font-bold text-base sm:text-lg mt-1">{item.price}원</span>
+                                                className="text-blue-600 font-bold text-base sm:text-lg mt-1">{item.price.toString().replace(/[\s원~]/g, '')}원</span>
                                         </div>
                                     </div>
                                 ))}
