@@ -67,7 +67,7 @@ const PurchasePage = () => {
                     className="absolute -z-10 bottom-[-50px] left-[-70px] w-52 h-52 bg-indigo-100 rounded-full blur-2xl opacity-25"/>
 
                 {/* 주문 요약/안내 */}
-                <div className="max-w-3xl mx-auto mb-10 flex items-center justify-between px-2">
+                <div className="max-w-5xl mx-auto mb-10 flex items-center justify-between px-2">
                     <span className="bg-blue-50 text-blue-900 text-sm rounded-full px-4 py-1 font-semibold shadow">
                         🛒 총 {products.length}개 상품 · 합계 {total.toLocaleString()}원
                     </span>
@@ -75,7 +75,7 @@ const PurchasePage = () => {
                 </div>
 
                 <div
-                    className="max-w-3xl mx-auto shadow-2xl rounded-3xl bg-white/90 px-6 py-10 flex flex-col lg:flex-row gap-12 border border-gray-100">
+                    className="max-w-5xl mx-auto shadow-2xl rounded-3xl bg-white/90 px-6 py-10 flex flex-col lg:flex-row gap-12 border border-gray-100">
                     {/* 상품 리스트 */}
                     <div className="w-full lg:w-2/5 flex flex-col items-center gap-6">
                         <h2 className="text-2xl font-bold mb-2 text-gray-900">주문상품</h2>
