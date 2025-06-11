@@ -81,7 +81,8 @@ const PurchasePage = () => {
                 <div
                     className="absolute -z-10 bottom-[-50px] left-[-70px] w-52 h-52 bg-indigo-100 rounded-full blur-2xl opacity-25"/>
                 {/* 주문 요약/안내 */}
-                <div className="w-full max-w-[1200px] mx-auto mb-10 flex items-center justify-between px-4 md:px-10">
+                <div
+                    className="w-full max-w-screen-md md:max-w-[900px] mx-auto mb-10 flex items-center justify-between px-4 md:px-10">
                     <span
                         className="bg-blue-50 text-blue-900 text-base md:text-lg rounded-full px-5 py-2 font-semibold shadow">
                         🛒 총 {products.length}개 상품 · 합계 {total.toLocaleString()}원
