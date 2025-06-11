@@ -1,18 +1,7 @@
 import React, {useState} from 'react';
 import {useLocation, useNavigate} from 'react-router-dom';
 import Header from "../functions/Header";
-
-const StepBar = () => (
-    <div className="w-full flex justify-center items-center py-4 bg-white shadow-xl">
-        <div className="flex gap-4 text-base font-bold tracking-wide">
-            <span className="text-blue-700">장바구니</span>
-            <span className="text-gray-400">→</span>
-            <span className="text-blue-900 border-b-2 border-blue-700 pb-1">주문/결제</span>
-            <span className="text-gray-400">→</span>
-            <span className="text-gray-400">완료</span>
-        </div>
-    </div>
-);
+import StepBar from "./StepBar";
 
 const PurchasePage = () => {
     const location = useLocation();
@@ -44,6 +33,16 @@ const PurchasePage = () => {
             return;
         }
         alert(`결제 완료! (${form.paymentMethod})`);
+        navigate('/purchase/success', {
+            state: {
+                products,
+                total,
+                name,
+                phone,
+                address,
+                paymentMethod: form.paymentMethod
+            }
+        });
     };
 
     function parsePrice(str) {
@@ -75,7 +74,7 @@ const PurchasePage = () => {
     return (
         <>
             <Header/>
-            <StepBar/>
+            <StepBar step={2}/>
             <div
                 className="relative min-h-screen py-10 bg-gradient-to-br from-gray-100 via-white to-gray-50 flex flex-col">
                 <div
