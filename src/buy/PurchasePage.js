@@ -78,12 +78,8 @@ const PurchasePage = () => {
             <StepBar/>
             <div
                 className="relative min-h-screen py-10 bg-gradient-to-br from-gray-100 via-white to-gray-50 flex flex-col">
-                {/* Soft Background Deco */}
-                <div
-                    className="absolute -z-10 top-[-60px] right-[-80px] w-64 h-64 bg-blue-100 rounded-full blur-3xl opacity-35"/>
                 <div
                     className="absolute -z-10 bottom-[-50px] left-[-70px] w-52 h-52 bg-indigo-100 rounded-full blur-2xl opacity-25"/>
-
                 {/* 주문 요약/안내 */}
                 <div className="w-full max-w-[1200px] mx-auto mb-10 flex items-center justify-between px-4 md:px-10">
                     <span
