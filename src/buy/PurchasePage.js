@@ -2,6 +2,18 @@ import React, {useState} from 'react';
 import {useLocation, useNavigate} from 'react-router-dom';
 import Header from "../functions/Header";
 
+const StepBar = () => (
+    <div className="w-full flex justify-center items-center py-4 bg-white shadow-sm mb-10">
+        <div className="flex gap-4 text-base font-bold tracking-wide">
+            <span className="text-blue-700">장바구니</span>
+            <span className="text-gray-400">→</span>
+            <span className="text-blue-900 border-b-2 border-blue-700 pb-1">주문/결제</span>
+            <span className="text-gray-400">→</span>
+            <span className="text-gray-400">완료</span>
+        </div>
+    </div>
+);
+
 const PurchasePage = () => {
     const location = useLocation();
     let products = location.state?.product || [];
@@ -63,6 +75,7 @@ const PurchasePage = () => {
     return (
         <>
             <Header/>
+            <StepBar/>
             <div
                 className="relative min-h-screen py-10 bg-gradient-to-br from-gray-100 via-white to-gray-50 flex flex-col">
                 {/* Soft Background Deco */}
@@ -72,7 +85,7 @@ const PurchasePage = () => {
                     className="absolute -z-10 bottom-[-50px] left-[-70px] w-52 h-52 bg-indigo-100 rounded-full blur-2xl opacity-25"/>
 
                 {/* 주문 요약/안내 */}
-                <div className="w-full max-w-[1400px] mx-auto mb-10 flex items-center justify-between px-4 md:px-10">
+                <div className="w-full max-w-[1200px] mx-auto mb-10 flex items-center justify-between px-4 md:px-10">
                     <span className="bg-blue-50 text-blue-900 text-base md:text-lg rounded-full px-5 py-2 font-semibold shadow">
                         🛒 총 {products.length}개 상품 · 합계 {total.toLocaleString()}원
                     </span>
@@ -80,7 +93,7 @@ const PurchasePage = () => {
                 </div>
 
                 <div
-                    className="w-full max-w-[1400px] mx-auto shadow-2xl rounded-3xl bg-white/90 px-10 py-14 flex flex-col md:flex-row gap-14 border border-gray-100 min-h-[540px] transition-all">
+                    className="w-full max-w-[1200px] mx-auto shadow-2xl rounded-3xl bg-white/90 px-6 py-10 flex flex-col md:flex-row gap-14 border border-gray-100 min-h-[540px] transition-all">
                     {/* 상품 리스트 */}
                     <div className="flex-1 min-w-[340px] flex flex-col">
                         <div className="w-full flex justify-between items-center mb-6 px-1">
