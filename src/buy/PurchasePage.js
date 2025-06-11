@@ -49,7 +49,7 @@ const PurchasePage = () => {
         if (typeof str === "number") return str;
         if (!str) return 0;
         // 콤마, 공백, '원' 제거
-        str = str.toString().replace(/[\s,원]/g, '');
+        str = str.toString().replace(/[\s,원~]/g, '');
         if (str.endsWith('만')) {
             return parseFloat(str.replace('만', '')) * 10000;
         }
