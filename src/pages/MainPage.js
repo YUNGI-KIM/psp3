@@ -182,75 +182,57 @@ const MainPage = () => {
         <div className="
                 w-full flex items-center justify-between
                 px-2 sm:px-6 md:px-12
-                pt-4 pb-8
+                pt-6 pb-5
                 relative overflow-hidden
-                mt-4 min-h-[8rem]
+                min-h-[8rem]
+                bg-gradient-to-br from-gray-100/80 via-white/60 to-blue-200/60
+backdrop-blur-2xl
             ">
 
             <section className="w-full flex flex-col items-center py-4 md:py-6 bg-transparent relative select-none">
                 <div
                     className="relative z-10 flex flex-row items-center justify-center w-full max-w-[1600px] mx-auto gap-4 md:gap-16">
-                    {/* 좌측 화살표 */}
-                    <button
-                        onClick={() => setCurrent((current - 1 + brandLogos.length) % brandLogos.length)}
-                        className="rounded-full bg-white/70 hover:bg-white/90 backdrop-blur p-3 shadow-xl transition"
-                        style={{minWidth: 44, minHeight: 44}}>
-                        <svg width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                             className="text-gray-400">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2"
-                                  d="M9 19l-7-7 7-7"/>
-                        </svg>
-                    </button>
                     {/* 카드 5개 */}
                     <div className="flex items-center gap-2 md:gap-12 w-full justify-center">
                         {getCards().map((idx, i) => {
                             // 중앙카드만 클릭시 이동, 나머지는 이동만
                             const isCenter = i === 2;
-                            return (<button
-                                key={brandLogos[idx].alt}
-                                onClick={() => isCenter ? navigate(brandLogos[idx].href) : setCurrent(idx)}
-                                className={`
-                                  flex flex-col items-center justify-center mx-1 py-[5rem]
-                                  ${isCenter ? "w-60 md:w-96 h-24 md:h-32 bg-white/90 shadow-2xl scale-100 md:scale-105 ring-2 ring-indigo-100" : i === 1 || i === 3 ? "w-44 md:w-72 h-20 md:h-28 bg-white/70 shadow-md scale-90 opacity-80" : "w-28 md:w-40 h-16 md:h-20 bg-white/50 shadow-sm scale-75 opacity-40"}
-                                  rounded-3xl
-                                  border-none
-                                  transition-all duration-300
-                                  hover:scale-105 hover:bg-white/90
-                                  group
-                                  overflow-hidden
-                                  backdrop-blur-xl
-                                `}
-                                style={{
-                                    boxShadow: isCenter ? "0 6px 32px 0 rgba(90,100,255,0.10)" : "0 2px 10px 0 rgba(150,170,230,0.08)"
-                                }}
-                            >
-                                <img
-                                    src={brandLogos[idx].src}
-                                    alt={brandLogos[idx].alt}
-                                    className={`object-contain transition-all duration-300 drop-shadow
+                            return (
+                                <button
+                                    key={brandLogos[idx].alt}
+                                    onClick={() => isCenter ? navigate(brandLogos[idx].href) : setCurrent(idx)}
+                                    className={`
+                                      flex flex-col items-center justify-center mx-1 py-[5rem]
+                                      text-white backdrop-blur-xl
+                                      ${isCenter ? 'relative after:content-[\'\'] after:absolute after:inset-0 after:rounded-3xl after:pointer-events-none after:shadow-[0_0_128px_64px_rgba(255,255,255,0.92)]' : ''}
+                                      ${
+                                        isCenter
+                                          ? "w-60 md:w-96 h-24 md:h-32 bg-black/7 backdrop-blur-xl shadow-[0_0_32px_12px_rgba(0,0,0,0.10)] border border-white/30 text-white"
+                                          : i === 1 || i === 3
+                                            ? "w-44 md:w-72 h-20 md:h-28 bg-black/4 backdrop-blur-md shadow-[0_4px_16px_0_rgba(0,0,0,0.10)] border border-white/10 text-white"
+                                            : "w-28 md:w-40 h-16 md:h-20 bg-black/1 backdrop-blur-sm shadow-[0_2px_8px_0_rgba(0,0,0,0.10)] border border-white/5 text-white"
+                                      }
+                                      rounded-3xl transition-all duration-300 hover:scale-105 hover:shadow-2xl group overflow-hidden
+                                    `}
+                                >
+                                    <img
+                                        src={brandLogos[idx].src}
+                                        alt={brandLogos[idx].alt}
+                                        className={`object-contain transition-all duration-300 drop-shadow
                                         ${isCenter ? "w-32 md:w-44 h-10 md:h-14" : "w-20 md:w-28 h-8 md:h-10"}
                                         group-hover:scale-105`}
-                                    draggable={false}
-                                />
-                                <span className={`
-                                  font-semibold mt-2
-                                  ${isCenter ? "text-lg md:text-xl text-gray-900" : "text-xs md:text-base text-gray-400"}
-                                `}>
-                                  {brandLogos[idx].alt}
-                                </span>
-                            </button>);
+                                        draggable={false}
+                                    />
+                                    <span className={`
+                                      font-semibold mt-2
+                                      ${isCenter ? "text-lg md:text-xl" : "text-xs md:text-base"} text-black opacity-90
+                                    `}>
+                                      {brandLogos[idx].alt}
+                                    </span>
+                                </button>
+                            );
                         })}
                     </div>
-                    {/* 우측 화살표 */}
-                    <button
-                        onClick={() => setCurrent((current + 1) % brandLogos.length)}
-                        className="rounded-full bg-white/70 hover:bg-white/90 backdrop-blur p-3 shadow-xl transition"
-                        style={{minWidth: 44, minHeight: 44}}>
-                        <svg width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                             className="text-gray-400">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.2" d="M5 5l7 7-7 7"/>
-                        </svg>
-                    </button>
                 </div>
                 {/* 인디케이터 */}
                 <div className="flex flex-row gap-2 mt-6 justify-center">
