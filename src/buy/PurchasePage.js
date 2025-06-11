@@ -3,7 +3,7 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import Header from "../functions/Header";
 
 const StepBar = () => (
-    <div className="w-full flex justify-center items-center py-4 bg-white shadow-sm mb-10">
+    <div className="w-full flex justify-center items-center py-4 bg-white shadow-xl">
         <div className="flex gap-4 text-base font-bold tracking-wide">
             <span className="text-blue-700">장바구니</span>
             <span className="text-gray-400">→</span>
