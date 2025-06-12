@@ -11,9 +11,13 @@ function AnswerList() {
 
     useEffect(() => {
         if (user?.id) {
-            fetch("https://clos21.kr/api/articles/comments/user/" + user.id, { credentials: "include" })
+            fetch("https://clos21.kr/api/articles/user/" + user.id, { credentials: "include" })
                 .then(res => res.json())
-                .then(data => setAnswers(data))
+                .then(data => {
+                    // 모든 article의 comments 배열을 합쳐 하나의 배열로 만듦
+                    const allComments = data.flatMap(article => article.comments || []);
+                    setAnswers(allComments);
+                })
                 .catch(err => console.error(err));
         }
     }, [user]);
@@ -41,29 +45,29 @@ function AnswerList() {
                     {answers
                         .slice()
                         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-                        .map((answer, index) => (
+                        .map((comment, index) => (
                             <motion.div
-                                key={answer.id}
+                                key={comment.id}
                                 className="bg-white rounded-xl shadow-md p-6 space-y-4 border border-gray-200 cursor-pointer hover:shadow-lg transition"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                                onClick={() => navigate(`/AnswerView/${answer.id}`)}
+                                onClick={() => navigate(`/AnswerView/${comment.id}`)}
                             >
                                 <div className="flex justify-between items-center text-sm text-gray-600">
                                     <div className="flex items-center gap-2">
                                         <UserRound className="w-4 h-4 text-blue-500" />
-                                        <span>{answer.name}</span>
+                                        <span>{comment.name}</span>
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <CalendarClock className="w-4 h-4 text-gray-400" />
-                                        <span>{new Date(answer.createdAt).toLocaleDateString()}</span>
+                                        <span>{new Date(comment.createdAt).toLocaleDateString()}</span>
                                     </div>
                                 </div>
 
                                 <div className="flex items-start gap-2 text-gray-800">
                                     <FileText className="w-5 h-5 text-green-600 mt-1" />
-                                    <p className="text-base leading-relaxed">{answer.title}</p>
+                                    <p className="text-base leading-relaxed">{comment.comment}</p>
                                 </div>
                             </motion.div>
                         ))}
