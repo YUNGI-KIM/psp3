@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from "../functions/Header";
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from "framer-motion";
+import StepBar from "./StepBar";
 
 
 
@@ -29,6 +30,7 @@ function CartPage() {
 
         <div className="min-h-screen">
             <Header />
+            <StepBar step={1}/>
             <div className="max-w-6xl mx-auto py-10 px-4">
                 <h2 className="text-2xl font-extrabold mb-8 text-center text-black">장바구니</h2>
                 {cartItems.length === 0 ? (

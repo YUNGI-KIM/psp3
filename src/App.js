@@ -22,6 +22,7 @@ import RequireAdmin from "./functions/RequireAdmin";
 import AnswerView from "./pages/AnswerView";
 import AnswerList from "./pages/AnswerList";
 import Question from "./pages/Question";
+import PurchaseSuccessPage from "./buy/PurchaseSuccessPage";
 
 function App() {
   useEffect(() => {
@@ -57,6 +58,7 @@ function App() {
               <Route path="/buy/:keyword" element={<Buy pageType="all" />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/purchase/" element={<PurchasePage />} />
+              <Route path="/purchase/success" element={<PurchaseSuccessPage />} />
               <Route path='/receviedSupport' element={
                 <RequireAdmin><ReceviedSupport/></RequireAdmin>
               } />
