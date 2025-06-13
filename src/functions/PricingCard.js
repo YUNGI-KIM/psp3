@@ -35,7 +35,13 @@ function ProductCard({ product }) {
 
     const handleAddToCart = () => {
         const existingCart = JSON.parse(localStorage.getItem('cart')) || [];
-        existingCart.push(product);
+        // 상품의 고유 id 또는 name으로 중복 검사
+        const idx = existingCart.findIndex(item => item.id === product.id); // id 비교 추천
+        if (idx !== -1) {
+            existingCart[idx].qty = (existingCart[idx].qty || 1) + 1;
+        } else {
+            existingCart.push({ ...product, qty: 1 });
+        }
         localStorage.setItem('cart', JSON.stringify(existingCart));
         navigate('/cart');
     };

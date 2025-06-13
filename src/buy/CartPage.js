@@ -4,15 +4,25 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from "framer-motion";
 import StepBar from "./StepBar";
 
-
-
-
 function CartPage() {
     const [cartItems, setCartItems] = useState([]);
 
+    // 중복 제거 후 qty 합치기 (혹시 이미 중복 데이터 있을 때도 정상화)
+    function normalizeCart(rawCart) {
+        const map = {};
+        rawCart.forEach(item => {
+            if (map[item.name]) {
+                map[item.name].qty += item.qty || 1;
+            } else {
+                map[item.name] = { ...item, qty: item.qty || 1 };
+            }
+        });
+        return Object.values(map);
+    }
+
     useEffect(() => {
         const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
-        setCartItems(savedCart);
+        setCartItems(normalizeCart(savedCart));
     }, []);
 
     function remove(item) {
@@ -20,14 +30,21 @@ function CartPage() {
         setCartItems(newCart);
         localStorage.setItem('cart', JSON.stringify(newCart));
     }
+
+    function changeQty(item, diff) {
+        let newCart = cartItems.map(i =>
+            i.name === item.name ? { ...i, qty: Math.max(1, i.qty + diff) } : i
+        );
+        setCartItems(newCart);
+        localStorage.setItem('cart', JSON.stringify(newCart));
+    }
+
     const navigate = useNavigate();
     const handleToBuy = () => {
         navigate('/purchase', { state: { product: cartItems } });
-
     };
 
     return (
-
         <div className="min-h-screen">
             <Header />
             <StepBar step={1}/>
@@ -49,7 +66,7 @@ function CartPage() {
                                         transition={{ duration: 0.3 }}
                                         layout
                                     >
-                                        {/* 삭제 버튼 우상단 */}
+                                        {/* 삭제 버튼 */}
                                         <svg
                                             onClick={() => remove(product)}
                                             className="cursor-pointer hover:text-red-700 hover:scale-110 absolute top-3 right-3 z-10"
@@ -61,23 +78,38 @@ function CartPage() {
                                         >
                                             <path d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z"/>
                                         </svg>
-                                        {/* 이미지 줄(하얀 배경) */}
+                                        {/* 이미지 */}
                                         <div className="w-full h-40 bg-white flex items-center justify-center">
                                             <img src={product.image} alt={product.name} className="max-w-full max-h-full object-contain" />
                                         </div>
-                                        {/* 내용 라인(어두운 바탕) */}
+                                        {/* 내용 라인 */}
                                         <div className="p-4 flex flex-col flex-1 bg-[#1e293b] text-white min-h-[90px]">
                                             <div className="flex justify-between items-center mb-2">
                                                 <h3 className="text-base font-bold">{product.name}</h3>
                                                 <h3 className="text-base font-bold">{product.price}</h3>
+                                            </div>
+                                            {/* 수량 조절 */}
+                                            <div className="flex justify-between items-center mt-2">
+                                                <span>수량: {product.qty}</span>
+                                                <div className="flex gap-2">
+                                                    <button
+                                                        className="w-6 h-6 flex items-center justify-center bg-gray-700 rounded-full"
+                                                        onClick={() => changeQty(product, -1)}
+                                                        disabled={product.qty <= 1}
+                                                    >-</button>
+                                                    <button
+                                                        className="w-6 h-6 flex items-center justify-center bg-gray-700 rounded-full"
+                                                        onClick={() => changeQty(product, 1)}
+                                                    >+</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </motion.li>
                                 ))}
                             </AnimatePresence>
                         </ul>
-                        <button onClick={()=>{handleToBuy()}}
-                            className="bg-indigo-600 hover:bg-indigo-700 w-full py-2 rounded-lg font-semibold text-white text-base shadow">
+                        <button onClick={handleToBuy}
+                                className="bg-indigo-600 hover:bg-indigo-700 w-full py-2 rounded-lg font-semibold text-white text-base shadow">
                             전체 상품 구매하기
                         </button>
                     </>
