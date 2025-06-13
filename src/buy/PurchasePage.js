@@ -48,7 +48,6 @@ const PurchasePage = () => {
     function parsePrice(str) {
         if (typeof str === "number") return str;
         if (!str) return 0;
-        // 콤마, 공백, '원' 제거
         str = str.toString().replace(/[\s,원~]/g, '');
         if (str.endsWith('만')) {
             return parseFloat(str.replace('만', '')) * 10000;
@@ -69,28 +68,25 @@ const PurchasePage = () => {
             </div>
         );
     }
-    const total = products.reduce((sum, p) => sum + parsePrice(p.price), 0);
+
+    // ★ 총 상품 수량, 전체 합계
+    const totalCount = products.reduce((sum, p) => sum + (p.qty || 1), 0);
+    const total = products.reduce((sum, p) => sum + parsePrice(p.price) * (p.qty || 1), 0);
 
     return (
         <>
             <Header/>
             <StepBar step={2}/>
-            <div
-                className="relative min-h-screen py-10 bg-gradient-to-br from-gray-100 via-white to-gray-50 flex flex-col">
-                <div
-                    className="absolute -z-10 bottom-[-50px] left-[-70px] w-52 h-52 bg-indigo-100 rounded-full blur-2xl opacity-25"/>
-                {/* 주문 요약/안내 */}
-                <div
-                    className="w-full max-w-screen-md md:max-w-[900px] mx-auto mb-10 flex items-center justify-between px-4 md:px-10">
-                    <span
-                        className="bg-blue-50 text-blue-900 text-base md:text-lg rounded-full px-5 py-2 font-semibold shadow">
-                        🛒 총 {products.length}개 상품 · 합계 {total.toLocaleString()}원
+            <div className="relative min-h-screen py-10 bg-gradient-to-br from-gray-100 via-white to-gray-50 flex flex-col">
+                <div className="absolute -z-10 bottom-[-50px] left-[-70px] w-52 h-52 bg-indigo-100 rounded-full blur-2xl opacity-25"/>
+                <div className="w-full max-w-screen-md md:max-w-[900px] mx-auto mb-10 flex items-center justify-between px-4 md:px-10">
+                    <span className="bg-blue-50 text-blue-900 text-base md:text-lg rounded-full px-5 py-2 font-semibold shadow">
+                        🛒 총 {totalCount}개 상품 · 합계 {total.toLocaleString()}원
                     </span>
                     <span className="text-xs md:text-sm text-gray-400 pl-4">무료배송 · 오늘 주문시 내일 도착</span>
                 </div>
 
-                <div
-                    className="
+                <div className="
                     w-full max-w-screen-md md:max-w-[900px] mx-auto
                     shadow-2xl rounded-3xl bg-white/90
                     px-1 sm:px-2 md:px-6 py-5 sm:py-7 md:py-10
@@ -100,8 +96,9 @@ const PurchasePage = () => {
                     <div className="basis-0 flex-1 min-w-0 flex flex-col">
                         <div className="w-full flex justify-between items-center mb-6 px-1">
                             <span className="text-[18px] font-bold text-blue-900">🛒 주문상품</span>
-                            <span
-                                className="bg-gradient-to-r from-indigo-200 via-blue-100 to-indigo-50 text-blue-900 text-sm font-semibold rounded-full px-4 py-1 shadow">총 {products.length}개 · {total.toLocaleString()}원</span>
+                            <span className="bg-gradient-to-r from-indigo-200 via-blue-100 to-indigo-50 text-blue-900 text-sm font-semibold rounded-full px-4 py-1 shadow">
+                                총 {totalCount}개 · {total.toLocaleString()}원
+                            </span>
                         </div>
                         <div className="w-full flex flex-col items-center gap-4 sm:gap-5">
                             <div className="w-full flex flex-col gap-3 sm:gap-5">
@@ -114,26 +111,26 @@ const PurchasePage = () => {
                                             className="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-xl border border-gray-100 bg-white"
                                         />
                                         <div className="flex flex-col flex-1 min-w-0">
-                                            <span
-                                                className="font-semibold text-base sm:text-lg text-gray-800 truncate">{item.name}</span>
-                                            <span className="text-gray-500 text-xs sm:text-sm mt-1">수량: 1개</span>
-                                            <span
-                                                className="text-blue-600 font-bold text-base sm:text-lg mt-1">{item.price.toString().replace(/[\s원~]/g, '')}원</span>
+                                            <span className="font-semibold text-base sm:text-lg text-gray-800 truncate">{item.name}</span>
+                                            <span className="text-gray-500 text-xs sm:text-sm mt-1">수량: {item.qty || 1}개</span>
+                                            <span className="text-blue-600 font-bold text-base sm:text-lg mt-1">
+                                                {(parsePrice(item.price) * (item.qty || 1)).toLocaleString()}원
+                                            </span>
                                         </div>
                                     </div>
                                 ))}
                             </div>
                             <div className="w-full text-right pr-2 sm:pr-4 mt-2 sm:mt-3">
-                                <span
-                                    className="text-lg sm:text-xl font-extrabold text-blue-900">합계 {total.toLocaleString()}원</span>
+                                <span className="text-lg sm:text-xl font-extrabold text-blue-900">
+                                    합계 {total.toLocaleString()}원
+                                </span>
                             </div>
                         </div>
                     </div>
 
                     {/* 결제/배송 폼 */}
                     <div className="basis-0 flex-1 min-w-0 flex flex-col justify-center gap-6 sm:gap-8">
-                        <div
-                            className="flex flex-col gap-6 sm:gap-8 px-2 sm:px-8 py-6 sm:py-8 bg-white/95 rounded-2xl shadow-xl border border-gray-100">
+                        <div className="flex flex-col gap-6 sm:gap-8 px-2 sm:px-8 py-6 sm:py-8 bg-white/95 rounded-2xl shadow-xl border border-gray-100">
                             <div>
                                 <h3 className="text-xl font-semibold text-gray-900 mb-4">배송지 정보</h3>
                                 <div className="flex flex-col gap-4">
@@ -163,7 +160,6 @@ const PurchasePage = () => {
                                     />
                                 </div>
                             </div>
-
                             <div>
                                 <h3 className="text-xl font-semibold text-gray-900 mb-4">결제수단</h3>
                                 <select
@@ -193,7 +189,6 @@ const PurchasePage = () => {
                         </div>
                     </div>
                 </div>
-                {/* 하단 안내 */}
                 <div className="mt-16 text-center text-xs text-gray-400">
                     (C) 2025 Vroom. 고객센터 admin@clos21.kr
                 </div>
